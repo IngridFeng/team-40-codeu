@@ -30,3 +30,11 @@ nav li {
   display: inline-block;
   margin-right: 10px
 }
+
+.singleBlock {
+  display: inline-block;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  width: 340px;
+  padding: 8px;
+}
