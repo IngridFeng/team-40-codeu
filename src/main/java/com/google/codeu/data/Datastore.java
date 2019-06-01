@@ -16,6 +16,7 @@
 
 package com.google.codeu.data;
 
+import com.google.appengine.api.datastore.FetchOptions;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -81,11 +82,17 @@ public class Datastore {
 
     return messages;
   }
-  
+
+  /** Returns the total number of messages for all users. */
+  public int getTotalMessageCount(){
+    Query query = new Query("Message");
+    PreparedQuery results = datastore.prepare(query);
+    return results.countEntities(FetchOptions.Builder.withLimit(1000));
+  }
+
   /**
-   * Gets a set of all users. 
-   * 
-   * @return a set of strings representing the users. 
+   * Gets a set of all users.
+   * return a set of strings representing the users.
    */
   public Set<String> getUsers(){
   	Set<String> users = new HashSet<>();
