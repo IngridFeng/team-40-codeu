@@ -16,11 +16,25 @@
 
 /* Set the size of the message input to be 100 pixels high
    and will fill the width of its parent element. */
-#message-input {
+#message-input, #aboutme-input {
   height: 100px;
   width: 100%;
+  background: #f4b942;
+  font-size: 14px;
 }
 
+#nickname-input{
+  background: #f4b942;
+  font-size: 16px;
+  border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+  border-bottom: thin solid #ddd;
+}
+
+#nickname-form, #about-me-form{
+  margin-bottom: 20px;
+}
 /* Give each message a rounded border. */
 .message-div {
   border: thin solid black;
@@ -44,4 +58,5 @@
    user is not logged in or viewing their own page. */
 .hidden {
   display: none;
+  margin-bottom: 20px;
 }

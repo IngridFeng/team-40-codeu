@@ -17,6 +17,7 @@
 /* Prevent the page from becoming too wide. */
 body {
   max-width: 600px;
+  background-color: #f4b942;
 }
 
 /* Remove bullet points from navigation bar. */
