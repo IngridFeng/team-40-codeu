@@ -61,10 +61,15 @@ public class AboutMeServlet extends HttpServlet {
       return;
     }
 
+    //get email of current user
     String userEmail = userService.getCurrentUser().getEmail();
+    //get aboutMe that user put in
     String aboutMe = Jsoup.clean(request.getParameter("about-me"), Whitelist.none());
-
-    User user = new User(userEmail, aboutMe, null);
+    //get current user by querying the email
+    User user = datastore.getUser(userEmail);
+    //modify the email
+    user.changeAboutMe(aboutMe);
+    //store the user
     datastore.storeUser(user);
 
     response.sendRedirect("/user-page.html?user=" + userEmail);
