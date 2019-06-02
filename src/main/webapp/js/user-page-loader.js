@@ -45,6 +45,7 @@ function showMessageFormIfViewingSelf() {
         }
       });
   document.getElementById('about-me-form').classList.remove('hidden');
+  document.getElementById('nickname-form').classList.remove('hidden');
 }
 
 /** Fetches messages and add them to the page. */
@@ -98,10 +99,21 @@ function fetchAboutMe(){
   }).then((aboutMe) => {
     const aboutMeContainer = document.getElementById('about-me-container');
     if(aboutMe == ''){
-      aboutMe = 'This user has not entered any information yet.';
+      aboutMe = 'This user has not entered any aboutme information yet.';
     }
 
     aboutMeContainer.innerHTML = aboutMe;
+
+  });
+}
+
+function fetchNickName(){
+  const url = '/nickName?user=' + parameterUsername;
+  fetch(url).then((response) => {
+    return response.text();
+  }).then((nickName) => {
+    const nickNameContainer = document.getElementById('nickname-container');
+    nickNameContainer.innerHTML = nickName;
 
   });
 }
@@ -112,4 +124,5 @@ function buildUI() {
   showMessageFormIfViewingSelf();
   fetchMessages();
   fetchAboutMe();
+  fetchNickName();
 }

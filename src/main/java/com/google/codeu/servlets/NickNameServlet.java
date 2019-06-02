@@ -11,13 +11,12 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.User;
-import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
+
 /**
  * Handles fetching and saving user data.
  */
-@WebServlet("/about")
-public class AboutMeServlet extends HttpServlet {
+@WebServlet("/nickName")
+public class NickNameServlet extends HttpServlet {
 
   private Datastore datastore;
 
@@ -27,7 +26,7 @@ public class AboutMeServlet extends HttpServlet {
   }
 
   /**
-   * Responds with the "about me" section for a particular user.
+   * Responds with the "nickname" section for a particular user.
    */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -44,11 +43,11 @@ public class AboutMeServlet extends HttpServlet {
 
     User userData = datastore.getUser(user);
 
-    if(userData == null || userData.getAboutMe() == null) {
+    if(userData == null || userData.getNickName() == null) {
       return;
     }
 
-    response.getOutputStream().println(userData.getAboutMe());
+    response.getOutputStream().println(userData.getNickName());
   }
 
   @Override
@@ -62,9 +61,9 @@ public class AboutMeServlet extends HttpServlet {
     }
 
     String userEmail = userService.getCurrentUser().getEmail();
-    String aboutMe = Jsoup.clean(request.getParameter("about-me"), Whitelist.none());
+    String nickName = request.getParameter("nickName");
 
-    User user = new User(userEmail, aboutMe, null);
+    User user = new User(userEmail, null, nickName);
     datastore.storeUser(user);
 
     response.sendRedirect("/user-page.html?user=" + userEmail);

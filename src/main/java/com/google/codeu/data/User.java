@@ -4,10 +4,18 @@ public class User {
 
   private String email;
   private String aboutMe;
+  private String nickName;
+  // private String favoriteSubject;
+  // private String favoriteFood;
 
-  public User(String email, String aboutMe) {
+  public User(String email, String aboutMe, String nickName) {
     this.email = email;
-    this.aboutMe = aboutMe;
+    if (aboutMe != null){
+      this.aboutMe = aboutMe;
+    }
+    if (nickName != null){
+      this.nickName = nickName;
+    }
   }
 
   public String getEmail(){
@@ -16,5 +24,9 @@ public class User {
 
   public String getAboutMe() {
     return aboutMe;
+  }
+
+  public String getNickName() {
+    return nickName;
   }
 }
