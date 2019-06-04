@@ -41,36 +41,29 @@ function setPageTitle(nickName, viewingSelf) {
 /**
  * Shows the message form if the user is logged in and viewing their own page.
  */
-function showMessageFormIfViewingSelf() {
+function showMessageForms() {
   fetch('/login-status')
       .then((response) => {
         return response.json();
       })
       .then((loginStatus) => {
-        if (loginStatus.isLoggedIn &&
-            loginStatus.username == parameterUsername) {
+        //not logged in
+        if (!loginStatus.isLoggedIn){
+          fetchNickName(false);
+        }
+        //login and viewing self
+        else if (loginStatus.username == parameterUsername) {
           const messageForm = document.getElementById('message-form');
           messageForm.classList.remove('hidden');
           document.getElementById('about-me-form').classList.remove('hidden');
           document.getElementById('nickname-form').classList.remove('hidden');
           fetchNickName(true);
         }
-      });
-}
-
-/**
- * Shows the message form if the user is logged in and viewing other people's page.
- */
-function showMessageFormIfNotViewingSelf() {
-  fetch('/login-status')
-      .then((response) => {
-        return response.json();
-      })
-      .then((loginStatus) => {
-        if (loginStatus.isLoggedIn &&
-            loginStatus.username != parameterUsername) {
-              fetchNickName(false);
+        //login and viewing others
+        else {
+          fetchNickName(false);
         }
+
       });
 }
 
@@ -143,8 +136,7 @@ function fetchNickName(viewingSelf){
 
 /** Fetches data and populates the UI of the page. */
 function buildUI() {
-  showMessageFormIfViewingSelf();
+  showMessageForms();
   fetchMessages();
   fetchAboutMe();
-  showMessageFormIfNotViewingSelf();
 }
