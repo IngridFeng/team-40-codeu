@@ -10,12 +10,8 @@ public class User {
 
   public User(String email, String aboutMe, String nickName) {
     this.email = email;
-    if (aboutMe != null){
-      this.aboutMe = aboutMe;
-    }
-    if (nickName != null){
-      this.nickName = nickName;
-    }
+    this.aboutMe = aboutMe;
+    this.nickName = nickName;
   }
 
   public String getEmail(){
@@ -28,5 +24,13 @@ public class User {
 
   public String getNickName() {
     return nickName;
+  }
+
+  public void changeNickName(String nickName) {
+    this.nickName = nickName;
+  }
+
+  public void changeAboutMe(String aboutMe) {
+    this.aboutMe = aboutMe;
   }
 }

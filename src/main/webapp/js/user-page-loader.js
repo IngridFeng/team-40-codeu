@@ -17,15 +17,14 @@
 // Get ?user=XYZ parameter value
 const urlParams = new URLSearchParams(window.location.search);
 const parameterUsername = urlParams.get('user');
-
 // URL must include ?user=XYZ parameter. If not, redirect to homepage.
 if (!parameterUsername) {
   window.location.replace('/');
 }
 
 /** Sets the page title based on the URL parameter username. */
-function setPageTitle() {
-  document.getElementById('page-title').innerText = parameterUsername;
+function setPageTitle(nickName) {
+  document.getElementById('page-title').innerText = 'Welcome! ' + nickName;
   document.title = parameterUsername + ' - User Page';
 }
 
@@ -101,9 +100,7 @@ function fetchAboutMe(){
     if(aboutMe == ''){
       aboutMe = 'This user has not entered any aboutme information yet.';
     }
-
     aboutMeContainer.innerHTML = aboutMe;
-
   });
 }
 
@@ -112,15 +109,12 @@ function fetchNickName(){
   fetch(url).then((response) => {
     return response.text();
   }).then((nickName) => {
-    const nickNameContainer = document.getElementById('nickname-container');
-    nickNameContainer.innerHTML = nickName;
-
+    setPageTitle(nickName);
   });
 }
 
 /** Fetches data and populates the UI of the page. */
 function buildUI() {
-  setPageTitle();
   showMessageFormIfViewingSelf();
   fetchMessages();
   fetchAboutMe();

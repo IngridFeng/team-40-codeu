@@ -162,7 +162,6 @@ public class Datastore {
   String nickName = (String) userEntity.getProperty("nickName");
   String aboutMe = (String) userEntity.getProperty("aboutMe");
   User user = new User(email, aboutMe, nickName);
-
   return user;
  }
 }
