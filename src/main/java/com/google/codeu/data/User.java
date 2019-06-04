@@ -1,12 +1,9 @@
 package com.google.codeu.data;
 
 public class User {
-
   private String email;
   private String aboutMe;
   private String nickName;
-  // private String favoriteSubject;
-  // private String favoriteFood;
 
   public User(String email, String aboutMe, String nickName) {
     this.email = email;
@@ -26,11 +23,11 @@ public class User {
     return nickName;
   }
 
-  public void changeNickName(String nickName) {
+  public void setNickName(String nickName) {
     this.nickName = nickName;
   }
 
-  public void changeAboutMe(String aboutMe) {
+  public void setAboutMe(String aboutMe) {
     this.aboutMe = aboutMe;
   }
 }
