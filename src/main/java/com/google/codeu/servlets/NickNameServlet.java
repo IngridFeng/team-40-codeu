@@ -66,8 +66,14 @@ public class NickNameServlet extends HttpServlet {
     String nickName = request.getParameter("nickName");
     //get current user by querying the email
     User user = datastore.getUser(userEmail);
-    //modify the email
-    user.changeNickName(nickName);
+    if (user == null) {
+      //create the user
+      user = new User(userEmail, null, nickName);
+    }
+    else{
+      //modify the nickName
+      user.setNickName(nickName);
+    }
     //store the user
     datastore.storeUser(user);
 

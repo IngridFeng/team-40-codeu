@@ -23,29 +23,50 @@ if (!parameterUsername) {
 }
 
 /** Sets the page title based on the URL parameter username. */
-function setPageTitle(nickName) {
-  document.getElementById('page-title').innerText = 'Welcome! ' + nickName;
+function setPageTitle(nickName, viewingSelf) {
+  if (viewingSelf == true){
+    document.getElementById('page-title').innerText = 'Welcome home! ' + nickName.replace(/(\n|\r|\r\n)/g, '') + ' ^_^';
+  }
+  else{
+    if (nickName == ''){
+      document.getElementById('page-title').innerText = 'Hello! My owner hasn\'t set my name yet! Please remind him/her to give me a name ^_^';
+    }
+    else{
+      document.getElementById('page-title').innerText = 'Helloooo! This is ' + nickName.replace(/(\n|\r|\r\n)/g, '') + ". Welcome to my page ^_^";
+    }
+  }
   document.title = parameterUsername + ' - User Page';
 }
 
 /**
  * Shows the message form if the user is logged in and viewing their own page.
  */
-function showMessageFormIfViewingSelf() {
+function showMessageForms() {
   fetch('/login-status')
       .then((response) => {
         return response.json();
       })
       .then((loginStatus) => {
-        if (loginStatus.isLoggedIn &&
-            loginStatus.username == parameterUsername) {
+        //not logged in
+        if (!loginStatus.isLoggedIn){
+          fetchNickName(false);
+        }
+        //login and viewing self
+        else if (loginStatus.username == parameterUsername) {
           const messageForm = document.getElementById('message-form');
           messageForm.classList.remove('hidden');
+          document.getElementById('about-me-form').classList.remove('hidden');
+          document.getElementById('nickname-form').classList.remove('hidden');
+          fetchNickName(true);
         }
+        //login and viewing others
+        else {
+          fetchNickName(false);
+        }
+
       });
-  document.getElementById('about-me-form').classList.remove('hidden');
-  document.getElementById('nickname-form').classList.remove('hidden');
 }
+
 
 /** Fetches messages and add them to the page. */
 function fetchMessages() {
@@ -104,19 +125,18 @@ function fetchAboutMe(){
   });
 }
 
-function fetchNickName(){
+function fetchNickName(viewingSelf){
   const url = '/nickName?user=' + parameterUsername;
   fetch(url).then((response) => {
     return response.text();
   }).then((nickName) => {
-    setPageTitle(nickName);
+    setPageTitle(nickName, viewingSelf);
   });
 }
 
 /** Fetches data and populates the UI of the page. */
 function buildUI() {
-  showMessageFormIfViewingSelf();
+  showMessageForms();
   fetchMessages();
   fetchAboutMe();
-  fetchNickName();
 }
