@@ -17,13 +17,41 @@ import java.util.Scanner;
  */
 @WebServlet("/bookchart")
 public class ChartServlet extends HttpServlet {
-  @Override
-  public void init() {
+
+  private JsonArray bookRatingArray;
+
+  // class can be separated from servlet if necessary
+  private static class bookRating {
+    String title;
+    double rating;
+
+    private bookRating(String title, double rating){
+      this.title = title;
+      this.rating = rating;
+    }
   }
 
+  @Override
+  public void init() {
+    bookRatingArray = new JsonArray();
+    Gson gson = new Gson();
+    Scanner scanner = new Scanner(getServletContext().getResourceAsStream("/WEB-INF/book-ratings.csv"));
+    scanner.nextLine(); // skip csv header
+    while(scanner.hasNextLine()) {
+      String line = scanner.nextLine();
+      String[] cells = line.split(",");
+      String curTitle = cells[5];
+      double curRating = Double.parseDouble(cells[6]);
+
+      bookRatingArray.add(gson.toJsonTree(new bookRating(curTitle,curRating)));
+    }
+    scanner.close();
+  }
+
+  @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("application/json");
-    response.getWriter().println("yoyo");
+    response.getOutputStream().println(bookRatingArray.toString());
   }
 
 }
