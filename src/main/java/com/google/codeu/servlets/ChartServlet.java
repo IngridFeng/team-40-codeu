@@ -24,14 +24,14 @@ public class ChartServlet extends HttpServlet {
   private static class courseDetails{
     String title;
     String parent;
-    int weight;
     int student_count;
+    int weight;
 
-    private courseDetails(String title, String parent, int weight, int student_count){
+    private courseDetails(String title, String parent, int student_count, int weight){
       this.title = title;
       this.parent = parent;
-      this.weight = weight;
       this.student_count = student_count;
+      this.weight = weight;
     }
   }
 
@@ -46,10 +46,10 @@ public class ChartServlet extends HttpServlet {
       String[] cells = line.split(",");
       String curTitle = cells[1];
       String curParent = cells[2];
-      int curWeight = Integer.parseInt(cells[3]);
-      int curStudentCount = Integer.parseInt(cells[4]);
+      int curStudentCount = Integer.parseInt(cells[3]);
+      int curWeight = Integer.parseInt(cells[4]);
 
-      courseDetailsArray.add(gson.toJsonTree(new courseDetails(curTitle,curParent,curWeight,curStudentCount)));
+      courseDetailsArray.add(gson.toJsonTree(new courseDetails(curTitle,curParent,curStudentCount,curWeight)));
     }
     scanner.close();
   }

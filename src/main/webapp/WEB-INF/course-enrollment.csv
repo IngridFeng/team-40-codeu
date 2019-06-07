@@ -1,20 +1,20 @@
-id,title,parent,weight,student_count
-1,School,null,0,0
+id,title,parent,student_count,weight
+1,School,,0,0
 2,Computer Science,School,0,0
 3,Arts and Humanities,School,0,0
 4,Social Science,School,0,0
 5,Natural Science,School,0,0
 6,Business,School,0,0
-7,Algorithms and Datastructures,Computer Science,1,30
-8,Math for Computer Science,Computer Science,1,50
-9,Software Construction,Computer Science,1,10
-10,Probabilistics Systems Analysis,Computer Science,1,20
-11,Global History,Arts and Humanities,1,60
-12,Morality and Justice,Arts and Humanities,1,40
-13,Arts and Literature,Arts and Humanities,1,10
-14,Perception and Cognition,Social Science,1,40
-15,Econometrics,Social Science,1,20
-16,Governance and Social Change,Social Science,1,10
-17,Psychology and Analytics,Business,1,20
-19,Financial Budgeting and Evaluation,Business,1,20
-20,Operational Complexity,Business,1,10
+7,Algorithms and Datastructures,Computer Science,30,1
+8,Math for Computer Science,Computer Science,50,1
+9,Software Construction,Computer Science,20,1
+10,Probabilistics Systems Analysis,Computer Science,20,1
+11,Global History,Arts and Humanities,60,1
+12,Morality and Justice,Arts and Humanities,40,1
+13,Arts and Literature,Arts and Humanities,10,1
+14,Perception and Cognition,Social Science,40,1
+15,Econometrics,Social Science,20,1
+16,Governance and Social Change,Social Science,10,1
+17,Psychology and Analytics,Business,20,1
+19,Financial Budgeting and Evaluation,Business,20,1
+20,Operational Complexity,Business,10,1
