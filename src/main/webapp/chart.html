@@ -5,34 +5,18 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
     google.charts.load('current', {packages: ['corechart','treemap']});
-    google.charts.setOnLoadCallback(drawPie);
+    google.charts.setOnLoadCallback(drawChart);
     google.charts.setOnLoadCallback(drawTree);
 
-    function drawPie(){
-      // create data table for chart
-      var pacman_data = new google.visualization.DataTable();
-
-      // define columns for the table
-      pacman_data.addColumn('string','isPacman');
-      pacman_data.addColumn('number', 'Ratio')
-
-      // add data to the table
-      pacman_data.addRows([
-      ['yes', 3],
-      ['no', 1]
-      ]);
-
-      // create an instance of a chart
-      var chart = new google.visualization.PieChart(document.getElementById('pacman_chart'));
-
-      // customize charts
-      var chart_options = {
-        width: 800,
-        height: 400
-      };
-
-      chart.draw(pacman_data, chart_options);
-    }
+    function drawChart(){
+      fetch("/bookchart")
+        .then((response) => {
+          return response.json();
+        })
+        .then((bookJson) => {
+          console.log(bookJson);
+        });
+      }
 
     function drawTree(){
       var data = google.visualization.arrayToDataTable([
@@ -74,8 +58,6 @@
 </script>
 </head>
 <body>
-  <h1>Is it pacman?</h1>
-  <div id="pacman_chart"></div>
   <h1>Subjects</h1>
   <div id="tree_chart"></div>
 
