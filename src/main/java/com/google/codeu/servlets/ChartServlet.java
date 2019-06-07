@@ -15,35 +15,41 @@ import java.util.Scanner;
 /**
  * Handles fetching and saving user data.
  */
-@WebServlet("/bookchart")
+@WebServlet("/chart")
 public class ChartServlet extends HttpServlet {
 
-  private JsonArray bookRatingArray;
+  private JsonArray courseDetailsArray;
 
   // class can be separated from servlet if necessary
-  private static class bookRating {
+  private static class courseDetails{
     String title;
-    double rating;
+    String parent;
+    int weight;
+    int student_count;
 
-    private bookRating(String title, double rating){
+    private courseDetails(String title, String parent, int weight, int student_count){
       this.title = title;
-      this.rating = rating;
+      this.parent = parent;
+      this.weight = weight;
+      this.student_count = student_count;
     }
   }
 
   @Override
   public void init() {
-    bookRatingArray = new JsonArray();
+    courseDetailsArray = new JsonArray();
     Gson gson = new Gson();
-    Scanner scanner = new Scanner(getServletContext().getResourceAsStream("/WEB-INF/book-ratings.csv"));
+    Scanner scanner = new Scanner(getServletContext().getResourceAsStream("/WEB-INF/course-enrollment.csv"));
     scanner.nextLine(); // skip csv header
     while(scanner.hasNextLine()) {
       String line = scanner.nextLine();
       String[] cells = line.split(",");
-      String curTitle = cells[5];
-      double curRating = Double.parseDouble(cells[6]);
+      String curTitle = cells[1];
+      String curParent = cells[2];
+      int curWeight = Integer.parseInt(cells[3]);
+      int curStudentCount = Integer.parseInt(cells[4]);
 
-      bookRatingArray.add(gson.toJsonTree(new bookRating(curTitle,curRating)));
+      courseDetailsArray.add(gson.toJsonTree(new courseDetails(curTitle,curParent,curWeight,curStudentCount)));
     }
     scanner.close();
   }
@@ -51,7 +57,7 @@ public class ChartServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("application/json");
-    response.getOutputStream().println(bookRatingArray.toString());
+    response.getOutputStream().println(courseDetailsArray.toString());
   }
 
 }
