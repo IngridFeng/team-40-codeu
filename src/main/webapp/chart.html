@@ -9,12 +9,32 @@
     google.charts.setOnLoadCallback(drawTree);
 
     function drawChart(){
+      // get book info from servlet
       fetch("/bookchart")
         .then((response) => {
           return response.json();
         })
         .then((bookJson) => {
-          console.log(bookJson);
+          // define data table for book info
+          var book_data = new google.visualization.DataTable();
+          book_data.addColumn('string', 'Book Title');
+          book_data.addColumn('number', 'Rating');
+
+          // put all returned info into data table
+          for (i=0; i < bookJson.length; i++){
+            bookRow = [];
+            var title = bookJson[i].title;
+            var rating = bookJson[i].rating;
+            bookRow.push(title, rating);
+
+            book_data.addRow(bookRow);
+          }
+          var chart_options = {
+            width:800,
+            height:400
+          };
+          var book_chart = new google.visualization.BarChart(document.getElementById('book_chart'));
+          book_chart.draw(book_data,chart_options);
         });
       }
 
@@ -52,13 +72,13 @@
         fontColor: 'black',
         showScale: true
       });
-
-    };
+    }
 
 </script>
 </head>
 <body>
   <h1>Subjects</h1>
+  <div id="book_chart"></div>
   <div id="tree_chart"></div>
 
 </body>
