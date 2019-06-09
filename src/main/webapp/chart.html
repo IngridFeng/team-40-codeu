@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Charts</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    google.charts.load('current', {packages: ['corechart','treemap']});
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart(){
+      // get book info from servlet
+      fetch("/chart")
+        .then((response) => {
+          return response.json();
+        })
+        .then((courseJson) => {
+          // define data table for book info
+          var course_data = new google.visualization.DataTable();
+          course_data.addColumn('string', 'Title');
+          course_data.addColumn('string', 'Parent');
+          course_data.addColumn('number', 'Student_count');
+          course_data.addColumn('number', 'Weight');
+
+          // put all returned info into data table
+          for (i=0; i < courseJson.length; i++){
+            courseRow = [];
+
+            var curTitle = courseJson[i].title;
+            var curParent = courseJson[i].parent;
+            var curStudentCount = courseJson[i].student_count;
+            var curWeight = courseJson[i].weight;
+            courseRow.push(curTitle, curParent, curStudentCount, curWeight);
+
+            course_data.addRow(courseRow);
+          }
+
+          var chart_options = {
+            width:800,
+            height:400,
+            showScale: true,
+            minColor: '#f00',
+            midColor: '#ddd',
+            maxColor: '#0d0'
+          };
+          var course_chart = new google.visualization.TreeMap(document.getElementById('course_chart'));
+          course_chart.draw(course_data,chart_options);
+        });
+      }
+
+</script>
+</head>
+<body>
+  <h1>Size of Courses</h1>
+  <div id="course_chart"></div>
+
+</body>
+</html>
