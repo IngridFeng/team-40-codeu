@@ -35,7 +35,13 @@ limitations under the License.
   </properties>
 
   <dependencies>
-
+    
+    <dependency>
+      <groupId>org.kefirsf</groupId>
+      <artifactId>kefirbb</artifactId>
+      <version>1.5</version>
+    </dependency>  
+    
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
