@@ -93,7 +93,6 @@ public class MessageServlet extends HttpServlet {
     									+ "</video>");
     String textWithVideosReplaced = textWithImagesReplaced.replaceAll(regexVid, repVid);
     
-    
     Message message = new Message(user, textWithVideosReplaced);
     datastore.storeMessage(message);
 
