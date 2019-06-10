@@ -21,8 +21,49 @@ limitations under the License.
     <title>CodeU 2019 Starter Project</title>
     <link rel="stylesheet" href="/css/main.css">
     <script src="/js/navigation-loader.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTYJGGk3f9krfYZB-Ab1oC65W_pDtvrAw"></script>
+    <script>
+      /** Creates a map that shows landmarks around Google. */
+      function createMap(){
+        const map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 37.422403, lng: -122.088073},
+          zoom: 15
+        });
+
+        addLandmark(map, 37.423829, -122.092154, 'Google West Campus',
+            'Google West Campus is home to YouTube and Maps.')
+        addLandmark(map, 37.421903, -122.084674, 'Stan the T-Rex',
+            'This is Stan, the T-Rex statue.')
+        addLandmark(map, 37.420919, -122.086619, 'Permanente Creek Trail',
+            'Permanente Creek Trail connects Google to a system of bike trails.');
+      }
+
+      /** Adds a marker that shows an info window when clicked. */
+      function addLandmark(map, lat, lng, title, description){
+        const marker = new google.maps.Marker({
+          position: {lat: lat, lng: lng},
+          map: map,
+          title: title
+        });
+        const infoWindow = new google.maps.InfoWindow({
+          content: description
+        });
+        marker.addListener('click', function() {
+          infoWindow.open(map, marker);
+        });
+      }
+    </script>
+    <style>
+      #map {
+        width: 500px;
+        height: 500px;
+        border: thin solid black;
+      }
+    </style>
+
   </head>
-  <body onload="addLoginOrLogoutLinkToNavigation();">
+  <body onload="addLoginOrLogoutLinkToNavigation(); createMap();">
     <nav>
       <ul id="navigation">
         <li><a href="/">Home</a></li>
@@ -34,12 +75,8 @@ limitations under the License.
     <div class="singleBlock" style="width: 600px;">
     <h1>CodeU Starter Project</h1>
     </div>
-    <div class="singleBlock" style="width: 600px;">
-    <p>This is the CodeU starter project. Click the links above to login and visit your page.
-    You can post messages on your page, and you can visit other user pages if you have
-    their URL.</p>
-    <p>This is your code now! Feel free to make changes, and don't be afraid to get creative!
-    You could start by modifying this page to tell the world more about your team.</p>
-    </div>
+
+    <div id="map"></div>
+
   </body>
 </html>
