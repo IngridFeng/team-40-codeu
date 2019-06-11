@@ -83,7 +83,17 @@ public class MessageServlet extends HttpServlet {
     TextProcessor processor = BBProcessorFactory.getInstance().create();
     text = processor.process(text); 
     
-    Message message = new Message(user, text);
+    String regex = "(https?://\\w+\\.\\S+\\.(png|jpg|gif))";
+    String replacement = "<img src=\"$1\" />";
+    String textWithImagesReplaced = text.replaceAll(regex, replacement);
+    
+    String regexVid = "(https?://\\w+\\.\\S+\\.(mp4|ogg))";
+    String repVid = ("<video controls> " 
+    									+ "<source src=\"$1\" type=\"video/mp4\" > " 
+    									+ "</video>");
+    String textWithVideosReplaced = textWithImagesReplaced.replaceAll(regexVid, repVid);
+    
+    Message message = new Message(user, textWithVideosReplaced);
     datastore.storeMessage(message);
 
     response.sendRedirect("/user-page.html?user=" + user);

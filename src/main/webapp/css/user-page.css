@@ -60,3 +60,15 @@
   display: none;
   margin-bottom: 20px;
 }
+
+.message-body img {
+  display: block;
+  margin-top: 25px;
+  max-width: 75%;
+}
+
+.message-body video {
+  display: block;
+  margin-top: 25px;
+  max-width: 75%;
+}
