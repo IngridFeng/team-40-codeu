@@ -28,6 +28,7 @@ limitations under the License.
   <url>http://maven.apache.org</url>
 
   <properties>
+    <exec.mainClass>io.happycoding.naturallanguage.NaturalLanguageHelloWorld</exec.mainClass>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -35,13 +36,13 @@ limitations under the License.
   </properties>
 
   <dependencies>
-    
+
     <dependency>
       <groupId>org.kefirsf</groupId>
       <artifactId>kefirbb</artifactId>
       <version>1.5</version>
-    </dependency>  
-    
+    </dependency>
+
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
@@ -65,6 +66,12 @@ limitations under the License.
       <groupId>com.google.cloud</groupId>
       <artifactId>google-cloud-datastore</artifactId>
       <version>1.52.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.cloud</groupId>
+      <artifactId>google-cloud-language</artifactId>
+      <version>1.55.0</version>
     </dependency>
 
   </dependencies>
