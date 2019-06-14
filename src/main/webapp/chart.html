@@ -5,11 +5,40 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
     google.charts.load('current', {packages: ['corechart','treemap']});
-    google.charts.setOnLoadCallback(drawChart);
+    google.charts.setOnLoadCallback(drawNiceChart);
+    google.charts.setOnLoadCallback(drawCourseChart);
 
-    function drawChart(){
+    function drawNiceChart(){
       // get book info from servlet
-      fetch("/chart")
+      fetch("/feed")
+        .then((response) => {
+          return response.json();
+        })
+        .then((messageJson) => {
+          // define data table for book info
+          var nice_data = new google.visualization.DataTable();
+          nice_data.addColumn('string', 'Text');
+          nice_data.addColumn('number', 'Sentiment');
+
+          // put all returned info into data table
+          for (i=0; i < messageJson.length; i++){
+            niceRow = [];
+
+            var curText = messageJson[i].text;
+            var curSentiment = messageJson[i].sentiment;
+            niceRow.push(curText, curSentiment);
+
+            nice_data.addRow(niceRow);
+          }
+
+          var course_chart = new google.visualization.Histogram(document.getElementById('nice_chart'));
+          course_chart.draw(nice_data);
+        });
+    }
+
+    function drawCourseChart(){
+      // get book info from servlet
+      fetch("/courseChart")
         .then((response) => {
           return response.json();
         })
@@ -50,6 +79,9 @@
 </script>
 </head>
 <body>
+  <h1>Niceness</h1>
+  <div id="nice_chart"></div>
+
   <h1>Size of Courses</h1>
   <div id="course_chart"></div>
 

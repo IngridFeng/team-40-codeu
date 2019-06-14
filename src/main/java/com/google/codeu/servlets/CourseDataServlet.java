@@ -15,8 +15,8 @@ import java.util.Scanner;
 /**
  * Handles fetching and saving user data.
  */
-@WebServlet("/chart")
-public class ChartServlet extends HttpServlet {
+@WebServlet("/courseChart")
+public class CourseDataServlet extends HttpServlet {
 
   private JsonArray courseDetailsArray;
 
