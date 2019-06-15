@@ -16,6 +16,10 @@
 
 package com.google.codeu.servlets;
 
+import com.google.cloud.language.v1.Document;
+import com.google.cloud.language.v1.LanguageServiceClient;
+import com.google.cloud.language.v1.Sentiment;
+
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.codeu.data.Datastore;
@@ -78,22 +82,27 @@ public class MessageServlet extends HttpServlet {
     }
 
     String user = userService.getCurrentUser().getEmail();
-    String text = Jsoup.clean(request.getParameter("text"), Whitelist.simpleText()); 
-    
+    String text = Jsoup.clean(request.getParameter("text"), Whitelist.simpleText());
+
     TextProcessor processor = BBProcessorFactory.getInstance().create();
-    text = processor.process(text); 
-    
+    text = processor.process(text);
+
     String regex = "(https?://\\w+\\.\\S+\\.(png|jpg|gif))";
     String replacement = "<img src=\"$1\" />";
     String textWithImagesReplaced = text.replaceAll(regex, replacement);
-    
+
     String regexVid = "(https?://\\w+\\.\\S+\\.(mp4|ogg))";
-    String repVid = ("<video controls> " 
-    									+ "<source src=\"$1\" type=\"video/mp4\" > " 
+    String repVid = ("<video controls> "
+    									+ "<source src=\"$1\" type=\"video/mp4\" > "
     									+ "</video>");
     String textWithVideosReplaced = textWithImagesReplaced.replaceAll(regexVid, repVid);
-    
-    Message message = new Message(user, textWithVideosReplaced);
+    Document doc = Document.newBuilder().setContent(textWithVideosReplaced).setType(Document.Type.PLAIN_TEXT).build();
+    LanguageServiceClient languageService = LanguageServiceClient.create();
+    Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
+    double score = sentiment.getScore();
+    languageService.close();
+
+    Message message = new Message(user, textWithVideosReplaced, score);
     datastore.storeMessage(message);
 
     response.sendRedirect("/user-page.html?user=" + user);

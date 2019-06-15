@@ -22,6 +22,10 @@ limitations under the License.
     <link rel="stylesheet" href="/css/main.css">
     <script src="/js/navigation-loader.js"></script>
 
+    <!-- Scripts for Charts-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="/js/chart-loader.js"></script>
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTYJGGk3f9krfYZB-Ab1oC65W_pDtvrAw"></script>
     <script>
       /** Creates a map that shows landmarks around Google. */
@@ -73,7 +77,15 @@ limitations under the License.
       </ul>
     </nav>
     <div class="singleBlock" style="width: 600px;">
-    <h1>CodeU Starter Project</h1>
+      <h1>CodeU Starter Project</h1>
+    </div>
+    <div>
+      <h1>How Constructive Are We?</h1>
+      <p>We become what our environment encourages.
+        Let's give transparent and collaborative feedback so we can all grow!</p>
+      <h2>Constructiveness of all messages</h2>
+      <div id="nice_chart"></div>
+      <p id="avg_sentiment" align="center"></p>
     </div>
 
     <div id="map"></div>
