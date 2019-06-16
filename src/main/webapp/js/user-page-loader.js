@@ -138,6 +138,7 @@ function fetchNickName(viewingSelf){
 function buildUI() {
   showMessageForms();
   fetchMessages();
-  ClassicEditor.create( document.getElementById('message-input') );
+  const config = {removePlugins: [ 'Heading', 'List' ]};
+  ClassicEditor.create(document.getElementById('message-input'), config );
   fetchAboutMe();
 }
