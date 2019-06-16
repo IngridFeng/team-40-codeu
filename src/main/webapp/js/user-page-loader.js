@@ -53,8 +53,7 @@ function showMessageForms() {
         }
         //login and viewing self
         else if (loginStatus.username == parameterUsername) {
-          const messageForm = document.getElementById('message-form');
-          messageForm.classList.remove('hidden');
+          fetchBlobstoreUrlAndShowForm();
           document.getElementById('about-me-form').classList.remove('hidden');
           document.getElementById('nickname-form').classList.remove('hidden');
           fetchNickName(true);
@@ -65,6 +64,19 @@ function showMessageForms() {
         }
 
       });
+}
+
+/** Fetches the Blobstore upload URL (for images) */
+function fetchBlobstoreUrlAndShowForm() {
+  fetch('/blobstore-upload-url')
+    .then((response) => {
+      return response.text();
+    })
+    .then((imageUploadUrl) => {
+      const messageForm = document.getElementById('message-form');
+      messageForm.action = imageUploadUrl;
+      messageForm.classList.remove('hidden');
+    });
 }
 
 
@@ -103,6 +115,12 @@ function buildMessageDiv(message) {
   const bodyDiv = document.createElement('div');
   bodyDiv.classList.add('message-body');
   bodyDiv.innerHTML = message.text;
+
+  if(message.hasOwnProperty('imageUrl')) {
+    const img = document.createElement('img');
+    img.src = message.imageUrl;
+    bodyDiv.appendChild(img);
+  }
 
   const messageDiv = document.createElement('div');
   messageDiv.classList.add('message-div');

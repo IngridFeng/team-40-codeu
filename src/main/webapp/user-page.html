@@ -50,11 +50,14 @@ limitations under the License.
       </form>
     </div>
 
-    <form id="message-form" action="/messages" method="POST" class="hidden">
+    <form id="message-form" method="POST" class="hidden" enctype="multipart/form-data">
       Enter a new message:
       <br/>
       <textarea name="text" id="message-input"></textarea>
       <br/>
+      <p>Upload an image:</p>
+      <input type="file" name="image">
+      <br/><br/>
       <input type="submit" value="Submit">
     </form>
     <hr/>
