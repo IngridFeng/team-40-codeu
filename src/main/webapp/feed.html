@@ -47,6 +47,12 @@
    body.classList.add('message-body');
    body.innerHTML = message.text;
    bodyDiv.appendChild(body);
+
+   if(message.hasOwnProperty('imageUrl')) {
+    const img = document.createElement('img');
+    img.src = message.imageUrl;
+    bodyDiv.appendChild(img);
+   }
    
    const messageDiv = document.createElement('div');
    messageDiv.classList.add("message-div");
