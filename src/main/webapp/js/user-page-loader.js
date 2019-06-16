@@ -138,5 +138,6 @@ function fetchNickName(viewingSelf){
 function buildUI() {
   showMessageForms();
   fetchMessages();
+  //ClassicEditor.create( document.getElementById('message-input') );
   fetchAboutMe();
 }
