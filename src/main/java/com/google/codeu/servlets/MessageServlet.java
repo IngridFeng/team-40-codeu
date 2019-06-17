@@ -94,9 +94,6 @@ public class MessageServlet extends HttpServlet {
     String text = Jsoup.clean(request.getParameter("text"), Whitelist.simpleText());
     String imageUrl = getUploadedFileUrl(request, "image");
 
-    TextProcessor processor = BBProcessorFactory.getInstance().create();
-    text = processor.process(text);
-
     String regex = "(https?://\\w+\\.\\S+\\.(png|jpg|gif))";
     String replacement = "<img src=\"$1\" />";
     String textWithImagesReplaced = text.replaceAll(regex, replacement);
