@@ -156,5 +156,7 @@ function fetchNickName(viewingSelf){
 function buildUI() {
   showMessageForms();
   fetchMessages();
+  const config = {removePlugins: [ 'Heading', 'List' ]};
+  ClassicEditor.create(document.getElementById('message-input'), config );
   fetchAboutMe();
 }
