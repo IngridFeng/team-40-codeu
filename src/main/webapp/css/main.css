@@ -39,3 +39,23 @@ nav li {
   width: 340px;
   padding: 8px;
 }
+
+#map {
+  width: 800px;
+  height: 500px;
+  border: thin solid black;
+}
+
+#floating-panel {
+  position: relative;
+  z-index: 5;
+  top: 50px;
+  left: 200px;
+  width: 300px;
+  background-color: #fff;
+  padding: 4px 0px 4px 0px;
+  border: 1px solid #ccc round;
+  text-align: center;
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
+}
