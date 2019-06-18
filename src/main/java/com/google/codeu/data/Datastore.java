@@ -158,7 +158,7 @@ public void storeUniversity(University university) {
   Entity universityEntity = new Entity("University", university.getUniversity());
   universityEntity.setProperty("university", university.getUniversity());
   datastore.put(universityEntity);
-  System.out.println(university.getUniversity());
+  System.out.println((String) universityEntity.getProperty("university"));
 }
 
 /** Return all universities. */

@@ -50,5 +50,7 @@ public class UniversityServlet extends HttpServlet {
 
     University university = new University(request.getParameter("university"));
     datastore.storeUniversity(university);
+    System.out.println("university stored");
+
   }
 }
