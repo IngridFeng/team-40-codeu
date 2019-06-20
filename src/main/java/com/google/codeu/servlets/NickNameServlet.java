@@ -12,6 +12,10 @@ import com.google.appengine.api.users.UserServiceFactory;
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.User;
 
+import com.google.codeu.data.Chat;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Handles fetching and saving user data.
  */
@@ -67,8 +71,10 @@ public class NickNameServlet extends HttpServlet {
     //get current user by querying the email
     User user = datastore.getUser(userEmail);
     if (user == null) {
+      //set chats of current user to null
+      List<Chat> chats = new ArrayList<Chat>();
       //create the user
-      user = new User(userEmail, null, nickName);
+      user = new User(userEmail, null, nickName, chats);
     }
     else{
       //modify the nickName

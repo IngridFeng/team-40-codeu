@@ -13,6 +13,11 @@ import com.google.codeu.data.Datastore;
 import com.google.codeu.data.User;
 import org.jsoup.Jsoup;
 import org.jsoup.safety.Whitelist;
+
+import com.google.codeu.data.Chat;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Handles fetching and saving user data.
  */
@@ -63,13 +68,16 @@ public class AboutMeServlet extends HttpServlet {
 
     //get email of current user
     String userEmail = userService.getCurrentUser().getEmail();
+
     //get aboutMe that user put in
     String aboutMe = Jsoup.clean(request.getParameter("about-me"), Whitelist.none());
     //get current user by querying the email
     User user = datastore.getUser(userEmail);
     if (user == null) {
+      //set chats of current user to null
+      List<Chat> chats = new ArrayList<Chat>();
       //create the user
-      user = new User(userEmail, aboutMe, null);
+      user = new User(userEmail, aboutMe, null, chats);
     }
     else{
       //modify the email

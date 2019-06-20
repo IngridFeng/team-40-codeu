@@ -146,6 +146,7 @@ public class Datastore {
   userEntity.setProperty("email", user.getEmail());
   userEntity.setProperty("aboutMe", user.getAboutMe());
   userEntity.setProperty("nickName", user.getNickName());
+  userEntity.setProperty("chats", user.getChats());
   datastore.put(userEntity);
  }
 
@@ -165,7 +166,8 @@ public class Datastore {
 
   String nickName = (String) userEntity.getProperty("nickName");
   String aboutMe = (String) userEntity.getProperty("aboutMe");
-  User user = new User(email, aboutMe, nickName);
+  List<Chat> chats= (List<Chat>) userEntity.getProperty("chats");
+  User user = new User(email, aboutMe, nickName, chats);
   return user;
  }
 }
