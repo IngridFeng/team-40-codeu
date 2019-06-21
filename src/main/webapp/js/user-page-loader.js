@@ -50,19 +50,9 @@ function showForms() {
         //not logged in
         if (!loginStatus.isLoggedIn){
           fetchNickName(false);
+          document.getElementById('login-form').classList.remove('hidden');
         }
-        //login and viewing self
         else if (loginStatus.username == parameterUsername) {
-
-          // remove login form
-          document.getElementById('login-form').remove();
-
-          // reveal chat form
-          const chatForm = document.getElementById('chat-form');
-          chatForm.classList.remove('hidden');
-          // set target user
-          chatForm.firstElementChild.value = parameterUsername;
-
           // handle message forms
           const messageForm = document.getElementById('message-form');
           messageForm.classList.remove('hidden');
@@ -73,6 +63,9 @@ function showForms() {
         //login and viewing others
         else {
           fetchNickName(false);
+          const chatForm = document.getElementById('chat-form');
+          chatForm.classList.remove('hidden');
+          chatForm.firstElementChild.value = parameterUsername;
         }
 
       });

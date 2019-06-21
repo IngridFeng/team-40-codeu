@@ -41,8 +41,10 @@ public class ChatServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response)
     throws IOException {
       String user = request.getParameter("user");
+      String selectedUser = request.getParameter("selectedUser");
       System.out.println("Hi");
       System.out.println(user);
+      System.out.println(selectedUser);
     }
 }
 
