@@ -41,7 +41,7 @@ function setPageTitle(nickName, viewingSelf) {
 /**
  * Shows the message form if the user is logged in and viewing their own page.
  */
-function showMessageForms() {
+function showForms() {
   fetch('/login-status')
       .then((response) => {
         return response.json();
@@ -53,6 +53,17 @@ function showMessageForms() {
         }
         //login and viewing self
         else if (loginStatus.username == parameterUsername) {
+
+          // remove login form
+          document.getElementById('login-form').remove();
+
+          // reveal chat form
+          const chatForm = document.getElementById('chat-form');
+          chatForm.classList.remove('hidden');
+          // set target user
+          chatForm.firstElementChild.value = parameterUsername;
+
+          // handle message forms
           const messageForm = document.getElementById('message-form');
           messageForm.classList.remove('hidden');
           document.getElementById('about-me-form').classList.remove('hidden');
@@ -136,7 +147,7 @@ function fetchNickName(viewingSelf){
 
 /** Fetches data and populates the UI of the page. */
 function buildUI() {
-  showMessageForms();
+  showForms();
   fetchMessages();
   fetchAboutMe();
 }
