@@ -166,7 +166,7 @@ public class Datastore {
 
   String nickName = (String) userEntity.getProperty("nickName");
   String aboutMe = (String) userEntity.getProperty("aboutMe");
-  List<Chat> chats= (List<Chat>) userEntity.getProperty("chats");
+  List<UUID> chats= (List<UUID>) userEntity.getProperty("chats");
   User user = new User(email, aboutMe, nickName, chats);
   return user;
  }

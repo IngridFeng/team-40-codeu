@@ -2,14 +2,15 @@ package com.google.codeu.data;
 
 import com.google.codeu.data.Chat;
 import java.util.List;
+import java.util.UUID;
 
 public class User {
   private String email;
   private String aboutMe;
   private String nickName;
-  private List<Chat> chats;
+  private List<UUID> chats;
 
-  public User(String email, String aboutMe, String nickName, List<Chat> chats) {
+  public User(String email, String aboutMe, String nickName, List<UUID> chats) {
     this.email = email;
     this.aboutMe = aboutMe;
     this.nickName = nickName;
@@ -28,7 +29,7 @@ public class User {
     return nickName;
   }
 
-  public List<Chat> getChats() {
+  public List<UUID> getChats() {
     return chats;
   }
 
@@ -41,7 +42,7 @@ public class User {
     this.aboutMe = aboutMe;
   }
 
-  public void setChats(List<Chat> chats) {
+  public void setChats(List<UUID> chats) {
     this.chats = chats;
   }
 }

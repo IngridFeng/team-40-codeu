@@ -15,6 +15,7 @@ import com.google.codeu.data.User;
 import com.google.codeu.data.Chat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Handles fetching and saving user data.
@@ -72,7 +73,7 @@ public class NickNameServlet extends HttpServlet {
     User user = datastore.getUser(userEmail);
     if (user == null) {
       //set chats of current user to null
-      List<Chat> chats = new ArrayList<Chat>();
+      List<UUID> chats = new ArrayList<UUID>();
       //create the user
       user = new User(userEmail, null, nickName, chats);
     }
