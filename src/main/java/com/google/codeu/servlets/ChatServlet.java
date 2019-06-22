@@ -101,7 +101,10 @@ public class ChatServlet extends HttpServlet {
       System.out.println(selectedUser.getChats());
 
     }
+
 }
+
+
 
   /**
    * upon posting, log a new chat
