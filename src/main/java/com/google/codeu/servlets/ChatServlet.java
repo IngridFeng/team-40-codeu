@@ -56,8 +56,6 @@ public class ChatServlet extends HttpServlet {
       String userEmail = userService.getCurrentUser().getEmail();
       String selectedUserEmail = request.getParameter("selectedUserEmail");
 
-      System.out.println(userEmail);
-
       // create new chat
       Chat chat = new Chat(userEmail + " and " + selectedUserEmail,"Omg a new friend! :D");
 
@@ -73,7 +71,6 @@ public class ChatServlet extends HttpServlet {
       else{
         //modify the chats
         List<UUID> userChats = user.getChats();
-        System.out.println(userChats);
         userChats.add(chat.getId());
         user.setChats(userChats);
       }

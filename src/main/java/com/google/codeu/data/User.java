@@ -1,6 +1,7 @@
 package com.google.codeu.data;
 
 import com.google.codeu.data.Chat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,7 +31,12 @@ public class User {
   }
 
   public List<UUID> getChats() {
-    return chats;
+    if (chats == null){
+      return new ArrayList<UUID>();
+    }
+    else {
+      return chats;
+    }
   }
 
 
