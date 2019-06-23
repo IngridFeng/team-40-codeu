@@ -46,6 +46,7 @@ public class Datastore {
     messageEntity.setProperty("text", message.getText());
     messageEntity.setProperty("timestamp", message.getTimestamp());
     messageEntity.setProperty("sentiment", message.getSentiment());
+    messageEntity.setProperty("imageUrl", message.getImageUrl());
 
     datastore.put(messageEntity);
   }
@@ -74,7 +75,9 @@ public class Datastore {
 
         double sentiment = (double) entity.getProperty("sentiment");
 
-        Message message = new Message(id, user, text, timestamp, sentiment);
+        String imageUrl = (String) entity.getProperty("imageUrl");
+
+        Message message = new Message(id, user, text, timestamp, sentiment, imageUrl);
         messages.add(message);
       } catch (Exception e) {
         System.err.println("Error reading message.");
@@ -101,12 +104,13 @@ public class Datastore {
       try {
         String idString = entity.getKey().getName();
         UUID id = UUID.fromString(idString);
-	String user = (String) entity.getProperty("user");
+	      String user = (String) entity.getProperty("user");
         String text = (String) entity.getProperty("text");
         long timestamp = (long) entity.getProperty("timestamp");
         double sentiment = (double) entity.getProperty("sentiment");
+        String imageUrl = (String) entity.getProperty("imageUrl");
 
-        Message message = new Message(id, user, text, timestamp, sentiment);
+        Message message = new Message(id, user, text, timestamp, sentiment, imageUrl);
         messages.add(message);
       } catch (Exception e) {
         System.err.println("Error reading message.");
@@ -115,7 +119,7 @@ public class Datastore {
       }
     }
 
-  return messages;
+    return messages;
 }
 
   /** Returns the total number of messages for all users. */
@@ -150,6 +154,33 @@ public class Datastore {
   datastore.put(userEntity);
  }
 
+ /** Stores the University the User inputs. */
+public void storeUniversity(University university) {
+  Entity universityEntity = new Entity("University", university.getUniversity());
+  universityEntity.setProperty("university", university.getUniversity());
+  datastore.put(universityEntity);
+  System.out.println((String) universityEntity.getProperty("university"));
+}
+
+/** Return all universities. */
+public List<University> getAllUniversities(){
+  List<University> universities = new ArrayList<>();
+
+  Query query = new Query("University");
+  PreparedQuery results = datastore.prepare(query);
+
+  for (Entity entity : results.asIterable()) {
+    try {
+      University university = new University((String) entity.getProperty("university"));
+      universities.add(university);
+    } catch (Exception e) {
+      System.err.println("Error reading university.");
+      System.err.println(entity.toString());
+      e.printStackTrace();
+    }
+  }
+  return universities;
+}
  /**
   * Returns the User owned by the email address, or
   * null if no matching User was found.
