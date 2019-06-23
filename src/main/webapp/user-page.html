@@ -25,42 +25,47 @@ limitations under the License.
     <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
   </head>
   <body onload="buildUI()">
-    <nav>
-      <ul id="navigation">
-        <li><a href="/">Home</a></li>
-        <li><a href="/aboutus.html">About Our Team</a></li>
-        <li><a href="/community.html">Community Page</a></li>
-      	<li><a href="/feed.html">Public Feed</a></li>
-      </ul>
-    </nav>
-    <h2 id="page-title">User Page</h2>
-    <div id="nickname-form" class="hidden">
-      <form action="/nickName" method="POST">
-        Nickname:
-        <input type="text" name="nickName" id="nickname-input" required></input>
-        <input type="submit" value="Submit">
-      </form>
-    </div>
+    <div id="content">
+      <nav>
+        <ul id="navigation">
+          <li><a href="/">Home</a></li>
+          <li><a href="/aboutus.html">About Our Team</a></li>
+          <li><a href="/community.html">Community Page</a></li>
+      	  <li><a href="/feed.html">Public Feed</a></li>
+        </ul>
+      </nav>
+      <div class="padded rounded panel centered">
+        <h2 id="page-title">User Page</h2>
+      </div>
+      <div id="nickname-form" class="hidden padded rounded panel">
+        <form action="/nickName" method="POST">
+          Nickname:
+          <input type="text" name="nickName" id="nickname-input" required></input>
+          <input type="submit" value="Submit" class="rounded">
+        </form>
+      </div>
 
-    <div id="about-me-container">Loading...</div>
-      <div id="about-me-form" class="hidden">
-      <form action="/about" method="POST">
-        <textarea name="about-me" id="aboutme-input" placeholder="Enter your information here" required></textarea>
-        <br/>
-        <input type="submit" value="Submit">
-      </form>
-    </div>
-
-    <form id="message-form" method="POST" class="hidden" enctype="multipart/form-data">
-      Enter a new message:
-      <br/>
-      <textarea name="text" id="message-input"></textarea>
-      <br/>
-      <p>Upload an image:</p>
-      <input type="file" name="image">
-      <br/><br/>
-      <input type="submit" value="Submit">
-    </form>
+      <div id="about-me-container" class="padded rounded panel">Loading...</div>
+      <div id="about-me-form" class="hidden padded rounded panel">
+        <form action="/about" method="POST">
+          <textarea name="about-me" id="aboutme-input" placeholder="Enter your information here" required></textarea>
+          <br/>
+          <input type="submit" value="Submit" class="rounded">
+        </form>
+      </div>
+      <div class="padded rounded panel">
+        <form id="message-form" method="POST" class="hidden" enctype="multipart/form-data">
+        Enter a new message:
+          <br/>
+          <textarea name="text" id="message-input" class="rounded"></textarea>
+          <br/>
+          <p>Upload an image:</p>
+          <input type="file" name="image">
+          <br/><br/>
+          <input type="submit" value="Submit" class="rounded">
+        </form>
+      </div>
+      <hr/>
 
     <!-- OK So i need to make a form that sends a post req.
     It needs to send the user that it is targetetd at
@@ -78,6 +83,7 @@ limitations under the License.
 
     <hr/>
 
-    <div id="message-container">Loading...</div>
+      <div id="message-container">Loading...</div>
+    </div>
   </body>
 </html>

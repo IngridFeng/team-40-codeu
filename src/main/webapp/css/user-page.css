@@ -19,12 +19,66 @@
 #message-input, #aboutme-input {
   height: 100px;
   width: 100%;
-  background: #f4b942;
   font-size: 14px;
 }
 
+body {
+  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
+  background: linear-gradient(white, #ccccff) fixed;
+}
+
+h2 {
+  margin: 0;
+}
+
+input[type=submit] {
+  background-color: #ccccff;
+  height: 50px;
+  width: 100px;
+  font-size: 14pt;
+}
+
+#content {
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+#message-input {
+  height: 100px;
+  width: 99%;
+}
+
+/* Give the message body a margin so the text
+   isn't too close to the border. */
+.message-body {
+  font: 12pt cursive;
+  margin: 5px;
+}
+
+.panel {
+  background-color: white;
+  margin-top: 20px;
+}
+
+.centered{
+  text-align: center;
+}
+
+.padded {
+  padding: 10px;
+}
+
+.rounded {
+  border: thin solid black;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
 #nickname-input{
-  background: #f4b942;
   font-size: 16px;
   border-top: 0px;
   border-right: 0px;
@@ -46,12 +100,7 @@
 .message-header {
   border-bottom: thin solid black;
   padding: 5px;
-}
-
-/* Give the message body a margin so the text
-   isn't too close to the border. */
-.message-body {
-  margin: 5px;
+  background-image: linear-gradient(to right, white , #ccccff);
 }
 
 /* Use this to hide certain elements like forms if the
