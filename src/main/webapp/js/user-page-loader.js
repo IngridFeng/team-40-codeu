@@ -41,7 +41,7 @@ function setPageTitle(nickName, viewingSelf) {
 /**
  * Shows the message form if the user is logged in and viewing their own page.
  */
-function showMessageForms() {
+function showForms() {
   fetch('/login-status')
       .then((response) => {
         return response.json();
@@ -50,10 +50,16 @@ function showMessageForms() {
         //not logged in
         if (!loginStatus.isLoggedIn){
           fetchNickName(false);
+          document.getElementById('login-form').classList.remove('hidden');
         }
-        //login and viewing self
         else if (loginStatus.username == parameterUsername) {
+
+          // handle message forms
+          const messageForm = document.getElementById('message-form');
+          messageForm.classList.remove('hidden');
+          
           fetchBlobstoreUrlAndShowForm();
+
           document.getElementById('about-me-form').classList.remove('hidden');
           document.getElementById('nickname-form').classList.remove('hidden');
           fetchNickName(true);
@@ -61,6 +67,9 @@ function showMessageForms() {
         //login and viewing others
         else {
           fetchNickName(false);
+          const chatForm = document.getElementById('chat-form');
+          chatForm.classList.remove('hidden');
+          chatForm.firstElementChild.value = parameterUsername;
         }
 
       });
@@ -157,7 +166,7 @@ function fetchNickName(viewingSelf){
 
 /** Fetches data and populates the UI of the page. */
 function buildUI() {
-  showMessageForms();
+  showForms();
   fetchMessages();
   const config = {removePlugins: [ 'Heading', 'List' ]};
   ClassicEditor.create(document.getElementById('message-input'), config );

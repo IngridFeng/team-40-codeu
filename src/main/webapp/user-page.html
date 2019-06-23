@@ -67,6 +67,22 @@ limitations under the License.
       </div>
       <hr/>
 
+    <!-- OK So i need to make a form that sends a post req.
+    It needs to send the user that it is targetetd at
+    (based on page currently being viewed)
+   -->
+
+   <form id="login-form" action="/login" method="GET" class="hidden">
+     <input type="submit" value="Login to Chat!">
+   </form>
+
+    <form id="chat-form" action="/chat" method="POST" class="hidden">
+      <input type="hidden" name="selectedUser" value="" />
+      <input type="submit" value="Chat with Me!">
+    </form>
+
+    <hr/>
+
       <div id="message-container">Loading...</div>
     </div>
   </body>
