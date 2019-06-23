@@ -37,20 +37,20 @@ limitations under the License.
       <div class="padded rounded panel centered">
         <h2 id="page-title">User Page</h2>
       </div>
-      <div id="nickname-form" class="hidden">
+      <div id="nickname-form" class="hidden padded rounded panel">
         <form action="/nickName" method="POST">
           Nickname:
           <input type="text" name="nickName" id="nickname-input" required></input>
-          <input type="submit" value="Submit">
+          <input type="submit" value="Submit" class="rounded">
         </form>
       </div>
 
-      <div id="about-me-container">Loading...</div>
-        <div id="about-me-form" class="hidden">
+      <div id="about-me-container" class="padded rounded panel">Loading...</div>
+      <div id="about-me-form" class="hidden padded rounded panel">
         <form action="/about" method="POST">
           <textarea name="about-me" id="aboutme-input" placeholder="Enter your information here" required></textarea>
           <br/>
-          <input type="submit" value="Submit">
+          <input type="submit" value="Submit" class="rounded">
         </form>
       </div>
       <div class="padded rounded panel">

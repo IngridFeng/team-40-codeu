@@ -19,25 +19,14 @@
 #message-input, #aboutme-input {
   height: 100px;
   width: 100%;
-  background: #f4b942;
   font-size: 14px;
 }
 
 body {
   margin: 0;
+  margin-left: auto;
+  margin-right: auto;
   background: linear-gradient(white, #ccccff) fixed;
-  font-family: sans-serif;
-}
-
-nav {
-  background-color: #ccccff;
-  font-size: 18pt;
-  padding: 10px;
-}
-
-nav a {
-  color: black;
-  margin-right: 10px;
 }
 
 h2 {
@@ -90,7 +79,6 @@ input[type=submit] {
 }
 
 #nickname-input{
-  background: #f4b942;
   font-size: 16px;
   border-top: 0px;
   border-right: 0px;
