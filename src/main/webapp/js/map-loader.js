@@ -64,8 +64,7 @@ function fetchMarkers(){
     return response.json();
   }).then((markers) => {
     markers.forEach((marker) => {
-     createMarkerForDisplay(marker.lat, marker.lng, marker.content)
-     console.log(marker.content);
+     createMarkerForDisplay(marker.lat, marker.lng, marker.content + "<br>" + "--from " + marker.universityAddress);
     });
   });
 }
@@ -76,18 +75,20 @@ function createMarkerForDisplay(lat, lng, content){
     map: map
   });
   var infoWindow = new google.maps.InfoWindow({
-    content: content
+    content: content.replace(/(\n|\r|\r\n)/g, '<br>')
   });
   marker.addListener('click', () => {
     infoWindow.open(map, marker);
   });
 }
 /** Sends a marker to the backend for saving. */
-function postMarker(lat, lng, content){
+function postMarker(lat, lng, content, universityAddress){
   const params = new URLSearchParams();
   params.append('lat', lat);
   params.append('lng', lng);
   params.append('content', content);
+  params.append('universityAddress', universityAddress);
+  // params.append('timestamp', System.currentTimeMillis());
   fetch('/markers', {
     method: 'POST',
     body: params
@@ -120,7 +121,7 @@ function buildInfoWindowInput(lat, lng, universityAddress){
   button.appendChild(document.createTextNode('Shoutout to Everyone from Your University!'));
   button.onclick = () => {
     const fullContent = textBox.value + "<br>" + "--from " + universityAddress;
-    postMarker(lat, lng, fullContent);
+    postMarker(lat, lng, textBox.value, universityAddress);
     createMarkerForDisplay(lat, lng, fullContent);
     editMarker.setMap(null);
   };

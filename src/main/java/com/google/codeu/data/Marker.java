@@ -5,11 +5,15 @@ public class Marker {
   private double lat;
   private double lng;
   private String content;
+  // private long timestamp;
+  private String universityAddress;
 
-  public Marker(double lat, double lng, String content) {
+  public Marker(double lat, double lng, String content, String universityAddress) {
     this.lat = lat;
     this.lng = lng;
+    // this.timestamp = timestamp;
     this.content = content;
+    this.universityAddress = universityAddress;
   }
 
   public double getLat() {
@@ -22,5 +26,13 @@ public class Marker {
 
   public String getContent() {
     return content;
+  }
+
+  // public long getTimestamp() {
+  //   return timestamp;
+  // }
+
+  public String getUniversityAddress() {
+    return universityAddress;
   }
 }
