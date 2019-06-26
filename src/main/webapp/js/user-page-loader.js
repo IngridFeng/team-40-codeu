@@ -53,9 +53,13 @@ function showForms() {
           document.getElementById('login-form').classList.remove('hidden');
         }
         else if (loginStatus.username == parameterUsername) {
+
           // handle message forms
           const messageForm = document.getElementById('message-form');
           messageForm.classList.remove('hidden');
+          
+          fetchBlobstoreUrlAndShowForm();
+
           document.getElementById('about-me-form').classList.remove('hidden');
           document.getElementById('nickname-form').classList.remove('hidden');
           fetchNickName(true);
@@ -69,6 +73,19 @@ function showForms() {
         }
 
       });
+}
+
+/** Fetches the Blobstore upload URL (for images) */
+function fetchBlobstoreUrlAndShowForm() {
+  fetch('/blobstore-upload-url')
+    .then((response) => {
+      return response.text();
+    })
+    .then((imageUploadUrl) => {
+      const messageForm = document.getElementById('message-form');
+      messageForm.action = imageUploadUrl;
+      messageForm.classList.remove('hidden');
+    });
 }
 
 
@@ -101,6 +118,7 @@ function fetchMessages() {
 function buildMessageDiv(message) {
   const headerDiv = document.createElement('div');
   headerDiv.classList.add('message-header');
+  headerDiv.classList.add('padded');
   headerDiv.appendChild(document.createTextNode(
       message.user + ' - ' + new Date(message.timestamp)));
 
@@ -108,8 +126,16 @@ function buildMessageDiv(message) {
   bodyDiv.classList.add('message-body');
   bodyDiv.innerHTML = message.text;
 
+  if(message.hasOwnProperty('imageUrl')) {
+    const img = document.createElement('img');
+    img.src = message.imageUrl;
+    bodyDiv.appendChild(img);
+  }
+
   const messageDiv = document.createElement('div');
   messageDiv.classList.add('message-div');
+  messageDiv.classList.add('rounded');
+  messageDiv.classList.add('panel');
   messageDiv.appendChild(headerDiv);
   messageDiv.appendChild(bodyDiv);
 
@@ -142,5 +168,7 @@ function fetchNickName(viewingSelf){
 function buildUI() {
   showForms();
   fetchMessages();
+  const config = {removePlugins: [ 'Heading', 'List' ]};
+  ClassicEditor.create(document.getElementById('message-input'), config );
   fetchAboutMe();
 }

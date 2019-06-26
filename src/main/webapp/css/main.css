@@ -15,9 +15,11 @@
  */
 
 /* Prevent the page from becoming too wide. */
-body {
+body { 
   max-width: 600px;
-  background-color: #f4b942;
+  background: linear-gradient(white, #ccccff) fixed;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Remove bullet points from navigation bar. */
@@ -38,4 +40,24 @@ nav li {
   border: 1px solid #ccc;
   width: 340px;
   padding: 8px;
+}
+
+#map {
+  width: 800px;
+  height: 500px;
+  border: thin solid black;
+}
+
+#floating-panel {
+  position: relative;
+  z-index: 5;
+  top: 50px;
+  left: 200px;
+  width: 300px;
+  background-color: #fff;
+  padding: 4px 0px 4px 0px;
+  border: 1px solid #ccc round;
+  text-align: center;
+  font-family: 'Roboto','sans-serif';
+  line-height: 30px;
 }
