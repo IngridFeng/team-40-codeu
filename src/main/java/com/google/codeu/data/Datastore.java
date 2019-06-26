@@ -42,6 +42,7 @@ public class Datastore {
   /** Stores the Message in Datastore. */
   public void storeMessage(Message message) {
     Entity messageEntity = new Entity("Message", message.getId().toString());
+    messageEntity.setProperty("chat", message.getChat());
     messageEntity.setProperty("user", message.getUser());
     messageEntity.setProperty("text", message.getText());
     messageEntity.setProperty("timestamp", message.getTimestamp());
@@ -69,12 +70,13 @@ public class Datastore {
       try {
         String idString = entity.getKey().getName();
         UUID id = UUID.fromString(idString);
+        String chat = (String) entity.getProperty("chat");
         String text = (String) entity.getProperty("text");
         long timestamp = (long) entity.getProperty("timestamp");
 
         double sentiment = (double) entity.getProperty("sentiment");
 
-        Message message = new Message(id, user, text, timestamp, sentiment);
+        Message message = new Message(id, chat, user, text, timestamp, sentiment);
         messages.add(message);
       } catch (Exception e) {
         System.err.println("Error reading message.");
@@ -101,12 +103,13 @@ public class Datastore {
       try {
         String idString = entity.getKey().getName();
         UUID id = UUID.fromString(idString);
-	String user = (String) entity.getProperty("user");
+        String chat = (String) entity.getProperty("chat");
+      	String user = (String) entity.getProperty("user");
         String text = (String) entity.getProperty("text");
         long timestamp = (long) entity.getProperty("timestamp");
         double sentiment = (double) entity.getProperty("sentiment");
 
-        Message message = new Message(id, user, text, timestamp, sentiment);
+        Message message = new Message(id, chat, user, text, timestamp, sentiment);
         messages.add(message);
       } catch (Exception e) {
         System.err.println("Error reading message.");
@@ -170,4 +173,34 @@ public class Datastore {
   User user = new User(email, aboutMe, nickName, chats);
   return user;
  }
+
+ /**
+ * Get chat from chat name
+ */
+ public Chat getChat(String name) {
+  Query query = new Query("Chat")
+    .setFilter(new Query.FilterPredicate("name", FilterOperator.EQUAL, name));
+  PreparedQuery results = datastore.prepare(query);
+  Entity chatEntity = results.asSingleEntity();
+  if(chatEntity == null) {
+    Chat chat = new Chat(name,"");
+    return chat;
+  }
+  else {
+    String idString = chatEntity.getKey().getName();
+    UUID id = UUID.fromString(idString);
+    String description = (String) chatEntity.getProperty("description");
+    Chat chat = new Chat(id,name,description);
+    return chat;
+  }
+ }
+
+ /**
+ * Returns the Messgaes associated with the Chat
+ * null if none was found.
+
+  Public List<UUID> getMessagesFromChat(UUID chat){
+
+  }
+  */
 }

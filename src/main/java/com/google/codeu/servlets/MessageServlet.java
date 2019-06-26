@@ -24,9 +24,11 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.Message;
+import com.google.codeu.data.Chat;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -81,12 +83,13 @@ public class MessageServlet extends HttpServlet {
       return;
     }
 
+    // Get user
     String user = userService.getCurrentUser().getEmail();
-    String text = Jsoup.clean(request.getParameter("text"), Whitelist.simpleText());
 
+    // Get text
+    String text = Jsoup.clean(request.getParameter("text"), Whitelist.simpleText());
     TextProcessor processor = BBProcessorFactory.getInstance().create();
     text = processor.process(text);
-
     String regex = "(https?://\\w+\\.\\S+\\.(png|jpg|gif))";
     String replacement = "<img src=\"$1\" />";
     String textWithImagesReplaced = text.replaceAll(regex, replacement);
@@ -96,13 +99,20 @@ public class MessageServlet extends HttpServlet {
     									+ "<source src=\"$1\" type=\"video/mp4\" > "
     									+ "</video>");
     String textWithVideosReplaced = textWithImagesReplaced.replaceAll(regexVid, repVid);
+
+    // Get sentiment score
     Document doc = Document.newBuilder().setContent(textWithVideosReplaced).setType(Document.Type.PLAIN_TEXT).build();
     LanguageServiceClient languageService = LanguageServiceClient.create();
     Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
     double score = sentiment.getScore();
     languageService.close();
 
-    Message message = new Message(user, textWithVideosReplaced, score);
+    // get chat
+    String chatName = request.getParameter("chat");
+    Chat chat = datastore.getChat(chatName);
+    String chatId = chat.getId().toString();
+
+    Message message = new Message(chatId ,user, textWithVideosReplaced, score);
     datastore.storeMessage(message);
 
     response.sendRedirect("/user-page.html?user=" + user);
