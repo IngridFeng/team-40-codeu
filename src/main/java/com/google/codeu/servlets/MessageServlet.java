@@ -35,12 +35,9 @@ import com.google.codeu.data.Chat;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.List;
-<<<<<<< HEAD
 import java.util.UUID;
-=======
 import java.util.Map;
 
->>>>>>> 2a12cdea426f2ca9998091f8a988c7bde5b90156
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

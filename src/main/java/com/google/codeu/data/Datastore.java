@@ -74,10 +74,7 @@ public class Datastore {
         String chat = (String) entity.getProperty("chat");
         String text = (String) entity.getProperty("text");
         long timestamp = (long) entity.getProperty("timestamp");
-
         double sentiment = (double) entity.getProperty("sentiment");
-
-        Message message = new Message(id, chat, user, text, timestamp, sentiment);
         String imageUrl = (String) entity.getProperty("imageUrl");
 
         Message message = new Message(id, chat, user, text, timestamp, sentiment, imageUrl);
