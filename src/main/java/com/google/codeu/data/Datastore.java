@@ -214,7 +214,7 @@ public List<University> getAllUniversities(){
  public void storeChat(Chat chat) {
    Entity chatEntity = new Entity("Chat", chat.getId().toString());
    chatEntity.setProperty("name", chat.getName());
-   chatEntity.setProperty("user", chat.getDescription());
+   chatEntity.setProperty("description", chat.getDescription());
    datastore.put(chatEntity);
  }
 

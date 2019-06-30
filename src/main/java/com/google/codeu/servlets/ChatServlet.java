@@ -65,7 +65,6 @@ public class ChatServlet extends HttpServlet {
       //get emails of users
       String userEmail = userService.getCurrentUser().getEmail();
       String selectedUserEmail = request.getParameter("selectedUser");
-      System.out.println(selectedUserEmail);
 
       // create new chat
       Chat chat = new Chat(userEmail + " and " + selectedUserEmail,"Omg a new friend! :D");
@@ -102,8 +101,6 @@ public class ChatServlet extends HttpServlet {
       }
 
       // store chat
-      System.out.println(chat.getName());
-      System.out.println(chat.getDescription());
       datastore.storeChat(chat);
 
       // redirect to chat package

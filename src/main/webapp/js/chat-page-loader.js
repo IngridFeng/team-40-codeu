@@ -13,22 +13,13 @@ function buildUI() {
   fetch(url).then((response) => {
     return response.json();
   }).then((chatInfo) => {
-    console.log(chatInfo.description);
     document.getElementById('chat-name').innerHTML = chatInfo.name;
     document.getElementById('chat-description').innerHTML = chatInfo.description;
 
   });
 
-
-  console.log('hi');
-
-
 }
 
 
 
-// send get request to chat endpoint
-
-// pull up requested chat id
-    // requires a getChat function in Datastore
     // should also implement a chat page that pulls all chats that have ids associated with user
