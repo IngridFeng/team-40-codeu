@@ -122,7 +122,7 @@ public class MessageServlet extends HttpServlet {
 
     // get chat
     String chatName = request.getParameter("chat");
-    Chat chat = datastore.getChat(chatName);
+    Chat chat = datastore.getChatbyName(chatName);
     String chatId = chat.getId().toString();
 
     Message message = new Message(chatId ,user, textWithVideosReplaced, score, imageUrl);

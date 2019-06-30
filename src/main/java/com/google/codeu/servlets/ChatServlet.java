@@ -11,11 +11,10 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.User;
-
 import com.google.codeu.data.Chat;
+import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Iterator;
 import java.util.UUID;
 
 
@@ -33,11 +32,25 @@ public class ChatServlet extends HttpServlet {
     datastore = new Datastore();
   }
 
+  /** Returns JSON of chat details with matching id  **/
+
+  // TO DO: Get the getChatbyId to work
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
     throws IOException {
-      System.out.println("Hi");
+      response.setContentType("application/json");
+      String chatId = request.getParameter("chatId");
+      System.out.println("HELLO");
+      System.out.println(chatId);
+
+      Chat chat = datastore.getChatbyId(chatId);
+      Gson gson = new Gson();
+      String json = gson.toJson(chat);
+      System.out.println(chat.getDescription());
+      response.getWriter().println(json);
     }
+
+  /** Creates and stores a new Chat **/
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -90,12 +103,8 @@ public class ChatServlet extends HttpServlet {
         selectedUser.setChats(selectedUserChats);
       }
 
-      System.out.println("Hi");
-      System.out.println(user);
-      System.out.println(selectedUser);
-      System.out.println(chat);
-      System.out.println(user.getChats());
-      System.out.println(selectedUser.getChats());
+      // store chat
+      datastore.storeChat(chat);
 
       // redirect to chat package
       response.sendRedirect("/chat.html?chat=" + chat.getId());
