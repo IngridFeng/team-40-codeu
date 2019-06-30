@@ -15,7 +15,7 @@
  */
 
 /* Prevent the page from becoming too wide. */
-body { 
+body {
   max-width: 600px;
   background: linear-gradient(white, #ccccff) fixed;
   margin-left: auto;
@@ -60,4 +60,8 @@ nav li {
   text-align: center;
   font-family: 'Roboto','sans-serif';
   line-height: 30px;
+}
+
+.mapInfoBox {
+  width: 240px;
 }
