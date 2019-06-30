@@ -31,29 +31,32 @@ limitations under the License.
   <body onload="addLoginOrLogoutLinkToNavigation(); createMap();">
     <nav>
       <ul id="navigation">
-        <li><a href="/">Home</a></li>
+        <li><a class="active" href="/">Home</a></li>
         <li><a href="/aboutus.html">About Our Team</a></li>
         <li><a href="/community.html">Community Page</a></li>
       	<li><a href="/feed.html">Public Feed</a></li>
       </ul>
     </nav>
-    <div class="singleBlock" style="width: 600px;">
+    <div align="center" style="width: 800px;margin-top:50px;margin:auto;">
+
+    <div align="center" align-text="center" class="singleBlock" style="width: 600px;margin-top:50px;">
       <h1>CodeU Starter Project</h1>
     </div>
-    <div>
+    <div align="center">
       <h1>How Constructive Are We?</h1>
       <p>We become what our environment encourages.
         Let's give transparent and collaborative feedback so we can all grow!</p>
       <h2>Constructiveness of all messages</h2>
       <div id="nice_chart"></div>
-      <p id="avg_sentiment" align="center"></p>
-    </div>
+      <p id="avg_sentiment" align="center" style="width: 600px;"></p>
+    </div algin="center">
     <h2>Shoutout for Your University!</h2>
-    <div id="floating-panel">
+    <div id="floating-panel" align="center">
       <input id="address" type="textbox" name = "university" required></input>
       <input id="submit" type="button" value="Add Your University!">
     </div>
-    <div id="map"></div>
+    <div id="map" align="center"></div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTYJGGk3f9krfYZB-Ab1oC65W_pDtvrAw&callback=createMap"></script>
+    </div>
   </body>
 </html>
