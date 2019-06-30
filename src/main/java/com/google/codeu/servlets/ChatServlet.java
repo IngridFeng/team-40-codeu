@@ -40,13 +40,10 @@ public class ChatServlet extends HttpServlet {
     throws IOException {
       response.setContentType("application/json");
       String chatId = request.getParameter("chatId");
-      System.out.println("HELLO");
-      System.out.println(chatId);
 
       Chat chat = datastore.getChatbyId(chatId);
       Gson gson = new Gson();
       String json = gson.toJson(chat);
-      System.out.println(chat.getDescription());
       response.getWriter().println(json);
     }
 
@@ -67,7 +64,8 @@ public class ChatServlet extends HttpServlet {
 
       //get emails of users
       String userEmail = userService.getCurrentUser().getEmail();
-      String selectedUserEmail = request.getParameter("selectedUserEmail");
+      String selectedUserEmail = request.getParameter("selectedUser");
+      System.out.println(selectedUserEmail);
 
       // create new chat
       Chat chat = new Chat(userEmail + " and " + selectedUserEmail,"Omg a new friend! :D");
@@ -104,6 +102,8 @@ public class ChatServlet extends HttpServlet {
       }
 
       // store chat
+      System.out.println(chat.getName());
+      System.out.println(chat.getDescription());
       datastore.storeChat(chat);
 
       // redirect to chat package
