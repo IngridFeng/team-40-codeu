@@ -6,22 +6,24 @@ if (!parameterChat) {
   window.location.replace('/');
 }
 
-// get chat details
-
-
 // set the chat title to the saved chat name
-function setChatName() {
-  if (viewingSelf == true){
-    document.getElementById('page-title').innerText = 'Welcome home! ' + nickName.replace(/(\n|\r|\r\n)/g, '') + ' ^_^';
-  }
-  else{
-    if (nickName == ''){
-      document.getElementById('page-title').innerText = 'Hello! My owner hasn\'t set my name yet! Please remind him/her to give me a name ^_^';
-    }
-    else{
-      document.getElementById('page-title').innerText = 'Helloooo! This is ' + nickName.replace(/(\n|\r|\r\n)/g, '') + ". Welcome to my page ^_^";
-    }
-  }
+function buildUI() {
+
+  const url = '/chat?chatId=' + parameterChat;
+  fetch(url).then((response) => {
+    return response.json();
+  }).then((chatInfo) => {
+    console.log(chatInfo.description);
+    document.getElementById('chat-name').innerHTML = chatInfo.name;
+    document.getElementById('chat-description').innerHTML = chatInfo.description;
+
+  });
+
+
+  console.log('hi');
+
+
+}
 
 
 
