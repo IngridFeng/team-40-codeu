@@ -11,11 +11,10 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.User;
-
 import com.google.codeu.data.Chat;
+import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Iterator;
 import java.util.UUID;
 
 
@@ -33,11 +32,22 @@ public class ChatServlet extends HttpServlet {
     datastore = new Datastore();
   }
 
+  /** Returns JSON of chat details with matching id  **/
+
+  // TO DO: Get the getChatbyId to work
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
     throws IOException {
-      System.out.println("Hi");
+      response.setContentType("application/json");
+      String chatId = request.getParameter("chatId");
+
+      Chat chat = datastore.getChatbyId(chatId);
+      Gson gson = new Gson();
+      String json = gson.toJson(chat);
+      response.getWriter().println(json);
     }
+
+  /** Creates and stores a new Chat **/
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -54,9 +64,7 @@ public class ChatServlet extends HttpServlet {
 
       //get emails of users
       String userEmail = userService.getCurrentUser().getEmail();
-      String selectedUserEmail = request.getParameter("selectedUserEmail");
-
-      System.out.println(userEmail);
+      String selectedUserEmail = request.getParameter("selectedUser");
 
       // create new chat
       Chat chat = new Chat(userEmail + " and " + selectedUserEmail,"Omg a new friend! :D");
@@ -68,12 +76,11 @@ public class ChatServlet extends HttpServlet {
         List<UUID> userChats = new ArrayList<UUID>();
         userChats.add(chat.getId());
 
-        user = new User(userEmail, null, null, userChats);
+        user = new User(userEmail, null, null, userChats, null);
       }
       else{
         //modify the chats
         List<UUID> userChats = user.getChats();
-        System.out.println(userChats);
         userChats.add(chat.getId());
         user.setChats(userChats);
       }
@@ -84,7 +91,7 @@ public class ChatServlet extends HttpServlet {
         //create new user
         List<UUID> selectedUserChats = new ArrayList<UUID>();
         selectedUserChats.add(chat.getId());
-        selectedUser = new User(userEmail, null, null, selectedUserChats);
+        selectedUser = new User(userEmail, null, null, selectedUserChats, null);
       }
       else{
         //modify the chats
@@ -93,60 +100,15 @@ public class ChatServlet extends HttpServlet {
         selectedUser.setChats(selectedUserChats);
       }
 
-      System.out.println("Hi");
-      System.out.println(user);
-      System.out.println(selectedUser);
-      System.out.println(chat);
-      System.out.println(user.getChats());
-      System.out.println(selectedUser.getChats());
+      // store chat
+      datastore.storeChat(chat);
+
+      // redirect to chat package
+      response.sendRedirect("/chat.html?chat=" + chat.getId());
+      return;
+
+
 
     }
+
 }
-
-  /**
-   * upon posting, log a new chat
-   * currently, only direct messages. Groups in the future.
-   */
-
-    /**
-  @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    // get the users involved
-    List<String> users = request.getParameter('users');
-
-    // get the chat name
-    String chatName = request.getParameter('chatName');
-    String chatDescription = request.getParameter('chatDescription');
-
-    // create new chat
-    chat = new Chat(chatName, chatDescription);
-
-    // store the new chat instance for each user
-    while (users.hasNext()) {
-      try {
-        System.oit.println(iterator.next());
-      } catch (Exception e) {
-        System.err.println("Error reading message.");
-        System.err.println(entity.toString());
-        e.printStackTrace();
-      }
-    }
-  }
-
-  **/
-
-  // send users to the new chat
-
-  /**
-    * upon getting, read all chats and return a JSON?
-     check with userlist servlet
-  */
-
-
-    /**
-    throws IOException {
-
-    }
-
-    response.getOutputStream().println();
-    **/

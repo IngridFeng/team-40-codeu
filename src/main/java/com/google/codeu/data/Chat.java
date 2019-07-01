@@ -8,7 +8,11 @@ public class Chat {
   private String description;
 
   public Chat(String name, String description) {
-    this.id = UUID.randomUUID();
+    this(UUID.randomUUID(),name,description);
+  }
+
+  public Chat(UUID id, String name, String description) {
+    this.id = id;
     this.name = name;
     this.description = description;
   }
