@@ -16,27 +16,54 @@
 
 /* Prevent the page from becoming too wide. */
 body {
-  max-width: 600px;
+  margin: auto;
   background: linear-gradient(white, #ccccff) fixed;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 /* Remove bullet points from navigation bar. */
 nav ul {
+  top: 0;
   list-style-type: none;
   padding-left: 0;
+  margin: auto;
+  margin-left: 0;
+  padding: 0;
+  width: 100%;
+  position: fixed;
+  background-color: #333;
+  border: 1px solid #e7e7e7;
 }
 
 /* Keep navigation menu on one line. */
 nav li {
   display: inline-block;
-  margin-right: 10px
+  float: left;
+  margin: auto;
+  text-decoration: none;
+}
+
+li a {
+  display: block;
+  color: white;
+  padding: 14px;
+  text-decoration: none;
+  text-align: center;
+  background-color: #333;
+}
+
+li a:hover {
+  background-color: #dddddd;
+  color: black;
+}
+
+.active {
+  background-color: #4CAF50;
+  color: black;
 }
 
 .singleBlock {
   display: inline-block;
-  margin-bottom: 10px;
+  text-align: left;
   border: 1px solid #ccc;
   width: 340px;
   padding: 8px;
