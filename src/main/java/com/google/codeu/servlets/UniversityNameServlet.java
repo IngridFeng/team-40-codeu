@@ -75,7 +75,7 @@ public class UniversityNameServlet extends HttpServlet {
       //set chats of current user to null
       List<UUID> chats = new ArrayList<UUID>();
       //create the user
-      user = new User(userEmail, null, null, chats, null, universityName);
+      user = new User(userEmail, null, null, chats, null, universityName, null);
     }
     else{
       //set the universityName

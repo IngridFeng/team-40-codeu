@@ -40,6 +40,15 @@ input[type=submit] {
   font-size: 12pt;
 }
 
+.noBotMargin{
+  margin-bottom: 0px;
+}
+
+.noTopMargin{
+  margin-top: 0px;
+}
+
+
 #content {
   max-width: 600px;
   margin-left: auto;
@@ -78,7 +87,23 @@ input[type=submit] {
   overflow: hidden;
 }
 
-#nickname-input, #university-name-input{
+.row {
+  display: flex;
+}
+
+.column {
+  float: left;
+}
+
+.left {
+  width: 40%;
+}
+
+.right {
+  width: 60%;
+}
+
+#nickname-input, #university-name-input, #major-input {
   font-size: 16px;
   border-top: 0px;
   border-right: 0px;

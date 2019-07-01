@@ -93,7 +93,7 @@ public class ProfilePicServlet extends HttpServlet {
       //set chats of current user to null
       List<UUID> chats = new ArrayList<UUID>();
       //create the user
-      user = new User(userEmail, null, null, chats, imageUrl, null);
+      user = new User(userEmail, null, null, chats, imageUrl, null, null);
     }
     else{
       //modify the profile pic Url

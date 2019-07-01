@@ -12,14 +12,16 @@ public class User {
   private List<UUID> chats;
   private String imageUrl;
   private String universityName;
+  private String major;
 
-  public User(String email, String aboutMe, String nickName, List<UUID> chats, String imageUrl, String universityName) {
+  public User(String email, String aboutMe, String nickName, List<UUID> chats, String imageUrl, String universityName, String major) {
     this.email = email;
     this.aboutMe = aboutMe;
     this.nickName = nickName;
     this.chats = chats;
     this.imageUrl = imageUrl;
     this.universityName = universityName;
+    this.major = major;
   }
 
   public String getEmail(){
@@ -51,6 +53,10 @@ public class User {
     return universityName;
   }
 
+  public String getMajor() {
+    return major;
+  }
+
   public void setNickName(String nickName) {
     this.nickName = nickName;
   }
@@ -69,6 +75,10 @@ public class User {
 
   public void setUniversityName(String universityName) {
     this.universityName = universityName;
+  }
+
+  public void setMajor(String major) {
+    this.major = major;
   }
 
 }

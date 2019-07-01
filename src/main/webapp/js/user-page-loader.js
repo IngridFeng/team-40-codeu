@@ -50,7 +50,6 @@ function showForms() {
         //not logged in
         if (!loginStatus.isLoggedIn){
           fetchNickName(false);
-          fetchUniversityName(false);
           document.getElementById('login-form').classList.remove('hidden');
         }
         //logged in and viewing self
@@ -65,13 +64,12 @@ function showForms() {
           document.getElementById('about-me-form').classList.remove('hidden');
           document.getElementById('nickname-form').classList.remove('hidden');
           document.getElementById('university-name-form').classList.remove('hidden');
-          fetchUniversityName(true);
+          document.getElementById('major-form').classList.remove('hidden');
           fetchNickName(true);
         }
         //login and viewing others
         else {
           fetchNickName(false);
-          fetchUniversityName(false);
           const chatForm = document.getElementById('chat-form');
           chatForm.classList.remove('hidden');
           chatForm.firstElementChild.value = parameterUsername;
@@ -199,7 +197,7 @@ function fetchNickName(viewingSelf){
   });
 }
 
-function fetchUniversityName(viewingSelf){
+function fetchUniversityName(){
   const url = '/universityName?user=' + parameterUsername;
   fetch(url).then((response) => {
     return response.text();
@@ -212,6 +210,19 @@ function fetchUniversityName(viewingSelf){
   });
 }
 
+function fetchMajor(){
+  const url = '/major?user=' + parameterUsername;
+  fetch(url).then((response) => {
+    return response.text();
+  }).then((major) => {
+    const majorContainer = document.getElementById('major-container');
+    if(major == ''){
+      major = 'I don\'t know, ask Prof.Dumbledore!';
+    }
+    majorContainer.innerHTML = 'Major: ' + major;
+  });
+}
+
 /** Fetches data and populates the UI of the page. */
 function buildUI() {
   showForms();
@@ -220,4 +231,6 @@ function buildUI() {
   ClassicEditor.create(document.getElementById('message-input'), config );
   fetchAboutMe();
   fetchProfilePic();
+  fetchUniversityName();
+  fetchMajor();
 }

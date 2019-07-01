@@ -75,7 +75,7 @@ public class NickNameServlet extends HttpServlet {
       //set chats of current user to null
       List<UUID> chats = new ArrayList<UUID>();
       //create the user
-      user = new User(userEmail, null, nickName, chats, null, null);
+      user = new User(userEmail, null, nickName, chats, null, null, null);
     }
     else{
       //modify the nickName
