@@ -59,6 +59,7 @@ function showForms() {
           messageForm.classList.remove('hidden');
           
           fetchBlobstoreUrlAndShowForm();
+          fetchProfilePicUrlAndShowForm();
 
           document.getElementById('about-me-form').classList.remove('hidden');
           document.getElementById('nickname-form').classList.remove('hidden');
@@ -88,8 +89,21 @@ function fetchBlobstoreUrlAndShowForm() {
     });
 }
 
+/** Fetches the profile picture upload URL */
+function fetchProfilePicUrlAndShowForm() {
+  fetch('/profilepic-upload-url')
+    .then((response) => {
+      return response.text();
+    })
+    .then((profilePicUploadUrl) => {
+      const profilepicForm = document.getElementById('profilepic-form');
+      profilepicForm.action = profilePicUploadUrl;
+      profilepicForm.classList.remove('hidden');
+    });
+}
 
-/** Fetches messages and add them to the page. */
+
+/** Fetches s and add them to the page. */
 function fetchMessages() {
   const url = '/messages?user=' + parameterUsername;
   fetch(url)
@@ -142,6 +156,18 @@ function buildMessageDiv(message) {
   return messageDiv;
 }
 
+function fetchProfilePic() {
+  const url = '/profilePic?user=' + parameterUsername;
+  fetch(url).then((response) => {
+    return response.text();
+  }).then((profilePicUrl) => {
+    const profileImg = document.getElementById('profilepic');
+    if(profilePicUrl != ''){
+      profileImg.src = profilePicUrl;
+    }
+  });
+}
+
 function fetchAboutMe(){
   const url = '/about?user=' + parameterUsername;
   fetch(url).then((response) => {
@@ -171,4 +197,5 @@ function buildUI() {
   const config = {removePlugins: [ 'Heading', 'List' ]};
   ClassicEditor.create(document.getElementById('message-input'), config );
   fetchAboutMe();
+  fetchProfilePic();
 }
