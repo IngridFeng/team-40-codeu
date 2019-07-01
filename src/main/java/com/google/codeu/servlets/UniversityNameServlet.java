@@ -20,8 +20,8 @@ import java.util.UUID;
 /**
  * Handles fetching and saving user data.
  */
-@WebServlet("/nickName")
-public class NickNameServlet extends HttpServlet {
+@WebServlet("/universityName")
+public class UniversityNameServlet extends HttpServlet {
 
   private Datastore datastore;
 
@@ -31,7 +31,7 @@ public class NickNameServlet extends HttpServlet {
   }
 
   /**
-   * Responds with the "nickname" section for a particular user.
+   * Responds with the "universityName" section for a particular user.
    */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -48,11 +48,11 @@ public class NickNameServlet extends HttpServlet {
 
     User userData = datastore.getUser(user);
 
-    if(userData == null || userData.getNickName() == null) {
+    if(userData == null || userData.getUniversityName() == null) {
       return;
     }
 
-    response.getOutputStream().println(userData.getNickName());
+    response.getOutputStream().println(userData.getUniversityName());
   }
 
   @Override
@@ -67,19 +67,19 @@ public class NickNameServlet extends HttpServlet {
 
     //get email of current user
     String userEmail = userService.getCurrentUser().getEmail();
-    //get nickName that user put in
-    String nickName = request.getParameter("nickName");
+    //get universityName that user put in
+    String universityName = request.getParameter("universityName");
     //get current user by querying the email
     User user = datastore.getUser(userEmail);
     if (user == null) {
       //set chats of current user to null
       List<UUID> chats = new ArrayList<UUID>();
       //create the user
-      user = new User(userEmail, null, nickName, chats, null, null);
+      user = new User(userEmail, null, null, chats, null, universityName);
     }
     else{
-      //modify the nickName
-      user.setNickName(nickName);
+      //set the universityName
+      user.setUniversityName(universityName);
     }
     //store the user
     datastore.storeUser(user);

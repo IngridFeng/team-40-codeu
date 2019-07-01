@@ -50,24 +50,28 @@ function showForms() {
         //not logged in
         if (!loginStatus.isLoggedIn){
           fetchNickName(false);
+          fetchUniversityName(false);
           document.getElementById('login-form').classList.remove('hidden');
         }
+        //logged in and viewing self
         else if (loginStatus.username == parameterUsername) {
-
           // handle message forms
           const messageForm = document.getElementById('message-form');
           messageForm.classList.remove('hidden');
-          
+
           fetchBlobstoreUrlAndShowForm();
           fetchProfilePicUrlAndShowForm();
 
           document.getElementById('about-me-form').classList.remove('hidden');
           document.getElementById('nickname-form').classList.remove('hidden');
+          document.getElementById('university-name-form').classList.remove('hidden');
+          fetchUniversityName(true);
           fetchNickName(true);
         }
         //login and viewing others
         else {
           fetchNickName(false);
+          fetchUniversityName(false);
           const chatForm = document.getElementById('chat-form');
           chatForm.classList.remove('hidden');
           chatForm.firstElementChild.value = parameterUsername;
@@ -186,7 +190,25 @@ function fetchNickName(viewingSelf){
   fetch(url).then((response) => {
     return response.text();
   }).then((nickName) => {
+    const nickNameContainer = document.getElementById('nick-name-container');
+    if(nickName == ''){
+      nickName = 'I don\'t know, ask Jarvis!';
+    }
+    nickNameContainer.innerHTML = 'Nickname: ' + nickName;
     setPageTitle(nickName, viewingSelf);
+  });
+}
+
+function fetchUniversityName(viewingSelf){
+  const url = '/universityName?user=' + parameterUsername;
+  fetch(url).then((response) => {
+    return response.text();
+  }).then((universityName) => {
+    const universityNameContainer = document.getElementById('university-name-container');
+    if(universityName == ''){
+      universityName = 'I don\'t know, ask Jarvis!';
+    }
+    universityNameContainer.innerHTML = 'University: ' + universityName;
   });
 }
 

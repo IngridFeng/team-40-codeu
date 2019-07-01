@@ -50,15 +50,28 @@ limitations under the License.
         </div>
       </div>
 
+      <h2>Information about Me</h2>
+      <div id="university-name-container" class="padded rounded panel">Loading...</div>
+      <div id="nick-name-container" class="padded rounded panel">Loading...</div>
+      <h3>Me in three sentences</h3>
+      <div id="about-me-container" class="padded rounded panel">Loading...</div>
+
       <div id="nickname-form" class="hidden padded rounded panel">
         <form action="/nickName" method="POST">
-          Nickname:
+          Change Nickname:
           <input type="text" name="nickName" id="nickname-input" required></input>
           <input type="submit" value="Submit" class="rounded">
         </form>
       </div>
 
-      <div id="about-me-container" class="padded rounded panel">Loading...</div>
+      <div id="university-name-form" class="hidden padded rounded panel">
+        <form action="/universityName" method="POST">
+          Change University:
+          <input type="text" name="universityName" id="university-name-input" required></input>
+          <input type="submit" value="Submit" class="rounded">
+        </form>
+      </div>
+
       <div id="about-me-form" class="hidden padded rounded panel">
         <form action="/about" method="POST">
           <textarea name="about-me" id="aboutme-input" placeholder="Enter your information here" required></textarea>
@@ -66,6 +79,7 @@ limitations under the License.
           <input type="submit" value="Submit" class="rounded">
         </form>
       </div>
+
       <div class="padded rounded panel">
         <form id="message-form" method="POST" class="hidden" enctype="multipart/form-data">
         Enter a new message:

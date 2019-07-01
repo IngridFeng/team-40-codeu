@@ -11,13 +11,15 @@ public class User {
   private String nickName;
   private List<UUID> chats;
   private String imageUrl;
+  private String universityName;
 
-  public User(String email, String aboutMe, String nickName, List<UUID> chats, String imageUrl) {
+  public User(String email, String aboutMe, String nickName, List<UUID> chats, String imageUrl, String universityName) {
     this.email = email;
     this.aboutMe = aboutMe;
     this.nickName = nickName;
     this.chats = chats;
     this.imageUrl = imageUrl;
+    this.universityName = universityName;
   }
 
   public String getEmail(){
@@ -40,9 +42,13 @@ public class User {
       return chats;
     }
   }
-  
+
   public String getImageUrl() {
   	return imageUrl;
+  }
+
+  public String getUniversityName() {
+    return universityName;
   }
 
   public void setNickName(String nickName) {
@@ -56,9 +62,13 @@ public class User {
   public void setChats(List<UUID> chats) {
     this.chats = chats;
   }
-  
+
   public void setImageUrl(String imageUrl) {
   	this.imageUrl = imageUrl;
   }
-  
+
+  public void setUniversityName(String universityName) {
+    this.universityName = universityName;
+  }
+
 }
