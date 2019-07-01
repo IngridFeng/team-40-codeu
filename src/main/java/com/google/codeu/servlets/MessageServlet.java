@@ -31,9 +31,11 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.Message;
+import com.google.codeu.data.Chat;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 import java.util.Map;
 
 import javax.servlet.annotation.WebServlet;
@@ -90,8 +92,15 @@ public class MessageServlet extends HttpServlet {
       return;
     }
 
+    // Get user
     String user = userService.getCurrentUser().getEmail();
+
+    // Get text
     String text = Jsoup.clean(request.getParameter("text"), Whitelist.simpleText());
+    TextProcessor processor = BBProcessorFactory.getInstance().create();
+    text = processor.process(text);
+
+    // Get image
     String imageUrl = getUploadedFileUrl(request, "image");
 
     String regex = "(https?://\\w+\\.\\S+\\.(png|jpg|gif))";
@@ -103,18 +112,25 @@ public class MessageServlet extends HttpServlet {
     									+ "<source src=\"$1\" type=\"video/mp4\" > "
     									+ "</video>");
     String textWithVideosReplaced = textWithImagesReplaced.replaceAll(regexVid, repVid);
+
+    // Get sentiment score
     Document doc = Document.newBuilder().setContent(textWithVideosReplaced).setType(Document.Type.PLAIN_TEXT).build();
     LanguageServiceClient languageService = LanguageServiceClient.create();
     Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
     double score = sentiment.getScore();
     languageService.close();
 
-    Message message = new Message(user, textWithVideosReplaced, score, imageUrl);
+    // get chat
+    String chatName = request.getParameter("chat");
+    Chat chat = datastore.getChatbyName(chatName);
+    String chatId = chat.getId().toString();
+
+    Message message = new Message(chatId ,user, textWithVideosReplaced, score, imageUrl);
     datastore.storeMessage(message);
 
     response.sendRedirect("/user-page.html?user=" + user);
   }
-  
+
   /**
    * Returns a URL that points to the uploaded file, or null if the user didn't upload a file.
    */

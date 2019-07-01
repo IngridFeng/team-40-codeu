@@ -121,3 +121,23 @@ input[type=submit] {
   margin-top: 25px;
   max-width: 75%;
 }
+
+#profilepic-container {
+  margin-bottom: 20px;
+}
+
+#profilepic-form {
+  width: 150px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profilepic {
+  display: block;
+  width: 150px;
+  height: 150px;
+  margin-top: 20px;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
