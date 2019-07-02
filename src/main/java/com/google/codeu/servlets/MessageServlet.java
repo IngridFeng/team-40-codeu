@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 import java.util.Map;
+import java.util.Enumeration; // debug
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -97,6 +98,25 @@ public class MessageServlet extends HttpServlet {
   /** Stores a new {@link Message}. */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    System.out.println("recieved post req"); // debug
+    System.out.println(request);
+    // start debug
+    Enumeration<String> headerNames = request.getHeaderNames();
+    while(headerNames.hasMoreElements()) {
+      String headerName = headerNames.nextElement();
+      System.out.println("Header Name - " + headerName + ", Value - " + request.getHeader(headerName));
+    }
+    System.out.println("finished headers"); // debug
+
+    Enumeration<String> params = request.getParameterNames();
+    System.out.println("got params"); // debug
+    while(params.hasMoreElements()){
+      System.out.println("starting to print params"); // debug
+     String paramName = params.nextElement();
+     System.out.println("Parameter Name - "+paramName+", Value - "+request.getParameter(paramName));
+    }
+    // end debug
+
 
     UserService userService = UserServiceFactory.getUserService();
     if (!userService.isUserLoggedIn()) {

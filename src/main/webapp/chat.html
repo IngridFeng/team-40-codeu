@@ -6,7 +6,6 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/user-page.css">
     <script src="/js/chat-page-loader.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
   </head>
   <body onload="buildUI()">
     <nav>
@@ -26,7 +25,7 @@
     <div id="message-container">Loading...</div>
 
     <div class="padded rounded panel">
-      <form id="message-form" method="POST" enctype="multipart/form-data" class="hidden">
+      <form id="message-form" action="/messages" method="POST" enctype="multipart/form-data" class="hidden">
         <input name="chat" value="" class="hidden">
       Enter a new message:
         <br/>

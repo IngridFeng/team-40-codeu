@@ -81,9 +81,8 @@ function fetchChatMessages() {
       });
   }
 
-function loadMessageForm() {
+function setChatParam() {
   const messageForm = document.getElementById('message-form');
-  messageForm.classList.remove('hidden');
   messageForm.firstElementChild.value = parameterChat;
 }
 
@@ -91,10 +90,8 @@ function loadMessageForm() {
 function buildUI() {
   loadChatDetails();
   fetchChatMessages();
-  loadMessageForm();
-  const config = {removePlugins: [ 'Heading', 'List' ]};
-  ClassicEditor.create(document.getElementById('message-input'), config );
-
+  setChatParam();
+  fetchBlobstoreUrlAndShowForm();
 }
 
 
