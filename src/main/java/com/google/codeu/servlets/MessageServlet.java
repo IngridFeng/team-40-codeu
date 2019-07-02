@@ -64,8 +64,6 @@ public class MessageServlet extends HttpServlet {
    */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    System.out.println("Get Request Recieved"); // debug
-
     response.setContentType("application/json");
 
     String user = request.getParameter("user");
@@ -73,8 +71,6 @@ public class MessageServlet extends HttpServlet {
 
     if (user != null && !user.equals("")) {
       // Get by user
-      System.out.println("Getting by User: "); // debug
-      System.out.println(user); // debug
       List<Message> messages = datastore.getMessages(user);
       Gson gson = new Gson();
       String json = gson.toJson(messages);
@@ -82,8 +78,6 @@ public class MessageServlet extends HttpServlet {
     }
 
     else if (chat != null && !chat.equals("")){
-      System.out.println("Getting by Chat: "); // debug
-      System.out.println(chat); // debug
       // Get by chat
       List<Message> messages = datastore.getMessagesbyChat(chat);
       Gson gson = new Gson();
@@ -92,7 +86,6 @@ public class MessageServlet extends HttpServlet {
     }
 
     else {
-      System.out.println("Req invalid"); // debug
       // Request is invalid, return empty array
       response.getWriter().println("[]");
       return;

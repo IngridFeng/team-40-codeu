@@ -62,13 +62,10 @@ function fetchBlobstoreUrlAndShowForm() {
 
 /** Fetches messages and add them to the page. */
 function fetchChatMessages() {
-  console.log('starting to fetch messages'); // DEBUG
   const url = '/messages?chat=' + parameterChat;
-  console.log('asking ', url); // DEBUG
   fetch(url)
       .then((response) => {
         return response.json();
-        console.log('something responded'); // DEBUG
       })
       .then((messages) => {
         const messagesContainer = document.getElementById('message-container');
