@@ -4,7 +4,9 @@
     <title>Chat Page</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/user-page.css">
     <script src="/js/chat-page-loader.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
   </head>
   <body onload="buildUI()">
     <nav>
@@ -21,6 +23,20 @@
       <p id="chat-description">...</p>
     </div>
 
-    <div id="chat-message-container">Loading...</div>
+    <div id="message-container">Loading...</div>
+
+    <div class="padded rounded panel">
+      <form id="message-form" method="POST" enctype="multipart/form-data" class="hidden">
+        <input name="chat" value="" class="hidden">
+      Enter a new message:
+        <br/>
+        <textarea name="text" id="message-input" class="rounded"></textarea>
+        <br/>
+        <p>Upload an image:</p>
+        <input type="file" name="image">
+        <br/><br/>
+        <input type="submit" value="Submit" class="rounded">
+      </form>
+    </div>
   </body>
 </html>
