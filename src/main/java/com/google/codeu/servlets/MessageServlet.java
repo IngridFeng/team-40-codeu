@@ -159,8 +159,7 @@ public class MessageServlet extends HttpServlet {
 
     Message message = new Message(chatId ,user, textWithVideosReplaced, score, imageUrl);
     datastore.storeMessage(message);
-
-    response.sendRedirect("/user-page.html?user=" + user);
+    response.sendRedirect(request.getHeader("referer"));
   }
 
   /**
