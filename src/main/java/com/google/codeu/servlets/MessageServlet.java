@@ -37,7 +37,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 import java.util.Map;
-import java.util.Enumeration; // debug
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -70,17 +69,17 @@ public class MessageServlet extends HttpServlet {
     String user = request.getParameter("user");
     String chat = request.getParameter("chat");
 
-    if (user != null && !user.equals("")) {
-      // Get by user
-      List<Message> messages = datastore.getMessages(user);
+    if (chat != null && !chat.equals("")){
+      // Get by chat
+      List<Message> messages = datastore.getMessagesbyChat(chat);
       Gson gson = new Gson();
       String json = gson.toJson(messages);
       response.getWriter().println(json);
     }
 
-    else if (chat != null && !chat.equals("")){
-      // Get by chat
-      List<Message> messages = datastore.getMessagesbyChat(chat);
+    else if (user != null && !user.equals("")) {
+      // Get by user
+      List<Message> messages = datastore.getMessages(user);
       Gson gson = new Gson();
       String json = gson.toJson(messages);
       response.getWriter().println(json);
@@ -98,25 +97,6 @@ public class MessageServlet extends HttpServlet {
   /** Stores a new {@link Message}. */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    System.out.println("recieved post req"); // debug
-    System.out.println(request);
-    // start debug
-    Enumeration<String> headerNames = request.getHeaderNames();
-    while(headerNames.hasMoreElements()) {
-      String headerName = headerNames.nextElement();
-      System.out.println("Header Name - " + headerName + ", Value - " + request.getHeader(headerName));
-    }
-    System.out.println("finished headers"); // debug
-
-    Enumeration<String> params = request.getParameterNames();
-    System.out.println("got params"); // debug
-    while(params.hasMoreElements()){
-      System.out.println("starting to print params"); // debug
-     String paramName = params.nextElement();
-     System.out.println("Parameter Name - "+paramName+", Value - "+request.getParameter(paramName));
-    }
-    // end debug
-
 
     UserService userService = UserServiceFactory.getUserService();
     if (!userService.isUserLoggedIn()) {
@@ -152,12 +132,9 @@ public class MessageServlet extends HttpServlet {
     double score = sentiment.getScore();
     languageService.close();
 
-    // get chat
-    String chatName = request.getParameter("chat");
-    Chat chat = datastore.getChatbyName(chatName);
-    String chatId = chat.getId().toString();
+    String chat = request.getParameter("chat");
 
-    Message message = new Message(chatId ,user, textWithVideosReplaced, score, imageUrl);
+    Message message = new Message(chat ,user, textWithVideosReplaced, score, imageUrl);
     datastore.storeMessage(message);
     response.sendRedirect(request.getHeader("referer"));
   }

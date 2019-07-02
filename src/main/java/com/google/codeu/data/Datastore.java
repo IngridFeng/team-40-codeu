@@ -292,14 +292,21 @@ public List<University> getAllUniversities(){
  */
   public List<Message> getMessagesbyChat(String chat) {
     List<Message> messages = new ArrayList<>();
+    System.out.println("reached datastore");
+    System.out.println(chat);
 
     Query query =
-        new Query("Messages")
+        new Query("Message")
             .setFilter(new Query.FilterPredicate("chat", FilterOperator.EQUAL, chat))
             .addSort("timestamp", SortDirection.DESCENDING);
     PreparedQuery results = datastore.prepare(query);
 
+    System.out.println("the results from the query were");
+    System.out.println(results);
+
     for (Entity entity : results.asIterable()) {
+      System.out.println("something was retrieved");
+      System.out.println(entity);
       try {
         String idString = entity.getKey().getName();
         UUID id = UUID.fromString(idString);
