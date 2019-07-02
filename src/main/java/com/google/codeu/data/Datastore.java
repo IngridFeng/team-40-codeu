@@ -208,9 +208,8 @@ public List<University> getAllUniversities(){
  }
 
  /**
- * Store chat
- **/
-
+  * Store chat
+  */
  public void storeChat(Chat chat) {
    Entity chatEntity = new Entity("Chat", chat.getId().toString());
    chatEntity.setProperty("name", chat.getName());
@@ -219,8 +218,8 @@ public List<University> getAllUniversities(){
  }
 
  /**
- * Get chat from chat name
- */
+  * Get chat from chat name
+  */
  public Chat getChatbyName(String name) {
   Query query = new Query("Chat")
     .setFilter(new Query.FilterPredicate("name", FilterOperator.EQUAL, name));
@@ -241,15 +240,9 @@ public List<University> getAllUniversities(){
 
 
  /**
- * Returns chat by chat id
- */
+  * Returns chat by chat id
+  */
  public Chat getChatbyId(String id) {
-   /** temporary hack until I figure out the key part
-   UUID chatId = UUID.fromString(id);
-   Chat chat = new Chat(chatId,"Test","A description");
-   return chat;
-
-   */
   try {
     Key chatKey = KeyFactory.createKey("Chat", id);
     Entity chatEntity = datastore.get(chatKey);
@@ -265,17 +258,9 @@ public List<University> getAllUniversities(){
 
  }
 
- //Query query = new Query("Chat").setFilter(new Query.FilterPredicate("id", FilterOperator.EQUAL, id));
- //PreparedQuery results = datastore.prepare(query);
- //Entity chatEntity = results.asSingleEntity();
- //
- //Entity chatEntity = chatId.get();
-
-
  /**
- * Returns the Messgaes associated with the Chat
- * null if none was found.
- */
+  * Returns all existing chats.
+  */
 
  public List<Chat> getAllChats(){
    List<Chat> chats = new ArrayList<>();
@@ -297,7 +282,42 @@ public List<University> getAllUniversities(){
        e.printStackTrace();
      }
    }
-
    return chats;
-}
+  }
+
+
+/**
+ * Returns the Messgaes associated with the Chat
+ * null if none was found.
+ */
+  public List<Message> getMessagesbyChat(String chat) {
+    List<Message> messages = new ArrayList<>();
+
+    Query query =
+        new Query("Messages")
+            .setFilter(new Query.FilterPredicate("chat", FilterOperator.EQUAL, chat))
+            .addSort("timestamp", SortDirection.DESCENDING);
+    PreparedQuery results = datastore.prepare(query);
+
+    for (Entity entity : results.asIterable()) {
+      try {
+        String idString = entity.getKey().getName();
+        UUID id = UUID.fromString(idString);
+        String user = (String) entity.getProperty("user");
+        String text = (String) entity.getProperty("text");
+        long timestamp = (long) entity.getProperty("timestamp");
+        double sentiment = (double) entity.getProperty("sentiment");
+        String imageUrl = (String) entity.getProperty("imageUrl");
+
+        Message message = new Message(id, chat, user, text, timestamp, sentiment, imageUrl);
+        messages.add(message);
+      } catch (Exception e) {
+        System.err.println("Error reading message.");
+        System.err.println(entity.toString());
+        e.printStackTrace();
+      }
+    }
+
+    return messages;
+  }
 }
