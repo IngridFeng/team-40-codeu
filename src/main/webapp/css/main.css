@@ -65,3 +65,13 @@ nav li {
 .mapInfoBox {
   width: 240px;
 }
+
+.profilepic {
+  display: block;
+  width: 150px;
+  height: 150px;
+  margin-top: 20px;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
