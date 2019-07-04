@@ -138,7 +138,35 @@ public class Datastore {
    * Gets a set of all users.
    * return a set of strings representing the users.
    */
-  public Set<String> getUsers(){
+  public List<User> getUsers(){
+    List<User> users = new ArrayList<>();
+
+    Query query =
+        new Query("User").addSort("nickName", SortDirection.DESCENDING);
+    PreparedQuery results = datastore.prepare(query);
+
+    for (Entity entity : results.asIterable()) {
+      try {
+        String email = (String) entity.getProperty("email");
+        String aboutMe = (String) entity.getProperty("aboutMe");
+        String nickName = (String) entity.getProperty("nickName");
+        List<UUID> chats = (List<UUID>) entity.getProperty("chats");
+        String imageUrl = (String) entity.getProperty("imageUrl");
+
+        User user = new User(email, aboutMe, nickName, chats, imageUrl);
+        users.add(user);
+      } catch (Exception e) {
+        System.err.println("Error reading message.");
+        System.err.println(entity.toString());
+        e.printStackTrace();
+      }
+    }
+
+    return users;
+
+
+
+    /*
   	Set<String> users = new HashSet<>();
   	Query query = new Query("Message");
   	PreparedQuery results = datastore.prepare(query);
@@ -146,6 +174,7 @@ public class Datastore {
   		users.add((String) entity.getProperty("user"));
   	}
   	return users;
+    */
   }
 
 
