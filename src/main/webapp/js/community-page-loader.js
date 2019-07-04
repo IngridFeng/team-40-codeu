@@ -22,6 +22,16 @@ function buildUserListItem(user){
   // build div
   const userDiv = document.createElement('div');
 
+  // add profile pic
+  const profilePic = document.createElement('img')
+  const picUrl = user.imageUrl || "profilepic.png";
+  profilePic.setAttribute("id","profilepic")
+  profilePic.setAttribute("src", picUrl)
+  profilePic.setAttribute("alt","Profile Picture")
+  profilePic.setAttribute("class","profilepic")
+
+  userDiv.appendChild(profilePic);
+
   // build profile link
   const userLink = document.createElement('a');
   userLink.setAttribute('href', '/user-page.html?user=' + user.email);
