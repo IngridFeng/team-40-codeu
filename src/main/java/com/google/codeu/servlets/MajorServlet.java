@@ -75,7 +75,7 @@ public class MajorServlet extends HttpServlet {
       //set chats of current user to null
       List<UUID> chats = new ArrayList<UUID>();
       //create the user
-      user = new User(userEmail, null, null, chats, null, null, major);
+      user = new User(userEmail, null, null, chats, null, null, major, null, null);
     }
     else{
       //set the major
