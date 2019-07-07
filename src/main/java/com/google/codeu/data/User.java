@@ -91,6 +91,7 @@ public class User {
 
   public void setCurrentTopics(List<String> currentTopics) {
     this.currentTopics = currentTopics;
+  }
 
   public void setUniversityName(String universityName) {
     this.universityName = universityName;
