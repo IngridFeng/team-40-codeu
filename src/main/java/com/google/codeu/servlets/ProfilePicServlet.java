@@ -80,20 +80,20 @@ public class ProfilePicServlet extends HttpServlet {
       response.sendRedirect("/index.html");
       return;
     }
-    
+
     //get email of current user
     String userEmail = userService.getCurrentUser().getEmail();
-    
+
     String imageUrl = getUploadedFileUrl(request, "image");
 
     //get current user by querying the email
     User user = datastore.getUser(userEmail);
-    
+
     if (user == null) {
       //set chats of current user to null
       List<UUID> chats = new ArrayList<UUID>();
       //create the user
-      user = new User(userEmail, null, null, chats, imageUrl);
+      user = new User(userEmail, null, null, chats, imageUrl, null, null);
     }
     else{
       //modify the profile pic Url
@@ -105,7 +105,7 @@ public class ProfilePicServlet extends HttpServlet {
     response.sendRedirect("/user-page.html?user=" + userEmail);
 
   }
-  
+
   /**
    * Returns a URL that points to the uploaded file, or null if the user didn't upload a file.
    */

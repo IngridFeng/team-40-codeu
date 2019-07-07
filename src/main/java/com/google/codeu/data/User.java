@@ -11,13 +11,26 @@ public class User {
   private String nickName;
   private List<UUID> chats;
   private String imageUrl;
+  private List<String> pastTopics;
+  private List<String> currentTopics;
 
-  public User(String email, String aboutMe, String nickName, List<UUID> chats, String imageUrl) {
+
+  public User(String email, String aboutMe, String nickName, List<UUID> chats, String imageUrl, List<String> pastTopics, List<String> currentTopics) {
     this.email = email;
     this.aboutMe = aboutMe;
     this.nickName = nickName;
     this.chats = chats;
     this.imageUrl = imageUrl;
+    this.pastTopics = pastTopics;
+    this.currentTopics = currentTopics;
+  }
+
+  public List<String> getPastTopics() {
+    return pastTopics;
+  }
+
+  public List<String> getCurrentTopics() {
+    return currentTopics;
   }
 
   public String getEmail(){
@@ -40,7 +53,7 @@ public class User {
       return chats;
     }
   }
-  
+
   public String getImageUrl() {
   	return imageUrl;
   }
@@ -56,9 +69,17 @@ public class User {
   public void setChats(List<UUID> chats) {
     this.chats = chats;
   }
-  
+
   public void setImageUrl(String imageUrl) {
   	this.imageUrl = imageUrl;
   }
-  
+
+  public void setPastTopics(List<String> pastTopics) {
+    this.pastTopics = pastTopics;
+  }
+
+  public void setCurrentTopics(List<String> currentTopics) {
+    this.currentTopics = currentTopics;
+  }
+
 }

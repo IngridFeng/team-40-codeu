@@ -76,7 +76,7 @@ public class ChatServlet extends HttpServlet {
         List<UUID> userChats = new ArrayList<UUID>();
         userChats.add(chat.getId());
 
-        user = new User(userEmail, null, null, userChats, null);
+        user = new User(userEmail, null, null, userChats, null, null, null);
       }
       else{
         //modify the chats
@@ -91,7 +91,7 @@ public class ChatServlet extends HttpServlet {
         //create new user
         List<UUID> selectedUserChats = new ArrayList<UUID>();
         selectedUserChats.add(chat.getId());
-        selectedUser = new User(userEmail, null, null, selectedUserChats, null);
+        selectedUser = new User(userEmail, null, null, selectedUserChats, null, null, null);
       }
       else{
         //modify the chats

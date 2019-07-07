@@ -140,9 +140,8 @@ public class Datastore {
    */
   public List<User> getUsers(){
     List<User> users = new ArrayList<>();
+    Query query = new Query("User").addSort("nickName", SortDirection.DESCENDING);
 
-    Query query =
-        new Query("User").addSort("nickName", SortDirection.DESCENDING);
     PreparedQuery results = datastore.prepare(query);
 
     for (Entity entity : results.asIterable()) {
@@ -152,8 +151,10 @@ public class Datastore {
         String nickName = (String) entity.getProperty("nickName");
         List<UUID> chats = (List<UUID>) entity.getProperty("chats");
         String imageUrl = (String) entity.getProperty("imageUrl");
+        List<String> pastTopics = (List<String>) entity.getProperty("pastTopics");
+        List<String> currentTopics = (List<String>) entity.getProperty("currentTopics");
 
-        User user = new User(email, aboutMe, nickName, chats, imageUrl);
+        User user = new User(email, aboutMe, nickName, chats, imageUrl, pastTopics, currentTopics);
         users.add(user);
       } catch (Exception e) {
         System.err.println("Error reading message.");
@@ -186,6 +187,8 @@ public class Datastore {
   userEntity.setProperty("nickName", user.getNickName());
   userEntity.setProperty("chats", user.getChats());
   userEntity.setProperty("imageUrl", user.getImageUrl());
+  userEntity.setProperty("pastTopics", user.getPastTopics());
+  userEntity.setProperty("currentTopics", user.getCurrentTopics());
   datastore.put(userEntity);
  }
 
@@ -207,7 +210,9 @@ public class Datastore {
   String aboutMe = (String) userEntity.getProperty("aboutMe");
   List<UUID> chats= (List<UUID>) userEntity.getProperty("chats");
   String imageUrl = (String) userEntity.getProperty("imageUrl");
-  User user = new User(email, aboutMe, nickName, chats, imageUrl);
+  List<String> pastTopics = (List<String>) userEntity.getProperty("pastTopics");
+  List<String> currentTopics = (List<String>) userEntity.getProperty("currentTopics");
+  User user = new User(email, aboutMe, nickName, chats, imageUrl, pastTopics, currentTopics);
   return user;
  }
 
