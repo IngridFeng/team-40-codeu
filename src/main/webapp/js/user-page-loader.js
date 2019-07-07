@@ -52,17 +52,19 @@ function showForms() {
           fetchNickName(false);
           document.getElementById('login-form').classList.remove('hidden');
         }
+        //logged in and viewing self
         else if (loginStatus.username == parameterUsername) {
-
           // handle message forms
           const messageForm = document.getElementById('message-form');
           messageForm.classList.remove('hidden');
-          
+
           fetchBlobstoreUrlAndShowForm();
           fetchProfilePicUrlAndShowForm();
 
           document.getElementById('about-me-form').classList.remove('hidden');
           document.getElementById('nickname-form').classList.remove('hidden');
+          document.getElementById('university-name-form').classList.remove('hidden');
+          document.getElementById('major-form').classList.remove('hidden');
           fetchNickName(true);
         }
         //login and viewing others
@@ -186,7 +188,38 @@ function fetchNickName(viewingSelf){
   fetch(url).then((response) => {
     return response.text();
   }).then((nickName) => {
+    const nickNameContainer = document.getElementById('nick-name-container');
+    if(nickName == ''){
+      nickName = 'I don\'t know, ask Jarvis!';
+    }
+    nickNameContainer.innerHTML = 'Nickname: ' + nickName;
     setPageTitle(nickName, viewingSelf);
+  });
+}
+
+function fetchUniversityName(){
+  const url = '/universityName?user=' + parameterUsername;
+  fetch(url).then((response) => {
+    return response.text();
+  }).then((universityName) => {
+    const universityNameContainer = document.getElementById('university-name-container');
+    if(universityName == ''){
+      universityName = 'I don\'t know, ask Jarvis!';
+    }
+    universityNameContainer.innerHTML = 'University: ' + universityName;
+  });
+}
+
+function fetchMajor(){
+  const url = '/major?user=' + parameterUsername;
+  fetch(url).then((response) => {
+    return response.text();
+  }).then((major) => {
+    const majorContainer = document.getElementById('major-container');
+    if(major == ''){
+      major = 'I don\'t know, ask Prof.Dumbledore!';
+    }
+    majorContainer.innerHTML = 'Major: ' + major;
   });
 }
 
@@ -198,4 +231,6 @@ function buildUI() {
   ClassicEditor.create(document.getElementById('message-input'), config );
   fetchAboutMe();
   fetchProfilePic();
+  fetchUniversityName();
+  fetchMajor();
 }
