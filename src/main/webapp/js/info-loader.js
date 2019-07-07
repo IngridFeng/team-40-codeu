@@ -23,13 +23,6 @@ function buildReq() {
     }
   }
 
-  // set hidden values
-  //realInputsDiv = document.getElementById('realInputs-div');
-  //realInputsDiv.children[0].value = pastTopics;
-  //realInputsDiv.children[1].value = currentTopics;
-
-  // send info
-
   const params = new URLSearchParams();
   params.append('pastTopics', pastTopics);
   params.append('currentTopics', currentTopics);
