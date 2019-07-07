@@ -14,6 +14,10 @@
  * limitations under the License.
  */
 
+:root {
+    --main-color:#06c;
+}
+
 /* Prevent the page from becoming too wide. */
 body {
   max-width: 600px;
@@ -64,4 +68,32 @@ nav li {
 
 .mapInfoBox {
   width: 240px;
+}
+
+.profilepic {
+  display: block;
+  width: 150px;
+  height: 150px;
+  margin-top: 20px;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* call to action button */
+.cta {
+  border-radius: 8px;
+  background-color: var(--main-color);
+  text-align: center;
+}
+
+
+.cta > a {
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cta > a:hover {
+  text-decoration: underline;
 }

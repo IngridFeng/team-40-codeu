@@ -5,6 +5,9 @@ import com.google.gson.Gson;
 import java.io.IOException;
 
 import java.util.Set;
+import java.util.List;
+import com.google.codeu.data.User;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +30,7 @@ public class UserListServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException {
     response.setContentType("application/json");
-    Set<String> users = datastore.getUsers();
+    List<User> users = datastore.getUsers();
     Gson gson = new Gson();
     String json = gson.toJson(users);
     response.getOutputStream().println(json);

@@ -64,22 +64,34 @@ public class MessageServlet extends HttpServlet {
    */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
     response.setContentType("application/json");
 
     String user = request.getParameter("user");
+    String chat = request.getParameter("chat");
 
-    if (user == null || user.equals("")) {
+    if (chat != null && !chat.equals("")){
+      // Get by chat
+      List<Message> messages = datastore.getMessagesbyChat(chat);
+      Gson gson = new Gson();
+      String json = gson.toJson(messages);
+      response.getWriter().println(json);
+    }
+
+    else if (user != null && !user.equals("")) {
+      // Get by user
+      List<Message> messages = datastore.getMessages(user);
+      Gson gson = new Gson();
+      String json = gson.toJson(messages);
+      response.getWriter().println(json);
+    }
+
+    else {
       // Request is invalid, return empty array
       response.getWriter().println("[]");
       return;
     }
 
-    List<Message> messages = datastore.getMessages(user);
-    Gson gson = new Gson();
-    String json = gson.toJson(messages);
 
-    response.getWriter().println(json);
   }
 
   /** Stores a new {@link Message}. */
@@ -120,15 +132,11 @@ public class MessageServlet extends HttpServlet {
     double score = sentiment.getScore();
     languageService.close();
 
-    // get chat
-    String chatName = request.getParameter("chat");
-    Chat chat = datastore.getChatbyName(chatName);
-    String chatId = chat.getId().toString();
+    String chat = request.getParameter("chat");
 
-    Message message = new Message(chatId ,user, textWithVideosReplaced, score, imageUrl);
+    Message message = new Message(chat ,user, textWithVideosReplaced, score, imageUrl);
     datastore.storeMessage(message);
-
-    response.sendRedirect("/user-page.html?user=" + user);
+    response.sendRedirect(request.getHeader("referer"));
   }
 
   /**
