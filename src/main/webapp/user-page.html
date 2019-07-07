@@ -38,37 +38,67 @@ limitations under the License.
       <div class="padded rounded panel centered">
         <h2 id="page-title">User Page</h2>
       </div>
-      <div id="profilepic-container">
-        <img id="profilepic" src="profilepic.png" alt="Profile Picture" class="profilepic">
-        <div id="profilepic-form-container">
-          <form id="profilepic-form" method="POST" class="hidden" enctype="multipart/form-data">
-            <p>Change profile picture:</p>
-            <input type="file" name="image">
-            <br/><br/>
-            <input type="submit" value="Submit" class="rounded">
-          </form>
+
+      <div class="row padded rounded panel">
+        <div id="profilepic-container" class="column left">
+          <img id="profilepic" src="profilepic.png" alt="Profile Picture" class="profilepic">
+          <div id="profilepic-form-container">
+            <form id="profilepic-form" method="POST" class="hidden" enctype="multipart/form-data">
+              Change profile picture:
+              <input type="file" name="image">
+              <br/><br/>
+              <input type="submit" value="Submit" class="rounded">
+            </form>
+          </div>
+        </div>
+
+        <div class="column right">
+          <h3>Information About Me</h3>
+          <p id="nick-name-container" class="noBotMargin noTopMargin">Loading...</p>
+          <p id="university-name-container" class="noBotMargin noTopMargin">Loading...</p>
+          <p id="major-container" class="noBotMargin noTopMargin">Loading...</p>
+          <h3>Me in Three Sentences</h3>
+          <p id="about-me-container" class="noBotMargin noTopMargin">Loading...</div>
         </div>
       </div>
 
       <div id="nickname-form" class="hidden padded rounded panel">
         <form action="/nickName" method="POST">
-          Nickname:
+          Change Nickname:
           <input type="text" name="nickName" id="nickname-input" required></input>
           <input type="submit" value="Submit" class="rounded">
         </form>
       </div>
 
-      <div id="about-me-container" class="padded rounded panel">Loading...</div>
+      <div id="university-name-form" class="hidden padded rounded panel">
+        <form action="/universityName" method="POST">
+          Change University:
+          <input type="text" name="universityName" id="university-name-input" required></input>
+          <input type="submit" value="Submit" class="rounded">
+        </form>
+      </div>
+
+      <div id="major-form" class="hidden padded rounded panel">
+        <form action="/major" method="POST">
+          Change Major:
+          <input type="text" name="major" id="major-input" required></input>
+          <input type="submit" value="Submit" class="rounded">
+        </form>
+      </div>
+
+
       <div id="about-me-form" class="hidden padded rounded panel">
+        <p class="noTopMargin">Change Me in Three Sentences:</p>
         <form action="/about" method="POST">
           <textarea name="about-me" id="aboutme-input" placeholder="Enter your information here" required></textarea>
           <br/>
           <input type="submit" value="Submit" class="rounded">
         </form>
       </div>
+
       <div class="padded rounded panel">
         <form id="message-form" method="POST" class="hidden" enctype="multipart/form-data">
-        Enter a new message:
+        <p class="noTopMargin">Enter a new message:</p>
           <br/>
           <textarea name="text" id="message-input" class="rounded"></textarea>
           <br/>
