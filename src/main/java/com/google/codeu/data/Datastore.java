@@ -171,10 +171,12 @@ public class Datastore {
         String nickName = (String) entity.getProperty("nickName");
         List<UUID> chats = (List<UUID>) entity.getProperty("chats");
         String imageUrl = (String) entity.getProperty("imageUrl");
+        String universityName = (String) entity.getProperty("universityName");
+        String major = (String) entity.getProperty("major");
         List<String> pastTopics = (List<String>) entity.getProperty("pastTopics");
         List<String> currentTopics = (List<String>) entity.getProperty("currentTopics");
-
-        User user = new User(email, aboutMe, nickName, chats, imageUrl, pastTopics, currentTopics);
+        
+        User user = new User(email, aboutMe, nickName, chats, imageUrl, universityName, major, pastTopics, currentTopics);
         users.add(user);
       } catch (Exception e) {
         System.err.println("Error reading message.");
@@ -207,6 +209,8 @@ public class Datastore {
   userEntity.setProperty("nickName", user.getNickName());
   userEntity.setProperty("chats", user.getChats());
   userEntity.setProperty("imageUrl", user.getImageUrl());
+  userEntity.setProperty("universityName", user.getUniversityName());
+  userEntity.setProperty("major", user.getMajor());
   userEntity.setProperty("pastTopics", user.getPastTopics());
   userEntity.setProperty("currentTopics", user.getCurrentTopics());
   datastore.put(userEntity);
@@ -230,9 +234,11 @@ public class Datastore {
   String aboutMe = (String) userEntity.getProperty("aboutMe");
   List<UUID> chats= (List<UUID>) userEntity.getProperty("chats");
   String imageUrl = (String) userEntity.getProperty("imageUrl");
+  String universityName = (String) userEntity.getProperty("universityName");
+  String major = (String) userEntity.getProperty("major");
   List<String> pastTopics = (List<String>) userEntity.getProperty("pastTopics");
   List<String> currentTopics = (List<String>) userEntity.getProperty("currentTopics");
-  User user = new User(email, aboutMe, nickName, chats, imageUrl, pastTopics, currentTopics);
+  User user = new User(email, aboutMe, nickName, chats, imageUrl, universityName, major, pastTopics, currentTopics);
   return user;
  }
 

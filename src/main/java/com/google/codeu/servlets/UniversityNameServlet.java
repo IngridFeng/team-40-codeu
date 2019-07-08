@@ -11,8 +11,6 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.User;
-import org.jsoup.Jsoup;
-import org.jsoup.safety.Whitelist;
 
 import com.google.codeu.data.Chat;
 import java.util.ArrayList;
@@ -22,8 +20,8 @@ import java.util.UUID;
 /**
  * Handles fetching and saving user data.
  */
-@WebServlet("/about")
-public class AboutMeServlet extends HttpServlet {
+@WebServlet("/universityName")
+public class UniversityNameServlet extends HttpServlet {
 
   private Datastore datastore;
 
@@ -33,7 +31,7 @@ public class AboutMeServlet extends HttpServlet {
   }
 
   /**
-   * Responds with the "about me" section for a particular user.
+   * Responds with the "universityName" section for a particular user.
    */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -50,11 +48,11 @@ public class AboutMeServlet extends HttpServlet {
 
     User userData = datastore.getUser(user);
 
-    if(userData == null || userData.getAboutMe() == null) {
+    if(userData == null || userData.getUniversityName() == null) {
       return;
     }
 
-    response.getOutputStream().println(userData.getAboutMe());
+    response.getOutputStream().println(userData.getUniversityName());
   }
 
   @Override
@@ -69,20 +67,19 @@ public class AboutMeServlet extends HttpServlet {
 
     //get email of current user
     String userEmail = userService.getCurrentUser().getEmail();
-
-    //get aboutMe that user put in
-    String aboutMe = Jsoup.clean(request.getParameter("about-me"), Whitelist.none());
+    //get universityName that user put in
+    String universityName = request.getParameter("universityName");
     //get current user by querying the email
     User user = datastore.getUser(userEmail);
     if (user == null) {
       //set chats of current user to null
       List<UUID> chats = new ArrayList<UUID>();
       //create the user
-      user = new User(userEmail, aboutMe, null, chats, null, null, null, null, null);
+      user = new User(userEmail, null, null, chats, null, universityName, null, null, null);
     }
     else{
-      //modify the email
-      user.setAboutMe(aboutMe);
+      //set the universityName
+      user.setUniversityName(universityName);
     }
     //store the user
     datastore.storeUser(user);
