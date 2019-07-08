@@ -23,6 +23,13 @@ function buildReq() {
     }
   }
 
+  realInputsDiv = document.getElementById('realInputs-div');
+  realInputsDiv.children[0].value = pastTopics;
+  realInputsDiv.children[1].value = currentTopics;
+
+  /*
+  Not sure why redirect doesn't work with this
+
   const params = new URLSearchParams();
   params.append('pastTopics', pastTopics);
   params.append('currentTopics', currentTopics);
@@ -31,6 +38,7 @@ function buildReq() {
        method: 'POST',
        body: params
   });
+  */
 
 
 

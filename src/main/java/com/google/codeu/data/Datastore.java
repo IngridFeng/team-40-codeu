@@ -138,7 +138,7 @@ public class Datastore {
    * Gets a set of all users.
    * return a set of strings representing the users.
    */
-  public List<User> getUsers(){
+  public List<User> getUsers(String past, String current){
     List<User> users = new ArrayList<>();
     Query query = new Query("User").addSort("nickName", SortDirection.DESCENDING);
 
