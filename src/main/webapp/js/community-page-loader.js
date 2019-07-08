@@ -1,6 +1,11 @@
 /** Fetches users and adds them to the page. */
 function fetchUserList(){
-  const url = '/user-list';
+  // get url params
+  const urlParams = new URLSearchParams(window.location.search);
+  const paramPast = urlParams.get('past');
+  const paramCurrent = urlParams.get('current');
+
+  const url = '/user-list?past=' + paramPast + '&current=' + paramCurrent;
   fetch(url).then((response) => {
     return response.json();
   }).then((users) => {

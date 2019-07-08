@@ -140,12 +140,29 @@ public class Datastore {
    */
   public List<User> getUsers(String past, String current){
     List<User> users = new ArrayList<>();
-    Query query = new Query("User").addSort("nickName", SortDirection.DESCENDING);
+    Query query;
+    System.out.println("ITS IN THE DATASTORE");
+    boolean pastIsNull = past.indexOf("null") !=-1? true: false;
+    boolean curIsNull = current.indexOf("null") !=-1? true: false;
+    System.out.println(past.getClass().getSimpleName());
+    System.out.println(pastIsNull);
+    System.out.println(curIsNull);
+
+
+    if (pastIsNull && curIsNull){
+      System.out.println("yes,load");
+      query = new Query("User").addSort("nickName", SortDirection.DESCENDING);
+    } else {
+      System.out.println("its gon fail and u know it");
+      query = new Query("User").setFilter(new Query.FilterPredicate("pastTopics", FilterOperator.EQUAL, past));
+    }
+
 
     PreparedQuery results = datastore.prepare(query);
 
     for (Entity entity : results.asIterable()) {
       try {
+        System.out.println("smtg exists");
         String email = (String) entity.getProperty("email");
         String aboutMe = (String) entity.getProperty("aboutMe");
         String nickName = (String) entity.getProperty("nickName");
