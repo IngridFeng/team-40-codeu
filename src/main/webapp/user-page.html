@@ -26,15 +26,15 @@ limitations under the License.
     <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
   </head>
   <body onload="buildUI(); addLoginOrLogoutLinkToNavigation();">
-    <div id="content">
-      <nav>
-        <ul id="navigation">
-          <li><a href="/">Home</a></li>
-          <li><a href="/aboutus.html">About Our Team</a></li>
-          <li><a href="/community.html">Community Page</a></li>
-      	  <li><a href="/feed.html">Public Feed</a></li>
-        </ul>
-      </nav>
+    <nav>
+      <ul id="navigation">
+        <li><a href="/">Home</a></li>
+        <li><a href="/aboutus.html">About Our Team</a></li>
+        <li><a href="/community.html">Community Page</a></li>
+    	  <li><a href="/feed.html">Public Feed</a></li>
+      </ul>
+    </nav>
+    <div class="content">
       <div class="padded rounded panel centered">
         <h2 id="page-title">User Page</h2>
       </div>
@@ -60,7 +60,6 @@ limitations under the License.
           <h3>Me in Three Sentences</h3>
           <p id="about-me-container" class="noBotMargin noTopMargin">Loading...</div>
         </div>
-      </div>
 
       <div id="nickname-form" class="hidden padded rounded panel">
         <form action="/nickName" method="POST">

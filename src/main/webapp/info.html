@@ -32,36 +32,39 @@ limitations under the License.
       	<li><a href="/feed.html">Public Feed</a></li>
       </ul>
     </nav>
-    <div class="singleBlock" style="width: 600px;">
-      <h1>Tell us about you!</h1>
-      <p> So we can better recommend friends for you :) </p>
-    </div>
-    <!-- INFO FORM -->
-    <form id="info-form" action="/info" method="POST">
-      <div id="pastTopics-div">
-        <h1>Past Topics</h1>
-        <input type="checkbox" name="OS">OS</input>
-        <br />
-        <input type="checkbox" name="Web Dev">Web Dev</input>
-        <br />
-        <!-- <input type="text" value="Other"/> haven't worked on this yet-->
+    <div class="content">
+
+      <div class="singleBlock" style="width: 600px;">
+        <h1>Tell us about you!</h1>
+        <p> So we can better recommend friends for you :) </p>
+      </div>
+      <!-- INFO FORM -->
+      <form id="info-form" action="/info" method="POST">
+        <div id="pastTopics-div">
+          <h1>Past Topics</h1>
+          <input type="checkbox" name="OS">OS</input>
+          <br />
+          <input type="checkbox" name="Web Dev">Web Dev</input>
+          <br />
+          <!-- <input type="text" value="Other"/> haven't worked on this yet-->
+          <br /><br />
+        </div>
+        <div id="currentTopics-div">
+          <h1>Current Topics</h1>
+          <input type="checkbox" name="OS">OS</input>
+          <br />
+          <input type="checkbox" name="Web Dev">Web Dev</input>
+          <br />
+          <!-- <input type="text" value="Other"/> -->
+        </div>
+        <!-- judging by feedback we should add study pace/ freq -->
+        <div id="realInputs-div">
+          <input type="hidden" name="pastTopics" value="""/>
+          <input type="hidden" name="currentTopics" value="""/>
+        </div>
         <br /><br />
-      </div>
-      <div id="currentTopics-div">
-        <h1>Current Topics</h1>
-        <input type="checkbox" name="OS">OS</input>
-        <br />
-        <input type="checkbox" name="Web Dev">Web Dev</input>
-        <br />
-        <!-- <input type="text" value="Other"/> -->
-      </div>
-      <!-- judging by feedback we should add study pace/ freq -->
-      <div id="realInputs-div">
-        <input type="hidden" name="pastTopics" value="""/>
-        <input type="hidden" name="currentTopics" value="""/>
-      </div>
-      <br /><br />
-      <input type="submit" name="Find a Buddy!" value="submit" onclick="buildReq()"/>
-    </form>
+        <input type="submit" name="Find a Buddy!" value="submit" onclick="buildReq()"/>
+      </form>
+    </div>
   </body>
 </html>

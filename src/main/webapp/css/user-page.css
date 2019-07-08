@@ -22,13 +22,6 @@
   font-size: 14px;
 }
 
-body {
-  margin: 0;
-  margin-left: auto;
-  margin-right: auto;
-  background: linear-gradient(white, #ccccff) fixed;
-}
-
 h2 {
   margin: 0;
 }
@@ -46,13 +39,6 @@ input[type=submit] {
 
 .noTopMargin{
   margin-top: 0px;
-}
-
-
-#content {
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 

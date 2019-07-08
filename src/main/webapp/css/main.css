@@ -15,20 +15,38 @@
  */
 
 :root {
-    --main-color:#06c;
+    --main-color:#AB63FF;
+    --secondary-color:#4D4D4D;
+
 }
 
-/* make font sans serif */
+/* FONT */
 h1, h2, h3, p {
-  font-family: sans-serif;
+  font-family: "Heltvetica",sans-serif;
+  color: var(--secondary-color);
 }
+
+/* MAIN LAYOUT */
 
 /* Prevent the page from becoming too wide. */
 body {
+  /* background: linear-gradient(white, #ccccff) fixed; */
+  background: #fff;
+}
+
+.content {
+  padding-top: 50px;
   max-width: 600px;
-  background: linear-gradient(white, #ccccff) fixed;
   margin-left: auto;
   margin-right: auto;
+}
+
+nav {
+  background-color: #F0D9F7;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 /* Remove bullet points from navigation bar. */
@@ -40,13 +58,68 @@ nav ul {
 /* Keep navigation menu on one line. */
 nav li {
   display: inline-block;
-  margin-right: 10px
+  margin-right: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: var(--main-color);
+}
+
+#navigation {
+  padding: 0 30px;
+}
+
+.top-content {
+  align-content: center;
+  text-align: center;
+}
+
+.title {
+  font-size: 80px;
+  color: var(--main-color);
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.subtitle {
+  color: var(--secondary-color);
+  text-align: center;
+  margin-top: 0;
+}
+
+/* call to action button */
+.cta {
+  border-radius: 50px;
+  background-color: var(--main-color);
+  text-align: center;
+  padding: 15px 0;
+  width: 70%;
+  margin: 5% 15%;
+}
+
+
+.cta > a {
+  position: relative;
+  top: 25%;
+  font-size: 30px;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cta > a:hover {
+  text-decoration: underline;
 }
 
 .singleBlock {
   display: inline-block;
   margin-bottom: 10px;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
   width: 340px;
   padding: 8px;
 }
@@ -83,22 +156,4 @@ nav li {
   border-radius: 50%;
   margin-left: auto;
   margin-right: auto;
-}
-
-/* call to action button */
-.cta {
-  border-radius: 8px;
-  background-color: var(--main-color);
-  text-align: center;
-}
-
-
-.cta > a {
-  color: #fff;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.cta > a:hover {
-  text-decoration: underline;
 }
