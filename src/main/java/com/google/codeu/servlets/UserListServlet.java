@@ -32,9 +32,6 @@ public class UserListServlet extends HttpServlet {
       response.setContentType("application/json");
       String past = request.getParameter("past");
       String current = request.getParameter("current");
-      System.out.println("ITS IN THE SERVLET");
-      System.out.println(past);
-      System.out.println(current);
 
       List<User> users = datastore.getUsers(past,current);
       Gson gson = new Gson();
