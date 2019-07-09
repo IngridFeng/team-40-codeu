@@ -17,11 +17,12 @@
 :root {
     --main-color:#AB63FF;
     --secondary-color:#4D4D4D;
+    --main-color-highlight: #7907FF;
 
 }
 
 /* FONT */
-h1, h2, h3, p {
+h1, h2, h3, p, a  {
   font-family: "Heltvetica",sans-serif;
   color: var(--secondary-color);
 }
@@ -39,6 +40,7 @@ body {
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
 }
 
 nav {
@@ -100,20 +102,13 @@ a:hover {
   padding: 15px 0;
   width: 70%;
   margin: 5% 15%;
-}
-
-
-.cta > a {
-  position: relative;
-  top: 25%;
   font-size: 30px;
   color: #fff;
   font-weight: 600;
-  text-decoration: none;
 }
 
-.cta > a:hover {
-  text-decoration: underline;
+.cta:hover {
+  background-color: var(--main-color-highlight);
 }
 
 .singleBlock {
