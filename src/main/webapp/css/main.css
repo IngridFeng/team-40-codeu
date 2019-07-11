@@ -111,6 +111,22 @@ a:hover {
   background-color: var(--main-color-highlight);
 }
 
+/* header bar */
+.header_bar {
+  display: flex;
+}
+
+.header_bar-left {
+  display: inline-flex;
+  align-items: center;
+}
+
+.header_bar-right {
+  display: inline-flex;
+  margin-left: auto;
+  align-items: center;
+}
+
 .singleBlock {
   display: inline-block;
   margin-bottom: 10px;

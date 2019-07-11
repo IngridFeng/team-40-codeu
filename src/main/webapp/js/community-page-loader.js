@@ -66,30 +66,36 @@ function buildUserListItem(user){
   chatForm.appendChild(chatButton);
   userDiv.appendChild(chatForm);
 
-
-  /*
-  const chatButton = document.createElement("input");
-    chatButton.type = "button";
-    chatButton.value = "Chat with Me!";
-    chatButton.onclick = createChat(user.email);
-    userDiv.appendChild(chatButton);
-  */
-
     return userDiv
 }
 
-/*
-function createChat(email) {
-  fetch('/chat', {
-    method: 'POST',
-    body: params
-  }).then(response => response.text())
-  .then((translatedMessage) => {
-    resultContainer.innerText = translatedMessage;
+/** Detect filter change **/
+function filterCommunity(filterBar){
+  // get params
+  var params = ``;
+  filterBar.querySelectorAll('select').forEach(function(param) {
+    params += `${param.name}=${param.value}&`;
   });
+  params = params.substring(0, params.length-1);
+  console.log(params);
 
-}
-*/
+  // send request with params
+
+  /*
+  var url = "bla.php";
+  var params = "somevariable=somevalue&anothervariable=anothervalue";
+  var http = new XMLHttpRequest();
+
+  http.open("GET", url+"?"+params, true);
+  http.onreadystatechange = function()
+  {
+      if(http.readyState == 4 && http.status == 200) {
+          alert(http.responseText);
+      }
+  }
+  http.send(null);
+  */
+ }
 
 /** Fetches data and populates the UI of the page. */
 function buildUI(){
