@@ -1,22 +1,29 @@
 /** Fetches users and adds them to the page. */
-function fetchUserList(){
-  // get url params
-  const urlParams = new URLSearchParams(window.location.search);
-  const paramPast = urlParams.get('past');
-  const paramCurrent = urlParams.get('current');
 
-  const url = '/user-list?past=' + paramPast + '&current=' + paramCurrent;
+function loadUsers(){
+  // get params
+  const filterBar = document.getElementById("filter_bar");
+  var params = ``;
+  filterBar.querySelectorAll('select').forEach(function(param) {
+    params += `${param.name}=${param.value}&`;
+  });
+  params = params.substring(0, params.length-1);
+
+  // fetch user list based on params
+  const url = '/user-list?' + params;
   fetch(url).then((response) => {
     return response.json();
   }).then((users) => {
     const list = document.getElementById('list');
     list.innerHTML = '';
 
+    // build UI
     users.forEach((user) => {
      const userListItem = buildUserListItem(user);
      list.appendChild(userListItem);
    });
   });
+
 }
 
 /**
@@ -66,35 +73,10 @@ function buildUserListItem(user){
   chatForm.appendChild(chatButton);
   userDiv.appendChild(chatForm);
 
-    return userDiv
+  return userDiv
 }
-
-/** Detect filter change **/
-function filterCommunity(filterBar){
-  // get params
-  var params = ``;
-  filterBar.querySelectorAll('select').forEach(function(param) {
-    params += `${param.name}=${param.value}&`;
-  });
-  params = params.substring(0, params.length-1);
-  console.log(params);
-
-  // send request with params
-
-  var url = "user-list";
-  var http = new XMLHttpRequest();
-
-  http.open("GET", url+"?"+params, true);
-  http.onreadystatechange = function()
-  {
-      if(http.readyState == 4 && http.status == 200) {
-          alert(http.responseText);
-      }
-  }
-  http.send(null);
- }
 
 /** Fetches data and populates the UI of the page. */
 function buildUI(){
-  fetchUserList();
+  loadUsers();
 }
