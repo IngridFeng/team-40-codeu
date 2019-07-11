@@ -81,9 +81,7 @@ function filterCommunity(filterBar){
 
   // send request with params
 
-  /*
-  var url = "bla.php";
-  var params = "somevariable=somevalue&anothervariable=anothervalue";
+  var url = "user-list";
   var http = new XMLHttpRequest();
 
   http.open("GET", url+"?"+params, true);
@@ -94,7 +92,6 @@ function filterCommunity(filterBar){
       }
   }
   http.send(null);
-  */
  }
 
 /** Fetches data and populates the UI of the page. */
