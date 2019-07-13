@@ -27,7 +27,7 @@ h2 {
 }
 
 input[type=submit] {
-  background-color: #ccccff;
+  background-color: #AB63FF;
   height: 30px;
   width: 80px;
   font-size: 12pt;
@@ -50,7 +50,7 @@ input[type=submit] {
 /* Give the message body a margin so the text
    isn't too close to the border. */
 .message-body {
-  font: 12pt cursive;
+  /* font: 12pt cursive; */
   margin: 5px;
 }
 

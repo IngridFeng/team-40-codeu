@@ -5,14 +5,15 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/user-page.css">
+    <script src="/js/navigation-loader.js"></script>
     <script src="/js/chat-page-loader.js"></script>
   </head>
-  <body onload="buildUI()">
+  <body onload="addLoginOrLogoutLinkToNavigation(); buildUI();">
     <nav>
       <ul id="navigation">
         <li><a href="/">Home</a></li>
-        <li><a href="/aboutus.html">About Our Team</a></li>
-        <li><a href="/community.html">Community Page</a></li>
+        <li><a href="/aboutus.html">About Us</a></li>
+        <li><a href="/community.html">Community</a></li>
       	<li><a href="/feed.html">Public Feed</a></li>
       </ul>
     </nav>
@@ -35,7 +36,7 @@
           <p>Upload an image:</p>
           <input type="file" name="image">
           <br/><br/>
-          <input type="submit" value="Submit" class="rounded">
+          <input type="submit" value="Submit" class="rounded submit-button">
         </form>
       </div>
     </div>
