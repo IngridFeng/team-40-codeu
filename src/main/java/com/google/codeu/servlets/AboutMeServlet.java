@@ -76,7 +76,7 @@ public class AboutMeServlet extends HttpServlet {
     User user = datastore.getUser(userEmail);
     if (user == null) {
       //set chats of current user to null
-      List<UUID> chats = new ArrayList<UUID>();
+      List<String> chats = new ArrayList<String>();
       //create the user
       user = new User(userEmail, aboutMe, null, chats, null, null, null, null, null);
     }

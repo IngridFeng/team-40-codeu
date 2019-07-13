@@ -89,7 +89,8 @@ function setChatParam() {
 /** Build page */
 function buildUI() {
   loadChatDetails();
-  fetchChatMessages();
+  const chatLoadTimer = setInterval(fetchChatMessages, 1000);
+  // fetchChatMessages();
   setChatParam();
   fetchBlobstoreUrlAndShowForm();
 }

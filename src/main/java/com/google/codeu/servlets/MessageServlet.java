@@ -31,9 +31,11 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.Message;
+import com.google.codeu.data.User;
 import com.google.codeu.data.Chat;
 import com.google.gson.Gson;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.Map;
@@ -106,6 +108,15 @@ public class MessageServlet extends HttpServlet {
 
     // Get user
     String user = userService.getCurrentUser().getEmail();
+
+    // store the user if the user isn't stored already. 
+    if (datastore.getUser(user) == null) {
+    	//set chats of current user to null
+    	List<String> chats = new ArrayList<String>();
+    	//create the user
+    	User newUser = new User(user, null, null, chats, null, null, null, null, null);
+    	datastore.storeUser(newUser);
+    }
 
     // Get text
     String text = Jsoup.clean(request.getParameter("text"), Whitelist.simpleText());
