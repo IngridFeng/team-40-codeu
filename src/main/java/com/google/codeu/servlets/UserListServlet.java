@@ -28,11 +28,14 @@ public class UserListServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws IOException {
-    response.setContentType("application/json");
-    List<User> users = datastore.getUsers();
-    Gson gson = new Gson();
-    String json = gson.toJson(users);
-    response.getOutputStream().println(json);
-  }
+    throws IOException {
+      response.setContentType("application/json");
+      String topic = request.getParameter("topic");
+      String timezone = request.getParameter("timezone");
+      String pace = request.getParameter("pace");
+      List<User> users = datastore.getUsers(topic, timezone, pace);
+      Gson gson = new Gson();
+      String json = gson.toJson(users);
+      response.getOutputStream().println(json);
+    }
 }

@@ -15,10 +15,43 @@
         <li><a href="/feed.html">Public Feed</a></li>
       </ul>
     </nav>
-    <div id="content">
+    <div class="content">
       <h1>Community Page</h1>
       <p>Here is a list of every user who has posted a message:</p>
       <hr/>
+      <div class="header_bar">
+        <div class="header_bar-left">
+          <!-- Should change this to show certain results -->
+          <p> Filter  by: </p>
+        </div>
+        <div id="filter_bar" class="header_bar-right" onchange="buildUI()">
+          <p>Topic</p>
+          <select name="topic">
+              <!-- Should change this to get all options -->
+            <option value="all">All</option>
+            <option value="same">Match mine</option>
+            <option value="different">Different</option>
+          </select>
+
+          <p>Time Zone</p>
+          <select name="timezone">
+              <!-- Should change this to get all options -->
+            <option value="all">All</option>
+            <option value="same">Match Mine</option>
+            <option value="different">Different</option>
+          </select>
+
+          <p>Study Pace</p>
+          <select name="pace">
+              <!-- Should change this to get all options -->
+            <option value="all">All</option>
+            <option value="chill">Chill</option>
+            <option value="moderate">Moderate</option>
+            <option value="intense">Intense</option>
+          </select>
+
+        </div>
+      </div>
       <ul id="list">Loading...</ul>
     </div>
   </body>

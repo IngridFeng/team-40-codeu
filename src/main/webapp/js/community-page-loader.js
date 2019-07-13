@@ -1,17 +1,29 @@
 /** Fetches users and adds them to the page. */
-function fetchUserList(){
-  const url = '/user-list';
+
+function loadUsers(){
+  // get params
+  const filterBar = document.getElementById("filter_bar");
+  var params = ``;
+  filterBar.querySelectorAll('select').forEach(function(param) {
+    params += `${param.name}=${param.value}&`;
+  });
+  params = params.substring(0, params.length-1);
+
+  // fetch user list based on params
+  const url = '/user-list?' + params;
   fetch(url).then((response) => {
     return response.json();
   }).then((users) => {
     const list = document.getElementById('list');
     list.innerHTML = '';
 
+    // build UI
     users.forEach((user) => {
      const userListItem = buildUserListItem(user);
      list.appendChild(userListItem);
    });
   });
+
 }
 
 /**
@@ -61,32 +73,10 @@ function buildUserListItem(user){
   chatForm.appendChild(chatButton);
   userDiv.appendChild(chatForm);
 
-
-  /*
-  const chatButton = document.createElement("input");
-    chatButton.type = "button";
-    chatButton.value = "Chat with Me!";
-    chatButton.onclick = createChat(user.email);
-    userDiv.appendChild(chatButton);
-  */
-
-    return userDiv
+  return userDiv
 }
-
-/*
-function createChat(email) {
-  fetch('/chat', {
-    method: 'POST',
-    body: params
-  }).then(response => response.text())
-  .then((translatedMessage) => {
-    resultContainer.innerText = translatedMessage;
-  });
-
-}
-*/
 
 /** Fetches data and populates the UI of the page. */
 function buildUI(){
-  fetchUserList();
+  loadUsers();
 }

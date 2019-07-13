@@ -28,6 +28,7 @@ import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.EntityNotFoundException;
 
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -138,9 +139,38 @@ public class Datastore {
    * Gets a set of all users.
    * return a set of strings representing the users.
    */
-  public List<User> getUsers(){
+  public List<User> getUsers(String topic, String timezone, String pace){
+    System.out.println("REACHED DATASTORE");
+    System.out.println(topic);
+    System.out.println(timezone);
+    System.out.println(pace);
+
     List<User> users = new ArrayList<>();
-    Query query = new Query("User").addSort("nickName", SortDirection.DESCENDING);
+    Query query;
+
+    /*
+    // I should really find a better way
+    boolean pastIsNull = past.indexOf("null") !=-1? true: false;
+    boolean curIsNull = current.indexOf("null") !=-1? true: false;
+
+    if (pastIsNull && curIsNull){
+      query = new Query("User").addSort("nickName", SortDirection.DESCENDING);
+    } else {
+      // process params
+
+      past = past.substring(1, past.length()-1);
+      current = current.substring(1, current.length()-1);
+
+      List<String> pastParams = Arrays.asList(past.split(","));
+      List<String> currentParams = Arrays.asList(current.split(","));
+
+      // curently only filter on currentTopics
+      query = new Query("User").setFilter(new Query.FilterPredicate("currentTopics", FilterOperator.IN, currentParams));
+    }
+    */
+
+    query = new Query("User").addSort("nickName", SortDirection.DESCENDING);
+
 
     PreparedQuery results = datastore.prepare(query);
 
@@ -155,7 +185,7 @@ public class Datastore {
         String major = (String) entity.getProperty("major");
         List<String> pastTopics = (List<String>) entity.getProperty("pastTopics");
         List<String> currentTopics = (List<String>) entity.getProperty("currentTopics");
-        
+
         User user = new User(email, aboutMe, nickName, chats, imageUrl, universityName, major, pastTopics, currentTopics);
         users.add(user);
       } catch (Exception e) {
@@ -307,21 +337,13 @@ public class Datastore {
  */
   public List<Message> getMessagesbyChat(String chat) {
     List<Message> messages = new ArrayList<>();
-    //System.out.println("reached datastore");
-    //System.out.println(chat);
-
     Query query =
         new Query("Message")
             .setFilter(new Query.FilterPredicate("chat", FilterOperator.EQUAL, chat))
             .addSort("timestamp", SortDirection.DESCENDING);
     PreparedQuery results = datastore.prepare(query);
 
-    //System.out.println("the results from the query were");
-    //System.out.println(results);
-
     for (Entity entity : results.asIterable()) {
-      //System.out.println("something was retrieved");
-      //System.out.println(entity);
       try {
         String idString = entity.getKey().getName();
         UUID id = UUID.fromString(idString);

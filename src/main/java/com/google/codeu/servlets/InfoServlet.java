@@ -101,7 +101,7 @@ public class InfoServlet extends HttpServlet {
       datastore.storeUser(user);
 
       // redirect to community page
-      response.sendRedirect("/community.html");
+      response.sendRedirect("/community.html?past=" + pastTopics + "&current=" + currentTopics);
   }
 
 }

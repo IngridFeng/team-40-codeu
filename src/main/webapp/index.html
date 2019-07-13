@@ -18,7 +18,7 @@ limitations under the License.
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Study Buddy Finder</title>
+    <title>MuMind</title>
     <link rel="stylesheet" href="/css/main.css">
     <script src="/js/navigation-loader.js"></script>
 
@@ -32,39 +32,46 @@ limitations under the License.
     <nav>
       <ul id="navigation">
         <li><a href="/">Home</a></li>
-        <li><a href="/aboutus.html">About Our Team</a></li>
-        <li><a href="/community.html">Community Page</a></li>
+        <li><a href="/aboutus.html">About Us</a></li>
+        <li><a href="/community.html">Community</a></li>
       	<li><a href="/feed.html">Public Feed</a></li>
       </ul>
     </nav>
-    <div class="singleBlock" style="width: 600px;">
-      <h1>Mututor</h1>
-      <h2>-- Your Favorite Study Buddy Finder</h2>
-      <div class="cta">
-        <a href="/community.html" class="button">Find a buddy!</a>
+    <div class="content">
+      <div class="singleBlock top-content" style="width: 600px;">
+        <h1 class="title">MuMind</h1>
+        <h2 class="subtitle">Cause nerds need friends too</h2>
+        <p>
+        Welcome to Mututor! Mututor is a platform designed for students to find study buddies
+        with similar interests from all over the world. Let's start exploring by shouting out
+        a message from your university!
+        </p>
+        <a href="/community.html" class="button">
+          <div class="cta">Find a Buddy</div>
+        </a>
       </div>
-    </div>
-    <p>
-    Welcome to Mututor! Mututor is a platform designed for students to find study buddies
-    with similar interests from all over the world. Let's start exploring by shouting out
-    a message from your university!
-    </p>
-    <h2 style="margin-top: 40px; margin-bottom: 0px;">Shoutout for Your University!</h2>
-    <div id="floating-panel">
-      <input id="address" type="textbox" name = "university" required></input>
-      <input id="submit" type="button" value="Add Your University!">
-    </div>
-    <div id="map"></div>
-    <div>
-      <h1>How Constructive Are We?</h1>
-      <p>
-        Here is a chart showing how constructive we are.
-        We become what our environment encourages.
-        Let's give transparent and collaborative feedback so we can all grow!
-      </p>
-      <h2>Constructiveness of all messages</h2>
-      <div id="nice_chart"></div>
-      <p id="avg_sentiment" align="center"></p>
+      <div class="content">
+        <h2 style="margin-top: 40px; margin-bottom: 0;">Let the Community Know You're Here</h2>
+        <p style="margin-bottom: 0"> Shoutout your University!</p>
+        <div id="floating-panel">
+          <input id="address" type="textbox" name = "university" required></input>
+          <input id="submit" type="button" value="Add Your University!">
+        </div>
+        <div id="map"></div>
+        <!--
+        <div>
+          <h1>How Constructive Are We?</h1>
+          <p>
+            Here is a chart showing how constructive we are.
+            We become what our environment encourages.
+            Let's give transparent and collaborative feedback so we can all grow!
+          </p>
+          <h2>Constructiveness of all messages</h2>
+          <div id="nice_chart"></div>
+          <p id="avg_sentiment" align="center"></p>
+        </div>
+        -->
+      </div>
     </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTYJGGk3f9krfYZB-Ab1oC65W_pDtvrAw&callback=createMap"></script>
   </body>
