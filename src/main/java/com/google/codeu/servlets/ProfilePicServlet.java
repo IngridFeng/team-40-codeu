@@ -91,7 +91,7 @@ public class ProfilePicServlet extends HttpServlet {
 
     if (user == null) {
       //set chats of current user to null
-      List<UUID> chats = new ArrayList<UUID>();
+      List<String> chats = new ArrayList<String>();
       //create the user
       user = new User(userEmail, null, null, chats, imageUrl, null, null, null, null);
     }

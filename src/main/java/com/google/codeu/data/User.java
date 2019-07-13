@@ -9,14 +9,14 @@ public class User {
   private String email;
   private String aboutMe;
   private String nickName;
-  private List<UUID> chats;
+  private List<String> chats;
   private String imageUrl;
   private String universityName;
   private String major;
   private List<String> pastTopics;
   private List<String> currentTopics;
   
-  public User(String email, String aboutMe, String nickName, List<UUID> chats, String imageUrl, String universityName, String major, List<String> pastTopics, List<String> currentTopics) {
+  public User(String email, String aboutMe, String nickName, List<String> chats, String imageUrl, String universityName, String major, List<String> pastTopics, List<String> currentTopics) {
     this.email = email;
     this.aboutMe = aboutMe;
     this.nickName = nickName;
@@ -48,9 +48,9 @@ public class User {
     return nickName;
   }
 
-  public List<UUID> getChats() {
+  public List<String> getChats() {
     if (chats == null){
-      return new ArrayList<UUID>();
+      return new ArrayList<String>();
     }
     else {
       return chats;
@@ -77,7 +77,7 @@ public class User {
     this.aboutMe = aboutMe;
   }
 
-  public void setChats(List<UUID> chats) {
+  public void setChats(List<String> chats) {
     this.chats = chats;
   }
 
