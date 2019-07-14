@@ -14,7 +14,9 @@ import com.google.codeu.data.User;
 import com.google.codeu.data.Chat;
 import com.google.gson.Gson;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 
@@ -55,51 +57,94 @@ public class ChatServlet extends HttpServlet {
       response.setContentType("text/html");
 
       // get user
-
       UserService userService = UserServiceFactory.getUserService();
       if (!userService.isUserLoggedIn()) {
-        response.sendRedirect("/index.html");
-        return;
+      	response.sendRedirect("/login");
+      	return;
       }
 
       //get emails of users
       String userEmail = userService.getCurrentUser().getEmail();
       String selectedUserEmail = request.getParameter("selectedUser");
 
+      //get current user by querying the email
+      User user = datastore.getUser(userEmail);
+      // get selected user by querying the email
+      User selectedUser = datastore.getUser(selectedUserEmail);
+
+      // check if a chat exists between the two users
+      if (user != null && selectedUser != null) {
+      	if (!userEmail.equals(selectedUserEmail)) {
+      		// user and selected user are different
+      		List<String> userChats = user.getChats();
+      		List<String> selectedUserChats = selectedUser.getChats();
+      		List<String> common = new ArrayList<String>(userChats);
+      		common.retainAll(selectedUserChats);
+      		if (common.size() > 0) {
+      			// a chat already exists between the two users
+      			String chatId = common.get(0);
+      			// redirect to chat package
+      			response.sendRedirect("/chat.html?chat=" + chatId);
+      			return;
+      		}
+      	} else {
+      		// user and selected user are actually the same person
+      		List<String> userChats = user.getChats();
+      		Set<String> unique = new HashSet<String>();
+      		for(int i = 0; i < userChats.size(); i++) {
+      			if (unique.contains(userChats.get(i))) {
+      				// a chat already exists
+      				String chatId = userChats.get(i);
+      				// redirect to chat package
+      				response.sendRedirect("/chat.html?chat=" + chatId);
+      				return;
+      			} else {
+      				unique.add(userChats.get(i));
+      			}
+      		}
+      	}
+      }
+
+      // chat doesn't exist between the two users 
       // create new chat
       Chat chat = new Chat(userEmail + " and " + selectedUserEmail,"Omg a new friend! :D");
 
-      //get current user by querying the email
-      User user = datastore.getUser(userEmail);
       if (user == null) {
-        //create new user
-        List<UUID> userChats = new ArrayList<UUID>();
-        userChats.add(chat.getId());
+      	//create new user
+      	List<String> userChats = new ArrayList<String>();
+      	userChats.add(chat.getId().toString());
 
-        user = new User(userEmail, null, null, userChats, null, null, null, null, null);
+      	user = new User(userEmail, null, null, userChats, null, null, null, null, null);
       }
       else{
-        //modify the chats
-        List<UUID> userChats = user.getChats();
-        userChats.add(chat.getId());
-        user.setChats(userChats);
+      	//modify the chats
+      	List<String> userChats = user.getChats();
+      	userChats.add(chat.getId().toString());
+      	user.setChats(userChats);
       }
 
-      // get selected user my querying the email
-      User selectedUser = datastore.getUser(selectedUserEmail);
       if (selectedUser == null) {
-        //create new user
-        List<UUID> selectedUserChats = new ArrayList<UUID>();
-        selectedUserChats.add(chat.getId());
-        selectedUser = new User(userEmail, null, null, selectedUserChats, null, null, null, null, null);
+      	//create new user
+      	List<String> selectedUserChats = new ArrayList<String>();
+      	selectedUserChats.add(chat.getId().toString());
+      	if (userEmail.equals(selectedUserEmail)) {
+      		selectedUserChats.add(chat.getId().toString());
+      	}
+      	selectedUser = new User(userEmail, null, null, selectedUserChats, null, null, null, null, null);
       }
-      else{
-        //modify the chats
-        List<UUID> selectedUserChats = selectedUser.getChats();
-        selectedUserChats.add(chat.getId());
-        selectedUser.setChats(selectedUserChats);
+      else {
+      	//modify the chats
+      	List<String> selectedUserChats = selectedUser.getChats();
+      	selectedUserChats.add(chat.getId().toString());
+      	if (userEmail.equals(selectedUserEmail)) {
+      		selectedUserChats.add(chat.getId().toString());
+      	}
+      	selectedUser.setChats(selectedUserChats);
       }
 
+      // store updated users
+      datastore.storeUser(user);
+      datastore.storeUser(selectedUser);
       // store chat
       datastore.storeChat(chat);
 
@@ -107,8 +152,6 @@ public class ChatServlet extends HttpServlet {
       response.sendRedirect("/chat.html?chat=" + chat.getId());
       return;
 
-
-
-    }
+  }
 
 }

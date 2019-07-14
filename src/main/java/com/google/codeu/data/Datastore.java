@@ -193,7 +193,7 @@ public class Datastore {
         String email = (String) entity.getProperty("email");
         String aboutMe = (String) entity.getProperty("aboutMe");
         String nickName = (String) entity.getProperty("nickName");
-        List<UUID> chats = (List<UUID>) entity.getProperty("chats");
+        List<String> chats = (List<String>) entity.getProperty("chats");
         String imageUrl = (String) entity.getProperty("imageUrl");
         String universityName = (String) entity.getProperty("universityName");
         String major = (String) entity.getProperty("major");
@@ -256,7 +256,7 @@ public class Datastore {
 
   String nickName = (String) userEntity.getProperty("nickName");
   String aboutMe = (String) userEntity.getProperty("aboutMe");
-  List<UUID> chats= (List<UUID>) userEntity.getProperty("chats");
+  List<String> chats= (List<String>) userEntity.getProperty("chats");
   String imageUrl = (String) userEntity.getProperty("imageUrl");
   String universityName = (String) userEntity.getProperty("universityName");
   String major = (String) userEntity.getProperty("major");
@@ -346,7 +346,7 @@ public class Datastore {
 
 
 /**
- * Returns the Messgaes associated with the Chat
+ * Returns the Messages associated with the Chat
  * null if none was found.
  */
   public List<Message> getMessagesbyChat(String chat) {
