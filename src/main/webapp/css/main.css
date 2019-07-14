@@ -18,7 +18,7 @@
     --main-color:#AB63FF;
     --secondary-color:#4D4D4D;
     --main-color-highlight: #7907FF;
-
+    --card-size: 150px;
 }
 
 /* FONT */
@@ -159,17 +159,6 @@ a:hover {
   width: 240px;
 }
 
-.profilepic {
-  display: block;
-  width: 150px;
-  height: 150px;
-  margin-top: 20px;
-  border-radius: 50%;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-
 /* Dropdown checkboxes */
 .selectBox {
   position: relative;
@@ -178,6 +167,7 @@ a:hover {
   margin: 0 8px;
   border-radius: 10px;
   border: 1px solid lightgray;
+  cursor: pointer;
 }
 
 .select-title {
@@ -208,4 +198,49 @@ a:hover {
   background-color: #1e90ff;
 }
 
-/* I haven't figured out why the options are gray...*/
+/** Profile Card **/
+.user_card {
+  display: block;
+  position: relative;
+  text-align: left;
+  width: 100%;
+  height: var(--card-size);
+  margin: 20px 0;
+  padding: 10px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+}
+
+.user_card:hover {
+  border: 1px solid var(--main-color);
+}
+
+.user_card a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.user_card-picture {
+  display: inline-block;
+  width: var(--card-size);
+  height: var(--card-size);
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.user_card-picture img {
+  width: inherit;
+  height: inherit;
+}
+
+.user_card-content {
+  display: inline-block;
+}
+
+.user_card-chat_button:hover {
+  border-radius: 10px;
+  background-color: var(--main-color);
+  color: white;
+}

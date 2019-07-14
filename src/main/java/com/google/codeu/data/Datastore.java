@@ -183,7 +183,7 @@ public class Datastore {
     Query query = new Query("User").setFilter(userFilter);
     **/
 
-    query = new Query("User").addSort("nickName", SortDirection.DESCENDING);
+    Query query = new Query("User").addSort("nickName", SortDirection.DESCENDING);
 
     PreparedQuery results = datastore.prepare(query);
 
