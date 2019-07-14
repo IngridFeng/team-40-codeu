@@ -21,12 +21,19 @@ import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
-import com.google.appengine.api.datastore.Query;
-import com.google.appengine.api.datastore.Query.FilterOperator;
-import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.datastore.Key;
 import com.google.appengine.api.datastore.KeyFactory;
 import com.google.appengine.api.datastore.EntityNotFoundException;
+
+/* QUERY */
+import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.FilterOperator;
+import com.google.appengine.api.datastore.Query.SortDirection;
+import com.google.appengine.api.datastore.Query.CompositeFilter;
+import com.google.appengine.api.datastore.Query.CompositeFilterOperator;
+import com.google.appengine.api.datastore.Query.Filter;
+import com.google.appengine.api.datastore.Query.FilterPredicate;
+
 
 import java.util.Arrays;
 import java.util.ArrayList;
@@ -146,36 +153,40 @@ public class Datastore {
     System.out.println(studypace);
 
     List<User> users = new ArrayList<>();
-    Query query;
 
-    /*
-    Can't quite do this part until I know how we're storing user info.
+    /**
+    // Can't quite do this part until I know how we're storing user info.
+
+    topic = topic.substring(1, topic.length()-1);
+    timezone = timezone.substring(1, timezone.length()-1);
+    studypace = studypace.substring(1, studypace.length()-1);
+
+    List<String> topicList = Arrays.asList(topic.split(","));
+    List<String> timezoneList = Arrays.asList(timezone.split(","));
+    List<String> studypaceList = Arrays.asList(studypace.split(","));
+
+    // Build Filters
+    Filter topicFilter =
+    new FilterPredicate("topic", FilterOperator.IN, topicList);
+
+    Filter timezoneFilter =
+        new FilterPredicate("timezone", FilterOperator.IN, timezoneList);
+
+    Filter studypaceFilter =
+        new FilterPredicate("studypace", FilterOperator.IN, studypaceList);
 
 
-    // I should really find a better way
-    boolean pastIsNull = past.indexOf("null") !=-1? true: false;
-    boolean curIsNull = current.indexOf("null") !=-1? true: false;
+    // Use CompositeFilter to combine multiple filters
+    CompositeFilter userFilter =
+        CompositeFilterOperator.and(topicFilter, timezoneFilter, studypaceFilter);
 
-    if (pastIsNull && curIsNull){
-      query = new Query("User").addSort("nickName", SortDirection.DESCENDING);
-    } else {
-      // process params
-
-      past = past.substring(1, past.length()-1);
-      current = current.substring(1, current.length()-1);
-
-      List<String> pastParams = Arrays.asList(past.split(","));
-      List<String> currentParams = Arrays.asList(current.split(","));
-
-      // curently only filter on currentTopics
-      query = new Query("User").setFilter(new Query.FilterPredicate("currentTopics", FilterOperator.IN, currentParams));
-    }
-    */
+    Query query = new Query("User").setFilter(userFilter);
+    **/
 
     query = new Query("User").addSort("nickName", SortDirection.DESCENDING);
 
-
     PreparedQuery results = datastore.prepare(query);
+
 
     for (Entity entity : results.asIterable()) {
       try {
