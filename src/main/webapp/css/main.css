@@ -188,6 +188,7 @@ a:hover {
   text-align: left;
   border: 1px solid lightgray;
   background-color: #fff;
+  z-index: 2;
 }
 
 .select-contents label {
