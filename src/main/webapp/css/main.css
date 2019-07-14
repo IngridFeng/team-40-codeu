@@ -194,9 +194,10 @@ a:hover {
   position: absolute;
   top: 20px;
   display: none;
-  border: 1px solid lightgray;
-  text-align: left;
   width: 100%;
+  text-align: left;
+  border: 1px solid lightgray;
+  background-color: #fff;
 }
 
 .select-contents label {
