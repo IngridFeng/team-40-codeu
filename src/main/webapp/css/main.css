@@ -168,3 +168,43 @@ a:hover {
   margin-left: auto;
   margin-right: auto;
 }
+
+
+/* Dropdown checkboxes */
+.selectBox {
+  position: relative;
+  height: 20px;
+  min-width: 120px;
+  margin: 0 8px;
+  border-radius: 10px;
+  border: 1px solid lightgray;
+}
+
+.select-title {
+  -webkit-appearance: menulist;
+}
+
+.select-title p, .select-contents p {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.select-contents {
+  position: absolute;
+  top: 20px;
+  display: none;
+  border: 1px solid lightgray;
+  text-align: left;
+  width: 100%;
+}
+
+.select-contents label {
+  display: block;
+}
+
+.select-contents label:hover {
+  background-color: #1e90ff;
+}
+
+/* I haven't figured out why the options are gray...*/
