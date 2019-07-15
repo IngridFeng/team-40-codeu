@@ -145,7 +145,7 @@ a:hover {
 }
 
 .padded {
-  padding: 10px;
+  padding: 20px;
 }
 
 .rounded {
@@ -192,18 +192,42 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   width: 50%;
   background: #f2f2f2;
   border-radius: 31px;
-  font-family: Roboto;
   font-size: 18px;
   color: #8f8fa1;
   line-height: 1.2;
 }
 
+.info-input {
+  border-radius: 31px 0px 0px 31px;
+  display: inline-block;
+  margin-right: -5px;
+}
+
 .uni {
-  width: 55%;
   font-size: 18px;
   padding: 8px;
   margin-top: 15px;
   margin-bottom: 30px;
+}
+
+.submit-btn {
+  width: auto;
+  font-size: 16px;
+  padding: 8px;
+  margin-top: 20px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.info-submit {
+  border-radius: 0px 31px 31px 0px;
+  display: inline-block;
+}
+
+.profile-submit {
+  font-size: 12px;
+  padding: 5px;
+  border-radius: 31px 31px 31px 31px;
 }
 
 .mapInfoBox {
@@ -214,7 +238,6 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   display: block;
   width: 150px;
   height: 150px;
-  margin-top: 20px;
   border-radius: 50%;
   margin-left: auto;
   margin-right: auto;

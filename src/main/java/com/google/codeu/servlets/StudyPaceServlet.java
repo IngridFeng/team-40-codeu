@@ -48,11 +48,11 @@ public class StudyPaceServlet extends HttpServlet {
 
     User userData = datastore.getUser(user);
 
-    if(userData == null || userData.getMajor() == null) {
+    if(userData == null || userData.getStudyPace() == null) {
       return;
     }
 
-    response.getOutputStream().println(userData.getMajor());
+    response.getOutputStream().println(userData.getStudyPace());
   }
 
   @Override

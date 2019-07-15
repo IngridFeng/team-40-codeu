@@ -247,7 +247,7 @@ function fetchStudyPace(){
     if(studypace == ''){
       studypace = 'Unknown';
     }
-    studyPaceContainer.innerHTML = 'Study Pace: ' + studypace + ' hours per week';
+    studyPaceContainer.innerHTML = 'Weekly Study Hours: ' + studypace;
   });
 }
 

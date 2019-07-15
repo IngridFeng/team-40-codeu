@@ -48,11 +48,11 @@ public class TimeZoneServlet extends HttpServlet {
 
     User userData = datastore.getUser(user);
 
-    if(userData == null || userData.getMajor() == null) {
+    if(userData == null || userData.getTimeZone() == null) {
       return;
     }
 
-    response.getOutputStream().println(userData.getMajor());
+    response.getOutputStream().println(userData.getTimeZone());
   }
 
   @Override

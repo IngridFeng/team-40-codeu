@@ -26,25 +26,12 @@ h2 {
   margin: 0;
 }
 
-input[type=submit] {
-  background-color: #ccccff;
-  height: 30px;
-  width: 80px;
-  font-size: 12pt;
-}
-
 .noBotMargin{
   margin-bottom: 0px;
 }
 
 .noTopMargin{
   margin-top: 0px;
-}
-
-
-#message-input {
-  height: 100px;
-  width: 99%;
 }
 
 /* Give the message body a margin so the text
@@ -70,7 +57,7 @@ input[type=submit] {
   width: 60%;
 }
 
-#nickname-input, #university-name-input, #major-input {
+#nickname-input, #university-name-input, #major-input, #timezone-input, #studypace-input {
   font-size: 16px;
   border-top: 0px;
   border-right: 0px;
@@ -114,12 +101,9 @@ input[type=submit] {
   max-width: 75%;
 }
 
-#profilepic-container {
-  margin-bottom: 20px;
-}
-
 #profilepic-form {
   width: 150px;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 10px;
 }
