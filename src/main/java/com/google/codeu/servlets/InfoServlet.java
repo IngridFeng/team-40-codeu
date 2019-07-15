@@ -88,7 +88,7 @@ public class InfoServlet extends HttpServlet {
         List<String> chats = new ArrayList<String>();
         //create the user
         //user = new User(userEmail, null, null, chats, null, pastTopics, currentTopics);
-        user = new User(userEmail, null, null, chats, null, null, null, pastTopics, currentTopics);
+        user = new User(userEmail, null, null, chats, null, null, null, null, null, pastTopics, currentTopics);
       }
       else{
         //modify the info

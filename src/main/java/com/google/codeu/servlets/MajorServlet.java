@@ -31,7 +31,7 @@ public class MajorServlet extends HttpServlet {
   }
 
   /**
-   * Responds with the "nickname" section for a particular user.
+   * Responds with the "major" section for a particular user.
    */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -75,7 +75,7 @@ public class MajorServlet extends HttpServlet {
       //set chats of current user to null
       List<String> chats = new ArrayList<String>();
       //create the user
-      user = new User(userEmail, null, null, chats, null, null, major, null, null);
+      user = new User(userEmail, null, null, chats, null, null, major, null, null, null, null);
     }
     else{
       //set the major

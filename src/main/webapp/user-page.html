@@ -53,11 +53,12 @@ limitations under the License.
         </div>
 
         <div class="column right">
-          <h3>Information About Me</h3>
           <p id="nick-name-container" class="noBotMargin noTopMargin">Loading...</p>
           <p id="university-name-container" class="noBotMargin noTopMargin">Loading...</p>
           <p id="major-container" class="noBotMargin noTopMargin">Loading...</p>
-          <h3>Me in Three Sentences</h3>
+          <p id="timezone-container" class="noBotMargin noTopMargin">Loading...</p>
+          <p id="studypace-container" class="noBotMargin noTopMargin">Loading...</p>
+          <h3>About Me</h3>
           <p id="about-me-container" class="noBotMargin noTopMargin">Loading...</div>
         </div>
 
@@ -85,9 +86,24 @@ limitations under the License.
         </form>
       </div>
 
+      <div id="timezone-form" class="hidden padded rounded panel">
+        <form action="/timezone" method="POST">
+          Change Time Zone:
+          <input type="text" name="timezone" id="timezone-input" required></input>
+          <input type="submit" value="Submit" class="rounded">
+        </form>
+      </div>
+
+      <div id="studypace-form" class="hidden padded rounded panel">
+        <form action="/studypace" method="POST">
+          Change Study Pace:
+          <input type="text" name="studypace" id="studypace-input" required></input>
+          <input type="submit" value="Submit" class="rounded">
+        </form>
+      </div>
 
       <div id="about-me-form" class="hidden padded rounded panel">
-        <p class="noTopMargin">Change Me in Three Sentences:</p>
+        <p class="noTopMargin">Change About Me:</p>
         <form action="/about" method="POST">
           <textarea name="about-me" id="aboutme-input" placeholder="Enter your information here" required></textarea>
           <br/>

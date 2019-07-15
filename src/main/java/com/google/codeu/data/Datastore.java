@@ -186,7 +186,7 @@ public class Datastore {
         List<String> pastTopics = (List<String>) entity.getProperty("pastTopics");
         List<String> currentTopics = (List<String>) entity.getProperty("currentTopics");
 
-        User user = new User(email, aboutMe, nickName, chats, imageUrl, universityName, major, pastTopics, currentTopics);
+        User user = new User(email, aboutMe, nickName, chats, imageUrl, universityName, major, timezone, pace, pastTopics, currentTopics);
         users.add(user);
       } catch (Exception e) {
         System.err.println("Error reading message.");
@@ -221,6 +221,8 @@ public class Datastore {
   userEntity.setProperty("imageUrl", user.getImageUrl());
   userEntity.setProperty("universityName", user.getUniversityName());
   userEntity.setProperty("major", user.getMajor());
+  userEntity.setProperty("timezone", user.getTimeZone());
+  userEntity.setProperty("studypace", user.getStudyPace());
   userEntity.setProperty("pastTopics", user.getPastTopics());
   userEntity.setProperty("currentTopics", user.getCurrentTopics());
   datastore.put(userEntity);
@@ -246,9 +248,11 @@ public class Datastore {
   String imageUrl = (String) userEntity.getProperty("imageUrl");
   String universityName = (String) userEntity.getProperty("universityName");
   String major = (String) userEntity.getProperty("major");
+  String timezone = (String) userEntity.getProperty("timezone");
+  String studypace = (String) userEntity.getProperty("studypace");
   List<String> pastTopics = (List<String>) userEntity.getProperty("pastTopics");
   List<String> currentTopics = (List<String>) userEntity.getProperty("currentTopics");
-  User user = new User(email, aboutMe, nickName, chats, imageUrl, universityName, major, pastTopics, currentTopics);
+  User user = new User(email, aboutMe, nickName, chats, imageUrl, universityName, major, timezone, studypace, pastTopics, currentTopics);
   return user;
  }
 

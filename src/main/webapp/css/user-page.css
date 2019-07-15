@@ -54,25 +54,6 @@ input[type=submit] {
   margin: 5px;
 }
 
-.panel {
-  background-color: white;
-  margin-top: 20px;
-}
-
-.centered{
-  text-align: center;
-}
-
-.padded {
-  padding: 10px;
-}
-
-.rounded {
-  border: thin solid black;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
 .row {
   display: flex;
 }

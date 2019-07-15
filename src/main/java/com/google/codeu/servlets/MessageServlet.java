@@ -109,12 +109,12 @@ public class MessageServlet extends HttpServlet {
     // Get user
     String user = userService.getCurrentUser().getEmail();
 
-    // store the user if the user isn't stored already. 
+    // store the user if the user isn't stored already.
     if (datastore.getUser(user) == null) {
     	//set chats of current user to null
     	List<String> chats = new ArrayList<String>();
     	//create the user
-    	User newUser = new User(user, null, null, chats, null, null, null, null, null);
+    	User newUser = new User(user, null, null, chats, null, null, null, null, null, null, null);
     	datastore.storeUser(newUser);
     }
 
