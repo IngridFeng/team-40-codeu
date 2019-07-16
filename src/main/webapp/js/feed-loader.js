@@ -22,16 +22,26 @@
   
   /** creates a new message element from the message provided */
   function buildMessageDiv(message){
+
+   //Adding profile picture
+   const profilePic = document.createElement('img');
+   const picUrl = message.profilePic || "profilepic.png";
+   profilePic.setAttribute("id", "profilepic")
+   profilePic.setAttribute("src", message.profilePic)
+   profilePic.setAttribute("alt", "Profile picture")
+   profilePic.setAttribute("class", "profilepic")
+
    const usernameDiv = document.createElement('div');
    usernameDiv.classList.add("left-align");
    usernameDiv.appendChild(document.createTextNode(message.user));
    
    const timeDiv = document.createElement('div');
    timeDiv.classList.add('right-align');
-   timeDiv.appendChild(document.createTextNode(new Date(message.timestamp)));
+   timeDiv.appendChild(document.createTextNode(new Date(message.timestamp).toLocaleString()));
    
    const headerDiv = document.createElement('div');
    headerDiv.classList.add('message-header');
+   headerDiv.appendChild(profilePic);
    headerDiv.appendChild(usernameDiv);
    headerDiv.appendChild(timeDiv);
    

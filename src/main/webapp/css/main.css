@@ -18,7 +18,7 @@
     --main-color:#AB63FF;
     --secondary-color:#4D4D4D;
     --main-color-highlight: #7907FF;
-
+    --card-size: 150px;
 }
 
 /* FONT */
@@ -234,11 +234,89 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   width: 240px;
 }
 
-.profilepic {
+/* Dropdown checkboxes */
+.selectBox {
+  position: relative;
+  height: 20px;
+  min-width: 120px;
+  margin: 0 8px;
+  border-radius: 10px;
+  border: 1px solid lightgray;
+  cursor: pointer;
+}
+
+.select-title {
+  -webkit-appearance: menulist;
+}
+
+.select-title p, .select-contents p {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.select-contents {
+  position: absolute;
+  top: 20px;
+  display: none;
+  width: 100%;
+  text-align: left;
+  border: 1px solid lightgray;
+  background-color: #fff;
+  z-index: 2;
+}
+
+.select-contents label {
   display: block;
-  width: 150px;
-  height: 150px;
+}
+
+.select-contents label:hover {
+  background-color: #1e90ff;
+}
+
+/** Profile Card **/
+.user_card {
+  display: block;
+  position: relative;
+  text-align: left;
+  width: 100%;
+  height: var(--card-size);
+  margin: 20px 0;
+  padding: 10px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+}
+
+.user_card:hover {
+  border: 1px solid var(--main-color);
+}
+
+.user_card a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.user_card-picture {
+  display: inline-block;
+  width: var(--card-size);
+  height: var(--card-size);
   border-radius: 50%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.user_card-picture img {
+  width: inherit;
+  height: inherit;
+}
+
+.user_card-content {
+  display: inline-block;
+}
+
+.user_card-chat_button:hover {
+  border-radius: 10px;
+  background-color: var(--main-color);
+  color: white;
 }

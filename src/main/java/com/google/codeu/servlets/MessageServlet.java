@@ -117,6 +117,9 @@ public class MessageServlet extends HttpServlet {
     	User newUser = new User(user, null, null, chats, null, null, null, null, null, null, null);
     	datastore.storeUser(newUser);
     }
+    
+    // Get nickName
+    String nickName = datastore.getUser(user).getNickName();
 
     // Get text
     String text = Jsoup.clean(request.getParameter("text"), Whitelist.simpleText());
@@ -144,8 +147,12 @@ public class MessageServlet extends HttpServlet {
     languageService.close();
 
     String chat = request.getParameter("chat");
+    
+    // Profile picture of user
+    String profilePic = datastore.getUser(user).getImageUrl();
 
-    Message message = new Message(chat ,user, textWithVideosReplaced, score, imageUrl);
+
+    Message message = new Message(chat , nickName, textWithVideosReplaced, score, imageUrl, profilePic);
     datastore.storeMessage(message);
     response.sendRedirect(request.getHeader("referer"));
   }
