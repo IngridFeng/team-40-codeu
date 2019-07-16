@@ -28,17 +28,17 @@ public class Message {
   private long timestamp;
   private double sentiment;
   private String imageUrl;
-
+  private String profilePic;
 
   /**
    * Constructs a new {@link Message} posted by {@code user} with {@code text} content. Generates a
    * random ID and uses the current system time for the creation time.
    */
-  public Message(String chat, String user, String text, double sentiment, String imageUrl) {
-    this(UUID.randomUUID(), chat, user, text, System.currentTimeMillis(), sentiment, imageUrl);
+  public Message(String chat, String user, String text, double sentiment, String imageUrl, String profilePic) {
+    this(UUID.randomUUID(), chat, user, text, System.currentTimeMillis(), sentiment, imageUrl, profilePic);
   }
 
-  public Message(UUID id, String chat, String user, String text, long timestamp, double sentiment, String imageUrl) {
+  public Message(UUID id, String chat, String user, String text, long timestamp, double sentiment, String imageUrl, String profilePic) {
     this.id = id;
     this.chat = chat;
     this.user = user;
@@ -46,6 +46,7 @@ public class Message {
     this.timestamp = timestamp;
     this.sentiment = sentiment;
     this.imageUrl = imageUrl;
+    this.profilePic = profilePic;
   }
 
   public UUID getId() {
@@ -74,5 +75,9 @@ public class Message {
 
   public String getImageUrl() {
   	return imageUrl;
+  }
+
+  public String getProfilePic() {
+    return profilePic;
   }
 }
