@@ -86,6 +86,20 @@ function setChatParam() {
   messageForm.firstElementChild.value = parameterChat;
 }
 
+/** Opens modal to create study session **/
+// Get the modal
+
+function openStudySessionModal() {
+  var modal = document.getElementById("studySessionModal");
+  modal.style.display = "block";
+}
+
+function closeStudySessionModal() {
+  var modal = document.getElementById("studySessionModal");
+  modal.style.display = "none";
+}
+
+
 /** Build page */
 function buildUI() {
   loadChatDetails();
