@@ -138,7 +138,7 @@ function buildMessageDiv(message) {
   headerDiv.classList.add('message-header');
   headerDiv.classList.add('padded');
   headerDiv.appendChild(document.createTextNode(
-      'You - ' + (new Date(message.timestamp)).toLocaleString()));
+      (new Date(message.timestamp)).toLocaleString()));
 
   const bodyDiv = document.createElement('div');
   bodyDiv.classList.add('message-body');
