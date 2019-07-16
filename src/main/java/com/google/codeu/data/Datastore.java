@@ -59,6 +59,7 @@ public class Datastore {
     messageEntity.setProperty("text", message.getText());
     messageEntity.setProperty("timestamp", message.getTimestamp());
     messageEntity.setProperty("sentiment", message.getSentiment());
+    messageEntity.setProperty("imageUrl", message.getImageUrl());
     messageEntity.setProperty("profilePic", message.getProfilePic());
 
     datastore.put(messageEntity);
