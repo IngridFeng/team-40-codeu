@@ -32,8 +32,8 @@ public class UserListServlet extends HttpServlet {
       response.setContentType("application/json");
       String topic = request.getParameter("topic");
       String timezone = request.getParameter("timezone");
-      String pace = request.getParameter("pace");
-      List<User> users = datastore.getUsers(topic, timezone, pace);
+      String studypace = request.getParameter("studypace");
+      List<User> users = datastore.getUsers(topic, timezone, studypace);
       Gson gson = new Gson();
       String json = gson.toJson(users);
       response.getOutputStream().println(json);
