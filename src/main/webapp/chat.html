@@ -35,9 +35,22 @@
           <p>Upload an image:</p>
           <input type="file" name="image">
           <br/><br/>
-          <input type="submit" value="Submit" class="rounded">
+          <input type="submit" value="Submit">
         </form>
       </div>
+      <div class="floating-button_bottom-right">
+        <a onclick="openStudySessionModal()"> Set a Study Session! </a>
+      </div>
+    </div>
+    <!-- The Modal -->
+    <div id="studySessionModal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close" onclick="closeStudySessionModal()">&times;</span>
+        <p>Boop</p>
+      </div>
+
     </div>
   </body>
 </html>

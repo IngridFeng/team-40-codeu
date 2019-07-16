@@ -27,7 +27,8 @@ h2 {
 }
 
 input[type=submit] {
-  background-color: #ccccff;
+  background-color: var(--secondary-color);
+  border-radius: 10px;
   height: 30px;
   width: 80px;
   font-size: 12pt;
