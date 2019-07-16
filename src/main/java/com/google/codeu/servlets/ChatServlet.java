@@ -66,7 +66,11 @@ public class ChatServlet extends HttpServlet {
       //get emails of users
       String userEmail = userService.getCurrentUser().getEmail();
       String selectedUserEmail = request.getParameter("selectedUser");
-
+      
+      //get nick names
+      String userNick = datastore.getUser(userEmail).getNickName();
+      String selectedUserEmail = datastore.getUser(selectedUserEmail).getNickName();
+    
       //get current user by querying the email
       User user = datastore.getUser(userEmail);
       // get selected user by querying the email
@@ -107,7 +111,7 @@ public class ChatServlet extends HttpServlet {
 
       // chat doesn't exist between the two users
       // create new chat
-      Chat chat = new Chat(userEmail + " and " + selectedUserEmail,"Omg a new friend! :D");
+      Chat chat = new Chat(userNick + " and " + selectedUserNick,"Omg a new friend! :D");
 
       if (user == null) {
       	//create new user
