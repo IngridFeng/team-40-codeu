@@ -25,7 +25,12 @@
 
    //Adding profile picture
    const profilePic = document.createElement('img');
-   const picUrl = message.profilePic || "profilepic.png";
+   var picUrl = message.profilePic || "profilepic.png";
+   if(picUrl && picUrl.style) {
+     picUrl.style.height = '75px';
+     picUrl.style.width = '75px';
+     picUrl.style.borderRadius = '50%';
+   }
    profilePic.setAttribute("id", "profilepic")
    profilePic.setAttribute("src", message.profilePic)
    profilePic.setAttribute("alt", "Profile picture")
