@@ -105,7 +105,7 @@ public class ChatServlet extends HttpServlet {
       	}
       }
 
-      // chat doesn't exist between the two users 
+      // chat doesn't exist between the two users
       // create new chat
       Chat chat = new Chat(userEmail + " and " + selectedUserEmail,"Omg a new friend! :D");
 
@@ -114,7 +114,7 @@ public class ChatServlet extends HttpServlet {
       	List<String> userChats = new ArrayList<String>();
       	userChats.add(chat.getId().toString());
 
-      	user = new User(userEmail, null, null, userChats, null, null, null, null, null);
+      	user = new User(userEmail, null, null, userChats, null, null, null, null, null, null, null);
       }
       else{
       	//modify the chats
@@ -130,7 +130,7 @@ public class ChatServlet extends HttpServlet {
       	if (userEmail.equals(selectedUserEmail)) {
       		selectedUserChats.add(chat.getId().toString());
       	}
-      	selectedUser = new User(userEmail, null, null, selectedUserChats, null, null, null, null, null);
+      	selectedUser = new User(userEmail, null, null, selectedUserChats, null, null, null, null, null, null, null);
       }
       else {
       	//modify the chats

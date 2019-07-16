@@ -40,12 +40,12 @@ body {
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-  text-align: center;
 }
 
 nav {
   background-color: #F0D9F7;
   position: fixed;
+  z-index: 9999;
   top: 0;
   left: 0;
   width: 100%;
@@ -101,7 +101,7 @@ a:hover {
   text-align: center;
   padding: 15px 0;
   width: 70%;
-  margin: 5% 15%;
+  margin: 5% 15% 0% 15%;
   font-size: 30px;
   color: #fff;
   font-weight: 600;
@@ -135,24 +135,99 @@ a:hover {
   padding: 8px;
 }
 
-#map {
-  width: 600px;
-  height: 375px;
-  border: thin solid black;
+.panel {
+  background-color: white;
+  margin-top: 20px;
 }
 
-#floating-panel {
-  position: relative;
-  z-index: 5;
-  top: 50px;
-  left: 200px;
-  width: 300px;
-  background-color: #fff;
-  padding: 4px 0px 4px 0px;
-  border: 1px solid #ccc round;
+.centered{
   text-align: center;
-  font-family: 'Roboto','sans-serif';
-  line-height: 30px;
+}
+
+.padded {
+  padding: 20px;
+}
+
+.rounded {
+  border: thin solid black;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#map {
+  width: 1100px;
+  height: 600px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+}
+
+/* form */
+input {
+	outline: none;
+	border: none;
+}
+
+input::-webkit-input-placeholder { color: #bdbdd3;}
+input:-moz-placeholder { color: #bdbdd3;}
+input::-moz-placeholder { color: #bdbdd3;}
+input:-ms-input-placeholder { color: #bdbdd3;}
+
+.input-part {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 31px;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.input-textbox {
+  position: relative;
+  display: block;
+  margin: auto;
+  margin-top: 20px;
+  padding: 8px;
+  width: 50%;
+  background: #f2f2f2;
+  border-radius: 31px;
+  font-size: 18px;
+  color: #8f8fa1;
+  line-height: 1.2;
+}
+
+.info-input {
+  border-radius: 31px 0px 0px 31px;
+  display: inline-block;
+  margin-right: -5px;
+}
+
+.uni {
+  font-size: 18px;
+  padding: 8px;
+  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+.submit-btn {
+  width: auto;
+  font-size: 16px;
+  padding: 8px;
+  margin-top: 20px;
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.info-submit {
+  border-radius: 0px 31px 31px 0px;
+  display: inline-block;
+}
+
+.profile-submit {
+  font-size: 12px;
+  padding: 5px;
+  border-radius: 31px 31px 31px 31px;
 }
 
 .mapInfoBox {
