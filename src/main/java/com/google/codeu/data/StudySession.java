@@ -2,20 +2,21 @@ package com.google.codeu.data;
 import java.util.UUID;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 
 public class StudySession {
   private UUID id;
   private String topic;
   private String description;
   private List<User> buddies;
-  private String time; // might change Kind
+  private LocalDate time;
   private String location; // might change Kind
 
-  public StudySession(String topic, String description, List<User> buddies, String time, String location) {
-    this(UUID.randomUUID(),topic,description, buddies, time, location);
+  public StudySession(String topic, String description, List<User> buddies, LocalDate time, String location) {
+    this(UUID.randomUUID(), topic, description, buddies, time, location);
   }
 
-  public StudySession(UUID id, String topic, String description, List<User> buddies, String time, String location) {
+  public StudySession(UUID id, String topic, String description, List<User> buddies, LocalDate time, String location) {
     this.id = id;
     this.topic = topic;
     this.description = description;
@@ -40,7 +41,7 @@ public class StudySession {
     return buddies;
   }
 
-  public String getTime() {
+  public LocalDate getTime() {
     return time;
   }
 
