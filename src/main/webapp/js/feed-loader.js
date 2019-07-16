@@ -31,6 +31,8 @@
      picUrl.style.width = '75px';
      picUrl.style.borderRadius = '50%';
    }
+   profilePic.setAttribute("height", 70)
+   profilePic.setAttribute("width", 70)
    profilePic.setAttribute("id", "profilepic")
    profilePic.setAttribute("src", message.profilePic)
    profilePic.setAttribute("alt", "Profile picture")
