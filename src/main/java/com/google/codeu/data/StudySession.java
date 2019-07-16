@@ -1,17 +1,27 @@
 package com.google.codeu.data;
 import java.util.UUID;
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class StudySession {
   private UUID id;
   private String topic;
   private String description;
-  private List<Users> buddies;
+  private List<User> buddies;
   private String time; // might change Kind
   private String location; // might change Kind
 
-  public StudySession(String name, String description, List<Users> buddies, String time, String location) {
-    this(UUID.randomUUID(),name,description, buddies, time, location);
+  public StudySession(String topic, String description, List<User> buddies, String time, String location) {
+    this(UUID.randomUUID(),topic,description, buddies, time, location);
+  }
+
+  public StudySession(UUID id, String topic, String description, List<User> buddies, String time, String location) {
+    this.id = id;
+    this.topic = topic;
+    this.description = description;
+    this.buddies = buddies;
+    this.time = time;
+    this.location = location;
   }
 
   public UUID getId() {
@@ -26,7 +36,7 @@ public class StudySession {
     return description;
   }
 
-  public List<Users> getBuddies() {
+  public List<User> getBuddies() {
     return buddies;
   }
 
@@ -38,8 +48,8 @@ public class StudySession {
     return location;
   }
 
-  public void setTopic(String name) {
-    this.name = name;
+  public void setTopic(String topic) {
+    this.topic = topic;
   }
 
   public void setDescription(String description) {
