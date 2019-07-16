@@ -69,7 +69,7 @@ public class ChatServlet extends HttpServlet {
       
       //get nick names
       String userNick = datastore.getUser(userEmail).getNickName();
-      String selectedUserEmail = datastore.getUser(selectedUserEmail).getNickName();
+      String selectedUserNick = datastore.getUser(selectedUserEmail).getNickName();
     
       //get current user by querying the email
       User user = datastore.getUser(userEmail);
