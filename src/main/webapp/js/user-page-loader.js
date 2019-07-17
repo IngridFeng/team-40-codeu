@@ -65,6 +65,8 @@ function showForms() {
           document.getElementById('nickname-form').classList.remove('hidden');
           document.getElementById('university-name-form').classList.remove('hidden');
           document.getElementById('major-form').classList.remove('hidden');
+          document.getElementById('timezone-form').classList.remove('hidden');
+          document.getElementById('studypace-form').classList.remove('hidden');
           fetchNickName(true);
         }
         //login and viewing others
@@ -138,7 +140,7 @@ function buildMessageDiv(message) {
   headerDiv.classList.add('message-header');
   headerDiv.classList.add('padded');
   headerDiv.appendChild(document.createTextNode(
-      message.user + ' - ' + new Date(message.timestamp)));
+      'You - ' + (new Date(message.timestamp)).toLocaleString()));
 
   const bodyDiv = document.createElement('div');
   bodyDiv.classList.add('message-body');
@@ -192,7 +194,7 @@ function fetchNickName(viewingSelf){
   }).then((nickName) => {
     const nickNameContainer = document.getElementById('nick-name-container');
     if(nickName == ''){
-      nickName = 'I don\'t know, ask Jarvis!';
+      nickName = 'Unknown';
     }
     nickNameContainer.innerHTML = 'Nickname: ' + nickName;
     setPageTitle(nickName, viewingSelf);
@@ -206,7 +208,7 @@ function fetchUniversityName(){
   }).then((universityName) => {
     const universityNameContainer = document.getElementById('university-name-container');
     if(universityName == ''){
-      universityName = 'I don\'t know, ask Jarvis!';
+      universityName = 'Unknown';
     }
     universityNameContainer.innerHTML = 'University: ' + universityName;
   });
@@ -219,9 +221,35 @@ function fetchMajor(){
   }).then((major) => {
     const majorContainer = document.getElementById('major-container');
     if(major == ''){
-      major = 'I don\'t know, ask Prof.Dumbledore!';
+      major = 'Unknown';
     }
     majorContainer.innerHTML = 'Major: ' + major;
+  });
+}
+
+function fetchTimeZone(){
+  const url = '/timezone?user=' + parameterUsername;
+  fetch(url).then((response) => {
+    return response.text();
+  }).then((timezone) => {
+    const timezoneContainer = document.getElementById('timezone-container');
+    if(timezone == ''){
+      timezone = 'Unknown';
+    }
+    timezoneContainer.innerHTML = 'Time Zone: ' + timezone;
+  });
+}
+
+function fetchStudyPace(){
+  const url = '/studypace?user=' + parameterUsername;
+  fetch(url).then((response) => {
+    return response.text();
+  }).then((studypace) => {
+    const studyPaceContainer = document.getElementById('studypace-container');
+    if(studypace == ''){
+      studypace = 'Unknown';
+    }
+    studyPaceContainer.innerHTML = 'Weekly Study Hours: ' + studypace;
   });
 }
 
@@ -235,4 +263,6 @@ function buildUI() {
   fetchProfilePic();
   fetchUniversityName();
   fetchMajor();
+  fetchTimeZone();
+  fetchStudyPace();
 }

@@ -21,6 +21,9 @@ limitations under the License.
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/user-page.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
     <script src="/js/navigation-loader.js"></script>
     <script src="/js/user-page-loader.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
@@ -40,71 +43,85 @@ limitations under the License.
       </div>
 
       <div class="row padded rounded panel">
-        <div id="profilepic-container" class="column left">
+        <div class="column left">
           <img id="profilepic" src="profilepic.png" alt="Profile Picture" class="profilepic">
           <div id="profilepic-form-container">
             <form id="profilepic-form" method="POST" class="hidden" enctype="multipart/form-data">
-              Change profile picture:
               <input type="file" name="image">
-              <br/><br/>
-              <input type="submit" value="Submit" class="rounded submit-button">
+              <input type="submit" value="Update Profile Picture" class="cta rounded submit-btn profile-submit">
             </form>
           </div>
         </div>
 
         <div class="column right">
-          <h3>Information About Me</h3>
           <p id="nick-name-container" class="noBotMargin noTopMargin">Loading...</p>
           <p id="university-name-container" class="noBotMargin noTopMargin">Loading...</p>
           <p id="major-container" class="noBotMargin noTopMargin">Loading...</p>
-          <h3>Me in Three Sentences</h3>
-          <p id="about-me-container" class="noBotMargin noTopMargin">Loading...</div>
+          <p id="timezone-container" class="noBotMargin noTopMargin">Loading...</p>
+          <p id="studypace-container" class="noBotMargin noTopMargin">Loading...</p>
+          <h3>About Me</h3>
+          <p id="about-me-container" class="noBotMargin noTopMargin">Loading...</p>
+        </div>
+      </div>
+
+      <div class = "padded rounded panel">
+        <div id="nickname-form" class = "input-part hidden">
+          <form action="/nickName" method="POST">
+            <input class = "input-textbox info-input" placeholder = "Nickname" type="textbox" name="nickName" id="nickname-input" required></input>
+            <input type="submit" value="Update" class="cta submit-btn info-submit">
+          </form>
         </div>
 
-      <div id="nickname-form" class="hidden padded rounded panel">
-        <form action="/nickName" method="POST">
-          Change Nickname:
-          <input type="text" name="nickName" id="nickname-input" required></input>
-          <input type="submit" value="Submit" class="rounded submit-button">
-        </form>
-      </div>
+        <div id="university-name-form" class = "input-part hidden">
+          <form action="/universityName" method="POST">
+            <input class = "input-textbox info-input" placeholder = "University Name" type="textbox" name="universityName" id="university-name-input" required></input>
+            <input type="submit" value="Update" class="cta submit-btn info-submit">
+          </form>
+        </div>
 
-      <div id="university-name-form" class="hidden padded rounded panel">
-        <form action="/universityName" method="POST">
-          Change University:
-          <input type="text" name="universityName" id="university-name-input" required></input>
-          <input type="submit" value="Submit" class="rounded submit-button">
-        </form>
-      </div>
+        <div id="major-form" class = "input-part hidden">
+          <form action="/major" method="POST">
+            <input class = "input-textbox info-input" placeholder = "Major" type="textbox" name="major" id="major-input" required></input>
+            <input type="submit" value="Update" class="cta submit-btn info-submit">
+          </form>
+        </div>
 
-      <div id="major-form" class="hidden padded rounded panel">
-        <form action="/major" method="POST">
-          Change Major:
-          <input type="text" name="major" id="major-input" required></input>
-          <input type="submit" value="Submit" class="rounded submit-button">
-        </form>
-      </div>
+        <div id="topic-form" class = "input-part hidden">
+          <form action="/timezone" method="POST">
+            <input class = "input-textbox info-input" placeholder = "Time Zone" type="textbox" name="timezone" id="timezone-input" required></input>
+            <input type="submit" value="Update" class="cta submit-btn info-submit">
+          </form>
+        </div>
 
+        <div id="timezone-form" class = "input-part hidden">
+          <form action="/timezone" method="POST">
+            <input class = "input-textbox info-input" placeholder = "Time Zone" type="textbox" name="timezone" id="timezone-input" required></input>
+            <input type="submit" value="Update" class="cta submit-btn info-submit">
+          </form>
+        </div>
+
+        <div id="studypace-form" class = "input-part hidden">
+          <form action="/studypace" method="POST">
+            <input class = "input-textbox info-input" placeholder = "Weekly Study Hours" type="textbox" name="studypace" id="studypace-input" required></input>
+            <input type="submit" value="Update" class="cta submit-btn info-submit">
+          </form>
+        </div>
+      </div>
 
       <div id="about-me-form" class="hidden padded rounded panel">
-        <p class="noTopMargin">Change Me in Three Sentences:</p>
         <form action="/about" method="POST">
           <textarea name="about-me" id="aboutme-input" placeholder="Enter your information here" required></textarea>
           <br/>
-          <input type="submit" value="Submit" class="rounded submit-button">
+          <input type="submit" value="Update About Me" class="cta submit-btn">
         </form>
       </div>
 
       <div class="padded rounded panel">
         <form id="message-form" method="POST" class="hidden" enctype="multipart/form-data">
-        <p class="noTopMargin">Enter a new message:</p>
-          <br/>
           <textarea name="text" id="message-input" class="rounded"></textarea>
-          <br/>
-          <p>Upload an image:</p>
+          <p style = "display: inline-block;">Upload an image:</p>
           <input type="file" name="image">
-          <br/><br/>
-          <input type="submit" value="Submit" class="rounded submit-button">
+          <input type="submit" value="Post A New Message" class="cta submit-btn">
         </form>
       </div>
       <hr/>

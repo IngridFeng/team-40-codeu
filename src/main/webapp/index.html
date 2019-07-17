@@ -20,6 +20,9 @@ limitations under the License.
     <meta charset="UTF-8">
     <title>MuMind</title>
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
     <script src="/js/navigation-loader.js"></script>
 
     <!-- Scripts for Charts-->
@@ -37,12 +40,12 @@ limitations under the License.
       	<li><a href="/feed.html">Public Feed</a></li>
       </ul>
     </nav>
-    <div class="content">
+    <div class="content centered">
       <div class="singleBlock top-content" style="width: 600px;">
         <h1 class="title">MuMind</h1>
         <h2 class="subtitle">Cause nerds need friends too</h2>
         <p>
-        Welcome to Mututor! Mututor is a platform designed for students to find study buddies
+        Welcome to MuMind! Mumind is a platform designed for students to find study buddies
         with similar interests from all over the world. Let's start exploring by shouting out
         a message from your university!
         </p>
@@ -50,14 +53,12 @@ limitations under the License.
           <div class="cta">Find a Buddy</div>
         </a>
       </div>
-      <div class="content">
+      <div class="content centered">
         <h2 style="margin-top: 40px; margin-bottom: 0;">Let the Community Know You're Here</h2>
-        <p style="margin-bottom: 0"> Shoutout your University!</p>
-        <div id="floating-panel">
-          <input id="address" type="textbox" name = "university" required></input>
-          <input id="submit" type="button" value="Add Your University!">
+        <div class="input-part">
+          <input id="address" type="textbox" name = "university" placeholder = "University Name" class = "input-textbox" required></input>
+          <input id="submit" type="button" value="Shoutout for Your University!" class="cta uni">
         </div>
-        <div id="map"></div>
         <!--
         <div>
           <h1>How Constructive Are We?</h1>
@@ -73,6 +74,7 @@ limitations under the License.
         -->
       </div>
     </div>
+    <div id="map"></div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTYJGGk3f9krfYZB-Ab1oC65W_pDtvrAw&callback=createMap"></script>
   </body>
 </html>

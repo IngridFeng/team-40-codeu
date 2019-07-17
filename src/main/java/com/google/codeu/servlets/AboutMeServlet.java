@@ -78,7 +78,7 @@ public class AboutMeServlet extends HttpServlet {
       //set chats of current user to null
       List<String> chats = new ArrayList<String>();
       //create the user
-      user = new User(userEmail, aboutMe, null, chats, null, null, null, null, null);
+      user = new User(userEmail, aboutMe, null, chats, null, null, null, null, null, null, null);
     }
     else{
       //modify the email
