@@ -122,8 +122,10 @@ function fetchMessages() {
           messagesContainer.innerHTML = '';
         }
         messages.forEach((message) => {
-          const messageDiv = buildMessageDiv(message);
-          messagesContainer.appendChild(messageDiv);
+          if(!message.hasOwnProperty('chat')) {
+            const messageDiv = buildMessageDiv(message);
+            messagesContainer.appendChild(messageDiv);
+          }
         });
       });
 }

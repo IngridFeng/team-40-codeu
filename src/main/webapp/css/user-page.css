@@ -26,6 +26,13 @@ h2 {
   margin: 0;
 }
 
+input[type=submit] {
+  background-color: #AB63FF;
+  height: 30px;
+  width: 80px;
+  font-size: 12pt;
+}
+
 .noBotMargin{
   margin-bottom: 0px;
 }
@@ -37,7 +44,7 @@ h2 {
 /* Give the message body a margin so the text
    isn't too close to the border. */
 .message-body {
-  font: 12pt cursive;
+  /* font: 12pt cursive; */
   margin: 5px;
 }
 
