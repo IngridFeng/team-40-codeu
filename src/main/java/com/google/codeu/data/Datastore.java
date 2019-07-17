@@ -199,6 +199,7 @@ public class Datastore {
         String imageUrl = (String) entity.getProperty("imageUrl");
         String universityName = (String) entity.getProperty("universityName");
         String major = (String) entity.getProperty("major");
+        String pace = (String) entity.getProperty("studypace");
         List<String> pastTopics = (List<String>) entity.getProperty("pastTopics");
         List<String> currentTopics = (List<String>) entity.getProperty("currentTopics");
 
