@@ -83,7 +83,9 @@ function fetchChatMessages() {
 
 function setChatParam() {
   const messageForm = document.getElementById('message-form');
+  const studySessionForm_chatInput = document.getElementById('studySessionForm_chatInput');
   messageForm.firstElementChild.value = parameterChat;
+  studySessionForm_chatInput.value = parameterChat;
 }
 
 /** Opens modal to create study session **/

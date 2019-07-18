@@ -52,9 +52,10 @@
       <!-- Modal content -->
       <div class="modal-content">
         <span class="close" onclick="closeStudySessionModal()">&times;</span>
-          <form id="study-session-form" action="/study-session" method="POST" class="hidden">
+          <form id="studySession-form" action="/study-session" method="POST">
             <h1>Set a Study Session</h1>
             <p>Topic:</p>
+            <input id="studySessionForm_chatInput" type="hidden" name="chatId" value="" />
             <input class="noTime_input" type="text" name="topic">
             <p>Description:</p>
             <input class="noTime_input" type="text" name="description">
