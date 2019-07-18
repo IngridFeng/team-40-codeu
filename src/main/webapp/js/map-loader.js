@@ -178,8 +178,22 @@ function createMap(){
 
   document.getElementById('submit').addEventListener('click', function() {
     geocodeAddress(geocoder, map);
+    scrollTo(document.documentElement, document.getElementById("map").offsetTop, 600);
   });
   fetchMarkers();
+}
+
+/** Smooth scrolling to target element */
+function scrollTo(element, to, duration) {
+    if (duration <= 0) return;
+    var difference = to - element.scrollTop;
+    var perTick = difference / duration * 10;
+
+    setTimeout(function() {
+        element.scrollTop = element.scrollTop + perTick;
+        if (element.scrollTop === to) return;
+        scrollTo(element, to, duration - 10);
+    }, 10);
 }
 
 /** Geocode Address the User inputted and calls to create a marker */
@@ -207,16 +221,7 @@ function geocodeLatLng(universityName, latlng, geocoder, map, infowindow) {
           map: map
         });
         var universityAddress = universityName.concat(" @", results[0].formatted_address);
-        // TODO: university name verification
-        // if (universityAddress.includes("University") || universityAddress.includes("university")
-        // || universityAddress.includes("College") || universityAddress.includes("college")
-        // || universityAddress.includes("School") || universityAddress.includes("school")
-        // || universityAddress.includes("Institute") || universityAddress.includes("institute") ) {
         createMarkerForEdit(latlng.lat(), latlng.lng(), universityAddress);
-        // }
-        // else {
-        //   window.alert('Ooops! To my knowledge, you might not entered a university/college/school. Please correct me if I am wrong:)');
-        // }
       } else {
         window.alert('No results found');
       }
@@ -232,12 +237,12 @@ function fetchMarkers(){
     return response.json();
   }).then((markers) => {
     markers.forEach((marker) => {
-     createMarkerForDisplay(marker.lat, marker.lng, marker.content + "<br>" + "--from " + marker.universityAddress);
+     createMarkerForDisplay(marker.lat, marker.lng, marker.content + "<br>" + "--from " + marker.universityAddress, false);
     });
   });
 }
 /** Creates a marker that shows a read-only info window when clicked. */
-function createMarkerForDisplay(lat, lng, content){
+function createMarkerForDisplay(lat, lng, content, show){
   const marker = new google.maps.Marker({
     position: {lat: lat, lng: lng},
     map: map
@@ -245,6 +250,9 @@ function createMarkerForDisplay(lat, lng, content){
   var infoWindow = new google.maps.InfoWindow({
     content: content.replace(/(\n|\r|\r\n)/g, '<br>')
   });
+  if (show) {
+    infoWindow.open(map, marker);
+  }
   marker.addListener('click', () => {
     infoWindow.open(map, marker);
   });
@@ -286,11 +294,11 @@ function buildInfoWindowInput(lat, lng, universityAddress){
   const textBox = document.createElement('textarea');
   textBox.setAttribute("class", "mapInfoBox");
   const button = document.createElement('button');
-  button.appendChild(document.createTextNode('Shoutout to Everyone from Your University!'));
+  button.appendChild(document.createTextNode('Add Your Voice!'));
   button.onclick = () => {
     const fullContent = textBox.value + "<br>" + "--from " + universityAddress;
     postMarker(lat, lng, textBox.value, universityAddress);
-    createMarkerForDisplay(lat, lng, fullContent);
+    createMarkerForDisplay(lat, lng, fullContent, true);
     editMarker.setMap(null);
   };
   const containerDiv = document.createElement('div');
