@@ -318,8 +318,8 @@ input:-ms-input-placeholder { color: #bdbdd3;}
 }
 
 .submit-button {
-  background-color: var(--main-color); 
-  color: #fff; 
+  background-color: var(--main-color);
+  color: #fff;
 }
 
 .submit-button:hover {
@@ -409,4 +409,12 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+
+/** TEMPORARY **/
+
+.noTime_input {
+  outline: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
 }

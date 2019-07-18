@@ -52,7 +52,22 @@
       <!-- Modal content -->
       <div class="modal-content">
         <span class="close" onclick="closeStudySessionModal()">&times;</span>
-        <p>Boop</p>
+          <form id="study-session-form" action="/study-session" method="POST" class="hidden">
+            <h1>Set a Study Session</h1>
+            <p>Topic:</p>
+            <input class="noTime_input" type="text" name="topic">
+            <p>Description:</p>
+            <input class="noTime_input" type="text" name="description">
+            <p>Time:</p>
+            <input class="noTime_input" type="datetime-local" name="time">
+            <p>Location:</p>
+            <input class="noTime_input" type="String" name="location">
+            <p>Allow anybody to join session</p>
+            <input class="noTime_input" type="checkbox" name="public">
+            <br />
+            <input type="submit" value="Set" class="cta submit-btn">
+          </form>
+        </span>
       </div>
 
     </div>
