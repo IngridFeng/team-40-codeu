@@ -51,7 +51,7 @@ public class StudySession {
     return location;
   }
 
-  public boolean getPublic() {
+  public boolean getAllowPublic() {
     return allowPublic;
   }
 
@@ -75,7 +75,6 @@ public class StudySession {
     this.location = location;
   }
 
-  public void allowPublic(boolean allowPublic) {
+  public void setAllowPublic(boolean allowPublic) {
     this.allowPublic = allowPublic;
   }
-}
