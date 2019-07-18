@@ -8,14 +8,15 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <script src="/js/navigation-loader.js"></script>
     <script src="/js/chat-page-loader.js"></script>
   </head>
-  <body onload="buildUI()">
+  <body onload="addLoginOrLogoutLinkToNavigation(); buildUI();">
     <nav>
       <ul id="navigation">
         <li><a href="/">Home</a></li>
-        <li><a href="/aboutus.html">About Our Team</a></li>
-        <li><a href="/community.html">Community Page</a></li>
+        <li><a href="/aboutus.html">About Us</a></li>
+        <li><a href="/community.html">Community</a></li>
       	<li><a href="/feed.html">Public Feed</a></li>
       </ul>
     </nav>
@@ -38,7 +39,7 @@
           <p>Upload an image:</p>
           <input type="file" name="image">
           <br/><br/>
-          <input type="submit" value="Submit" class="rounded">
+          <input type="submit" value="Submit" class="rounded submit-button">
         </form>
       </div>
     </div>

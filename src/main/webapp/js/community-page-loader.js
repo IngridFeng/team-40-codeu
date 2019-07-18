@@ -100,7 +100,10 @@ function buildUserListItem(user){
   const chatButton = document.createElement("input");
   chatButton.setAttribute('type',"submit");
   chatButton.setAttribute('value',"Chat with Me!");
-  chatButton.className = "user_card-chat_button";
+  //chatButton.classList.add("submit-button");
+  //chatButton.classList.add("chat-with-me");
+  chatButton.classList.add("user_card-chat_button");
+
 
   chatForm.appendChild(selectedUser);
   chatForm.appendChild(chatButton);

@@ -8,20 +8,29 @@
     }).then((messages) => {
       const messageContainer = document.getElementById('message-container');
       if(messages.length == 0){
-       messageContainer.innerHTML = '<p>There are no posts yet.</p>';
+        messageContainer.innerHTML = '<p>There are no posts yet.</p>';
       }
       else{
-       messageContainer.innerHTML = '';  
+        messageContainer.innerHTML = '';  
       }
       messages.forEach((message) => {  
-       const messageDiv = buildMessageDiv(message);
-       messageContainer.appendChild(messageDiv);
+        if(!message.hasOwnProperty('chat')) {
+          const messageDiv = buildMessageDiv(message);
+          messageContainer.appendChild(messageDiv);
+        }
       });
     });
   }
   
   /** creates a new message element from the message provided */
   function buildMessageDiv(message){
+    const usernameDiv = document.createElement('div');
+    usernameDiv.classList.add("left-align");
+    const userLink = document.createElement('a');
+    const userLinkText = document.createTextNode(message.user);
+    userLink.appendChild(userLinkText);
+    userLink.href = "/user-page.html?user=" + message.user
+    usernameDiv.appendChild(userLink);
 
    //Adding profile picture
    const profilePic = document.createElement('img');
@@ -46,37 +55,41 @@
    timeDiv.classList.add('right-align');
    timeDiv.appendChild(document.createTextNode(new Date(message.timestamp).toLocaleString()));
    
-   const headerDiv = document.createElement('div');
-   headerDiv.classList.add('message-header');
-   headerDiv.appendChild(profilePic);
-   headerDiv.appendChild(usernameDiv);
-   headerDiv.appendChild(timeDiv);
+    const timeDiv = document.createElement('div');
+    timeDiv.classList.add('right-align');
+    timeDiv.appendChild(document.createTextNode(new Date(message.timestamp).toLocaleString()));
    
-   const bodyDiv = document.createElement('div');
-   bodyDiv.classList.add('message-body');
-   const body = document.createElement('div');
-   body.classList.add('message-body');
-   body.classList.add('message-text');
-   body.innerHTML = message.text;
-   const bodyTranslated = document.createElement('div');
-   bodyTranslated.classList.add('message-body');
-   bodyTranslated.classList.add('message-translated');
-   bodyTranslated.classList.add('hidden');
-   bodyDiv.appendChild(body);
-   bodyDiv.appendChild(bodyTranslated);
+    const headerDiv = document.createElement('div');
+    headerDiv.classList.add('message-header');
+    headerDiv.appendChild(profilePic);
+    headerDiv.appendChild(usernameDiv);
+    headerDiv.appendChild(timeDiv);
 
-   if(message.hasOwnProperty('imageUrl')) {
-    const img = document.createElement('img');
-    img.src = message.imageUrl;
-    bodyDiv.appendChild(img);
-   }
+    const bodyDiv = document.createElement('div');
+    bodyDiv.classList.add('message-body');
+    const body = document.createElement('div');
+    body.classList.add('message-body');
+    body.classList.add('message-text');
+    body.innerHTML = message.text;
+    const bodyTranslated = document.createElement('div');
+    bodyTranslated.classList.add('message-body');
+    bodyTranslated.classList.add('message-translated');
+    bodyTranslated.classList.add('hidden');
+    bodyDiv.appendChild(body);
+    bodyDiv.appendChild(bodyTranslated);
+
+    if(message.hasOwnProperty('imageUrl')) {
+      const img = document.createElement('img');
+      img.src = message.imageUrl;
+      bodyDiv.appendChild(img);
+    }
    
-   const messageDiv = document.createElement('div');
-   messageDiv.classList.add("message-div");
-   messageDiv.appendChild(headerDiv);
-   messageDiv.appendChild(bodyDiv);
-   
-   return messageDiv;
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add("message-div");
+    messageDiv.appendChild(headerDiv);
+    messageDiv.appendChild(bodyDiv);
+
+    return messageDiv;
   }
 
   /** translates all of the messages to the selected language */
