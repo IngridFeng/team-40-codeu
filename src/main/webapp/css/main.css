@@ -338,10 +338,12 @@ input:-ms-input-placeholder { color: #bdbdd3;}
 .user_card-picture img {
   width: inherit;
   height: inherit;
+  border-radius: 5px;
 }
 
 .user_card-content {
   display: inline-block;
+  margin-left: 10px;
 }
 
 .user_card-chat_button:hover {
