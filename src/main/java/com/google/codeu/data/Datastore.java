@@ -59,6 +59,7 @@ public class Datastore {
     messageEntity.setProperty("text", message.getText());
     messageEntity.setProperty("timestamp", message.getTimestamp());
     messageEntity.setProperty("sentiment", message.getSentiment());
+    messageEntity.setProperty("imageUrl", message.getImageUrl());
     messageEntity.setProperty("profilePic", message.getProfilePic());
 
     datastore.put(messageEntity);
@@ -203,7 +204,7 @@ public class Datastore {
         List<String> pastTopics = (List<String>) entity.getProperty("pastTopics");
         List<String> currentTopics = (List<String>) entity.getProperty("currentTopics");
 
-        User user = new User(email, aboutMe, nickName, chats, imageUrl, universityName, major, timezone, pace, pastTopics, currentTopics);
+        User user = new User(email, aboutMe, nickName, chats, imageUrl, universityName, major, timezone, studypace, pastTopics, currentTopics);
         users.add(user);
       } catch (Exception e) {
         System.err.println("Error reading message.");

@@ -32,13 +32,28 @@
     userLink.href = "/user-page.html?user=" + message.user
     usernameDiv.appendChild(userLink);
 
-    //Adding profile picture
-    const profilePic = document.createElement('img');
-    const picUrl = message.profilePic || "profilepic.png";
-    profilePic.setAttribute("id", "profilepic")
-    profilePic.setAttribute("src", message.profilePic)
-    profilePic.setAttribute("alt", "Profile picture")
-    profilePic.setAttribute("class", "profilepic")
+   //Adding profile picture
+   const profilePic = document.createElement('img');
+   var picUrl = message.profilePic || "profilepic.png";
+   if(picUrl && picUrl.style) {
+     picUrl.style.height = '75px';
+     picUrl.style.width = '75px';
+     picUrl.style.borderRadius = '50%';
+   }
+   profilePic.setAttribute("height", 70)
+   profilePic.setAttribute("width", 70)
+   profilePic.setAttribute("id", "profilepic")
+   profilePic.setAttribute("src", message.profilePic)
+   profilePic.setAttribute("alt", "Profile picture")
+   profilePic.setAttribute("class", "profilepic")
+
+   const usernameDiv = document.createElement('div');
+   usernameDiv.classList.add("left-align");
+   usernameDiv.appendChild(document.createTextNode(message.user));
+   
+   const timeDiv = document.createElement('div');
+   timeDiv.classList.add('right-align');
+   timeDiv.appendChild(document.createTextNode(new Date(message.timestamp).toLocaleString()));
    
     const timeDiv = document.createElement('div');
     timeDiv.classList.add('right-align');
