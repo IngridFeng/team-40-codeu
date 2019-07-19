@@ -36,12 +36,28 @@ public class StudySessionServlet extends HttpServlet {
     datastore = new Datastore();
   }
 
-  /*
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
     throws IOException {
+      response.setContentType("application/json");
+
+      String chat = request.getParameter("chat");
+
+      if (chat != null && !chat.equals("")) {
+        // Get by chat
+        List<StudySession> studySessions = datastore.getStudySessionsByChat(chat);
+        Gson gson = new Gson();
+        String json = gson.toJson(studySessions);
+        response.getWriter().println(json);
+      }
+
+      else {
+        // Request is invalid, return empty array
+        response.getWriter().println("[]");
+        return;
+      }
+
     }
-  */
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response)

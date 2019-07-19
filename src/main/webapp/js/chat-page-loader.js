@@ -95,10 +95,10 @@ function fetchStudySessions() {
         if (studySessions.length == 0) {
           studySessionsContainer.innerHTML = '<p>Set a Study Session!</p>';
         } else {
-          studySessionsContainer.innerHTML = '<h1>Study Sessions/h1>';
+          studySessionsContainer.innerHTML = '';
         }
         studySessions.forEach((studySession) => {
-          const studySessionDiv = buildMessageDiv(studySession);
+          const studySessionDiv = buildStudySessionDiv(studySession);
           studySessionsContainer.appendChild(studySessionDiv);
         });
       });
@@ -113,7 +113,7 @@ function buildStudySessionDiv(studySession) {
 
   const bodyDiv = document.createElement('div');
   bodyDiv.classList.add('message-body');
-  bodyDiv.innerHTML = message.description;
+  bodyDiv.innerHTML = studySession.description;
 
   const studySessionDiv = document.createElement('div');
   studySessionDiv.classList.add('message-div');
