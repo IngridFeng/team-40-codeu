@@ -81,10 +81,71 @@ function fetchChatMessages() {
       });
   }
 
+function fetchStudySessions() {
+  console.log("started fetching sessions");
+  const url = '/study-session?chat=' + parameterChat;
+  fetch(url)
+      .then((response) => {
+        console.log("response");
+        return response.json();
+      })
+      .then((studySessions) => {
+        console.log(studySessions);
+        const studySessionsContainer = document.getElementById('studySession-container');
+        if (studySessions.length == 0) {
+          studySessionsContainer.innerHTML = '<p>Set a Study Session!</p>';
+        } else {
+          studySessionsContainer.innerHTML = '';
+        }
+        studySessions.forEach((studySession) => {
+          const studySessionDiv = buildStudySessionDiv(studySession);
+          studySessionsContainer.appendChild(studySessionDiv);
+        });
+      });
+  }
+
+function buildStudySessionDiv(studySession) {
+  const headerDiv = document.createElement('div');
+  headerDiv.classList.add('message-header');
+  headerDiv.classList.add('padded');
+  headerDiv.appendChild(document.createTextNode(
+      studySession.topic + ";" + studySession.time + ";" + studySession.location));
+
+  const bodyDiv = document.createElement('div');
+  bodyDiv.classList.add('message-body');
+  bodyDiv.innerHTML = studySession.description;
+
+  const studySessionDiv = document.createElement('div');
+  studySessionDiv.classList.add('message-div');
+  studySessionDiv.classList.add('rounded');
+  studySessionDiv.classList.add('panel');
+  studySessionDiv.appendChild(headerDiv);
+  studySessionDiv.appendChild(bodyDiv);
+
+  return studySessionDiv;
+}
+
+
 function setChatParam() {
   const messageForm = document.getElementById('message-form');
+  const studySessionForm_chatInput = document.getElementById('studySessionForm_chatInput');
   messageForm.firstElementChild.value = parameterChat;
+  studySessionForm_chatInput.value = parameterChat;
 }
+
+/** Opens modal to create study session **/
+// Get the modal
+
+function openStudySessionModal() {
+  var modal = document.getElementById("studySessionModal");
+  modal.style.display = "block";
+}
+
+function closeStudySessionModal() {
+  var modal = document.getElementById("studySessionModal");
+  modal.style.display = "none";
+}
+
 
 /** Build page */
 function buildUI() {
@@ -93,6 +154,7 @@ function buildUI() {
   // fetchChatMessages();
   setChatParam();
   fetchBlobstoreUrlAndShowForm();
+  fetchStudySessions();
 }
 
 

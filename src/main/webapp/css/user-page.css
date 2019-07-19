@@ -26,6 +26,14 @@ h2 {
   margin: 0;
 }
 
+input[type=submit] {
+  background-color: var(--main-color);
+  border-radius: 10px;
+  height: 30px;
+  width: 80px;
+  font-size: 12pt;
+}
+
 .noBotMargin{
   margin-bottom: 0px;
 }

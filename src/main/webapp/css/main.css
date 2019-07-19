@@ -16,7 +16,8 @@
 
 :root {
     --main-color:#AB63FF;
-    --secondary-color:#4D4D4D;
+    --secondary-color: #F0D9F7;
+    --text-color:#4D4D4D;
     --main-color-highlight: #7907FF;
     --card-size: 150px;
 }
@@ -24,7 +25,7 @@
 /* FONT */
 h1, h2, h3, p, a  {
   font-family: "Heltvetica",sans-serif;
-  color: var(--secondary-color);
+  color: var(--text-color);
 }
 
 /* MAIN LAYOUT */
@@ -36,14 +37,13 @@ body {
 }
 
 .content {
+  position: relative;
   padding-top: 50px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 10vw;
 }
 
 nav {
-  background-color: #F0D9F7;
+  background-color: var(--secondary-color);
   position: fixed;
   z-index: 9999;
   top: 0;
@@ -98,7 +98,7 @@ nav a:hover {
 }
 
 .subtitle {
-  color: var(--secondary-color);
+  color: var(--text-color);
   text-align: center;
   margin-top: 0;
 }
@@ -316,8 +316,8 @@ input:-ms-input-placeholder { color: #bdbdd3;}
 }
 
 .submit-button {
-  background-color: var(--main-color); 
-  color: #fff; 
+  background-color: var(--main-color);
+  color: #fff;
 }
 
 .submit-button:hover {
@@ -350,4 +350,98 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   border-radius: 10px;
   background-color: var(--main-color);
   color: white;
+}
+
+/** FLOATING BUTTONS C: **/
+/* just remember to set position: relative */
+/* to whatever parent elem its positioned against */
+.floating-button_bottom-right {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 10px;
+}
+
+.floating-button_bottom-right a {
+  min-width: 100px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: var(--main-color);
+  padding: 5px;
+}
+
+/** MODALS **/
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto; /* 15% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/** Page Layout **/
+
+.flex_section_parent {
+  display: flex;
+  height: 20vh;
+}
+
+.flex_section_sidebar {
+  width: 30%;
+  overflow: scroll;
+}
+
+.flex_section_main {
+  width: 70%;
+  overflow: scroll;
+}
+
+.scrollable {
+  overflow: scroll;
+}
+
+.main-content_title {
+
+}
+
+/** TEMPORARY **/
+
+.noTime_input {
+  outline: var(--secondary-color);
+  border: 1px solid var(--secondary-color);
+}
+
+.scrollable {
+  overflow: scroll;
+  height: 30vh;
 }

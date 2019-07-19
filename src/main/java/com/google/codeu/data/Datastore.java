@@ -41,6 +41,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.time.LocalDate;
+
 
 /** Provides access to the data stored in Datastore. */
 public class Datastore {
@@ -64,6 +66,8 @@ public class Datastore {
 
     datastore.put(messageEntity);
   }
+
+  /*************** MESSAGES ***************/
 
   /**
    * Gets messages posted by a specific user.
@@ -146,6 +150,43 @@ public class Datastore {
   }
 
   /**
+   * Returns the Messages associated with the Chat
+   * null if none was found.
+   */
+  public List<Message> getMessagesbyChat(String chat) {
+      List<Message> messages = new ArrayList<>();
+      Query query =
+          new Query("Message")
+              .setFilter(new Query.FilterPredicate("chat", FilterOperator.EQUAL, chat))
+              .addSort("timestamp", SortDirection.DESCENDING);
+      PreparedQuery results = datastore.prepare(query);
+
+      for (Entity entity : results.asIterable()) {
+        try {
+          String idString = entity.getKey().getName();
+          UUID id = UUID.fromString(idString);
+          String user = (String) entity.getProperty("user");
+          String text = (String) entity.getProperty("text");
+          long timestamp = (long) entity.getProperty("timestamp");
+          double sentiment = (double) entity.getProperty("sentiment");
+          String imageUrl = (String) entity.getProperty("imageUrl");
+          String profilePic = (String) entity.getProperty("profilePic");
+
+          Message message = new Message(id, chat, user, text, timestamp, sentiment, imageUrl, profilePic);
+          messages.add(message);
+        } catch (Exception e) {
+          System.err.println("Error reading message.");
+          System.err.println(entity.toString());
+          e.printStackTrace();
+        }
+      }
+
+      return messages;
+    }
+
+  /*************** USERS ***************/
+
+  /**
    * Gets a set of all users.
    * return a set of strings representing the users.
    */
@@ -186,7 +227,7 @@ public class Datastore {
     Query query = new Query("User").setFilter(userFilter);
     **/
 
-    Query query = new Query("User").addSort("nickName", SortDirection.DESCENDING);
+    Query query = new Query("User");
 
     PreparedQuery results = datastore.prepare(query);
 
@@ -275,6 +316,29 @@ public class Datastore {
   return user;
  }
 
+ public List<String> getUserEmailsByChat(String chatId) {
+   List<String> userEmails = new ArrayList<>();
+
+   Query query = new Query("User").setFilter(new Query.FilterPredicate("chats", FilterOperator.EQUAL, chatId)).addSort("nickName", SortDirection.DESCENDING);
+
+
+   PreparedQuery results = datastore.prepare(query);
+
+   for (Entity entity : results.asIterable()) {
+     try {
+       String email = (String) entity.getProperty("email");
+       userEmails.add(email);
+     } catch (Exception e) {
+       System.err.println("Error reading message.");
+       System.err.println(entity.toString());
+       e.printStackTrace();
+     }
+   }
+   return userEmails;
+ }
+
+ /*************** CHATS ***************/
+
  /**
   * Store chat
   */
@@ -353,39 +417,72 @@ public class Datastore {
    return chats;
   }
 
+  /*************** STUDY SESSION ***************/
 
-/**
- * Returns the Messages associated with the Chat
- * null if none was found.
- */
-  public List<Message> getMessagesbyChat(String chat) {
-    List<Message> messages = new ArrayList<>();
-    Query query =
-        new Query("Message")
-            .setFilter(new Query.FilterPredicate("chat", FilterOperator.EQUAL, chat))
-            .addSort("timestamp", SortDirection.DESCENDING);
+
+  public void storeStudySession(StudySession studySession){
+    Entity studySessionEntity = new Entity("StudySession", studySession.getId().toString());
+    studySessionEntity.setProperty("topic", studySession.getTopic());
+    studySessionEntity.setProperty("description", studySession.getDescription());
+    studySessionEntity.setProperty("buddies", studySession.getBuddies());
+    studySessionEntity.setProperty("chat", studySession.getChat());
+    studySessionEntity.setProperty("time", studySession.getTime());
+    studySessionEntity.setProperty("location", studySession.getLocation());
+    studySessionEntity.setProperty("allowPublic", studySession.getAllowPublic());
+    datastore.put(studySessionEntity);
+  }
+
+  public List<StudySession> getStudySessionsByChat(String chatId) {
+    List<StudySession> studySessions = new ArrayList<>();
+
+    Query query = new Query("StudySession").setFilter(new Query.FilterPredicate("chat", FilterOperator.EQUAL, chatId)).addSort("topic", SortDirection.DESCENDING);
+
+
     PreparedQuery results = datastore.prepare(query);
 
     for (Entity entity : results.asIterable()) {
       try {
-        String idString = entity.getKey().getName();
-        UUID id = UUID.fromString(idString);
-        String user = (String) entity.getProperty("user");
-        String text = (String) entity.getProperty("text");
-        long timestamp = (long) entity.getProperty("timestamp");
-        double sentiment = (double) entity.getProperty("sentiment");
-        String imageUrl = (String) entity.getProperty("imageUrl");
-        String profilePic = (String) entity.getProperty("profilePic");
-
-        Message message = new Message(id, chat, user, text, timestamp, sentiment, imageUrl, profilePic);
-        messages.add(message);
+        String topic = (String) entity.getProperty("topic");
+        String description = (String) entity.getProperty("description");
+        List<String> buddies = (List<String>) entity.getProperty("buddies");
+        String time = (String) entity.getProperty("time");
+        String location = (String) entity.getProperty("location");
+        boolean allowPublic = (boolean) entity.getProperty("allowPublic");
+        StudySession studySession = new StudySession(topic, description, buddies, chatId, time, location, allowPublic);
+        studySessions.add(studySession);
       } catch (Exception e) {
-        System.err.println("Error reading message.");
+        System.err.println("Error reading studySession.");
         System.err.println(entity.toString());
         e.printStackTrace();
       }
     }
+    return studySessions;
+  }
 
-    return messages;
+  public List<StudySession> getAllStudySessions(){
+    List<StudySession> studySessions = new ArrayList<>();
+
+    Query query = new Query("StudySession").addSort("topic", SortDirection.DESCENDING);
+
+    PreparedQuery results = datastore.prepare(query);
+
+    for (Entity entity : results.asIterable()) {
+      try {
+        String topic = (String) entity.getProperty("topic");
+        String description = (String) entity.getProperty("description");
+        List<String> buddies = (List<String>) entity.getProperty("buddies");
+        String chat = (String) entity.getProperty("chat");
+        String time = (String) entity.getProperty("time");
+        String location = (String) entity.getProperty("location");
+        boolean allowPublic = (boolean) entity.getProperty("allowPublic");
+        StudySession studySession = new StudySession(topic, description, buddies, chat, time, location, allowPublic);
+        studySessions.add(studySession);
+      } catch (Exception e) {
+        System.err.println("Error reading studySession.");
+        System.err.println(entity.toString());
+        e.printStackTrace();
+      }
+    }
+    return studySessions;
   }
 }

@@ -21,15 +21,28 @@
       </ul>
     </nav>
     <div class="content centered">
-
       <div class="padded rounded panel centered">
         <h2 id="chat-name">Chat Room</h2>
         <p id="chat-description">...</p>
       </div>
 
-      <div id="message-container">Loading...</div>
+      <div class="flex_section_parent">
+        <div class="flex_section_sidebar scrollable rounded panel centered">
+          <div class="main-content_title">
+            <h1>Study Sessions</h1>
+          </div>
+          <div id="studySession-container">Loading...</div>
+        </div>
 
-      <div class="padded rounded panel">
+        <div class="flex_section_main scrollable rounded panel centered">
+          <div class="main-content_title">
+            <h1>Messages</h1>
+          </div>
+          <div id="message-container">Loading...</div>
+        </div>
+      </div>
+
+      <div class="main-content_footer padded rounded panel">
         <form id="message-form" action="/messages" method="POST" enctype="multipart/form-data" class="hidden">
           <input name="chat" value="" class="hidden">
         Enter a new message:
@@ -39,9 +52,38 @@
           <p>Upload an image:</p>
           <input type="file" name="image">
           <br/><br/>
-          <input type="submit" value="Submit" class="rounded submit-button">
+          <input type="submit" value="Submit">
         </form>
       </div>
+      <div class="floating-button_bottom-right">
+        <a onclick="openStudySessionModal()"> Set a Study Session! </a>
+      </div>
+    </div>
+    <!-- The Modal -->
+    <div id="studySessionModal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close" onclick="closeStudySessionModal()">&times;</span>
+          <form id="studySession-form" action="/study-session" method="POST">
+            <h1>Set a Study Session</h1>
+            <p>Topic:</p>
+            <input id="studySessionForm_chatInput" type="hidden" name="chatId" value="" />
+            <input class="noTime_input" type="text" name="topic">
+            <p>Description:</p>
+            <input class="noTime_input" type="text" name="description">
+            <p>Time:</p>
+            <input class="noTime_input" type="datetime-local" name="time">
+            <p>Location:</p>
+            <input class="noTime_input" type="String" name="location">
+            <p>Allow anybody to join session</p>
+            <input class="noTime_input" type="checkbox" name="public">
+            <br />
+            <input type="submit" value="Set" class="cta submit-btn">
+          </form>
+        </span>
+      </div>
+
     </div>
   </body>
 </html>
