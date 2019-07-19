@@ -9,20 +9,22 @@ public class StudySession {
   private String topic;
   private String description;
   private List<String> buddies;
+  private String chat;
   //private LocalDate time;
   private String time;
   private String location; // might change Kind
   private boolean allowPublic;
 
-  public StudySession(String topic, String description, List<String> buddies, String time, String location, boolean allowPublic) {
-    this(UUID.randomUUID(), topic, description, buddies, time, location, allowPublic);
+  public StudySession(String topic, String description, List<String> buddies, String chat, String time, String location, boolean allowPublic) {
+    this(UUID.randomUUID(), topic, description, buddies, chat, time, location, allowPublic);
   }
 
-  public StudySession(UUID id, String topic, String description, List<String> buddies, String time, String location, boolean allowPublic) {
+  public StudySession(UUID id, String topic, String description, List<String> buddies, String chat, String time, String location, boolean allowPublic) {
     this.id = id;
     this.topic = topic;
     this.description = description;
     this.buddies = buddies;
+    this.chat = chat;
     this.time = time;
     this.location = location;
     this.allowPublic = allowPublic;
@@ -42,6 +44,10 @@ public class StudySession {
 
   public List<String> getBuddies() {
     return buddies;
+  }
+
+  public String getChat() {
+    return chat;
   }
 
   public String getTime() {
@@ -66,6 +72,10 @@ public class StudySession {
 
   public void setBuddies(List<String> buddies) {
     this.buddies =  buddies;
+  }
+
+  public void setChat(String chat) {
+    this.chat = chat;
   }
 
   public void setTime(String time) {

@@ -60,10 +60,7 @@ public class StudySessionServlet extends HttpServlet {
       String allow = request.getParameter("public");
       boolean allowPublic = (allow != null);
 
-      StudySession studySession = new StudySession(topic, description, buddies, time, location, allowPublic);
-
-      System.out.println(allowPublic);
-      System.out.println(studySession);
+      StudySession studySession = new StudySession(topic, description, buddies, chatId, time, location, allowPublic);
 
       // store study session
       datastore.storeStudySession(studySession);
