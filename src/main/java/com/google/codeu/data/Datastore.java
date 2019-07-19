@@ -334,13 +334,7 @@ public class Datastore {
        e.printStackTrace();
      }
    }
-
-   System.out.println("sending u");
-   System.out.println(userEmails);
-
    return userEmails;
-
-
  }
 
  /*************** CHATS ***************/
@@ -428,14 +422,6 @@ public class Datastore {
 
   public void storeStudySession(StudySession studySession){
     Entity studySessionEntity = new Entity("StudySession", studySession.getId().toString());
-    System.out.println(studySession.getTopic());
-    System.out.println(studySession.getChat());
-    System.out.println(studySession.getLocation());
-    System.out.println(studySession.getTopic());
-    System.out.println(studySession.getTopic());
-    System.out.println(studySession.getTopic());
-    System.out.println(studySession.getTopic());
-
     studySessionEntity.setProperty("topic", studySession.getTopic());
     studySessionEntity.setProperty("description", studySession.getDescription());
     studySessionEntity.setProperty("buddies", studySession.getBuddies());
@@ -474,17 +460,14 @@ public class Datastore {
   }
 
   public List<StudySession> getAllStudySessions(){
-    System.out.println("YES U CALLED");
     List<StudySession> studySessions = new ArrayList<>();
 
     Query query = new Query("StudySession").addSort("topic", SortDirection.DESCENDING);
-    System.out.println(query);
 
     PreparedQuery results = datastore.prepare(query);
 
     for (Entity entity : results.asIterable()) {
       try {
-        System.out.println("YES smtg");
         String topic = (String) entity.getProperty("topic");
         String description = (String) entity.getProperty("description");
         List<String> buddies = (List<String>) entity.getProperty("buddies");
@@ -494,7 +477,6 @@ public class Datastore {
         boolean allowPublic = (boolean) entity.getProperty("allowPublic");
         StudySession studySession = new StudySession(topic, description, buddies, chat, time, location, allowPublic);
         studySessions.add(studySession);
-        System.out.println(studySession);
       } catch (Exception e) {
         System.err.println("Error reading studySession.");
         System.err.println(entity.toString());
