@@ -48,26 +48,27 @@ public class StudySessionServlet extends HttpServlet {
     throws IOException {
 
       String chatId = request.getParameter("chatId");
-      List<User> buddies = datastore.getUserByChat(chatId);
+      List<String> buddies = datastore.getUserEmailsByChat(chatId);
 
       String topic = request.getParameter("topic");
       String description = request.getParameter("description");
       String time = request.getParameter("time");
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-      LocalDate localDate = LocalDate.parse(time, formatter);
+      //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+      //LocalDate localDate = LocalDate.parse(time, formatter);
       String location = request.getParameter("location");
 
       String allow = request.getParameter("public");
       boolean allowPublic = (allow != null);
 
-      StudySession studySession = new StudySession(topic, description, buddies, localDate, location, allowPublic);
+      StudySession studySession = new StudySession(topic, description, buddies, time, location, allowPublic);
 
       System.out.println(allowPublic);
       System.out.println(studySession);
 
       // store study session
-      //datastore.storeStudySession(studysession);
-      return;
+      datastore.storeStudySession(studySession);
+      // send back
+      response.sendRedirect(request.getHeader("referer"));
   }
 
 }

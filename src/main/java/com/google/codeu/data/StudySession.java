@@ -2,22 +2,23 @@ package com.google.codeu.data;
 import java.util.UUID;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDate;
+//import java.time.LocalDate;
 
 public class StudySession {
   private UUID id;
   private String topic;
   private String description;
-  private List<User> buddies;
-  private LocalDate time;
+  private List<String> buddies;
+  //private LocalDate time;
+  private String time;
   private String location; // might change Kind
   private boolean allowPublic;
 
-  public StudySession(String topic, String description, List<User> buddies, LocalDate time, String location, boolean allowPublic) {
+  public StudySession(String topic, String description, List<String> buddies, String time, String location, boolean allowPublic) {
     this(UUID.randomUUID(), topic, description, buddies, time, location, allowPublic);
   }
 
-  public StudySession(UUID id, String topic, String description, List<User> buddies, LocalDate time, String location, boolean allowPublic) {
+  public StudySession(UUID id, String topic, String description, List<String> buddies, String time, String location, boolean allowPublic) {
     this.id = id;
     this.topic = topic;
     this.description = description;
@@ -39,11 +40,11 @@ public class StudySession {
     return description;
   }
 
-  public List<User> getBuddies() {
+  public List<String> getBuddies() {
     return buddies;
   }
 
-  public LocalDate getTime() {
+  public String getTime() {
     return time;
   }
 
@@ -63,11 +64,11 @@ public class StudySession {
     this.description = description;
   }
 
-  public void setBuddies(List<User> buddies) {
+  public void setBuddies(List<String> buddies) {
     this.buddies =  buddies;
   }
 
-  public void setTime(LocalDate time) {
+  public void setTime(String time) {
     this.time = time;
   }
 

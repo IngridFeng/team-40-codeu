@@ -41,6 +41,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.time.LocalDate;
+
 
 /** Provides access to the data stored in Datastore. */
 public class Datastore {
@@ -314,8 +316,8 @@ public class Datastore {
   return user;
  }
 
- public List<User> getUserByChat(String chatId) {
-   List<User> users = new ArrayList<>();
+ public List<String> getUserEmailsByChat(String chatId) {
+   List<String> userEmails = new ArrayList<>();
 
    Query query = new Query("User").setFilter(new Query.FilterPredicate("chats", FilterOperator.EQUAL, chatId)).addSort("nickName", SortDirection.DESCENDING);
 
@@ -325,19 +327,7 @@ public class Datastore {
    for (Entity entity : results.asIterable()) {
      try {
        String email = (String) entity.getProperty("email");
-       String aboutMe = (String) entity.getProperty("aboutMe");
-       String nickName = (String) entity.getProperty("nickName");
-       List<String> chats = (List<String>) entity.getProperty("chats");
-       String imageUrl = (String) entity.getProperty("imageUrl");
-       String universityName = (String) entity.getProperty("universityName");
-       String major = (String) entity.getProperty("major");
-       String timezone = (String) entity.getProperty("timezone");
-       String studypace = (String) entity.getProperty("studypace");
-       List<String> pastTopics = (List<String>) entity.getProperty("pastTopics");
-       List<String> currentTopics = (List<String>) entity.getProperty("currentTopics");
-
-       User user = new User(email, aboutMe, nickName, chats, imageUrl, universityName, major, timezone, studypace, pastTopics, currentTopics);
-       users.add(user);
+       userEmails.add(email);
      } catch (Exception e) {
        System.err.println("Error reading message.");
        System.err.println(entity.toString());
@@ -346,9 +336,9 @@ public class Datastore {
    }
 
    System.out.println("sending u");
-   System.out.println(users);
+   System.out.println(userEmails);
 
-   return users;
+   return userEmails;
 
 
  }
@@ -435,13 +425,15 @@ public class Datastore {
 
   /*************** STUDY SESSION ***************/
 
-  /*
+
   public void storeStudySession(StudySession studySession){
     Entity studySessionEntity = new Entity("StudySession", studySession.getId().toString());
-    studySessionEntity.setProperty("topic", chat.getTopic());
-    studySessionEntity.setProperty("description", chat.getDescription());
+    studySessionEntity.setProperty("topic", studySession.getTopic());
+    studySessionEntity.setProperty("description", studySession.getDescription());
+    studySessionEntity.setProperty("buddies", studySession.getBuddies());
+    studySessionEntity.setProperty("time", studySession.getTime());
+    studySessionEntity.setProperty("locaion", studySession.getLocation());
+    studySessionEntity.setProperty("allowPublic", studySession.getAllowPublic());
     datastore.put(studySessionEntity);
   }
-  */
-
 }
