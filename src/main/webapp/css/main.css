@@ -196,7 +196,7 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   position: relative;
   display: block;
   margin: auto;
-  margin-top: 20px;
+  margin-top: 15px;
   padding: 8px;
   width: 50%;
   background: #f2f2f2;
@@ -223,7 +223,7 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   width: auto;
   font-size: 16px;
   padding: 8px;
-  margin-top: 20px;
+  margin-top: 15px;
   margin-left: 0px;
   margin-right: 0px;
 }
@@ -316,8 +316,8 @@ input:-ms-input-placeholder { color: #bdbdd3;}
 }
 
 .submit-button {
-  background-color: var(--main-color); 
-  color: #fff; 
+  background-color: var(--main-color);
+  color: #fff;
 }
 
 .submit-button:hover {

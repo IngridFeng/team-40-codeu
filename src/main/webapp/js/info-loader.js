@@ -12,7 +12,7 @@ function buildReq() {
   let currentTopics = [];
 
   // for each input option
-  for (i=0; i < pastTopicsInputs.length; i++) {
+  for (i = 0; i < pastTopicsInputs.length; i++) {
     // if checked, add to list
     if (pastTopicsInputs[i].checked) {
       pastTopics.push(pastTopicsInputs[i].name);
