@@ -415,7 +415,6 @@ input:-ms-input-placeholder { color: #bdbdd3;}
 
 .flex_section_parent {
   display: flex;
-  height: 20vh;
 }
 
 .flex_section_sidebar {
