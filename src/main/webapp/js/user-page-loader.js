@@ -67,6 +67,8 @@ function showForms() {
           document.getElementById('major-form').classList.remove('hidden');
           document.getElementById('timezone-form').classList.remove('hidden');
           document.getElementById('studypace-form').classList.remove('hidden');
+          document.getElementById('studypace-form').classList.remove('hidden');
+          document.getElementById('topic-form').classList.remove('hidden');
           fetchNickName(true);
         }
         //login and viewing others
@@ -253,6 +255,43 @@ function fetchStudyPace(){
   });
 }
 
+function fetchTopics() {
+  const url = '/currentTopics?user=' + parameterUsername;
+  fetch(url).then((response) => {
+    return response.text();
+  }).then((topics) => {
+    const topicContainer = document.getElementById('topic-container');
+    if(topics == ''){
+      topics = 'Unknown';
+    }
+    console.log(topics);
+    topicContainer.innerHTML = topics;
+  });
+  // // get elements
+  // // pastTopicsDiv = document.getElementById('pastTopics-div');
+  // // pastTopicsInputs = pastTopicsDiv.getElementsByTagName('input');
+  // currentTopicsDiv = document.getElementById('currentTopics-div');
+  // currentTopicsInputs = currentTopicsDiv.getElementsByTagName('input');
+  //
+  // // initialize returns
+  // // let pastTopics = [];
+  // let currentTopics = [];
+  // // for each input option
+  // for (i = 0; i < currentTopicsInputs.length; i++) {
+  //   // if checked, add to list
+  //   // if (pastTopicsInputs[i].checked) {
+  //   //   pastTopics.push(pastTopicsInputs[i].name);
+  //   // }
+  //   if (currentTopicsInputs[i].checked) {
+  //     currentTopics.push(currentTopicsInputs[i].name);
+  //   }
+  // }
+  //
+  // realInputsDiv = document.getElementById('realInputs-div');
+  // realInputsDiv.children[0].value = pastTopics;
+  // realInputsDiv.children[1].value = currentTopics;
+}
+
 /** Fetches data and populates the UI of the page. */
 function buildUI() {
   showForms();
@@ -265,4 +304,5 @@ function buildUI() {
   fetchMajor();
   fetchTimeZone();
   fetchStudyPace();
+  fetchTopics();
 }

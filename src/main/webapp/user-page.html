@@ -54,6 +54,7 @@ limitations under the License.
         </div>
 
         <div class="column right">
+          <h2 style = "margin-bottom: 20px">My Profile</h2>
           <p id="nick-name-container" class="noBotMargin noTopMargin">Loading...</p>
           <p id="university-name-container" class="noBotMargin noTopMargin">Loading...</p>
           <p id="major-container" class="noBotMargin noTopMargin">Loading...</p>
@@ -65,6 +66,7 @@ limitations under the License.
       </div>
 
       <div class = "padded rounded panel">
+        <h2 style = "margin-bottom: 20px">Update My Profile</h2>
         <div id="nickname-form" class = "input-part hidden">
           <form action="/nickName" method="POST">
             <input class = "input-textbox info-input" placeholder = "Nickname" type="textbox" name="nickName" id="nickname-input" required></input>
@@ -86,13 +88,6 @@ limitations under the License.
           </form>
         </div>
 
-        <div id="topic-form" class = "input-part hidden">
-          <form action="/timezone" method="POST">
-            <input class = "input-textbox info-input" placeholder = "Time Zone" type="textbox" name="timezone" id="timezone-input" required></input>
-            <input type="submit" value="Update" class="cta submit-btn info-submit">
-          </form>
-        </div>
-
         <div id="timezone-form" class = "input-part hidden">
           <form action="/timezone" method="POST">
             <input class = "input-textbox info-input" placeholder = "Time Zone" type="textbox" name="timezone" id="timezone-input" required></input>
@@ -106,14 +101,41 @@ limitations under the License.
             <input type="submit" value="Update" class="cta submit-btn info-submit">
           </form>
         </div>
-      </div>
 
-      <div id="about-me-form" class="hidden padded rounded panel">
-        <form action="/about" method="POST">
-          <textarea name="about-me" id="aboutme-input" placeholder="Enter your information here" required></textarea>
-          <br/>
-          <input type="submit" value="Update About Me" class="cta submit-btn">
-        </form>
+        <!-- Topic Form -->
+        <div id="topic-form" class = "input-part hidden">
+          <form action="/topic" method="POST">
+            <!-- <div id="pastTopics-div">
+              <h1>Past Topics</h1>
+              <input type="checkbox" name="OS">OS</input>
+              <br />
+              <input type="checkbox" name="Web Dev">Web Dev</input>
+              <br />
+            </div> -->
+            <div id="currentTopics-div">
+              <h1>Current Topics</h1>
+              <input type="checkbox" name="OS">OS</input>
+              <br />
+              <input type="checkbox" name="Web Dev">Web Dev</input>
+              <br />
+            </div>
+            <!-- judging by feedback we should add study pace/ freq -->
+            <div id="realInputs-div">
+              <!-- <input type="hidden" name="pastTopics" value="""/> -->
+              <input type="hidden" name="currentTopics" value="""/>
+            </div>
+            <br /><br />
+            <input type="submit" value="Update My Fields of Interest" class="cta submit-btn">
+          </form>
+        </div>
+
+        <div id="about-me-form">
+          <form action="/about" method="POST">
+            <textarea name="about-me" id="aboutme-input" placeholder="Enter your information here" required></textarea>
+            <br/>
+            <input type="submit" value="Update About Me" class="cta submit-btn">
+          </form>
+        </div>
       </div>
 
       <div class="padded rounded panel">

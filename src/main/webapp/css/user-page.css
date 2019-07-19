@@ -19,6 +19,7 @@
 #message-input, #aboutme-input {
   height: 100px;
   width: 100%;
+  margin-top: 15px;
   font-size: 14px;
 }
 
