@@ -368,7 +368,7 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   min-width: 100px;
   height: 50px;
   border-radius: 10px;
-  background-color: var(--secondary-color);
+  background-color: var(--main-color);
   padding: 5px;
 }
 
@@ -416,4 +416,9 @@ input:-ms-input-placeholder { color: #bdbdd3;}
 .noTime_input {
   outline: var(--secondary-color);
   border: 1px solid var(--secondary-color);
+}
+
+.scrollable {
+  overflow: scroll;
+  height: 30vh;
 }
