@@ -39,9 +39,7 @@ body {
 .content {
   position: relative;
   padding-top: 50px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 10vw;
 }
 
 nav {
@@ -409,6 +407,31 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+/** Page Layout **/
+
+.flex_section_parent {
+  display: flex;
+  height: 20vh;
+}
+
+.flex_section_sidebar {
+  width: 30%;
+  overflow: scroll;
+}
+
+.flex_section_main {
+  width: 70%;
+  overflow: scroll;
+}
+
+.scrollable {
+  overflow: scroll;
+}
+
+.main-content_title {
+
 }
 
 /** TEMPORARY **/
