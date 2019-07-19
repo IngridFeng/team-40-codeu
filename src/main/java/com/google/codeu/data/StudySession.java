@@ -78,3 +78,4 @@ public class StudySession {
   public void setAllowPublic(boolean allowPublic) {
     this.allowPublic = allowPublic;
   }
+}

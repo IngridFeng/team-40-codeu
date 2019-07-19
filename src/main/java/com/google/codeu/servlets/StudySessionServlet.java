@@ -48,37 +48,23 @@ public class StudySessionServlet extends HttpServlet {
     throws IOException {
 
       String chatId = request.getParameter("chatId");
-
-      // get users involved
       List<User> buddies = datastore.getUserByChat(chatId);
 
       String topic = request.getParameter("topic");
-
       String description = request.getParameter("description");
-
       String time = request.getParameter("time");
-      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-DDEHH:mm");
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
       LocalDate localDate = LocalDate.parse(time, formatter);
-
-
       String location = request.getParameter("location");
 
-      boolean allowPublic = request.getParameter("public") == "on";
+      String allow = request.getParameter("public");
+      boolean allowPublic = (allow != null);
 
       StudySession studySession = new StudySession(topic, description, buddies, localDate, location, allowPublic);
 
-      System.out.println("found friends");
-
       System.out.println(allowPublic);
-
       System.out.println(studySession);
-      System.out.println(localDate);
 
-
-
-      // get inputed params
-
-      //
       // store study session
       //datastore.storeStudySession(studysession);
       return;
