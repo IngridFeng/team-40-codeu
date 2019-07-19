@@ -81,6 +81,51 @@ function fetchChatMessages() {
       });
   }
 
+function fetchStudySessions() {
+  console.log("started fetching sessions");
+  const url = '/study-session?chat=' + parameterChat;
+  fetch(url)
+      .then((response) => {
+        console.log("response");
+        return response.json();
+      })
+      .then((studySessions) => {
+        console.log(studySessions);
+        const studySessionsContainer = document.getElementById('studySession-container');
+        if (studySessions.length == 0) {
+          studySessionsContainer.innerHTML = '<p>Set a Study Session!</p>';
+        } else {
+          studySessionsContainer.innerHTML = '<h1>Study Sessions/h1>';
+        }
+        studySessions.forEach((studySession) => {
+          const studySessionDiv = buildMessageDiv(studySession);
+          studySessionsContainer.appendChild(studySessionDiv);
+        });
+      });
+  }
+
+function buildStudySessionDiv(studySession) {
+  const headerDiv = document.createElement('div');
+  headerDiv.classList.add('message-header');
+  headerDiv.classList.add('padded');
+  headerDiv.appendChild(document.createTextNode(
+      studySession.topic + ";" + studySession.time + ";" + studySession.location));
+
+  const bodyDiv = document.createElement('div');
+  bodyDiv.classList.add('message-body');
+  bodyDiv.innerHTML = message.description;
+
+  const studySessionDiv = document.createElement('div');
+  studySessionDiv.classList.add('message-div');
+  studySessionDiv.classList.add('rounded');
+  studySessionDiv.classList.add('panel');
+  studySessionDiv.appendChild(headerDiv);
+  studySessionDiv.appendChild(bodyDiv);
+
+  return studySessionDiv;
+}
+
+
 function setChatParam() {
   const messageForm = document.getElementById('message-form');
   const studySessionForm_chatInput = document.getElementById('studySessionForm_chatInput');
@@ -109,6 +154,7 @@ function buildUI() {
   // fetchChatMessages();
   setChatParam();
   fetchBlobstoreUrlAndShowForm();
+  fetchStudySessions();
 }
 
 
