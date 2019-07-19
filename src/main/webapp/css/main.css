@@ -39,7 +39,9 @@ body {
 .content {
   position: relative;
   padding-top: 50px;
-  margin: 0 10vw;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 nav {
@@ -434,6 +436,11 @@ input:-ms-input-placeholder { color: #bdbdd3;}
 
 }
 
+.main-content_footer {
+  height: 30vh;
+  padding-top: 180px;/* TEmp*/
+}
+
 /** TEMPORARY **/
 
 .noTime_input {
@@ -444,4 +451,10 @@ input:-ms-input-placeholder { color: #bdbdd3;}
 .scrollable {
   overflow: scroll;
   height: 30vh;
+}
+
+.content-wide {
+  position: relative;
+  padding-top: 50px;
+  margin: 0 20px;
 }
