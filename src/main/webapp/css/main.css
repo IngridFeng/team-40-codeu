@@ -317,12 +317,16 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   margin-right: auto;
 }
 
-.submit-button {
+.send-button {
   background-color: var(--main-color);
   color: #fff;
+  font-size: 14px;
+  height: 30px;
+  width: 70px;
+  margin-top: 10px;
 }
 
-.submit-button:hover {
+.send-button:hover {
   background-color: var(--main-color-highlight);
   color: #fff;
   cursor: pointer;
@@ -362,14 +366,23 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   bottom: 0;
   right: 0;
   margin: 10px;
+  height: 30px;
+}
+
+.floating-button_bottom-right a:hover {
+  background-color: var(--main-color-highlight);
+  color: #fff;
+  cursor: pointer;
 }
 
 .floating-button_bottom-right a {
+  display: block;
   min-width: 100px;
-  height: 50px;
-  border-radius: 10px;
+  height: 30px;
+  border-radius: 4px;
   background-color: var(--main-color);
   padding: 5px;
+  color: #fff;
 }
 
 /** MODALS **/
@@ -438,6 +451,7 @@ input:-ms-input-placeholder { color: #bdbdd3;}
 .main-content_footer {
   height: 30vh;
   padding-top: 180px;/* TEmp*/
+  padding-bottom: 60px;
 }
 
 /** TEMPORARY **/
