@@ -66,6 +66,8 @@ public class TopicServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response)
     throws IOException {
+      System.out.println("WHOA SLOW DOWN");
+      System.out.println(request.getParameter("currentTopics"));
       // maybe don't require login?
       UserService userService = UserServiceFactory.getUserService();
       if (!userService.isUserLoggedIn()) {
@@ -99,7 +101,9 @@ public class TopicServlet extends HttpServlet {
       // redirect to community page
       // response.sendRedirect("/community.html?past=" + pastTopics + "&current=" + currentTopics);
       // Ingrid -- I think we can redirect the users after they put in all the info -- studypace & topics & timezone & nickname etc.
-      response.sendRedirect("/user-page.html?user=" + userEmail);
+      // back demon
+      response.sendRedirect(request.getHeader("referer"));
+
   }
 
 }

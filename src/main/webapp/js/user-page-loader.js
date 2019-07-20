@@ -256,41 +256,47 @@ function fetchStudyPace(){
 }
 
 function fetchTopics() {
+  const topicContainer = document.getElementById('topic-container');
   const url = '/currentTopics?user=' + parameterUsername;
   fetch(url).then((response) => {
-    return response.text();
-  }).then((topics) => {
-    const topicContainer = document.getElementById('topic-container');
-    if(topics == ''){
-      topics = 'Unknown';
+    if (response.status >= 200 && response.status < 300) {
+      topicContainer.innerHTML = response.text();
+    } else {
+      topicContainer.innerHTML = 'Topic: Life, Meaning, and 404';
     }
-    console.log(topics);
-    topicContainer.innerHTML = topics;
-  });
-  // // get elements
-  // // pastTopicsDiv = document.getElementById('pastTopics-div');
-  // // pastTopicsInputs = pastTopicsDiv.getElementsByTagName('input');
-  // currentTopicsDiv = document.getElementById('currentTopics-div');
-  // currentTopicsInputs = currentTopicsDiv.getElementsByTagName('input');
-  //
-  // // initialize returns
-  // // let pastTopics = [];
-  // let currentTopics = [];
-  // // for each input option
-  // for (i = 0; i < currentTopicsInputs.length; i++) {
-  //   // if checked, add to list
-  //   // if (pastTopicsInputs[i].checked) {
-  //   //   pastTopics.push(pastTopicsInputs[i].name);
-  //   // }
-  //   if (currentTopicsInputs[i].checked) {
-  //     currentTopics.push(currentTopicsInputs[i].name);
-  //   }
-  // }
-  //
-  // realInputsDiv = document.getElementById('realInputs-div');
-  // realInputsDiv.children[0].value = pastTopics;
-  // realInputsDiv.children[1].value = currentTopics;
+  })
 }
+ // get elements
+ // pastTopicsDiv = document.getElementById('pastTopics-div');
+ // pastTopicsInputs = pastTopicsDiv.getElementsByTagName('input');
+
+ function setCurrentTopics() {
+   currentTopicsDiv = document.getElementById('currentTopics-div');
+   currentTopicsInputs = currentTopicsDiv.getElementsByTagName('input');
+
+   // let pastTopics = [];
+   let currentTopics = [];
+
+   for (i = 0; i < currentTopicsInputs.length; i++) {
+    //if checked, add to list
+    //if (pastTopicsInputs[i].checked) {
+    //  pastTopics.push(pastTopicsInputs[i].name);
+    //}
+     if (currentTopicsInputs[i].checked) {
+       currentTopics.push(currentTopicsInputs[i].name);
+     }
+   }
+   // send post request
+   const params = new URLSearchParams();
+    //params.append('pastTopics', pastTopics);
+    params.append('currentTopics', currentTopics);
+
+    fetch('/topic', {
+      method: 'POST',
+      body: params
+     });
+
+ }
 
 /** Fetches data and populates the UI of the page. */
 function buildUI() {
