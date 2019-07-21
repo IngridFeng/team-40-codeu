@@ -257,14 +257,16 @@ function fetchStudyPace(){
 
 function fetchTopics() {
   const topicContainer = document.getElementById('topic-container');
-  const url = '/currentTopics?user=' + parameterUsername;
+  const url = '/topic?user=' + parameterUsername;
   fetch(url).then((response) => {
-    if (response.status >= 200 && response.status < 300) {
-      topicContainer.innerHTML = response.text();
-    } else {
-      topicContainer.innerHTML = 'Topic: Life, Meaning, and 404';
+    return response.text();
+  }).then((topic) => {
+    const topicContainer = document.getElementById('topic-container');
+    if(topic == ''){
+      topic = 'Unknown';
     }
-  })
+    topicContainer.innerHTML = 'Topic: ' + topic;
+  });
 }
  // get elements
  // pastTopicsDiv = document.getElementById('pastTopics-div');

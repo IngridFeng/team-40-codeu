@@ -52,11 +52,9 @@ public class TopicServlet extends HttpServlet {
       return;
     }
 
-    // change this to just topic data later
-    Gson gson = new Gson();
-    String json = gson.toJson(userData);
+    String topics = String.join(", ", userData.getCurrentTopics());
 
-    response.getOutputStream().println(json);
+    response.getOutputStream().println(topics);
   }
 
   @Override
