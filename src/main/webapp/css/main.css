@@ -352,10 +352,14 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   margin-left: 10px;
 }
 
-.user_card-chat_button:hover {
+.user_card-chat_button {
   border-radius: 10px;
   background-color: var(--main-color);
   color: white;
+}
+
+.user_card-chat_button:hover {
+  background-color: var(--main-color-highlight);
 }
 
 /** FLOATING BUTTONS C: **/
