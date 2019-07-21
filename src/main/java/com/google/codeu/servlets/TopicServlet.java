@@ -39,19 +39,15 @@ public class TopicServlet extends HttpServlet {
    */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws IOException {
-
-    response.setContentType("application/json");
-
-    String user = request.getParameter("user");
-
-    if(user == null || user.equals("")) {
-      // Request is invalid, return empty response
-      return;
+    throws IOException {
+      response.setContentType("application/json");
+      String user = request.getParameter("user");
+      if(user == null || user.equals("")) {
+        // Request is invalid, return empty response
+        return;
     }
 
     User userData = datastore.getUser(user);
-
     if(userData == null || userData.getCurrentTopics() == null) {
       return;
     }
