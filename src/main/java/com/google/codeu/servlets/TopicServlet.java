@@ -66,8 +66,6 @@ public class TopicServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response)
     throws IOException {
-      System.out.println("WHOA SLOW DOWN");
-      System.out.println(request.getParameter("currentTopics"));
       // maybe don't require login?
       UserService userService = UserServiceFactory.getUserService();
       if (!userService.isUserLoggedIn()) {
@@ -81,7 +79,6 @@ public class TopicServlet extends HttpServlet {
       //get info that user put in
       // List<String> pastTopics = new ArrayList<String> (Arrays.asList( request.getParameter("pastTopics").split(",")));
       List<String> currentTopics = new ArrayList<String> (Arrays.asList( request.getParameter("currentTopics").split(",")));
-      System.out.println(currentTopics);
       //get current user by querying the email
       User user = datastore.getUser(userEmail);
       if (user == null) {
