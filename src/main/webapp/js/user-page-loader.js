@@ -304,5 +304,5 @@ function buildUI() {
   fetchMajor();
   fetchTimeZone();
   fetchStudyPace();
-  //fetchTopics();
+  fetchTopics();
 }
