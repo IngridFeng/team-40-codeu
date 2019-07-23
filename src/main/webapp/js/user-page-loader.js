@@ -55,20 +55,11 @@ function showForms() {
         //logged in and viewing self
         else if (loginStatus.username == parameterUsername) {
           // handle message forms
-          const messageForm = document.getElementById('message-form');
-          messageForm.classList.remove('hidden');
+          document.getElementById('message-form-wrap').classList.remove('hidden');
 
           fetchBlobstoreUrlAndShowForm();
           fetchProfilePicUrlAndShowForm();
-
-          document.getElementById('about-me-form').classList.remove('hidden');
-          document.getElementById('nickname-form').classList.remove('hidden');
-          document.getElementById('university-name-form').classList.remove('hidden');
-          document.getElementById('major-form').classList.remove('hidden');
-          document.getElementById('timezone-form').classList.remove('hidden');
-          document.getElementById('studypace-form').classList.remove('hidden');
-          document.getElementById('studypace-form').classList.remove('hidden');
-          document.getElementById('topic-form').classList.remove('hidden');
+          document.getElementById('update-forms').classList.remove('hidden');
           fetchNickName(true);
         }
         //login and viewing others
@@ -91,7 +82,7 @@ function fetchBlobstoreUrlAndShowForm() {
     .then((imageUploadUrl) => {
       const messageForm = document.getElementById('message-form');
       messageForm.action = imageUploadUrl;
-      messageForm.classList.remove('hidden');
+      document.getElementById('message-form-wrap').classList.remove('hidden');
     });
 }
 
@@ -265,6 +256,7 @@ function fetchTopics() {
     if(topic == ''){
       topic = 'Unknown';
     }
+    console.log(topic);
     topicContainer.innerHTML = 'Topic: ' + topic;
   });
 }

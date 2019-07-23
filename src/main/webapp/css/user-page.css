@@ -50,12 +50,16 @@ h2 {
   float: left;
 }
 
-.left {
+.left40 {
   width: 40%;
 }
 
-.right {
+.right60 {
   width: 60%;
+}
+
+.equal33 {
+  width: 33.33%;
 }
 
 #nickname-input, #university-name-input, #major-input, #timezone-input, #studypace-input {
@@ -110,6 +114,9 @@ h2 {
 }
 
 #profilepic {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   width: 150px;
   height: 150px;
   border-radius: 5px;
