@@ -67,37 +67,37 @@ limitations under the License.
         </div>
       </div>
 
-      <div class = "padded rounded panel">
+      <div id = "update-forms" class = "padded rounded panel hidden">
         <h2 style = "margin-bottom: 20px">Update My Profile</h2>
-        <div id="nickname-form" class = "input-part hidden">
+        <div id="nickname-form" class = "input-part">
           <form action="/nickName" method="POST">
             <input class = "input-textbox info-input" placeholder = "Nickname" type="textbox" name="nickName" id="nickname-input" required></input>
             <input type="submit" value="Update" class="cta submit-btn info-submit">
           </form>
         </div>
 
-        <div id="university-name-form" class = "input-part hidden">
+        <div id="university-name-form" class = "input-part">
           <form action="/universityName" method="POST">
             <input class = "input-textbox info-input" placeholder = "University Name" type="textbox" name="universityName" id="university-name-input" required></input>
             <input type="submit" value="Update" class="cta submit-btn info-submit">
           </form>
         </div>
 
-        <div id="major-form" class = "input-part hidden">
+        <div id="major-form" class = "input-part">
           <form action="/major" method="POST">
             <input class = "input-textbox info-input" placeholder = "Major" type="textbox" name="major" id="major-input" required></input>
             <input type="submit" value="Update" class="cta submit-btn info-submit">
           </form>
         </div>
 
-        <div id="timezone-form" class = "input-part hidden">
+        <div id="timezone-form" class = "input-part">
           <form action="/timezone" method="POST">
             <input class = "input-textbox info-input" placeholder = "Time Zone" type="textbox" name="timezone" id="timezone-input" required></input>
             <input type="submit" value="Update" class="cta submit-btn info-submit">
           </form>
         </div>
 
-        <div id="studypace-form" class = "input-part hidden">
+        <div id="studypace-form" class = "input-part">
           <form action="/studypace" method="POST">
             <input class = "input-textbox info-input" placeholder = "Weekly Study Hours" type="textbox" name="studypace" id="studypace-input" required></input>
             <input type="submit" value="Update" class="cta submit-btn info-submit">
@@ -106,7 +106,7 @@ limitations under the License.
 
         <!-- Topic Form -->
         <!-- post request is handled via JS to parse the inputs into lists -->
-        <div id="topic-form" class = "input-part hidden">
+        <div id="topic-form" class = "input-part">
           <form>
             <!-- <div id="pastTopics-div">
               <h1>Past Topics</h1>
@@ -135,8 +135,8 @@ limitations under the License.
         </div>
       </div>
 
-      <div class="padded rounded panel">
-        <form id="message-form" method="POST" class="hidden" enctype="multipart/form-data">
+      <div id="message-form-wrap" class="padded rounded panel hidden">
+        <form id="message-form" method="POST" enctype="multipart/form-data">
           <textarea name="text" id="message-input" class="rounded"></textarea>
           <p style = "display: inline-block;">Upload an image:</p>
           <input type="file" name="image">
