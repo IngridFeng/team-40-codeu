@@ -20,25 +20,25 @@
       	<li><a href="/feed.html">Public Feed</a></li>
       </ul>
     </nav>
-    <div class="content centered">
+    <div class="content-wide centered">
       <div class="padded rounded panel centered">
         <h2 id="chat-name">Chat Room</h2>
         <p id="chat-description">...</p>
       </div>
 
       <div class="flex_section_parent">
-        <div class="flex_section_sidebar scrollable rounded panel centered">
+        <div class="flex_section_sidebar rounded panel centered">
           <div class="main-content_title">
             <h1>Study Sessions</h1>
           </div>
-          <div id="studySession-container">Loading...</div>
+          <div id="studySession-container" class="scrollable">Loading...</div>
         </div>
 
-        <div class="flex_section_main scrollable rounded panel centered">
+        <div class="flex_section_main rounded panel centered">
           <div class="main-content_title">
             <h1>Messages</h1>
           </div>
-          <div id="message-container">Loading...</div>
+          <div id="message-container" class="scrollable">Loading...</div>
         </div>
       </div>
 
@@ -51,11 +51,11 @@
           <br/>
           <p>Upload an image:</p>
           <input type="file" name="image">
-          <br/><br/>
-          <input type="submit" value="Submit">
+          <br/>
+          <input type="submit" value="Send" class="rounded send-button">
         </form>
       </div>
-      <div class="floating-button_bottom-right">
+      <div class="floating-button_bottom-right rounded">
         <a onclick="openStudySessionModal()"> Set a Study Session! </a>
       </div>
     </div>

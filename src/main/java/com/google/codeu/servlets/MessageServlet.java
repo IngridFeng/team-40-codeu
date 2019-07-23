@@ -151,8 +151,8 @@ public class MessageServlet extends HttpServlet {
     // Profile picture of user
     String profilePic = datastore.getUser(user).getImageUrl();
 
-
-    Message message = new Message(chat , nickName, textWithVideosReplaced, score, imageUrl, profilePic);
+    Message message = new Message(chat , user, textWithVideosReplaced, score, imageUrl, profilePic);
+    // Message message = new Message(chat , nickName, textWithVideosReplaced, score, imageUrl, profilePic);
     datastore.storeMessage(message);
     response.sendRedirect(request.getHeader("referer"));
   }

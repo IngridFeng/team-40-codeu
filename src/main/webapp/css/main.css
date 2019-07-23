@@ -39,7 +39,9 @@ body {
 .content {
   position: relative;
   padding-top: 50px;
-  margin: 0 10vw;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 nav {
@@ -315,12 +317,16 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   margin-right: auto;
 }
 
-.submit-button {
+.send-button {
   background-color: var(--main-color);
   color: #fff;
+  font-size: 14px;
+  height: 30px;
+  width: 70px;
+  margin-top: 10px;
 }
 
-.submit-button:hover {
+.send-button:hover {
   background-color: var(--main-color-highlight);
   color: #fff;
   cursor: pointer;
@@ -346,10 +352,14 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   margin-left: 10px;
 }
 
-.user_card-chat_button:hover {
+.user_card-chat_button {
   border-radius: 10px;
   background-color: var(--main-color);
   color: white;
+}
+
+.user_card-chat_button:hover {
+  background-color: var(--main-color-highlight);
 }
 
 /** FLOATING BUTTONS C: **/
@@ -360,14 +370,23 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   bottom: 0;
   right: 0;
   margin: 10px;
+  height: 30px;
+}
+
+.floating-button_bottom-right a:hover {
+  background-color: var(--main-color-highlight);
+  color: #fff;
+  cursor: pointer;
 }
 
 .floating-button_bottom-right a {
+  display: block;
   min-width: 100px;
-  height: 50px;
-  border-radius: 10px;
+  height: 30px;
+  border-radius: 4px;
   background-color: var(--main-color);
   padding: 5px;
+  color: #fff;
 }
 
 /** MODALS **/
@@ -413,7 +432,6 @@ input:-ms-input-placeholder { color: #bdbdd3;}
 
 .flex_section_parent {
   display: flex;
-  height: 20vh;
 }
 
 .flex_section_sidebar {
@@ -434,6 +452,12 @@ input:-ms-input-placeholder { color: #bdbdd3;}
 
 }
 
+.main-content_footer {
+  height: 30vh;
+  padding-top: 180px;/* TEmp*/
+  padding-bottom: 60px;
+}
+
 /** TEMPORARY **/
 
 .noTime_input {
@@ -444,4 +468,10 @@ input:-ms-input-placeholder { color: #bdbdd3;}
 .scrollable {
   overflow: scroll;
   height: 30vh;
+}
+
+.content-wide {
+  position: relative;
+  padding-top: 50px;
+  margin: 0 20px;
 }
