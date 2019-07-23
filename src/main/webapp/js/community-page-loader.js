@@ -88,7 +88,7 @@ function buildUserListItem(user){
   // build chat form
   const chatForm = document.createElement("form");
   chatForm.setAttribute("method","post");
-  chatForm.setAttribute("action","/chat");
+  chatForm.setAttribute("action","/mychats");
 
   // add selectedUser input
   const selectedUser = document.createElement("input"); //input element, Submit button
