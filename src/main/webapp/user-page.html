@@ -58,6 +58,7 @@ limitations under the License.
           <h2 style = "margin-bottom: 20px">My Profile</h2>
           <p id="nick-name-container" class="noBotMargin noTopMargin">Loading...</p>
           <p id="university-name-container" class="noBotMargin noTopMargin">Loading...</p>
+          <p id="topic-container" class="noBotMargin noTopMargin">Loading...</p>
           <p id="major-container" class="noBotMargin noTopMargin">Loading...</p>
           <p id="timezone-container" class="noBotMargin noTopMargin">Loading...</p>
           <p id="studypace-container" class="noBotMargin noTopMargin">Loading...</p>
@@ -104,8 +105,9 @@ limitations under the License.
         </div>
 
         <!-- Topic Form -->
+        <!-- post request is handled via JS to parse the inputs into lists -->
         <div id="topic-form" class = "input-part hidden">
-          <form action="/topic" method="POST">
+          <form>
             <!-- <div id="pastTopics-div">
               <h1>Past Topics</h1>
               <input type="checkbox" name="OS">OS</input>
@@ -120,13 +122,7 @@ limitations under the License.
               <input type="checkbox" name="Web Dev">Web Dev</input>
               <br />
             </div>
-            <!-- judging by feedback we should add study pace/ freq -->
-            <div id="realInputs-div">
-              <!-- <input type="hidden" name="pastTopics" value="""/> -->
-              <input type="hidden" name="currentTopics" value="""/>
-            </div>
-            <br /><br />
-            <input type="submit" value="Update My Fields of Interest" class="cta submit-btn">
+            <input type="submit" value="Update My Fields of Interest" class="cta submit-btn" onclick="setCurrentTopics()">
           </form>
         </div>
 

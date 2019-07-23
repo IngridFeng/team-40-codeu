@@ -39,28 +39,22 @@ public class TopicServlet extends HttpServlet {
    */
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response)
-      throws IOException {
-
-    response.setContentType("application/json");
-
-    String user = request.getParameter("user");
-
-    if(user == null || user.equals("")) {
-      // Request is invalid, return empty response
-      return;
+    throws IOException {
+      response.setContentType("application/json");
+      String user = request.getParameter("user");
+      if(user == null || user.equals("")) {
+        // Request is invalid, return empty response
+        return;
     }
 
     User userData = datastore.getUser(user);
-
     if(userData == null || userData.getCurrentTopics() == null) {
       return;
     }
 
-    // change this to just topic data later
-    Gson gson = new Gson();
-    String json = gson.toJson(userData);
+    String topics = String.join(", ", userData.getCurrentTopics());
 
-    response.getOutputStream().println(json);
+    response.getOutputStream().println(topics);
   }
 
   @Override
@@ -79,7 +73,6 @@ public class TopicServlet extends HttpServlet {
       //get info that user put in
       // List<String> pastTopics = new ArrayList<String> (Arrays.asList( request.getParameter("pastTopics").split(",")));
       List<String> currentTopics = new ArrayList<String> (Arrays.asList( request.getParameter("currentTopics").split(",")));
-      System.out.println(currentTopics);
       //get current user by querying the email
       User user = datastore.getUser(userEmail);
       if (user == null) {
@@ -99,7 +92,9 @@ public class TopicServlet extends HttpServlet {
       // redirect to community page
       // response.sendRedirect("/community.html?past=" + pastTopics + "&current=" + currentTopics);
       // Ingrid -- I think we can redirect the users after they put in all the info -- studypace & topics & timezone & nickname etc.
-      response.sendRedirect("/user-page.html?user=" + userEmail);
+      // back demon
+      response.sendRedirect(request.getHeader("referer"));
+
   }
 
 }
