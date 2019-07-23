@@ -256,6 +256,7 @@ function fetchTopics() {
     if(topic == ''){
       topic = 'Unknown';
     }
+    console.log(topic);
     topicContainer.innerHTML = 'Topic: ' + topic;
   });
 }

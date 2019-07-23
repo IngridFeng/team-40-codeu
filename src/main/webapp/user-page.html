@@ -44,7 +44,7 @@ limitations under the License.
 
       <div class="row padded rounded panel">
         <!-- temp styling to make the photo section look nice, plz fix w CSS -->
-        <div class="column left" style="margin-left: 10%;">
+        <div class="column left40">
           <img id="profilepic" src="profilepic.png" alt="Profile Picture" class="profilepic">
           <div id="profilepic-form-container">
             <form id="profilepic-form" method="POST" class="hidden" enctype="multipart/form-data">
@@ -54,7 +54,7 @@ limitations under the License.
           </div>
         </div>
 
-        <div class="column right">
+        <div class="column right60">
           <h2 style = "margin-bottom: 20px">My Profile</h2>
           <p id="nick-name-container" class="noBotMargin noTopMargin">Loading...</p>
           <p id="university-name-container" class="noBotMargin noTopMargin">Loading...</p>
@@ -69,6 +69,7 @@ limitations under the License.
 
       <div id = "update-forms" class = "padded rounded panel hidden">
         <h2 style = "margin-bottom: 20px">Update My Profile</h2>
+
         <div id="nickname-form" class = "input-part">
           <form action="/nickName" method="POST">
             <input class = "input-textbox info-input" placeholder = "Nickname" type="textbox" name="nickName" id="nickname-input" required></input>
@@ -116,13 +117,32 @@ limitations under the License.
               <br />
             </div> -->
             <div id="currentTopics-div">
-              <h1>Current Topics</h1>
-              <input type="checkbox" name="OS">OS</input>
-              <br />
-              <input type="checkbox" name="Web Dev">Web Dev</input>
-              <br />
+              <div class = "row">
+                <div class="column equal33"><input type="checkbox" name="OS">Operating System</input></div>
+                <div class="column equal33"><input type="checkbox" name="Web Dev">Web Development</input></div>
+                <div class="column equal33"><input type="checkbox" name="Ios Dev">iOS Development</input></div>
+              </div>
+
+              <div class = "row">
+                <div class="column equal33"><input type="checkbox" name="And Dev">Android Development</input></div>
+                <div class="column equal33"><input type="checkbox" name="ML">Machine Learning</input></div>
+                <div class="column equal33"><input type="checkbox" name="CV">Computer Vision</input></div>
+              </div>
+
+              <div class = "row">
+                <div class="column equal33"><input type="checkbox" name="NLP">NLP</input></div>
+                <div class="column equal33"><input type="checkbox" name="Alg Des">Algorithm Design</input></div>
+                <div class="column equal33"><input type="checkbox" name="Data Sci">Data Science</input></div>
+              </div>
+
+              <div class = "row">
+                <div class="column equal33"><input type="checkbox" name="Database">Database</input></div>
+                <div class="column equal33"><input type="checkbox" name="Com Net">Computer Networks</input></div>
+                <div class="column equal33"><input type="checkbox" name="Dist SYs">Distributed System</input></div>
+              </div>
+
             </div>
-            <input type="submit" value="Update My Fields of Interest" class="cta submit-btn" onclick="setCurrentTopics()">
+            <input type="submit" value="Update Fields of Interest" class="cta submit-btn" onclick="setCurrentTopics()">
           </form>
         </div>
 
