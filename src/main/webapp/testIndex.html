@@ -1,0 +1,94 @@
+<!--
+Copyright 2019 Google Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>MuMind</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/mission-control.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <script src="/js/mc-loader.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
+
+    <!-- Scripts for Charts
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="/js/chart-loader.js"></script>-->
+    <!-- Scripts for Map-->
+    <script src="/js/map-loader.js"></script>
+  </head>
+  <body onload="addLoginOrLogoutLinkToNavigation(); createMap();">
+    <div class="wrapper navbar">
+      <article class="main">
+        <p id="logo"><a href="/aboutus.html">MuMind</a></p>
+      </article>
+      <aside class="aside aside-1"><a href="/">Home</a></aside>
+      <aside class="aside aside-2" id="login-element"></aside>
+    </div>
+
+    <div class="flex_section_parent">
+      <div class="mc_sidebar">
+        <h2>My Stuff</h2>
+        <a class="sidebar-link" href="#">Chats</a>
+        <a class="sidebar-link" href="#">Study Sessions</a>
+        <h2>Community</h2>
+        <a class="sidebar-link" href="/community.html">Nerds</a>
+        <a class="sidebar-link" href="/feed.html">Forum</a>
+      </div>
+      <div class="mc_main">
+        <div class="top-content">
+          <h1 class="title">MuMind</h1>
+          <h2 class="subtitle">Cause nerds need friends too</h2>
+          <p>
+            Welcome to MuMind C:
+            <br>
+            Find study buddies with similar interests
+            <br>
+            Let's start exploring by shouting out a message from your university!
+          </p>
+          <a href="/community.html" class="button">
+            <div class="cta">Find a Buddy</div>
+          </a>
+        </div>
+        <div class="content centered">
+          <h2 style="margin-top: 40px; margin-bottom: 0;">Let the Community Know You're Here</h2>
+          <div class="input-part">
+            <input id="address" type="textbox" name = "university" placeholder = "University Name" class = "input-textbox centered" required></input>
+            <input id="submit" type="button" value="Shoutout for Your University!" class="cta uni">
+          </div>
+          <!--
+          <div>
+            <h1>How Constructive Are We?</h1>
+            <p>
+              Here is a chart showing how constructive we are.
+              We become what our environment encourages.
+              Let's give transparent and collaborative feedback so we can all grow!
+            </p>
+            <h2>Constructiveness of all messages</h2>
+            <div id="nice_chart"></div>
+            <p id="avg_sentiment" align="center"></p>
+          </div>
+          -->
+        </div>
+        <div id="map"></div>
+      </div>
+    </div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTYJGGk3f9krfYZB-Ab1oC65W_pDtvrAw&callback=createMap"></script>
+  </body>
+</html>
