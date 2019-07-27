@@ -78,11 +78,6 @@ a {
   text-decoration: none;
 }
 
-username {
-  text-decoration: underline;
-  color: blue;	
-}
-
 nav a:hover {
   background-color: var(--main-color);
   color: #fff;
