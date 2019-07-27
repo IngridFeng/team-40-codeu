@@ -25,7 +25,7 @@ import java.util.UUID;
  * Handles fetching and saving user data.
  */
 @WebServlet("/mychats")
-public class ChatServlet extends HttpServlet {
+public class MyChatServlet extends HttpServlet {
 
   private Datastore datastore;
 
