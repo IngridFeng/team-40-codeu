@@ -25,7 +25,7 @@ import java.util.UUID;
  * Handles fetching all users for the community page.
  */
 @WebServlet("/chats-list")
-public class UserListServlet extends HttpServlet {
+public class ChatsListServlet extends HttpServlet {
 
   private Datastore datastore;
 
