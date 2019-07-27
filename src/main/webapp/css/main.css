@@ -75,7 +75,8 @@ nav a {
 }
 
 a {
-  text-decoration: none;
+  text-decoration: underline;
+  color: blue;	
 }
 
 nav a:hover {
