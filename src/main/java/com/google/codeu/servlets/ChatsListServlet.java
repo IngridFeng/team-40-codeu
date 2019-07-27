@@ -39,6 +39,12 @@ public class ChatsListServlet extends HttpServlet {
     throws IOException {
       response.setContentType("application/json");
       
+      UserService userService = UserServiceFactory.getUserService();
+      if (!userService.isUserLoggedIn()) {
+      	response.sendRedirect("/login");
+      	return;
+      }	  
+	  
       //get email of current user
       String userEmail = userService.getCurrentUser().getEmail();
       //get current user by querying the email
