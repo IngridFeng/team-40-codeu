@@ -75,6 +75,10 @@ nav a {
 }
 
 a {
+  text-decoration: none;
+}
+
+username {
   text-decoration: underline;
   color: blue;	
 }
