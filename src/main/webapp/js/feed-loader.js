@@ -34,7 +34,6 @@
     }).then((nickName) => {
       const userName = nickName || message.user;
       const userLinkText = document.createTextNode(userName);
-      userLinkText.style.color = "blue";
       userLink.appendChild(userLinkText);
     });
     //const userLinkText = document.createTextNode(userName);
