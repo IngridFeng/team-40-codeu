@@ -131,26 +131,22 @@ function buildStudySessionDiv(studySession) {
   const about = document.createElement('p');
   about.appendChild(document.createTextNode(studySession.description));
   topicDiv.appendChild(topic);
-  topicDiv.appendChild(document.createElement('br'));
   topicDiv.appendChild(about);
 
   const logisticsDiv = document.createElement('div');
   logisticsDiv.classList.add('studySession_logistics');
-  const time = document.createElement('p');
   const timeIcon = document.createElement('i');
   timeIcon.classList = "fas fa-clock";
-  time.appendChild(timeIcon);
+  const time = document.createElement('p');
   time.appendChild(document.createTextNode(studySession.time.slice(11,16)));
   const location = document.createElement('p')
+  location.appendChild(document.createTextNode(studySession.location));
   const locationIcon = document.createElement('i');
   locationIcon.classList = "fas fa-map-marker-alt";;
-  location.appendChild(locationIcon);
-  location.appendChild(document.createTextNode(studySession.location));
-  logisticsDiv.appendChild(time);
   logisticsDiv.appendChild(timeIcon);
-  logisticsDiv.appendChild(document.createElement('br'));
-  logisticsDiv.appendChild(location);
+  logisticsDiv.appendChild(time);
   logisticsDiv.appendChild(locationIcon);
+  logisticsDiv.appendChild(location);
 
   const studySessionDiv = document.createElement('div');
   studySessionDiv.classList.add('studySession-div');

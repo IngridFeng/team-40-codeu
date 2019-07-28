@@ -26,4 +26,9 @@
 
 .studySession_logistics p {
   font-size: 14px;
+  margin: 5px 0;
+}
+
+.studySession_logistics i {
+  margin-top: 5px;
 }
