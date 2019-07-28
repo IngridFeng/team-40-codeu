@@ -27,6 +27,7 @@
 
     const usernameDiv = document.createElement('div');
     usernameDiv.classList.add("left-align");
+    usernameDiv.style.textAlign = "left";
     const userLink = document.createElement('a');
     const url = '/nickName?user=' + message.user;
     fetch(url).then((response) => {
@@ -40,10 +41,15 @@
     //userLink.appendChild(userLinkText);
     userLink.href = "/user-page.html?user=" + message.user
     usernameDiv.appendChild(userLink);
-     
+
     const timeDiv = document.createElement('div');
     timeDiv.classList.add('right-align');
     timeDiv.appendChild(document.createTextNode(new Date(message.timestamp).toLocaleString()));
+
+    const headerContentDiv = document.createElement('div');
+    headerContentDiv.setAttribute("id", "message-header-content")
+    headerContentDiv.appendChild(usernameDiv);
+    headerContentDiv.appendChild(timeDiv)
 
     const headerDiv = document.createElement('div');
     headerDiv.classList.add('message-header');
@@ -51,24 +57,30 @@
     //if(message.hasOwnProperty('profilePic')) {
       //Adding profile picture
       const profilePic = document.createElement('img');
+      var profilePicUrl = "profilepic.png";
+      if(message.hasOwnProperty('profilePic')) {
+        profilePicUrl = message.profilePic;
+      }
+
       var picUrl = message.profilePic || "profilepic.png";
       if(picUrl && picUrl.style) {
        picUrl.style.height = '75px';
        picUrl.style.width = '75px';
        picUrl.style.borderRadius = '50%';
       }
-      profilePic.setAttribute("height", 70)
-      profilePic.setAttribute("width", 70)
-      profilePic.setAttribute("id", "profilepic")
-      profilePic.setAttribute("src", message.profilePic)
+      //profilePic.setAttribute("height", 70)
+      //profilePic.setAttribute("width", 70)
+      profilePic.setAttribute("id", "profilepic-message")
+      profilePic.setAttribute("src", profilePicUrl)
       profilePic.setAttribute("alt", "Profile picture")
       profilePic.setAttribute("class", "profilepic")
 
       headerDiv.appendChild(profilePic);
     //}
 
-    headerDiv.appendChild(usernameDiv);
-    headerDiv.appendChild(timeDiv);
+    //headerDiv.appendChild(usernameDiv);
+    //headerDiv.appendChild(timeDiv);
+    headerDiv.appendChild(headerContentDiv);
 
     const bodyDiv = document.createElement('div');
     bodyDiv.classList.add('message-body');
