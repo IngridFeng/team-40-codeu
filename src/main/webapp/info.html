@@ -20,6 +20,7 @@ limitations under the License.
     <meta charset="UTF-8">
     <title>Who Are You?</title>
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/mission-control.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
@@ -27,47 +28,58 @@ limitations under the License.
     <script src="/js/info-loader.js"></script>
   </head>
   <body onload="addLoginOrLogoutLinkToNavigation();">
-    <nav>
-      <ul id="navigation">
-        <li><a href="/">Home</a></li>
-        <li><a href="/aboutus.html">About Our Team</a></li>
-        <li><a href="/community.html">Community Page</a></li>
-      	<li><a href="/feed.html">Public Feed</a></li>
-      </ul>
-    </nav>
-    <div class="content centered">
+    <div class="wrapper navbar">
+      <article class="main">
+        <p id="logo"><a href="/aboutus.html">MuMind</a></p>
+      </article>
+      <aside class="aside aside-1"><a href="/">Home</a></aside>
+      <aside class="aside aside-2" id="login-element"></aside>
+    </div>
 
-      <div class="singleBlock" style="width: 600px;">
-        <h1>Tell us about you!</h1>
-        <p> So we can better recommend friends for you :) </p>
+    <div class="flex_section_parent">
+      <div class="mc_sidebar">
+        <h2>My Stuff</h2>
+        <a class="sidebar-link" href="#">Chats</a>
+        <a class="sidebar-link" href="#">Study Sessions</a>
+        <h2>Community</h2>
+        <a class="sidebar-link" href="/community.html">Nerds</a>
+        <a class="sidebar-link" href="/feed.html">Forum</a>
       </div>
-      <!-- INFO FORM -->
-      <form id="info-form" action="/info" method="POST">
-        <div id="pastTopics-div">
-          <h1>Past Topics</h1>
-          <input type="checkbox" name="OS">OS</input>
-          <br />
-          <input type="checkbox" name="Web Dev">Web Dev</input>
-          <br />
-          <!-- <input type="text" value="Other"/> haven't worked on this yet-->
-          <br /><br />
+      <div class="mc_main">
+        <div class="content centered">
+          <div class="singleBlock" style="width: 600px;">
+            <h1>Tell us about you!</h1>
+            <p> So we can better recommend friends for you :) </p>
+          </div>
+          <!-- INFO FORM -->
+          <form id="info-form" action="/info" method="POST">
+            <div id="pastTopics-div">
+              <h1>Past Topics</h1>
+              <input type="checkbox" name="OS">OS</input>
+              <br />
+              <input type="checkbox" name="Web Dev">Web Dev</input>
+              <br />
+              <!-- <input type="text" value="Other"/> haven't worked on this yet-->
+              <br /><br />
+            </div>
+            <div id="currentTopics-div">
+              <h1>Current Topics</h1>
+              <input type="checkbox" name="OS">OS</input>
+              <br />
+              <input type="checkbox" name="Web Dev">Web Dev</input>
+              <br />
+              <!-- <input type="text" value="Other"/> -->
+            </div>
+            <!-- judging by feedback we should add study pace/ freq -->
+            <div id="realInputs-div">
+              <input type="hidden" name="pastTopics" value="""/>
+              <input type="hidden" name="currentTopics" value="""/>
+            </div>
+            <br /><br />
+            <input type="submit" name="Find a Buddy!" value="submit" onclick="buildReq()"/>
+          </form>
         </div>
-        <div id="currentTopics-div">
-          <h1>Current Topics</h1>
-          <input type="checkbox" name="OS">OS</input>
-          <br />
-          <input type="checkbox" name="Web Dev">Web Dev</input>
-          <br />
-          <!-- <input type="text" value="Other"/> -->
-        </div>
-        <!-- judging by feedback we should add study pace/ freq -->
-        <div id="realInputs-div">
-          <input type="hidden" name="pastTopics" value="""/>
-          <input type="hidden" name="currentTopics" value="""/>
-        </div>
-        <br /><br />
-        <input type="submit" name="Find a Buddy!" value="submit" onclick="buildReq()"/>
-      </form>
+      </div>
     </div>
   </body>
 </html>
