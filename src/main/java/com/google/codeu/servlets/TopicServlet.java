@@ -93,7 +93,8 @@ public class TopicServlet extends HttpServlet {
       // response.sendRedirect("/community.html?past=" + pastTopics + "&current=" + currentTopics);
       // Ingrid -- I think we can redirect the users after they put in all the info -- studypace & topics & timezone & nickname etc.
       // back demon
-      response.sendRedirect(request.getHeader("referer"));
+      // response.sendRedirect(request.getHeader("referer"));
+      response.sendRedirect("/user-page.html?user=" + userEmail);
 
   }
 
