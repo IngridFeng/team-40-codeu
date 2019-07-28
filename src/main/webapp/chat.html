@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/user-page.css">
+    <link rel="stylesheet" href="/css/chat.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
     <script src="/js/navigation-loader.js"></script>
     <script src="/js/chat-page-loader.js"></script>
+    <script src="https://kit.fontawesome.com/c031e10546.js"></script>
   </head>
   <body onload="addLoginOrLogoutLinkToNavigation(); buildUI();">
     <nav>
@@ -40,21 +42,18 @@
             <h1>Messages</h1>
           </div>
           <div id="message-container" class="scrollable">Loading...</div>
+          <form id="message-form" action="/messages" method="POST" enctype="multipart/form-data" class="hidden">
+            <input name="chat" value="" class="hidden">
+            Enter a new message:
+            <br/>
+            <textarea name="text" id="message-input" class="rounded"></textarea>
+            <br/>
+            <p>Upload an image:</p>
+            <input type="file" name="image">
+            <br/>
+            <input type="submit" value="Send" class="rounded send-button">
+          </form>
         </div>
-      </div>
-
-      <div class="main-content_footer padded rounded panel">
-        <form id="message-form" action="/messages" method="POST" enctype="multipart/form-data" class="hidden">
-          <input name="chat" value="" class="hidden">
-        Enter a new message:
-          <br/>
-          <textarea name="text" id="message-input" class="rounded"></textarea>
-          <br/>
-          <p>Upload an image:</p>
-          <input type="file" name="image">
-          <br/>
-          <input type="submit" value="Send" class="rounded send-button">
-        </form>
       </div>
       <div class="floating-button_bottom-right rounded">
         <a onclick="openStudySessionModal()"> Set a Study Session! </a>
