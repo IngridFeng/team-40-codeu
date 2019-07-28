@@ -41,21 +41,18 @@
             <h1>Messages</h1>
           </div>
           <div id="message-container" class="scrollable">Loading...</div>
+          <form id="message-form" action="/messages" method="POST" enctype="multipart/form-data" class="hidden">
+            <input name="chat" value="" class="hidden">
+            Enter a new message:
+            <br/>
+            <textarea name="text" id="message-input" class="rounded"></textarea>
+            <br/>
+            <p>Upload an image:</p>
+            <input type="file" name="image">
+            <br/>
+            <input type="submit" value="Send" class="rounded send-button">
+          </form>
         </div>
-      </div>
-
-      <div class="main-content_footer padded rounded panel">
-        <form id="message-form" action="/messages" method="POST" enctype="multipart/form-data" class="hidden">
-          <input name="chat" value="" class="hidden">
-        Enter a new message:
-          <br/>
-          <textarea name="text" id="message-input" class="rounded"></textarea>
-          <br/>
-          <p>Upload an image:</p>
-          <input type="file" name="image">
-          <br/>
-          <input type="submit" value="Send" class="rounded send-button">
-        </form>
       </div>
       <div class="floating-button_bottom-right rounded">
         <a onclick="openStudySessionModal()"> Set a Study Session! </a>
