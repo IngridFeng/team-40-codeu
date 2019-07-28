@@ -48,7 +48,7 @@
     const headerDiv = document.createElement('div');
     headerDiv.classList.add('message-header');
 
-    if(message.hasOwnProperty('profilePic')) {
+    //if(message.hasOwnProperty('profilePic')) {
       //Adding profile picture
       const profilePic = document.createElement('img');
       var picUrl = message.profilePic || "profilepic.png";
@@ -65,7 +65,7 @@
       profilePic.setAttribute("class", "profilepic")
 
       headerDiv.appendChild(profilePic);
-    }
+    //}
 
     headerDiv.appendChild(usernameDiv);
     headerDiv.appendChild(timeDiv);

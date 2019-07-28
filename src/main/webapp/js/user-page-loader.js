@@ -257,7 +257,7 @@ function fetchTopics() {
       topic = 'Unknown';
     }
     console.log(topic);
-    topicContainer.innerHTML = 'Topic: ' + topic;
+    topicContainer.innerHTML = 'Fields of Interest: ' + topic;
   });
 }
  // get elements
