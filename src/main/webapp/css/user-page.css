@@ -27,13 +27,6 @@ h2 {
   margin: 0;
 }
 
-input[type=submit] {
-  background-color: var(--main-color);
-  border-radius: 10px;
-  height: 30px;
-  font-size: 12pt;
-}
-
 .noBotMargin{
   margin-bottom: 0px;
 }
@@ -57,12 +50,16 @@ input[type=submit] {
   float: left;
 }
 
-.left {
+.left40 {
   width: 40%;
 }
 
-.right {
+.right60 {
   width: 60%;
+}
+
+.equal33 {
+  width: 33.33%;
 }
 
 #nickname-input, #university-name-input, #major-input, #timezone-input, #studypace-input {
@@ -126,6 +123,9 @@ select {
 }
 
 #profilepic {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   width: 150px;
   height: 150px;
   border-radius: 5px;

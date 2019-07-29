@@ -154,7 +154,6 @@ public class MyChatServlet extends HttpServlet {
 
       // redirect to chat package
       response.sendRedirect("/mychats.html?chat=" + chat.getId());
-      // response.sendRedirect("/chat.html?chat=" + chat.getId());
       return;
 
   }

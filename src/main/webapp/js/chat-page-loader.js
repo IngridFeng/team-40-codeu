@@ -1,6 +1,13 @@
 // Get ?chat=XYZ parameter value
 const urlParams = new URLSearchParams(window.location.search);
 const parameterChat = urlParams.get('chat');
+let cur_user = null;
+fetch('/current-user').then((response) => {
+  return response.text();
+}).then((user) => {
+  cur_user = user;
+});
+
 // if chat parameter not in url, redirect to home
 if (!parameterChat) {
   window.location.replace('/');
@@ -21,11 +28,13 @@ function loadChatDetails() {
 }
 
 function buildMessageDiv(message) {
+  /*
   const headerDiv = document.createElement('div');
   headerDiv.classList.add('message-header');
   headerDiv.classList.add('padded');
   headerDiv.appendChild(document.createTextNode(
       message.user + ' - ' + new Date(message.timestamp)));
+  */
 
   const bodyDiv = document.createElement('div');
   bodyDiv.classList.add('message-body');
@@ -38,11 +47,21 @@ function buildMessageDiv(message) {
   }
 
   const messageDiv = document.createElement('div');
-  messageDiv.classList.add('message-div');
-  messageDiv.classList.add('rounded');
-  messageDiv.classList.add('panel');
-  messageDiv.appendChild(headerDiv);
+
+  if (message.user.replace(/\s/g, "") == cur_user.replace(/\s/g, "")){
+    messageDiv.classList.add('message-div-right');
+  } else {
+    messageDiv.classList.add('message-div-left');
+  }
+
+  const time = getTimeFromDate(message.timestamp);
+  const timeDiv = document.createElement('div');
+  timeDiv.classList = "time-div";
+  timeDiv.appendChild(document.createTextNode(time));
+
+  /*messageDiv.appendChild(headerDiv); */
   messageDiv.appendChild(bodyDiv);
+  messageDiv.appendChild(timeDiv);
 
   return messageDiv;
 }
@@ -105,22 +124,34 @@ function fetchStudySessions() {
   }
 
 function buildStudySessionDiv(studySession) {
-  const headerDiv = document.createElement('div');
-  headerDiv.classList.add('message-header');
-  headerDiv.classList.add('padded');
-  headerDiv.appendChild(document.createTextNode(
-      studySession.topic + ";" + studySession.time + ";" + studySession.location));
+  const topicDiv = document.createElement('div');
+  topicDiv.classList.add('studySession_topic');
+  const topic = document.createElement('h3');
+  topic.appendChild(document.createTextNode(studySession.topic));
+  const about = document.createElement('p');
+  about.appendChild(document.createTextNode(studySession.description));
+  topicDiv.appendChild(topic);
+  topicDiv.appendChild(about);
 
-  const bodyDiv = document.createElement('div');
-  bodyDiv.classList.add('message-body');
-  bodyDiv.innerHTML = studySession.description;
+  const logisticsDiv = document.createElement('div');
+  logisticsDiv.classList.add('studySession_logistics');
+  const timeIcon = document.createElement('i');
+  timeIcon.classList = "fas fa-clock";
+  const time = document.createElement('p');
+  time.appendChild(document.createTextNode(studySession.time.slice(11,16)));
+  const location = document.createElement('p')
+  location.appendChild(document.createTextNode(studySession.location));
+  const locationIcon = document.createElement('i');
+  locationIcon.classList = "fas fa-map-marker-alt";;
+  logisticsDiv.appendChild(timeIcon);
+  logisticsDiv.appendChild(time);
+  logisticsDiv.appendChild(locationIcon);
+  logisticsDiv.appendChild(location);
 
   const studySessionDiv = document.createElement('div');
-  studySessionDiv.classList.add('message-div');
-  studySessionDiv.classList.add('rounded');
-  studySessionDiv.classList.add('panel');
-  studySessionDiv.appendChild(headerDiv);
-  studySessionDiv.appendChild(bodyDiv);
+  studySessionDiv.classList.add('studySession-div');
+  studySessionDiv.appendChild(topicDiv);
+  studySessionDiv.appendChild(logisticsDiv);
 
   return studySessionDiv;
 }
@@ -146,6 +177,17 @@ function closeStudySessionModal() {
   modal.style.display = "none";
 }
 
+/* Helper to parse timestamp */
+function pad(num) {
+  return ("0"+num).slice(-2);
+}
+function getTimeFromDate(timestamp) {
+  var date = new Date(timestamp * 1000);
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var seconds = date.getSeconds();
+  return pad(hours)+":"+pad(minutes);
+}
 
 /** Build page */
 function buildUI() {

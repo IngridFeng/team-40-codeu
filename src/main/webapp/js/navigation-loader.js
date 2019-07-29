@@ -19,9 +19,9 @@
  * already logged in.
  */
 function addLoginOrLogoutLinkToNavigation() {
-  const navigationElement = document.getElementById('navigation');
-  if (!navigationElement) {
-    console.warn('Navigation element not found!');
+  const loginElement = document.getElementById('login-element');
+  if (!loginElement) {
+    console.warn('Login element not found!');
     return;
   }
 
@@ -31,14 +31,14 @@ function addLoginOrLogoutLinkToNavigation() {
       })
       .then((loginStatus) => {
         if (loginStatus.isLoggedIn) {
-          navigationElement.appendChild(createListItem(createLink(
-              '/user-page.html?user=' + loginStatus.username, 'Your Page')));
+          loginElement.appendChild(createLink('/user-page.html?user=' + loginStatus.username, 'Profile'));
 
+          /*
           navigationElement.appendChild(
               createListItem(createLink('/logout', 'Logout')));
+          */
         } else {
-          navigationElement.appendChild(
-              createListItem(createLink('/login', 'Login')));
+          loginElement.appendChild(createLink('/login', 'Login'));
         }
       });
 }

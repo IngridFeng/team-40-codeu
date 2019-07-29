@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Chat Page</title>
+    <title>My chats</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/mission-control.css">
     <link rel="stylesheet" href="/css/user-page.css">
-    <link rel="stylesheet" href="/css/chat.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
     <script src="/js/navigation-loader.js"></script>
-    <script src="/js/chat-page-loader.js"></script>
-    <script src="https://kit.fontawesome.com/c031e10546.js"></script>
+    <script src="/js/mychats-page-loader.js"></script>
   </head>
   <body onload="addLoginOrLogoutLinkToNavigation(); buildUI();">
     <div class="wrapper navbar">
@@ -39,12 +37,6 @@
           </div>
 
           <div class="flex_section_parent">
-            <div class="flex_section_sidebar rounded panel centered">
-              <div class="main-content_title">
-                <h1>Study Sessions</h1>
-              </div>
-              <div id="studySession-container" class="scrollable">Loading...</div>
-            </div>
 
             <div class="flex_section_main rounded panel centered">
               <div class="main-content_title">
@@ -52,6 +44,7 @@
               </div>
               <div id="message-container" class="scrollable">Loading...</div>
             </div>
+
           </div>
 
           <div class="main-content_footer padded rounded panel">
@@ -67,35 +60,10 @@
               <input type="submit" value="Send" class="rounded send-button">
             </form>
           </div>
-          <div class="floating-button_bottom-right rounded">
-            <a onclick="openStudySessionModal()"> Set a Study Session! </a>
-          </div>
-        </div>
-        <!-- The Modal -->
-        <div id="studySessionModal" class="modal">
-          <!-- Modal content -->
-          <div class="modal-content">
-            <span class="close" onclick="closeStudySessionModal()">&times;</span>
-              <form id="studySession-form" action="/study-session" method="POST">
-                <h1>Set a Study Session</h1>
-                <p>Topic:</p>
-                <input id="studySessionForm_chatInput" type="hidden" name="chatId" value="" />
-                <input class="noTime_input" type="text" name="topic">
-                <p>Description:</p>
-                <input class="noTime_input" type="text" name="description">
-                <p>Time:</p>
-                <input class="noTime_input" type="datetime-local" name="time">
-                <p>Location:</p>
-                <input class="noTime_input" type="String" name="location">
-                <p>Allow anybody to join session</p>
-                <input class="noTime_input" type="checkbox" name="public">
-                <br />
-                <input type="submit" value="Set" class="cta submit-btn">
-              </form>
-            </span>
-          </div>
         </div>
       </div>
     </div>
+
+
   </body>
 </html>

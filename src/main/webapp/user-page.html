@@ -20,6 +20,7 @@ limitations under the License.
     <title>User Page</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/mission-control.css">
     <link rel="stylesheet" href="/css/user-page.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
@@ -29,184 +30,208 @@ limitations under the License.
     <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
   </head>
   <body onload="buildUI(); addLoginOrLogoutLinkToNavigation();">
-    <nav>
-      <ul id="navigation">
-        <li><a href="/">Home</a></li>
-        <li><a href="/aboutus.html">About Us</a></li>
-        <li><a href="/community.html">Community</a></li>
-    	  <li><a href="/feed.html">Public Feed</a></li>
-      </ul>
-    </nav>
-    <div class="content">
-      <div class="padded rounded panel centered">
-        <h2 id="page-title">User Page</h2>
-      </div>
+    <div class="wrapper navbar">
+      <article class="main">
+        <p id="logo"><a href="/aboutus.html">MuMind</a></p>
+      </article>
+      <aside class="aside aside-1"><a href="/">Home</a></aside>
+      <aside class="aside aside-2"><a href="/logout">Logout</a></aside>
+    </div>
 
-      <div class="row padded rounded panel">
-        <div class="column left">
-          <img id="profilepic" src="profilepic.png" alt="Profile Picture" class="profilepic">
-          <div id="profilepic-form-container">
-            <form id="profilepic-form" method="POST" class="hidden" enctype="multipart/form-data">
+    <div class="flex_section_parent">
+      <div class="mc_sidebar">
+        <h2 class="sidebar-title">My Stuff</h2>
+        <a class="sidebar-link" href="/my-community.html">Chats</a>
+        <a class="sidebar-link" href="#">Study Sessions</a>
+        <h2 class="sidebar-title">Community</h2>
+        <a class="sidebar-link" href="/community.html">Nerds</a>
+        <a class="sidebar-link" href="/feed.html">Forum</a>
+      </div>
+      <div class="mc_main">
+        <div class="content">
+          <div class="padded rounded panel centered">
+            <h2 id="page-title">User Page</h2>
+          </div>
+
+          <div class="row padded rounded panel">
+            <!-- temp styling to make the photo section look nice, plz fix w CSS -->
+            <div class="column left40">
+              <img id="profilepic" src="profilepic.png" alt="Profile Picture" class="profilepic">
+              <div id="profilepic-form-container">
+                <form id="profilepic-form" method="POST" class="hidden" enctype="multipart/form-data">
+                  <input type="file" name="image">
+                  <input type="submit" value="Update Profile Picture" class="cta submit-btn profile-submit">
+                </form>
+              </div>
+            </div>
+
+            <div class="column right60">
+              <h2 style = "margin-bottom: 20px">My Profile</h2>
+              <p id="nick-name-container" class="noBotMargin noTopMargin">Loading...</p>
+              <p id="university-name-container" class="noBotMargin noTopMargin">Loading...</p>
+              <p id="topic-container" class="noBotMargin noTopMargin">Loading...</p>
+              <p id="major-container" class="noBotMargin noTopMargin">Loading...</p>
+              <p id="timezone-container" class="noBotMargin noTopMargin">Loading...</p>
+              <p id="studypace-container" class="noBotMargin noTopMargin">Loading...</p>
+              <h3>About Me</h3>
+              <p id="about-me-container" class="noBotMargin noTopMargin">Loading...</p>
+            </div>
+          </div>
+
+          <div id = "update-forms" class = "padded rounded panel hidden">
+            <h2 style = "margin-bottom: 20px">Update My Profile</h2>
+
+            <div id="nickname-form" class = "input-part">
+              <form action="/nickName" method="POST">
+                <input class = "input-textbox info-input" placeholder = "Nickname" type="textbox" name="nickName" id="nickname-input" required></input>
+                <input type="submit" value="Update" class="cta submit-btn info-submit">
+              </form>
+            </div>
+            <div id="university-name-form" class = "input-part">
+              <form action="/universityName" method="POST">
+                <input class = "input-textbox info-input" placeholder = "University Name" type="textbox" name="universityName" id="university-name-input" required></input>
+                <input type="submit" value="Update" class="cta submit-btn info-submit">
+              </form>
+            </div>
+
+            <div id="major-form" class = "input-part">
+              <form action="/major" method="POST">
+                <input class = "input-textbox info-input" placeholder = "Major" type="textbox" name="major" id="major-input" required></input>
+                <input type="submit" value="Update" class="cta submit-btn info-submit">
+              </form>
+            </div>
+
+            <div id="timezone-form" class = "input-part">
+              <form action="/timezone" method="POST">
+                <!--<input class = "input-textbox info-input" placeholder = "Time Zone" type="textbox" name="timezone" id="timezone-input" required></input>-->
+                <select name="timezone" id="timezone-input" class = "input-textbox info-input" equired>
+                  <option value="" selected>Time Zone</option>
+                	<option value="-12:00">(GMT -12:00) Eniwetok, Kwajalein</option>
+                	<option value="-11:00">(GMT -11:00) Midway Island, Samoa</option>
+                	<option value="-10:00">(GMT -10:00) Hawaii</option>
+                	<option value="-09:50">(GMT -9:30) Taiohae</option>
+                	<option value="-09:00">(GMT -9:00) Alaska</option>
+                	<option value="-08:00">(GMT -8:00) Pacific Time (US &amp; Canada)</option>
+                	<option value="-07:00">(GMT -7:00) Mountain Time (US &amp; Canada)</option>
+                	<option value="-06:00">(GMT -6:00) Central Time (US &amp; Canada), Mexico City</option>
+                	<option value="-05:00">(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima</option>
+                	<option value="-04:50">(GMT -4:30) Caracas</option>
+                	<option value="-04:00">(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz</option>
+                	<option value="-03:50">(GMT -3:30) Newfoundland</option>
+                	<option value="-03:00">(GMT -3:00) Brazil, Buenos Aires, Georgetown</option>
+                	<option value="-02:00">(GMT -2:00) Mid-Atlantic</option>
+                	<option value="-01:00">(GMT -1:00) Azores, Cape Verde Islands</option>
+                	<option value="+00:00" selected="selected">(GMT) Western Europe Time, London, Lisbon, Casablanca</option>
+                	<option value="+01:00">(GMT +1:00) Brussels, Copenhagen, Madrid, Paris</option>
+                	<option value="+02:00">(GMT +2:00) Kaliningrad, South Africa</option>
+                	<option value="+03:00">(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg</option>
+                	<option value="+03:50">(GMT +3:30) Tehran</option>
+                	<option value="+04:00">(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi</option>
+                	<option value="+04:50">(GMT +4:30) Kabul</option>
+                	<option value="+05:00">(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent</option>
+                	<option value="+05:50">(GMT +5:30) Bombay, Calcutta, Madras, New Delhi</option>
+                	<option value="+05:75">(GMT +5:45) Kathmandu, Pokhara</option>
+                	<option value="+06:00">(GMT +6:00) Almaty, Dhaka, Colombo</option>
+                	<option value="+06:50">(GMT +6:30) Yangon, Mandalay</option>
+                	<option value="+07:00">(GMT +7:00) Bangkok, Hanoi, Jakarta</option>
+                	<option value="+08:00">(GMT +8:00) Beijing, Perth, Singapore, Hong Kong</option>
+                	<option value="+08:75">(GMT +8:45) Eucla</option>
+                	<option value="+09:00">(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</option>
+                	<option value="+09:50">(GMT +9:30) Adelaide, Darwin</option>
+                	<option value="+10:00">(GMT +10:00) Eastern Australia, Guam, Vladivostok</option>
+                	<option value="+10:50">(GMT +10:30) Lord Howe Island</option>
+                	<option value="+11:00">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</option>
+                	<option value="+11:50">(GMT +11:30) Norfolk Island</option>
+                	<option value="+12:00">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</option>
+                	<option value="+12:75">(GMT +12:45) Chatham Islands</option>
+                	<option value="+13:00">(GMT +13:00) Apia, Nukualofa</option>
+                	<option value="+14:00">(GMT +14:00) Line Islands, Tokelau</option>
+                </select>
+                <input type="submit" value="Update" class="cta submit-btn info-submit">
+              </form>
+            </div>
+            
+            <div id="studypace-form" class = "input-part">
+              <form action="/studypace" method="POST">
+                <input class = "input-textbox info-input" placeholder = "Weekly Study Hours" type="textbox" name="studypace" id="studypace-input" required></input>
+                <input type="submit" value="Update" class="cta submit-btn info-submit">
+              </form>
+            </div>
+            <!-- Topic Form -->
+            <!-- post request is handled via JS to parse the inputs into lists -->
+            <div id="topic-form" class = "input-part">
+              <form>
+                <!-- <div id="pastTopics-div">
+                  <h1>Past Topics</h1>
+                  <input type="checkbox" name="OS">OS</input>
+                  <br />
+                  <input type="checkbox" name="Web Dev">Web Dev</input>
+                  <br />
+                </div> -->
+                <div id="currentTopics-div">
+                  <div class = "row">
+                    <div class="column equal33"><input type="checkbox" name="OS">Operating System</input></div>
+                    <div class="column equal33"><input type="checkbox" name="Web Dev">Web Development</input></div>
+                    <div class="column equal33"><input type="checkbox" name="Ios Dev">iOS Development</input></div>
+                  </div>
+
+                  <div class = "row">
+                    <div class="column equal33"><input type="checkbox" name="And Dev">Android Development</input></div>
+                    <div class="column equal33"><input type="checkbox" name="ML">Machine Learning</input></div>
+                    <div class="column equal33"><input type="checkbox" name="CV">Computer Vision</input></div>
+                  </div>
+
+                  <div class = "row">
+                    <div class="column equal33"><input type="checkbox" name="NLP">NLP</input></div>
+                    <div class="column equal33"><input type="checkbox" name="Alg Des">Algorithm Design</input></div>
+                    <div class="column equal33"><input type="checkbox" name="Data Sci">Data Science</input></div>
+                  </div>
+
+                  <div class = "row">
+                    <div class="column equal33"><input type="checkbox" name="Database">Database</input></div>
+                    <div class="column equal33"><input type="checkbox" name="Com Net">Computer Networks</input></div>
+                    <div class="column equal33"><input type="checkbox" name="Dist SYs">Distributed System</input></div>
+                  </div>
+
+                </div>
+                <input type="submit" value="Update Fields of Interest" class="cta submit-btn" onclick="setCurrentTopics()">
+              </form>
+            </div>
+
+            <div id="about-me-form">
+              <form action="/about" method="POST">
+                <textarea name="about-me" id="aboutme-input" placeholder="Enter your information here" required></textarea>
+                <br/>
+                <input type="submit" value="Update About Me" class="cta submit-btn">
+              </form>
+            </div>
+          </div>
+
+          <div id="message-form-wrap" class="padded rounded panel hidden">
+            <form id="message-form" method="POST" enctype="multipart/form-data">
+              <textarea name="text" id="message-input" class="rounded"></textarea>
+              <p style = "display: inline-block;">Upload an image:</p>
               <input type="file" name="image">
-              <input type="submit" value="Update Profile Picture" class="cta submit-btn profile-submit">
+              <input type="submit" value="Post A New Message" class="cta submit-btn">
             </form>
           </div>
-        </div>
+          <hr/>
 
-        <div class="column right">
-          <h2 style = "margin-bottom: 20px">My Profile</h2>
-          <p id="nick-name-container" class="noBotMargin noTopMargin">Loading...</p>
-          <p id="university-name-container" class="noBotMargin noTopMargin">Loading...</p>
-          <p id="topic-container" class="noBotMargin noTopMargin">Loading...</p>
-          <p id="major-container" class="noBotMargin noTopMargin">Loading...</p>
-          <p id="timezone-container" class="noBotMargin noTopMargin">Loading...</p>
-          <p id="studypace-container" class="noBotMargin noTopMargin">Loading...</p>
-          <h3>About Me</h3>
-          <p id="about-me-container" class="noBotMargin noTopMargin">Loading...</p>
-        </div>
-      </div>
+       <form id="login-form" action="/login" method="GET" class="hidden">
+         <input type="submit" value="Login to Chat!">
+       </form>
 
-      <div class = "padded rounded panel">
-        <h2 style = "margin-bottom: 20px">Update My Profile</h2>
-        <div id="nickname-form" class = "input-part hidden">
-          <form action="/nickName" method="POST">
-            <input class = "input-textbox info-input" placeholder = "Nickname" type="textbox" name="nickName" id="nickname-input" required></input>
-            <input type="submit" value="Update" class="cta submit-btn info-submit">
-          </form>
-        </div>
-
-        <div id="university-name-form" class = "input-part hidden">
-          <form action="/universityName" method="POST">
-            <input class = "input-textbox info-input" placeholder = "University Name" type="textbox" name="universityName" id="university-name-input" required></input>
-            <input type="submit" value="Update" class="cta submit-btn info-submit">
-          </form>
-        </div>
-
-        <div id="major-form" class = "input-part hidden">
-          <form action="/major" method="POST">
-            <input class = "input-textbox info-input" placeholder = "Major" type="textbox" name="major" id="major-input" required></input>
-            <input type="submit" value="Update" class="cta submit-btn info-submit">
-          </form>
-        </div>
-
-        <div id="timezone-form" class = "input-part hidden">
-          <form action="/timezone" method="POST">
-            <input class = "input-textbox info-input" placeholder = "Time Zone" type="textbox" name="timezone" id="timezone-input" required></input>
-            <input type="submit" value="Update" class="cta submit-btn info-submit">
-          </form>
-        </div>
-
-        <div id="studypace-form" class = "input-part hidden">
-          <form action="/studypace" method="POST">
-            <input class = "input-textbox info-input" placeholder = "Weekly Study Hours" type="textbox" name="studypace" id="studypace-input" required></input>
-            <input type="submit" value="Update" class="cta submit-btn info-submit">
-          </form>
-        </div>
-        
-        <div id="timezone-form" class = "input-part">
-          <form action="/timezone" method="POST">
-            <!--<input class = "input-textbox info-input" placeholder = "Time Zone" type="textbox" name="timezone" id="timezone-input" required></input>-->
-            <select name="timezone" id="timezone-input" class = "input-textbox info-input" equired>
-              <option value="" selected>Time Zone</option>
-            	<option value="-12:00">(GMT -12:00) Eniwetok, Kwajalein</option>
-            	<option value="-11:00">(GMT -11:00) Midway Island, Samoa</option>
-            	<option value="-10:00">(GMT -10:00) Hawaii</option>
-            	<option value="-09:50">(GMT -9:30) Taiohae</option>
-            	<option value="-09:00">(GMT -9:00) Alaska</option>
-            	<option value="-08:00">(GMT -8:00) Pacific Time (US &amp; Canada)</option>
-            	<option value="-07:00">(GMT -7:00) Mountain Time (US &amp; Canada)</option>
-            	<option value="-06:00">(GMT -6:00) Central Time (US &amp; Canada), Mexico City</option>
-            	<option value="-05:00">(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima</option>
-            	<option value="-04:50">(GMT -4:30) Caracas</option>
-            	<option value="-04:00">(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz</option>
-            	<option value="-03:50">(GMT -3:30) Newfoundland</option>
-            	<option value="-03:00">(GMT -3:00) Brazil, Buenos Aires, Georgetown</option>
-            	<option value="-02:00">(GMT -2:00) Mid-Atlantic</option>
-            	<option value="-01:00">(GMT -1:00) Azores, Cape Verde Islands</option>
-            	<option value="+00:00" selected="selected">(GMT) Western Europe Time, London, Lisbon, Casablanca</option>
-            	<option value="+01:00">(GMT +1:00) Brussels, Copenhagen, Madrid, Paris</option>
-            	<option value="+02:00">(GMT +2:00) Kaliningrad, South Africa</option>
-            	<option value="+03:00">(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg</option>
-            	<option value="+03:50">(GMT +3:30) Tehran</option>
-            	<option value="+04:00">(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi</option>
-            	<option value="+04:50">(GMT +4:30) Kabul</option>
-            	<option value="+05:00">(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent</option>
-            	<option value="+05:50">(GMT +5:30) Bombay, Calcutta, Madras, New Delhi</option>
-            	<option value="+05:75">(GMT +5:45) Kathmandu, Pokhara</option>
-            	<option value="+06:00">(GMT +6:00) Almaty, Dhaka, Colombo</option>
-            	<option value="+06:50">(GMT +6:30) Yangon, Mandalay</option>
-            	<option value="+07:00">(GMT +7:00) Bangkok, Hanoi, Jakarta</option>
-            	<option value="+08:00">(GMT +8:00) Beijing, Perth, Singapore, Hong Kong</option>
-            	<option value="+08:75">(GMT +8:45) Eucla</option>
-            	<option value="+09:00">(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</option>
-            	<option value="+09:50">(GMT +9:30) Adelaide, Darwin</option>
-            	<option value="+10:00">(GMT +10:00) Eastern Australia, Guam, Vladivostok</option>
-            	<option value="+10:50">(GMT +10:30) Lord Howe Island</option>
-            	<option value="+11:00">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</option>
-            	<option value="+11:50">(GMT +11:30) Norfolk Island</option>
-            	<option value="+12:00">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</option>
-            	<option value="+12:75">(GMT +12:45) Chatham Islands</option>
-            	<option value="+13:00">(GMT +13:00) Apia, Nukualofa</option>
-            	<option value="+14:00">(GMT +14:00) Line Islands, Tokelau</option>
-            </select>
-            <input type="submit" value="Update" class="cta submit-btn info-submit">
-          </form>
-        </div>
-
-        <!-- Topic Form -->
-        <!-- post request is handled via JS to parse the inputs into lists -->
-        <div id="topic-form" class = "input-part hidden">
-          <form>
-            <!-- <div id="pastTopics-div">
-              <h1>Past Topics</h1>
-              <input type="checkbox" name="OS">OS</input>
-              <br />
-              <input type="checkbox" name="Web Dev">Web Dev</input>
-              <br />
-            </div> -->
-            <div id="currentTopics-div">
-              <h1>Current Topics</h1>
-              <input type="checkbox" name="OS">OS</input>
-              <br />
-              <input type="checkbox" name="Web Dev">Web Dev</input>
-              <br />
-            </div>
-            <input type="submit" value="Update My Fields of Interest" class="cta submit-btn" onclick="setCurrentTopics()">
-          </form>
-        </div>
-
-        <div id="about-me-form">
-          <form action="/about" method="POST">
-            <textarea name="about-me" id="aboutme-input" placeholder="Enter your information here" required></textarea>
-            <br/>
-            <input type="submit" value="Update About Me" class="cta submit-btn">
-          </form>
-        </div>
-      </div>
-
-      <div class="padded rounded panel">
-        <form id="message-form" method="POST" class="hidden" enctype="multipart/form-data">
-          <textarea name="text" id="message-input" class="rounded"></textarea>
-          <p style = "display: inline-block;">Upload an image:</p>
-          <input type="file" name="image">
-          <input type="submit" value="Post A New Message" class="cta submit-btn">
+        <form id="chat-form" action="/chat" method="POST" class="hidden">
+          <input type="hidden" name="selectedUser" value="" />
+          <input type="hidden" name="chat" value="forum" />
+          <input type="submit" value="Chat with Me!">
         </form>
+
+        <hr/>
+
+          <div id="message-container">Loading...</div>
+        </div>
       </div>
-      <hr/>
-
-   <form id="login-form" action="/login" method="GET" class="hidden">
-     <input type="submit" value="Login to Chat!">
-   </form>
-
-    <form id="chat-form" action="/chat" method="POST" class="hidden">
-      <input type="hidden" name="selectedUser" value="" />
-      <input type="hidden" name="chat" value="forum" />
-      <input type="submit" value="Chat with Me!">
-    </form>
-
-    <hr/>
-
-      <div id="message-container">Loading...</div>
     </div>
   </body>
 </html>
