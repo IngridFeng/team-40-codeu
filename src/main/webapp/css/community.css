@@ -1,0 +1,21 @@
+/*************** HEADER CONTENT ***************/
+.header_bar {
+  margin: 0 7%;
+}
+
+.select-box {
+  display: inline-block;
+  width: 25%;
+  min-width: 250px;
+}
+
+#filter_bar {
+  display: block;
+  text-align: center;
+}
+
+#list {
+  width: 70%;
+  margin: 0 15%;
+  padding: 0
+}
