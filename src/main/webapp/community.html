@@ -79,12 +79,19 @@
                 <p>Time Zone</p>
               </div>
               <div class="select-contents" id="timezone" style="display: none;">
+                <p>Between </p>
+                <input type="number" name="startTime" min="-12" max="+14" class="filter_input">
+                <p>GMT and </p>
+                <input type="number" name="endTime" min="-12" max="+14" class="filter_input">
+                <p>GMT</p>
+              <!--
                 <label for="east_ish">
                   <input type="checkbox" value="east_ish" checked/><p>GMT -12:00 to GMT -4:00</p></label>
                 <label for="central_ish">
                   <input type="checkbox" value="central_ish" checked/><p>GMT -04:00 to GMT +04:00</p></label>
                 <label for="west_ish">
                   <input type="checkbox" value="west_ish" checked/><p>GMT +04:00 to GMT +14:00</p></label>
+                -->
                 <!--
                 <label for="-12:00">
                   <input type="checkbox" value="-12:00" checked/><p>(GMT -12:00) Eniwetok, Kwajalein</p></label>
@@ -174,13 +181,12 @@
               <div class="select-title" onclick="showCheckboxOptions(this)">
                 <p>Study Pace</p>
               </div>
-              <div class="select-contents" id="studypace" style="display: none;">
-                <label for="chill">
-                  <input type="checkbox" value="chill" checked/><p>Less than 2 hrs/wk</p></label>
-                <label for="moderate">
-                  <input type="checkbox" value="moderate" checked/><p>2 to 5 hrs/wk</p></label>
-                <label for="intense">
-                  <input type="checkbox" value="intense" checked/><p>More than 5 hrs/wk</p></label>
+              <div class="select-contents" id="timezone" style="display: none;">
+                <p>Between </p>
+                <input type="number" name="minPace" min="0" max="168" class="filter_input">
+                <p>hrs/week and </p>
+                <input type="number" name="maxPace" min="0" max="168" class="filter_input">
+                <p>hrs/week</p>
               </div>
             </div>
 

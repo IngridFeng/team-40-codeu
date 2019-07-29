@@ -229,7 +229,7 @@ function fetchTimeZone(){
     if(timezone == ''){
       timezone = 'Unknown';
     }
-    timezoneContainer.innerHTML = 'Time Zone: ' + timezone;
+    timezoneContainer.innerHTML = 'Time Zone: ' + timezone + 'GMT';
   });
 }
 

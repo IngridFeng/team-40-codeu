@@ -38,24 +38,24 @@ public class ChatsListServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response)
     throws IOException {
       response.setContentType("application/json");
-      
+
       UserService userService = UserServiceFactory.getUserService();
       if (!userService.isUserLoggedIn()) {
       	response.sendRedirect("/login");
       	return;
-      }	  
-	  
+      }
+
       //get email of current user
       String userEmail = userService.getCurrentUser().getEmail();
       //get current user by querying the email
       User user = datastore.getUser(userEmail);
-      
+
       String topic = request.getParameter("topic");
       String timezone = request.getParameter("timezone");
       String studypace = request.getParameter("studypace");
-      List<User> users = datastore.getUsers(topic, timezone, studypace);
+      List<User> users = datastore.getUsersWithParams(topic, timezone, studypace);
       List<User> result = new ArrayList<>();
-      
+
       for (User selectedUser : users) {
 			  String selectedUserEmail = selectedUser.getEmail();
         if (user != null && selectedUser != null) {
@@ -70,9 +70,9 @@ public class ChatsListServlet extends HttpServlet {
               result.add(selectedUser);
             }
           }
-        }   
+        }
 		  }
-      
+
       Gson gson = new Gson();
       String json = gson.toJson(result);
       response.getOutputStream().println(json);

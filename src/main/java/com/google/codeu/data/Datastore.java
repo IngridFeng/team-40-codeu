@@ -190,7 +190,41 @@ public class Datastore {
    * Gets a set of all users.
    * return a set of strings representing the users.
    */
-  public List<User> getUsers(String topic, String timezone, String studypace){
+   public List<User> getUsers(){
+     List<User> users = new ArrayList<>();
+     Query query = new Query("User");
+
+     PreparedQuery results = datastore.prepare(query);
+
+
+     for (Entity entity : results.asIterable()) {
+       try {
+         String email = (String) entity.getProperty("email");
+         String aboutMe = (String) entity.getProperty("aboutMe");
+         String nickName = (String) entity.getProperty("nickName");
+         List<String> chats = (List<String>) entity.getProperty("chats");
+         String imageUrl = (String) entity.getProperty("imageUrl");
+         String universityName = (String) entity.getProperty("universityName");
+         String major = (String) entity.getProperty("major");
+         Long timezone = (Long) entity.getProperty("timezone");
+         String studypace = (String) entity.getProperty("studypace");
+         List<String> pastTopics = (List<String>) entity.getProperty("pastTopics");
+         List<String> currentTopics = (List<String>) entity.getProperty("currentTopics");
+
+         User user = new User(email, aboutMe, nickName, chats, imageUrl, universityName, major, timezone, studypace, pastTopics, currentTopics);
+         users.add(user);
+       } catch (Exception e) {
+         System.err.println("Error reading message.");
+         System.err.println(entity.toString());
+         e.printStackTrace();
+       }
+     }
+
+     return users;
+   }
+
+
+  public List<User> getUsersWithParams(String topicParam, String timezoneParam, String studypaceParam){
     System.out.println("REACHED DATASTORE");
 
     List<User> users = new ArrayList<>();
@@ -200,9 +234,9 @@ public class Datastore {
     studypace = studypace.substring(1, studypace.length()-1);
     */
 
-    List<String> topicList = Arrays.asList(topic.split(","));
-    List<String> timezoneList = Arrays.asList(timezone.split(","));
-    List<String> studypaceList = Arrays.asList(studypace.split(","));
+    List<String> topicList = Arrays.asList(topicParam.split(","));
+    List<String> timezoneList = Arrays.asList(timezoneParam.split(","));
+    List<String> studypaceList = Arrays.asList(studypaceParam.split(","));
 
     System.out.println(topicList);
     System.out.println(timezoneList);
@@ -210,6 +244,8 @@ public class Datastore {
 
     // Build Filters
     Filter topicFilter = new FilterPredicate("currentTopics", FilterOperator.IN, topicList);
+
+    // should change this to number later
 
     //Filter timezoneFilter =
     //    new FilterPredicate("timezone", FilterOperator.IN, timezoneList);
@@ -236,7 +272,8 @@ public class Datastore {
         String imageUrl = (String) entity.getProperty("imageUrl");
         String universityName = (String) entity.getProperty("universityName");
         String major = (String) entity.getProperty("major");
-        String pace = (String) entity.getProperty("studypace");
+        Long timezone = (Long) entity.getProperty("timezone");
+        String studypace = (String) entity.getProperty("studypace");
         List<String> pastTopics = (List<String>) entity.getProperty("pastTopics");
         List<String> currentTopics = (List<String>) entity.getProperty("currentTopics");
 
@@ -303,7 +340,7 @@ public class Datastore {
   String imageUrl = (String) userEntity.getProperty("imageUrl");
   String universityName = (String) userEntity.getProperty("universityName");
   String major = (String) userEntity.getProperty("major");
-  String timezone = (String) userEntity.getProperty("timezone");
+  Long timezone = (Long) userEntity.getProperty("timezone");
   String studypace = (String) userEntity.getProperty("studypace");
   List<String> pastTopics = (List<String>) userEntity.getProperty("pastTopics");
   List<String> currentTopics = (List<String>) userEntity.getProperty("currentTopics");

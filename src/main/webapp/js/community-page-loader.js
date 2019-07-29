@@ -10,17 +10,27 @@ function showCheckboxOptions(div) {
 
 /** Fetches users and adds them to the page. */
 function loadUsers(){
-  // get params
-  const filterBar = document.getElementById("filter_bar");
   var params = ``;
 
-  const paramDivs = Array.from(filterBar.getElementsByClassName('select-contents'));
+  // get topic params
+  var topicParams = checkboxesToList(document.getElementById("topic"));
 
-  paramDivs.forEach(function(paramDiv) {
-    const selectedOptions = checkboxesToList(paramDiv);
-    params += `${paramDiv.id}=${selectedOptions}&`;
-  });
-  params = params.substring(0, params.length-1);
+  // get timezone params
+  const startTime = document.getElementById("timezone").getElementsByTagName("input")[0].value;
+  const endTime = document.getElementById("timezone").getElementsByTagName("input")[1].value
+  var timezoneParams = []
+  for (var i=startTime; i<=endTime; i++) {
+    timezoneParams.append(i);
+  }
+
+  // get studypace params
+  const startPace = document.getElementById("studypace").getElementsByTagName("input")[0].value;
+  const endPace = document.getElementById("studypace").getElementsByTagName("input")[1].value
+  var studypaceParams = []
+  for (var i=startPace; i<=endPace; i++) {
+    studypaceParams.append(i);
+  }
+  params = `topic=${topicParams}&timezone=${timezoneParams}&studypace=${studypaceParams}`;
 
   // fetch user list based on params
   const url = '/user-list?' + params;

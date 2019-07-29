@@ -19,3 +19,11 @@
   margin: 0 15%;
   padding: 0
 }
+
+.filter_input {
+  border: 1px solid grey;
+}
+
+.filter_input:hover {
+  border: 1px solid var(--main-color);
+}
