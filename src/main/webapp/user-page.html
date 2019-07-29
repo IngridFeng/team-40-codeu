@@ -101,6 +101,47 @@ limitations under the License.
               </form>
             </div>
 
+            <!-- Topic Form -->
+            <!-- post request is handled via JS to parse the inputs into lists -->
+            <div id="topic-form" class = "input-part">
+              <form>
+                <!-- <div id="pastTopics-div">
+                  <h1>Past Topics</h1>
+                  <input type="checkbox" name="OS">OS</input>
+                  <br />
+                  <input type="checkbox" name="Web Dev">Web Dev</input>
+                  <br />
+                </div> -->
+                <div id="currentTopics-div">
+                  <div class = "row">
+                    <div class="column equal33"><input type="checkbox" name="OS">Operating System</input></div>
+                    <div class="column equal33"><input type="checkbox" name="Web Dev">Web Development</input></div>
+                    <div class="column equal33"><input type="checkbox" name="Ios Dev">iOS Development</input></div>
+                  </div>
+
+                  <div class = "row">
+                    <div class="column equal33"><input type="checkbox" name="And Dev">Android Development</input></div>
+                    <div class="column equal33"><input type="checkbox" name="ML">Machine Learning</input></div>
+                    <div class="column equal33"><input type="checkbox" name="CV">Computer Vision</input></div>
+                  </div>
+
+                  <div class = "row">
+                    <div class="column equal33"><input type="checkbox" name="NLP">NLP</input></div>
+                    <div class="column equal33"><input type="checkbox" name="Alg Des">Algorithm Design</input></div>
+                    <div class="column equal33"><input type="checkbox" name="Data Sci">Data Science</input></div>
+                  </div>
+
+                  <div class = "row">
+                    <div class="column equal33"><input type="checkbox" name="Database">Database</input></div>
+                    <div class="column equal33"><input type="checkbox" name="Com Net">Computer Networks</input></div>
+                    <div class="column equal33"><input type="checkbox" name="Dist SYs">Distributed System</input></div>
+                  </div>
+
+                </div>
+                <input type="submit" value="Update Fields of Interest" class="cta submit-btn" onclick="setCurrentTopics()">
+              </form>
+            </div>
+
             <div id="timezone-form" class = "input-part">
               <form action="/timezone" method="POST">
                 <!--<input class = "input-textbox info-input" placeholder = "Time Zone" type="textbox" name="timezone" id="timezone-input" required></input>-->
@@ -150,53 +191,14 @@ limitations under the License.
                 <input type="submit" value="Update" class="cta submit-btn info-submit">
               </form>
             </div>
-            
+
             <div id="studypace-form" class = "input-part">
               <form action="/studypace" method="POST">
                 <input class = "input-textbox info-input" placeholder = "Weekly Study Hours" type="textbox" name="studypace" id="studypace-input" required></input>
                 <input type="submit" value="Update" class="cta submit-btn info-submit">
               </form>
             </div>
-            <!-- Topic Form -->
-            <!-- post request is handled via JS to parse the inputs into lists -->
-            <div id="topic-form" class = "input-part">
-              <form>
-                <!-- <div id="pastTopics-div">
-                  <h1>Past Topics</h1>
-                  <input type="checkbox" name="OS">OS</input>
-                  <br />
-                  <input type="checkbox" name="Web Dev">Web Dev</input>
-                  <br />
-                </div> -->
-                <div id="currentTopics-div">
-                  <div class = "row">
-                    <div class="column equal33"><input type="checkbox" name="OS">Operating System</input></div>
-                    <div class="column equal33"><input type="checkbox" name="Web Dev">Web Development</input></div>
-                    <div class="column equal33"><input type="checkbox" name="Ios Dev">iOS Development</input></div>
-                  </div>
 
-                  <div class = "row">
-                    <div class="column equal33"><input type="checkbox" name="And Dev">Android Development</input></div>
-                    <div class="column equal33"><input type="checkbox" name="ML">Machine Learning</input></div>
-                    <div class="column equal33"><input type="checkbox" name="CV">Computer Vision</input></div>
-                  </div>
-
-                  <div class = "row">
-                    <div class="column equal33"><input type="checkbox" name="NLP">NLP</input></div>
-                    <div class="column equal33"><input type="checkbox" name="Alg Des">Algorithm Design</input></div>
-                    <div class="column equal33"><input type="checkbox" name="Data Sci">Data Science</input></div>
-                  </div>
-
-                  <div class = "row">
-                    <div class="column equal33"><input type="checkbox" name="Database">Database</input></div>
-                    <div class="column equal33"><input type="checkbox" name="Com Net">Computer Networks</input></div>
-                    <div class="column equal33"><input type="checkbox" name="Dist SYs">Distributed System</input></div>
-                  </div>
-
-                </div>
-                <input type="submit" value="Update Fields of Interest" class="cta submit-btn" onclick="setCurrentTopics()">
-              </form>
-            </div>
 
             <div id="about-me-form">
               <form action="/about" method="POST">
