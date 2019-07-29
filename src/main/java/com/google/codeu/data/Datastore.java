@@ -192,42 +192,37 @@ public class Datastore {
    */
   public List<User> getUsers(String topic, String timezone, String studypace){
     System.out.println("REACHED DATASTORE");
-    System.out.println(topic);
-    System.out.println(timezone);
-    System.out.println(studypace);
 
     List<User> users = new ArrayList<>();
-
-    /**
-    // Can't quite do this part until I know how we're storing user info.
-
+    /*
     topic = topic.substring(1, topic.length()-1);
     timezone = timezone.substring(1, timezone.length()-1);
     studypace = studypace.substring(1, studypace.length()-1);
+    */
 
     List<String> topicList = Arrays.asList(topic.split(","));
     List<String> timezoneList = Arrays.asList(timezone.split(","));
     List<String> studypaceList = Arrays.asList(studypace.split(","));
 
+    System.out.println(topicList);
+    System.out.println(timezoneList);
+    System.out.println(studypaceList);
+
     // Build Filters
-    Filter topicFilter =
-    new FilterPredicate("topic", FilterOperator.IN, topicList);
+    Filter topicFilter = new FilterPredicate("currentTopics", FilterOperator.IN, topicList);
 
-    Filter timezoneFilter =
-        new FilterPredicate("timezone", FilterOperator.IN, timezoneList);
+    //Filter timezoneFilter =
+    //    new FilterPredicate("timezone", FilterOperator.IN, timezoneList);
 
-    Filter studypaceFilter =
-        new FilterPredicate("studypace", FilterOperator.IN, studypaceList);
-
+    //Filter studypaceFilter =
+    //    new FilterPredicate("studypace", FilterOperator.IN, studypaceList);
 
     // Use CompositeFilter to combine multiple filters
-    CompositeFilter userFilter =
-        CompositeFilterOperator.and(topicFilter, timezoneFilter, studypaceFilter);
+    //CompositeFilter userFilter = CompositeFilterOperator.and(topicFilter, timezoneFilter, studypaceFilter);
 
-    Query query = new Query("User").setFilter(userFilter);
-    **/
 
-    Query query = new Query("User");
+
+    Query query = new Query("User").setFilter(topicFilter);
 
     PreparedQuery results = datastore.prepare(query);
 
