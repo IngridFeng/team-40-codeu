@@ -68,7 +68,7 @@ public class StudyPaceServlet extends HttpServlet {
     //get email of current user
     String userEmail = userService.getCurrentUser().getEmail();
     //get studypace that user put in
-    String studypace = request.getParameter("studypace");
+    Long studypace = Long.parseLong(request.getParameter("studypace"));
     //get current user by querying the email
     User user = datastore.getUser(userEmail);
     if (user == null) {

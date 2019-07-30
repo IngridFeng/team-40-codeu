@@ -90,7 +90,7 @@ public class Datastore {
         UUID id = UUID.fromString(idString);
         String chat = (String) entity.getProperty("chat");
         String text = (String) entity.getProperty("text");
-        long timestamp = (long) entity.getProperty("timestamp");
+        Long timestamp = (Long) entity.getProperty("timestamp");
         /* double sentiment = (double) entity.getProperty("sentiment"); */
         String imageUrl = (String) entity.getProperty("imageUrl");
         String profilePic = (String) entity.getProperty("profilePic");
@@ -125,7 +125,7 @@ public class Datastore {
         String chat = (String) entity.getProperty("chat");
       	String user = (String) entity.getProperty("user");
         String text = (String) entity.getProperty("text");
-        long timestamp = (long) entity.getProperty("timestamp");
+        Long timestamp = (Long) entity.getProperty("timestamp");
         /* double sentiment = (double) entity.getProperty("sentiment"); */
         String imageUrl = (String) entity.getProperty("imageUrl");
         String profilePic = (String) entity.getProperty("profilePic");
@@ -167,7 +167,7 @@ public class Datastore {
           UUID id = UUID.fromString(idString);
           String user = (String) entity.getProperty("user");
           String text = (String) entity.getProperty("text");
-          long timestamp = (long) entity.getProperty("timestamp");
+          Long timestamp = (Long) entity.getProperty("timestamp");
           /* ouble sentiment = (double) entity.getProperty("sentiment"); */
           String imageUrl = (String) entity.getProperty("imageUrl");
           String profilePic = (String) entity.getProperty("profilePic");
@@ -207,7 +207,7 @@ public class Datastore {
          String universityName = (String) entity.getProperty("universityName");
          String major = (String) entity.getProperty("major");
          Long timezone = (Long) entity.getProperty("timezone");
-         String studypace = (String) entity.getProperty("studypace");
+         Long studypace = (Long) entity.getProperty("studypace");
          List<String> pastTopics = (List<String>) entity.getProperty("pastTopics");
          List<String> currentTopics = (List<String>) entity.getProperty("currentTopics");
 
@@ -235,8 +235,11 @@ public class Datastore {
     for (String strTimezone:timezoneStrings) {
        timezoneList.add(Long.parseLong(strTimezone));
     }
-
-    List<String> studypaceList = Arrays.asList(studypaceParam.split(","));
+    List<String> studypaceStrings = Arrays.asList(studypaceParam.split(","));
+    List<Long> studypaceList = new ArrayList<>();
+    for (String strStudypace:studypaceStrings) {
+       studypaceList.add(Long.parseLong(strStudypace));
+    }
 
     System.out.println(topicList);
     System.out.println(timezoneList);
@@ -248,12 +251,11 @@ public class Datastore {
 
     Filter timezoneFilter = new FilterPredicate("timezone", FilterOperator.IN, timezoneList);
 
-    //Filter studypaceFilter =
-    //    new FilterPredicate("studypace", FilterOperator.IN, studypaceList);
+    Filter studypaceFilter = new FilterPredicate("studypace", FilterOperator.IN, studypaceList);
 
     // Use CompositeFilter to combine multiple filters
-    //CompositeFilter userFilter = CompositeFilterOperator.and(topicFilter, timezoneFilter, studypaceFilter);
-    CompositeFilter userFilter = CompositeFilterOperator.and(topicFilter, timezoneFilter);
+    CompositeFilter userFilter = CompositeFilterOperator.and(topicFilter, timezoneFilter, studypaceFilter);
+    //CompositeFilter userFilter = CompositeFilterOperator.and(topicFilter, timezoneFilter);
 
     Query query = new Query("User").setFilter(userFilter);
     PreparedQuery results = datastore.prepare(query);
@@ -269,7 +271,7 @@ public class Datastore {
         String universityName = (String) entity.getProperty("universityName");
         String major = (String) entity.getProperty("major");
         Long timezone = (Long) entity.getProperty("timezone");
-        String studypace = (String) entity.getProperty("studypace");
+        Long studypace = (Long) entity.getProperty("studypace");
         List<String> pastTopics = (List<String>) entity.getProperty("pastTopics");
         List<String> currentTopics = (List<String>) entity.getProperty("currentTopics");
 
@@ -325,7 +327,7 @@ public class Datastore {
   String universityName = (String) userEntity.getProperty("universityName");
   String major = (String) userEntity.getProperty("major");
   Long timezone = (Long) userEntity.getProperty("timezone");
-  String studypace = (String) userEntity.getProperty("studypace");
+  Long studypace = (Long) userEntity.getProperty("studypace");
   List<String> pastTopics = (List<String>) userEntity.getProperty("pastTopics");
   List<String> currentTopics = (List<String>) userEntity.getProperty("currentTopics");
   User user = new User(email, aboutMe, nickName, chats, imageUrl, universityName, major, timezone, studypace, pastTopics, currentTopics);
