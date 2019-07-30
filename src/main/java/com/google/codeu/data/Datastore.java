@@ -225,43 +225,54 @@ public class Datastore {
 
 
   public List<User> getUsersWithParams(String topicParam, String timezoneParam, String studypaceParam){
-    System.out.println("REACHED DATASTORE");
-
+    /*****! This is so slow I need to figure out a diff way !*****/
     List<User> users = new ArrayList<>();
 
+    // process params
     List<String> topicList = Arrays.asList(topicParam.split(","));
     List<String> timezoneStrings = Arrays.asList(timezoneParam.split(","));
     List<Long> timezoneList = new ArrayList<>();
     for (String strTimezone:timezoneStrings) {
        timezoneList.add(Long.parseLong(strTimezone));
     }
+
     List<String> studypaceStrings = Arrays.asList(studypaceParam.split(","));
     List<Long> studypaceList = new ArrayList<>();
     for (String strStudypace:studypaceStrings) {
        studypaceList.add(Long.parseLong(strStudypace));
     }
 
+    /* DEBUGGING
     System.out.println(topicList);
     System.out.println(timezoneList);
     System.out.println(studypaceList);
+    */
 
-    // Build Filters
-    // need to handle null
+    // build query
+    /* FAILED APPROACH: can't have composite inequalities
+    Filter timezoneFilter1 = new FilterPredicate("timezone", FilterOperator.GREATER_THAN_OR_EQUAL, Long.parseLong(timezoneStrings.get(0)));
+    Filter timezoneFilter2 = new FilterPredicate("timezone", FilterOperator.LESS_THAN_OR_EQUAL, Long.parseLong(timezoneStrings.get(1)));
+
+    Filter studypaceFilter1 = new FilterPredicate("studypace", FilterOperator.GREATER_THAN_OR_EQUAL, Long.parseLong(studypaceStrings.get(0)));
+    Filter studypaceFilter2 = new FilterPredicate("studypace", FilterOperator.LESS_THAN_OR_EQUAL, Long.parseLong(studypaceStrings.get(1)));
+    CompositeFilter userFilter = CompositeFilterOperator.and(topicFilter, timezoneFilter1, timezoneFilter2, studypaceFilter1, studypaceFilter2);
+    */
+
     Filter topicFilter = new FilterPredicate("currentTopics", FilterOperator.IN, topicList);
-
     Filter timezoneFilter = new FilterPredicate("timezone", FilterOperator.IN, timezoneList);
-
     Filter studypaceFilter = new FilterPredicate("studypace", FilterOperator.IN, studypaceList);
 
-    // Use CompositeFilter to combine multiple filters
     CompositeFilter userFilter = CompositeFilterOperator.and(topicFilter, timezoneFilter, studypaceFilter);
-    //CompositeFilter userFilter = CompositeFilterOperator.and(topicFilter, timezoneFilter);
 
     Query query = new Query("User").setFilter(userFilter);
     PreparedQuery results = datastore.prepare(query);
 
-
+    // process results
     for (Entity entity : results.asIterable()) {
+      /* DEBUGGING
+      System.out.println("Results!!");
+      System.out.println(entity);
+      */
       try {
         String email = (String) entity.getProperty("email");
         String aboutMe = (String) entity.getProperty("aboutMe");
@@ -274,7 +285,6 @@ public class Datastore {
         Long studypace = (Long) entity.getProperty("studypace");
         List<String> pastTopics = (List<String>) entity.getProperty("pastTopics");
         List<String> currentTopics = (List<String>) entity.getProperty("currentTopics");
-
         User user = new User(email, aboutMe, nickName, chats, imageUrl, universityName, major, timezone, studypace, pastTopics, currentTopics);
         users.add(user);
       } catch (Exception e) {
@@ -283,7 +293,10 @@ public class Datastore {
         e.printStackTrace();
       }
     }
-
+    /* DEBUGGING
+    System.out.println("datastore returning");
+    System.out.println(users);
+    */
     return users;
   }
 

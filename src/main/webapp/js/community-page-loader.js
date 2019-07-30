@@ -10,27 +10,26 @@ function showCheckboxOptions(div) {
 
 /** Fetches users and adds them to the page. */
 function loadUsers(){
-  var params = ``;
+  // get params
+  // set param defaults if no input
 
-  // get topic params
   var topicParams = checkboxesToList(document.getElementById("topic"));
 
-  // get timezone params
-  const startTime = document.getElementById("timezone").getElementsByTagName("input")[0].value;
-  const endTime = document.getElementById("timezone").getElementsByTagName("input")[1].value;
+  const startTime = parseInt(document.getElementById("timezone").getElementsByTagName("input")[0].value || -12);
+  const endTime = parseInt(document.getElementById("timezone").getElementsByTagName("input")[1].value || 14);
   var timezoneParams = [];
   for (var i=startTime; i<=endTime; i++) {
     timezoneParams.push(i);
   }
 
-  // get studypace params
-  const startPace = document.getElementById("studypace").getElementsByTagName("input")[0].value;
-  const endPace = document.getElementById("studypace").getElementsByTagName("input")[1].value;
+  const startPace = parseInt(document.getElementById("studypace").getElementsByTagName("input")[0].value || 0);
+  const endPace = parseInt(document.getElementById("studypace").getElementsByTagName("input")[1].value || 168);
   var studypaceParams = [];
   for (var i=startPace; i<=endPace; i++) {
     studypaceParams.push(i);
   }
-  params = `topic=${topicParams}&timezone=${timezoneParams}&studypace=${studypaceParams}`;
+
+  var params = `topic=${topicParams}&timezone=${timezoneParams}&studypace=${studypaceParams}`;
 
   // fetch user list based on params
   const url = '/user-list?' + params;
