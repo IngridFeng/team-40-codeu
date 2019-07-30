@@ -29,6 +29,10 @@ function buildInitialUI(){
 
 /** Fetches users and adds them to the page. */
 function loadUsers(){
+  // TEMPORARY: show succesful request
+  const list = document.getElementById('list');
+  list.innerHTML = '<p>loading filtered users...</p>'+ list.innerHTML;
+  
   // get params
   // set param defaults if no input
 
@@ -55,7 +59,6 @@ function loadUsers(){
   fetch(url).then((response) => {
     return response.json();
   }).then((users) => {
-    const list = document.getElementById('list');
     list.innerHTML = '';
 
     // build UI
