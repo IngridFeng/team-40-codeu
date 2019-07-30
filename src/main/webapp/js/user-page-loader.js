@@ -223,13 +223,13 @@ function fetchMajor(){
 function fetchTimeZone(){
   const url = '/timezone?user=' + parameterUsername;
   fetch(url).then((response) => {
-    return response.text();
+    return (response.text()+ 'GMT');
   }).then((timezone) => {
     const timezoneContainer = document.getElementById('timezone-container');
     if(timezone == ''){
       timezone = 'Unknown';
     }
-    timezoneContainer.innerHTML = 'Time Zone: ' + timezone + 'GMT';
+    timezoneContainer.innerHTML = 'Time Zone: ' + timezone;
   });
 }
 

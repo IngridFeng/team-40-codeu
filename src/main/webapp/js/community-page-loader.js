@@ -20,7 +20,7 @@ function loadUsers(){
   const endTime = document.getElementById("timezone").getElementsByTagName("input")[1].value
   var timezoneParams = []
   for (var i=startTime; i<=endTime; i++) {
-    timezoneParams.append(i);
+    timezoneParams.push(i);
   }
 
   // get studypace params
@@ -28,7 +28,7 @@ function loadUsers(){
   const endPace = document.getElementById("studypace").getElementsByTagName("input")[1].value
   var studypaceParams = []
   for (var i=startPace; i<=endPace; i++) {
-    studypaceParams.append(i);
+    studypaceParams.push(i);
   }
   params = `topic=${topicParams}&timezone=${timezoneParams}&studypace=${studypaceParams}`;
 
