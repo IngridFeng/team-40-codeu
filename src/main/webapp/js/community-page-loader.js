@@ -8,6 +8,25 @@ function showCheckboxOptions(div) {
   }
 }
 
+/* TEMPORARY: prevent slow initial load*/
+function buildInitialUI(){
+  // fetch user list no params
+  const url = '/user-list';
+  fetch(url).then((response) => {
+    return response.json();
+  }).then((users) => {
+    const list = document.getElementById('list');
+    list.innerHTML = '';
+
+    // build UI
+    users.forEach((user) => {
+     const userListItem = buildUserListItem(user);
+     list.appendChild(userListItem);
+   });
+  });
+
+}
+
 /** Fetches users and adds them to the page. */
 function loadUsers(){
   // get params

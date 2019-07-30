@@ -11,7 +11,7 @@
     <script src="/js/community-page-loader.js"></script>
     <script src="/js/navigation-loader.js"></script>
   </head>
-  <body onload="buildUI(); addLoginOrLogoutLinkToNavigation();">
+  <body onload="buildInitialUI(); addLoginOrLogoutLinkToNavigation();">
     <div class="wrapper navbar">
       <article class="main">
         <p id="logo"><a href="/aboutus.html">MuMind</a></p>
@@ -40,7 +40,7 @@
             </div>
           </div>
 
-          <div id="filter_bar" class="header_bar" onchange="buildUI()">
+          <div id="filter_bar" class="header_bar">
 
             <div class="selectBox">
               <div class="select-title" onclick="showCheckboxOptions(this)">
@@ -190,6 +190,7 @@
               </div>
             </div>
 
+            <button type="button" onclick="buildUI()">Filter</button>
             <!--
             <p>Topic</p>
 
