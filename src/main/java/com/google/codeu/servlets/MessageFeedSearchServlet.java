@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.codeu.data.Datastore;
 import com.google.codeu.data.Message;
+import com.google.codeu.data.User;
 import com.google.gson.Gson;
 
 /** Handles fetching searched messages for the public feed. */
@@ -33,8 +34,11 @@ public class MessageFeedSearchServlet extends HttpServlet{
     List<Message> messages = datastore.getAllMessages();
     List<Message> result = new ArrayList<Message>();
     for(Message m : messages) {
+    	User user = datastore.getUser(m.getUser());
     	if (Pattern.compile(Pattern.quote(searchKey), Pattern.CASE_INSENSITIVE).matcher(m.getText()).find() ||
-    			Pattern.compile(Pattern.quote(searchKey), Pattern.CASE_INSENSITIVE).matcher(m.getUser()).find()) {
+    			Pattern.compile(Pattern.quote(searchKey), Pattern.CASE_INSENSITIVE).matcher(m.getUser()).find() ||
+    			(user != null && user.getNickName() != null &&
+    			Pattern.compile(Pattern.quote(searchKey), Pattern.CASE_INSENSITIVE).matcher(user.getNickName()).find())) {
     		result.add(m);
     	} 
     }

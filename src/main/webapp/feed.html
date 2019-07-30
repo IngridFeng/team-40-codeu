@@ -4,6 +4,7 @@
 <title>Message Feed</title>
 <link rel="stylesheet" href="/css/main.css">
 <link rel="stylesheet" href="/css/user-page.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
@@ -22,6 +23,12 @@
  </nav>
  <div class="content centered">
   <h1>Message Feed</h1>
+  <div id="search-container">
+    <form onsubmit="searchRedirect();" id="search-form">
+      <input id="search-key" type="text" placeholder="Search..." name="search">
+      <button type="submit"><i id="search-button" class="fa fa-search"></i></button>
+    </form>
+  </div>
   <div id="translation">
     Translate messages:
     <select id="language">
@@ -33,7 +40,7 @@
       <option value="ar">Arabic</option>
     </select>
 
-    <button onclick="requestTranslation();">Translate</button>
+    <button onclick="requestTranslation();" id="translate-button">Translate</button>
   </div>
   <hr/>
   <div id="message-container">Loading...</div>

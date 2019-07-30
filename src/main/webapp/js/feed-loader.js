@@ -1,8 +1,17 @@
 // Fetch messages and add them to the page.
 
+// Get ?user=XYZ parameter value
+const urlParams = new URLSearchParams(window.location.search);
+const parameterKey = urlParams.get('search');
+// URL must include ?user=XYZ parameter. If not, display all messages.
+var url = '/feed';
+if (parameterKey) {
+  url = '/feedSearch?key=' + parameterKey;
+}
+
   /** fetches messages and populates the message container with messages */
   function fetchMessages(){
-    const url = '/feed';
+    //const url = '/feed';
     fetch(url).then((response) => {
       return response.json();
     }).then((messages) => {
@@ -147,6 +156,15 @@
       resultContainer.innerText = translatedMessage;
     });
 
+  }
+  
+  function searchRedirect() {
+    var searchKey = document.getElementById('search-key').value;
+    if (searchKey == "") {
+      window.location.replace("/feed.html");
+    } else {
+      window.location.replace("/feed.html?search=" + searchKey);
+    }
   }
   
   // Fetch data and populate the UI of the page.
