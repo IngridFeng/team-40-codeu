@@ -228,14 +228,14 @@ public class Datastore {
     System.out.println("REACHED DATASTORE");
 
     List<User> users = new ArrayList<>();
-    /*
-    topic = topic.substring(1, topic.length()-1);
-    timezone = timezone.substring(1, timezone.length()-1);
-    studypace = studypace.substring(1, studypace.length()-1);
-    */
 
     List<String> topicList = Arrays.asList(topicParam.split(","));
-    List<String> timezoneList = Arrays.asList(timezoneParam.split(","));
+    List<String> timezoneStrings = Arrays.asList(timezoneParam.split(","));
+    List<Long> timezoneList = new ArrayList<>();
+    for (String strTimezone:timezoneStrings) {
+       timezoneList.add(Long.parseLong(strTimezone));
+    }
+
     List<String> studypaceList = Arrays.asList(studypaceParam.split(","));
 
     System.out.println(topicList);
@@ -243,23 +243,19 @@ public class Datastore {
     System.out.println(studypaceList);
 
     // Build Filters
+    // need to handle null
     Filter topicFilter = new FilterPredicate("currentTopics", FilterOperator.IN, topicList);
 
-    // should change this to number later
-
-    //Filter timezoneFilter =
-    //    new FilterPredicate("timezone", FilterOperator.IN, timezoneList);
+    Filter timezoneFilter = new FilterPredicate("timezone", FilterOperator.IN, timezoneList);
 
     //Filter studypaceFilter =
     //    new FilterPredicate("studypace", FilterOperator.IN, studypaceList);
 
     // Use CompositeFilter to combine multiple filters
     //CompositeFilter userFilter = CompositeFilterOperator.and(topicFilter, timezoneFilter, studypaceFilter);
+    CompositeFilter userFilter = CompositeFilterOperator.and(topicFilter, timezoneFilter);
 
-
-
-    Query query = new Query("User").setFilter(topicFilter);
-
+    Query query = new Query("User").setFilter(userFilter);
     PreparedQuery results = datastore.prepare(query);
 
 
@@ -287,18 +283,6 @@ public class Datastore {
     }
 
     return users;
-
-
-
-    /*
-  	Set<String> users = new HashSet<>();
-  	Query query = new Query("Message");
-  	PreparedQuery results = datastore.prepare(query);
-  	for(Entity entity : results.asIterable()) {
-  		users.add((String) entity.getProperty("user"));
-  	}
-  	return users;
-    */
   }
 
 
