@@ -487,6 +487,16 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   margin-top: 20px;
 }
 
+.mg-20 {
+  margin: 20px;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+/**/
+
 #search-container {
   box-sizing: border-box;
 }
@@ -550,4 +560,3 @@ input:-ms-input-placeholder { color: #bdbdd3;}
 #translate-button:hover {
   background: var(--main-color-highlight);
 }
-
