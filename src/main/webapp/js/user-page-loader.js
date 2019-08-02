@@ -175,7 +175,7 @@ function fetchAboutMe(){
   }).then((aboutMe) => {
     const aboutMeContainer = document.getElementById('about-me-container');
     if(aboutMe == ''){
-      aboutMe = 'This user has not entered any aboutme information yet.';
+      aboutMe = 'This user has not entered any information yet.';
     }
     aboutMeContainer.innerHTML = aboutMe;
   });
