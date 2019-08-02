@@ -1,0 +1,182 @@
+<!--
+Copyright 2019 Google Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Study Sessions</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+    <script src="/js/navigation-loader.js"></script>
+    <script src="/js/study-session-page-loader.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
+  </head>
+  <body onload="buildUI(); addLoginOrLogoutLinkToNavigation();">
+    <nav>
+      <ul id="navigation">
+        <li><a href="/">Home</a></li>
+        <li><a href="/aboutus.html">About Us</a></li>
+        <li><a href="/community.html">Community</a></li>
+    	  <li><a href="/feed.html">Public Feed</a></li>
+      </ul>
+    </nav>
+    <div class="content">
+      <div class="padded rounded panel centered">
+        <h2 id="page-title">User Page</h2>
+      </div>
+
+      <div class="row padded rounded panel">
+        <!-- temp styling to make the photo section look nice, plz fix w CSS -->
+        <div class="column left40">
+          <img id="profilepic" src="profilepic.png" alt="Profile Picture" class="profilepic">
+          <div id="profilepic-form-container">
+            <form id="profilepic-form" method="POST" class="hidden" enctype="multipart/form-data">
+              <input type="file" name="image">
+              <input type="submit" value="Update Profile Picture" class="cta submit-btn profile-submit">
+            </form>
+          </div>
+        </div>
+
+        <div class="column right60">
+          <h2 style = "margin-bottom: 20px">My Profile</h2>
+          <p id="nick-name-container" class="noBotMargin noTopMargin">Loading...</p>
+          <p id="university-name-container" class="noBotMargin noTopMargin">Loading...</p>
+          <p id="major-container" class="noBotMargin noTopMargin">Loading...</p>
+          <p id="timezone-container" class="noBotMargin noTopMargin">Loading...</p>
+          <p id="studypace-container" class="noBotMargin noTopMargin">Loading...</p>
+          <p id="topic-container" class="noBotMargin noTopMargin">Loading...</p>
+          <h3>About Me</h3>
+          <p id="about-me-container" class="noBotMargin noTopMargin">Loading...</p>
+        </div>
+      </div>
+
+      <div id = "update-forms" class = "padded rounded panel hidden">
+        <h2 style = "margin-bottom: 20px">Update My Profile</h2>
+
+        <div id="nickname-form" class = "input-part">
+          <form action="/nickName" method="POST">
+            <input class = "input-textbox info-input" placeholder = "Nickname" type="textbox" name="nickName" id="nickname-input" required></input>
+            <input type="submit" value="Update" class="cta submit-btn info-submit">
+          </form>
+        </div>
+
+        <div id="university-name-form" class = "input-part">
+          <form action="/universityName" method="POST">
+            <input class = "input-textbox info-input" placeholder = "University Name" type="textbox" name="universityName" id="university-name-input" required></input>
+            <input type="submit" value="Update" class="cta submit-btn info-submit">
+          </form>
+        </div>
+
+        <div id="major-form" class = "input-part">
+          <form action="/major" method="POST">
+            <input class = "input-textbox info-input" placeholder = "Major" type="textbox" name="major" id="major-input" required></input>
+            <input type="submit" value="Update" class="cta submit-btn info-submit">
+          </form>
+        </div>
+
+        <div id="timezone-form" class = "input-part">
+          <form action="/timezone" method="POST">
+            <input class = "input-textbox info-input" placeholder = "Time Zone" type="textbox" name="timezone" id="timezone-input" required></input>
+            <input type="submit" value="Update" class="cta submit-btn info-submit">
+          </form>
+        </div>
+
+        <div id="studypace-form" class = "input-part">
+          <form action="/studypace" method="POST">
+            <input class = "input-textbox info-input" placeholder = "Weekly Study Hours" type="textbox" name="studypace" id="studypace-input" required></input>
+            <input type="submit" value="Update" class="cta submit-btn info-submit">
+          </form>
+        </div>
+
+        <!-- Topic Form -->
+        <!-- post request is handled via JS to parse the inputs into lists -->
+        <div id="topic-form" class = "input-part">
+          <form>
+            <!-- <div id="pastTopics-div">
+              <h1>Past Topics</h1>
+              <input type="checkbox" name="OS">OS</input>
+              <br />
+              <input type="checkbox" name="Web Dev">Web Dev</input>
+              <br />
+            </div> -->
+            <div id="currentTopics-div">
+              <div class = "row">
+                <div class="column equal33"><input type="checkbox" name="Operating System">Operating System</input></div>
+                <div class="column equal33"><input type="checkbox" name="Web Development">Web Development</input></div>
+                <div class="column equal33"><input type="checkbox" name="iOS Development">iOS Development</input></div>
+              </div>
+
+              <div class = "row">
+                <div class="column equal33"><input type="checkbox" name="Android Development">Android Development</input></div>
+                <div class="column equal33"><input type="checkbox" name="Machine Learning">Machine Learning</input></div>
+                <div class="column equal33"><input type="checkbox" name="Computer Vision">Computer Vision</input></div>
+              </div>
+
+              <div class = "row">
+                <div class="column equal33"><input type="checkbox" name="NLP">NLP</input></div>
+                <div class="column equal33"><input type="checkbox" name="Algorithm Design">Algorithm Design</input></div>
+                <div class="column equal33"><input type="checkbox" name="Data Science">Data Science</input></div>
+              </div>
+
+              <div class = "row">
+                <div class="column equal33"><input type="checkbox" name="Database">Database</input></div>
+                <div class="column equal33"><input type="checkbox" name="Computer Networks">Computer Networks</input></div>
+                <div class="column equal33"><input type="checkbox" name="Distributed System">Distributed System</input></div>
+              </div>
+
+            </div>
+            <input type="submit" value="Update Fields of Interest" class="cta submit-btn" onclick="setCurrentTopics()">
+          </form>
+        </div>
+
+        <div id="about-me-form">
+          <form action="/about" method="POST">
+            <textarea name="about-me" id="aboutme-input" placeholder="Enter your information here" required></textarea>
+            <br/>
+            <input type="submit" value="Update About Me" class="cta submit-btn">
+          </form>
+        </div>
+      </div>
+
+      <div id="message-form-wrap" class="padded rounded panel hidden">
+        <form id="message-form" method="POST" enctype="multipart/form-data">
+          <textarea name="text" id="message-input" class="rounded"></textarea>
+          <p style = "display: inline-block;">Upload an image:</p>
+          <input type="file" name="image">
+          <input type="submit" value="Post A New Message" class="cta submit-btn">
+        </form>
+      </div>
+      <hr/>
+
+   <form id="login-form" action="/login" method="GET" class="hidden">
+     <input type="submit" value="Login to Chat!">
+   </form>
+
+    <form id="chat-form" action="/chat" method="POST" class="hidden">
+      <input type="hidden" name="selectedUser" value="" />
+      <input type="hidden" name="chat" value="forum" />
+      <input type="submit" value="Chat with Me!">
+    </form>
+
+    <hr/>
+
+      <div id="message-container">Loading...</div>
+    </div>
+  </body>
+</html>

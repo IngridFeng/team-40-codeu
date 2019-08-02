@@ -17,6 +17,7 @@
 // Get ?user=XYZ parameter value
 const urlParams = new URLSearchParams(window.location.search);
 const parameterUsername = urlParams.get('user');
+const alertMessage = urlParams.get('alert')
 // URL must include ?user=XYZ parameter. If not, redirect to homepage.
 if (!parameterUsername) {
   window.location.replace('/');
@@ -290,7 +291,9 @@ function fetchTopics() {
     fetch('/topic', {
       method: 'POST',
       body: params
-     });
+    }).then((topic) => {
+      document.location.reload();
+    });
 
  }
 
@@ -307,4 +310,7 @@ function buildUI() {
   fetchTimeZone();
   fetchStudyPace();
   fetchTopics();
+  if(alertMessage) {
+    alert("Please, fill in your profile information first!");
+  }
 }

@@ -85,10 +85,55 @@ function buildUserListItem(user){
   nameElem.appendChild(document.createTextNode(userName));
   contentDiv.appendChild(nameElem)
 
+  // add university
+  const userInfoElem = document.createElement('p');
+  if(!user.hasOwnProperty('universityName')){
+    const universityName = 'Unknown';
+    userInfoElem.appendChild(document.createTextNode('University: ' + universityName));
+  } else {
+    const universityName = user.universityName;
+    if(universityName == ''){
+        universityName = 'Unknown';
+    }
+    userInfoElem.appendChild(document.createTextNode('University: ' + universityName));
+  }
+
+  userInfoElem.appendChild(document.createElement('br'));
+
+  // add major
+  if(!user.hasOwnProperty('major')){
+    const major = 'Unknown';
+    userInfoElem.appendChild(document.createTextNode('Major: ' + major));
+  } else {
+    const major = user.major;
+    if(major == ''){
+        major = 'Unknown';
+    }
+    userInfoElem.appendChild(document.createTextNode('Major: ' + major));
+  }
+
+  userInfoElem.appendChild(document.createElement('br'));
+
+  // add topic
+  if(!user.hasOwnProperty('currentTopics')){
+    const topic = '-';
+    userInfoElem.appendChild(document.createTextNode('Fields of interest: ' + topic));
+  } else {
+    const topic = user.currentTopics;
+    const topicStr = 'Fields of interest: ' + topic;
+    if (topicStr.length > 45) {
+      const topicSubStr = topicStr.substring(0, 45) + '...';
+      userInfoElem.appendChild(document.createTextNode(topicSubStr));
+    } else {
+      userInfoElem.appendChild(document.createTextNode(topicStr));
+    }
+  }
+  contentDiv.appendChild(userInfoElem);
+
   // build chat form
   const chatForm = document.createElement("form");
   chatForm.setAttribute("method","post");
-  chatForm.setAttribute("action","/mychats");
+  chatForm.setAttribute("action","/chat");
 
   // add selectedUser input
   const selectedUser = document.createElement("input"); //input element, Submit button

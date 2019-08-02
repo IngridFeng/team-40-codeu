@@ -69,7 +69,7 @@ public class TopicServlet extends HttpServlet {
 
       //get email of current user
       String userEmail = userService.getCurrentUser().getEmail();
-
+      System.out.println(userEmail);
       //get info that user put in
       // List<String> pastTopics = new ArrayList<String> (Arrays.asList( request.getParameter("pastTopics").split(",")));
       List<String> currentTopics = new ArrayList<String> (Arrays.asList( request.getParameter("currentTopics").split(",")));
@@ -88,12 +88,6 @@ public class TopicServlet extends HttpServlet {
       }
       //store the user
       datastore.storeUser(user);
-
-      // redirect to community page
-      // response.sendRedirect("/community.html?past=" + pastTopics + "&current=" + currentTopics);
-      // Ingrid -- I think we can redirect the users after they put in all the info -- studypace & topics & timezone & nickname etc.
-      // back demon
-      // response.sendRedirect(request.getHeader("referer"));
       response.sendRedirect("/user-page.html?user=" + userEmail);
 
   }
