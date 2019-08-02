@@ -36,7 +36,7 @@ function addLoginOrLogoutLinkToNavigation() {
           loginElement.appendChild(createLink('/logout', 'Logout'));
 
         } else {
-          profileElement.onClick = "loginAlert()";
+          profileElement.setAttribute("onClick","loginAlert()");
           loginElement.appendChild(createLink('/login', 'Login'));
         }
       });
