@@ -10,6 +10,10 @@ function showCheckboxOptions(div) {
 
 /** Fetches users and adds them to the page. */
 function loadUsers(){
+  // TEMPORARY: show succesful request
+  const list = document.getElementById('list');
+  list.innerHTML = '<p>loading filtered users...</p>'+ list.innerHTML;
+
   // get params
   const filterBar = document.getElementById("filter_bar");
   var params = ``;
@@ -144,7 +148,7 @@ function buildUserListItem(user){
   // build chat button
   const chatButton = document.createElement("input");
   chatButton.setAttribute('type',"submit");
-  chatButton.setAttribute('value',"Chat with Me!");
+  chatButton.setAttribute('value',"Let's Talk!");
   //chatButton.classList.add("submit-button");
   //chatButton.classList.add("chat-with-me");
   chatButton.classList.add("user_card-chat_button");

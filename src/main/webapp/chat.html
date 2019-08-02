@@ -4,6 +4,7 @@
     <title>Chat Page</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/mission-control.css">
     <link rel="stylesheet" href="/css/user-page.css">
     <link rel="stylesheet" href="/css/chat.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
@@ -14,76 +15,89 @@
     <script src="https://kit.fontawesome.com/c031e10546.js"></script>
   </head>
   <body onload="addLoginOrLogoutLinkToNavigation(); buildUI();">
-    <nav>
-      <ul id="navigation">
-        <li><a href="/">Home</a></li>
-        <li><a href="/aboutus.html">About Us</a></li>
-        <li><a href="/community.html">Community</a></li>
-        <li><a href="/my-community.html">My Chats</a></li>
-      	<li><a href="/feed.html">Public Feed</a></li>
-      </ul>
-    </nav>
-    <div class="content-wide centered">
-      <div class="padded rounded panel centered">
-        <h2 id="chat-name">Chat Room</h2>
-        <p id="chat-description">...</p>
-      </div>
-
-      <div class="flex_section_parent">
-        <div class="flex_section_sidebar rounded panel centered">
-          <div class="main-content_title">
-            <h1>Study Sessions</h1>
-          </div>
-          <div id="studySession-container" class="scrollable">Loading...</div>
+    <div class="wrapper navbar">
+      <article class="main">
+        <p id="logo"><a href="/aboutus.html">MuMind</a></p>
+      </article>
+      <aside class="aside aside-1"><a href="/">Home</a></aside>
+      <aside class="aside aside-2" id="login-element"></aside>
+    </div>
+    <div class="flex_section_parent">
+      <div class="mc_sidebar">
+          <!-- <h2 class="sidebar-title">Find Friends</h2> -->
+          <a class="sidebar-link" href="/community.html">Find Friends</a>
+          <a class="sidebar-link" href="/my-community.html">Bounce Thoughts</a>
+          <a id = "profile_link" class="sidebar-link" href="#">Reflect</a>
+          <a class="sidebar-link" href="/feed.html">Explore</a>
         </div>
-
-        <div class="flex_section_main rounded panel centered">
-          <div class="main-content_title">
-            <h1>Messages</h1>
+      <div class="mc_main">
+        <div class="content-wide centered">
+          <div class="padded rounded panel centered">
+            <h2 id="chat-name">Chat Room</h2>
+            <p id="chat-description">...</p>
           </div>
-          <div id="message-container" class="scrollable">Loading...</div>
-          <form id="message-form" action="/messages" method="POST" enctype="multipart/form-data" class="hidden">
-            <input name="chat" value="" class="hidden">
+
+          <div class="flex_section_parent">
+            <div class="flex_section_sidebar rounded panel centered">
+              <div class="main-content_title">
+                <h1>Study Sessions</h1>
+              </div>
+              <div id="studySession-container" class="scrollable">Loading...</div>
+            </div>
+
+            <div class="flex_section_main rounded panel centered">
+              <div class="main-content_title">
+                <h1>Messages</h1>
+              </div>
+              <div id="message-container" class="scrollable">Loading...</div>
+            </div>
+          </div>
+
+          <div class="main-content_footer padded rounded panel">
+            <form id="message-form" action="/messages" method="POST" enctype="multipart/form-data" class="hidden">
+              <input name="chat" value="" class="hidden">
             Enter a new message:
-            <br/>
-            <textarea name="text" id="message-input" class="rounded"></textarea>
-            <br/>
-            <p>Upload an image:</p>
-            <input type="file" name="image">
-            <br/>
-            <input type="submit" value="Send" class="rounded send-button">
-          </form>
+              <br/>
+              <textarea name="text" id="message-input" class="rounded"></textarea>
+              <br/>
+              <p>Upload an image:</p>
+              <input type="file" name="image">
+              <br/>
+              <input type="submit" value="Send" class="rounded send-button">
+            </form>
+          </div>
+          <div class="floating-button_bottom-right rounded">
+            <a onclick="openStudySessionModal()"> Set a Study Session! </a>
+          </div>
+        </div>
+        <!-- The Modal -->
+        <div id="studySessionModal" class="modal">
+          <!-- Modal content -->
+          <div class="modal-content">
+            <span class="close" onclick="closeStudySessionModal()">&times;</span>
+              <form id="studySession-form" action="/study-session" method="POST">
+                <h1>Set a Study Session</h1>
+                <p>Topic:</p>
+                <input id="studySessionForm_chatInput" type="hidden" name="chatId" value="" />
+                <input class="noTime_input" type="text" name="topic">
+                <p>Description:</p>
+                <input class="noTime_input" type="text" name="description">
+                <p>Time:</p>
+                <input class="noTime_input" type="datetime-local" name="time">
+                <p>Location:</p>
+                <input class="noTime_input" type="String" name="location">
+                <p>Allow anybody to join session</p>
+                <input class="noTime_input" type="checkbox" name="public">
+                <br />
+                <input type="submit" value="Set" class="cta submit-btn">
+              </form>
+            </span>
+          </div>
         </div>
       </div>
       <div class="floating-button_bottom-right rounded">
         <a onclick="openStudySessionModal()"> Set a Study Session! </a>
       </div>
-    </div>
-    <!-- The Modal -->
-    <div id="studySessionModal" class="modal">
-
-      <!-- Modal content -->
-      <div class="modal-content">
-        <span class="close" onclick="closeStudySessionModal()">&times;</span>
-          <form id="studySession-form" action="/study-session" method="POST">
-            <h1>Set a Study Session</h1>
-            <p>Topic:</p>
-            <input id="studySessionForm_chatInput" type="hidden" name="chatId" value="" />
-            <input class="noTime_input" type="text" name="topic">
-            <p>Description:</p>
-            <input class="noTime_input" type="text" name="description">
-            <p>Time:</p>
-            <input class="noTime_input" type="datetime-local" name="time">
-            <p>Location:</p>
-            <input class="noTime_input" type="String" name="location">
-            <p>Allow anybody to join session</p>
-            <input class="noTime_input" type="checkbox" name="public">
-            <br />
-            <input type="submit" value="Set" class="cta submit-btn">
-          </form>
-        </span>
-      </div>
-
     </div>
   </body>
 </html>

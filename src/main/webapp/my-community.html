@@ -3,6 +3,7 @@
   <head>
     <title>My Chats</title>
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/mission-control.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
@@ -10,94 +11,103 @@
     <script src="/js/navigation-loader.js"></script>
   </head>
   <body onload="buildUI(); addLoginOrLogoutLinkToNavigation();">
-    <nav>
-      <ul id="navigation">
-        <li><a href="/">Home</a></li>
-        <li><a href="/aboutus.html">About Us</a></li>
-        <li><a href="/community.html">Community</a></li>
-        <li><a href="/my-community.html">My Chats</a></li>
-        <li><a href="/feed.html">Public Feed</a></li>
-      </ul>
-    </nav>
-    <div class="content centered">
-      <h1>My Chats</h1>
-      <p>Users you have chatted with:</p>
-      <hr/>
-      <div class="header_bar">
-        <div class="header_bar-left">
-          <!-- Should change this to show certain results -->
-          <p> Filter  by: </p>
-        </div>
+    <div class="wrapper navbar">
+      <article class="main">
+        <p id="logo"><a href="/aboutus.html">MuMind</a></p>
+      </article>
+      <aside class="aside aside-1"><a href="/">Home</a></aside>
+      <aside class="aside aside-2" id="login-element"></aside>
+    </div>
+    <div class="flex_section_parent">
+      <div class="mc_sidebar">
+        <!-- <h2 class="sidebar-title">Find Friends</h2> -->
+        <a class="sidebar-link" href="/community.html">Find Friends</a>
+        <a class="sidebar-link" href="/my-community.html">Bounce Thoughts</a>
+        <a id = "profile_link" class="sidebar-link" href="#">Reflect</a>
+        <a class="sidebar-link" href="/feed.html">Explore</a>
       </div>
+      <div class="mc_main">
+        <div class="content centered">
+          <h1>My Chats</h1>
+          <p>Users you have chatted with:</p>
+          <hr/>
+          <div class="header_bar">
+            <div class="header_bar-left">
+              <!-- Should change this to show certain results -->
+              <p> Filter  by: </p>
+            </div>
+          </div>
 
-      <div id="filter_bar" class="header_bar" onchange="buildUI()">
+          <div id="filter_bar" class="header_bar" onchange="buildUI()">
 
-        <div class="selectBox">
-          <div class="select-title" onclick="showCheckboxOptions(this)">
+            <div class="selectBox">
+              <div class="select-title" onclick="showCheckboxOptions(this)">
+                <p>Topic</p>
+              </div>
+              <div class="select-contents" id="topic" style="display: none;">
+                <label for="topic1">
+                  <input type="checkbox" value="topic1" checked/><p>Topic 1</p></label>
+                <label for="topic2">
+                  <input type="checkbox" value="topic2" checked/><p>Topic 2</p></label>
+                <label for="topic3">
+                  <input type="checkbox" value="topic3" checked/><p>Topic 3</p></label>
+              </div>
+            </div>
+
+            <div class="selectBox">
+              <div class="select-title" onclick="showCheckboxOptions(this)">
+                <p>Time Zone</p>
+              </div>
+              <div class="select-contents" id="timezone" style="display: none;">
+                <label for="topic1">
+                  <input type="checkbox" value="timezone1" checked/><p>Time 1</p></label>
+                <label for="topic2">
+                  <input type="checkbox" value="timezone2" checked/><p>Time 2</p></label>
+                <label for="topic3">
+                  <input type="checkbox" value="timezone3" checked/><p>Time 3</p></label>
+              </div>
+            </div>
+
+            <div class="selectBox">
+              <div class="select-title" onclick="showCheckboxOptions(this)">
+                <p>Study Pace</p>
+              </div>
+              <div class="select-contents" id="studypace" style="display: none;">
+                <label for="topic1">
+                  <input type="checkbox" value="studypace1" checked/><p>Pace 1</p></label>
+                <label for="topic2">
+                  <input type="checkbox" value="studypace2" checked/><p>Pace 2</p></label>
+                <label for="topic3">
+                  <input type="checkbox" value="studypace3" checked/><p>Pace 3</p></label>
+              </div>
+            </div>
+
+            <!--
             <p>Topic</p>
-          </div>
-          <div class="select-contents" id="topic" style="display: none;">
-            <label for="topic1">
-              <input type="checkbox" value="topic1" checked/><p>Topic 1</p></label>
-            <label for="topic2">
-              <input type="checkbox" value="topic2" checked/><p>Topic 2</p></label>
-            <label for="topic3">
-              <input type="checkbox" value="topic3" checked/><p>Topic 3</p></label>
-          </div>
-        </div>
-
-        <div class="selectBox">
-          <div class="select-title" onclick="showCheckboxOptions(this)">
+            <select name="topic">
+              <option value="all">All</option>
+              <option value="same">Match mine</option>
+              <option value="different">Different</option>
+            </select>
             <p>Time Zone</p>
-          </div>
-          <div class="select-contents" id="timezone" style="display: none;">
-            <label for="topic1">
-              <input type="checkbox" value="timezone1" checked/><p>Time 1</p></label>
-            <label for="topic2">
-              <input type="checkbox" value="timezone2" checked/><p>Time 2</p></label>
-            <label for="topic3">
-              <input type="checkbox" value="timezone3" checked/><p>Time 3</p></label>
-          </div>
-        </div>
-
-        <div class="selectBox">
-          <div class="select-title" onclick="showCheckboxOptions(this)">
+            <select name="timezone">
+              <option value="all">All</option>
+              <option value="same">Match Mine</option>
+              <option value="different">Different</option>
+            </select>
             <p>Study Pace</p>
+            <select name="pace">
+              <option value="all">All</option>
+              <option value="chill">Chill</option>
+              <option value="moderate">Moderate</option>
+              <option value="intense">Intense</option>
+            </select>
+            -->
+
           </div>
-          <div class="select-contents" id="studypace" style="display: none;">
-            <label for="topic1">
-              <input type="checkbox" value="studypace1" checked/><p>Pace 1</p></label>
-            <label for="topic2">
-              <input type="checkbox" value="studypace2" checked/><p>Pace 2</p></label>
-            <label for="topic3">
-              <input type="checkbox" value="studypace3" checked/><p>Pace 3</p></label>
-          </div>
+          <ul id="list">Loading...</ul>
         </div>
-
-        <!--
-        <p>Topic</p>
-        <select name="topic">
-          <option value="all">All</option>
-          <option value="same">Match mine</option>
-          <option value="different">Different</option>
-        </select>
-        <p>Time Zone</p>
-        <select name="timezone">
-          <option value="all">All</option>
-          <option value="same">Match Mine</option>
-          <option value="different">Different</option>
-        </select>
-        <p>Study Pace</p>
-        <select name="pace">
-          <option value="all">All</option>
-          <option value="chill">Chill</option>
-          <option value="moderate">Moderate</option>
-          <option value="intense">Intense</option>
-        </select>
-        -->
-
       </div>
-      <ul id="list">Loading...</ul>
     </div>
   </body>
 </html>

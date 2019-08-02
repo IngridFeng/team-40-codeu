@@ -111,7 +111,7 @@ function buildUserListItem(user){
     }
     userInfoElem.appendChild(document.createTextNode('Major: ' + major));
   }
-  
+
   userInfoElem.appendChild(document.createElement('br'));
 
   // add topic
