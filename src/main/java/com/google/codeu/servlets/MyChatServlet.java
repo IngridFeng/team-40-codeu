@@ -66,11 +66,11 @@ public class MyChatServlet extends HttpServlet {
       //get emails of users
       String userEmail = userService.getCurrentUser().getEmail();
       String selectedUserEmail = request.getParameter("selectedUser");
-      
+
       //get nick names
       String userNick = datastore.getUser(userEmail).getNickName();
       String selectedUserNick = datastore.getUser(selectedUserEmail).getNickName();
-    
+
       //get current user by querying the email
       User user = datastore.getUser(userEmail);
       // get selected user by querying the email

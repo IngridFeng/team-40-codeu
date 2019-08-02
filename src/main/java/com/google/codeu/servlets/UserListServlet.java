@@ -33,7 +33,12 @@ public class UserListServlet extends HttpServlet {
       String topic = request.getParameter("topic");
       String timezone = request.getParameter("timezone");
       String studypace = request.getParameter("studypace");
-      List<User> users = datastore.getUsers(topic, timezone, studypace);
+      List<User> users;
+      if (topic == null && timezone == null && studypace == null) {
+        users = datastore.getUsers();
+      } else {
+        users = datastore.getUsersWithParams(topic,timezone,studypace);
+      }
       Gson gson = new Gson();
       String json = gson.toJson(users);
       response.getOutputStream().println(json);
