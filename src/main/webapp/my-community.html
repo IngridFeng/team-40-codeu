@@ -28,83 +28,11 @@
         <a class="sidebar-link" href="/feed.html">Explore</a>
       </div>
       <div class="mc_main">
-        <div class="content centered">
+        <div class="content-wide centered">
           <h1>My Chats</h1>
           <p>Users you have chatted with:</p>
           <hr/>
           <div class="header_bar">
-            <div class="header_bar-left">
-              <!-- Should change this to show certain results -->
-              <p> Filter  by: </p>
-            </div>
-          </div>
-
-          <div id="filter_bar" class="header_bar" onchange="buildUI()">
-
-            <div class="selectBox">
-              <div class="select-title" onclick="showCheckboxOptions(this)">
-                <p>Topic</p>
-              </div>
-              <div class="select-contents" id="topic" style="display: none;">
-                <label for="topic1">
-                  <input type="checkbox" value="topic1" checked/><p>Topic 1</p></label>
-                <label for="topic2">
-                  <input type="checkbox" value="topic2" checked/><p>Topic 2</p></label>
-                <label for="topic3">
-                  <input type="checkbox" value="topic3" checked/><p>Topic 3</p></label>
-              </div>
-            </div>
-
-            <div class="selectBox">
-              <div class="select-title" onclick="showCheckboxOptions(this)">
-                <p>Time Zone</p>
-              </div>
-              <div class="select-contents" id="timezone" style="display: none;">
-                <label for="topic1">
-                  <input type="checkbox" value="timezone1" checked/><p>Time 1</p></label>
-                <label for="topic2">
-                  <input type="checkbox" value="timezone2" checked/><p>Time 2</p></label>
-                <label for="topic3">
-                  <input type="checkbox" value="timezone3" checked/><p>Time 3</p></label>
-              </div>
-            </div>
-
-            <div class="selectBox">
-              <div class="select-title" onclick="showCheckboxOptions(this)">
-                <p>Study Pace</p>
-              </div>
-              <div class="select-contents" id="studypace" style="display: none;">
-                <label for="topic1">
-                  <input type="checkbox" value="studypace1" checked/><p>Pace 1</p></label>
-                <label for="topic2">
-                  <input type="checkbox" value="studypace2" checked/><p>Pace 2</p></label>
-                <label for="topic3">
-                  <input type="checkbox" value="studypace3" checked/><p>Pace 3</p></label>
-              </div>
-            </div>
-
-            <!--
-            <p>Topic</p>
-            <select name="topic">
-              <option value="all">All</option>
-              <option value="same">Match mine</option>
-              <option value="different">Different</option>
-            </select>
-            <p>Time Zone</p>
-            <select name="timezone">
-              <option value="all">All</option>
-              <option value="same">Match Mine</option>
-              <option value="different">Different</option>
-            </select>
-            <p>Study Pace</p>
-            <select name="pace">
-              <option value="all">All</option>
-              <option value="chill">Chill</option>
-              <option value="moderate">Moderate</option>
-              <option value="intense">Intense</option>
-            </select>
-            -->
-
           </div>
           <ul id="list">Loading...</ul>
         </div>
