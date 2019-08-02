@@ -355,6 +355,16 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   height: 100%;
 }
 
+.user_card-content-2 {
+  display: inline-block;
+  margin-left: 10px;
+  position: absolute;
+  top: 0;
+  width: calc(inherit - var(--card-height));
+  height: 100%;
+  background-image: linear-gradient(to left, white , #e2adf0);
+}
+
 .user_card-chat_button {
   border-radius: 10px;
   background-color: var(--main-color);
@@ -507,13 +517,8 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   margin-bottom: 20px;
 }
 
-#search-form input[type=text] {
-  padding: 10px;
-  font-size: 17px;
-  border: 1px solid grey;
-  float: left;
-  width: 80%;
-  background: #f1f1f1;
+.search-input {
+  width: 100%;
 }
 
 #search-form button {
@@ -527,6 +532,7 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   border-left: none;
   border-radius: 0px 10px 10px 0px;
   cursor: pointer;
+  display: none;
 }
 
 #search-form button:hover {
