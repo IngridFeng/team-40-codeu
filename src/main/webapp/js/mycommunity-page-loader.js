@@ -111,7 +111,7 @@ function buildUserListItem(user){
     }
     userInfoElem.appendChild(document.createTextNode('Major: ' + major));
   }
-  
+
   userInfoElem.appendChild(document.createElement('br'));
 
   // add topic
@@ -133,7 +133,7 @@ function buildUserListItem(user){
   // build chat form
   const chatForm = document.createElement("form");
   chatForm.setAttribute("method","post");
-  chatForm.setAttribute("action","/mychats");
+  chatForm.setAttribute("action","/chat");
 
   // add selectedUser input
   const selectedUser = document.createElement("input"); //input element, Submit button
