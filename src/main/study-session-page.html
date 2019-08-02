@@ -17,15 +17,14 @@ limitations under the License.
 <!DOCTYPE html>
 <html>
   <head>
-    <title>User Page</title>
+    <title>My Study Sessions</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/user-page.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
     <script src="/js/navigation-loader.js"></script>
-    <script src="/js/user-page-loader.js"></script>
+    <script src="/js/study-session-page-loader.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>
   </head>
   <body onload="buildUI(); addLoginOrLogoutLinkToNavigation();">
@@ -142,7 +141,7 @@ limitations under the License.
               </div>
 
             </div>
-            <input type="button" value="Update Fields of Interest" class="cta submit-btn" onclick="setCurrentTopics()">
+            <input type="submit" value="Update Fields of Interest" class="cta submit-btn" onclick="setCurrentTopics()">
           </form>
         </div>
 

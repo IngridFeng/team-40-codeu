@@ -288,7 +288,9 @@ function fetchTopics() {
     fetch('/topic', {
       method: 'POST',
       body: params
-     });
+    }).then((topic) => {
+      document.location.reload();
+    });
 
  }
 
