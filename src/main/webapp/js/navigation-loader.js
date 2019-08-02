@@ -20,8 +20,9 @@
  */
 function addLoginOrLogoutLinkToNavigation() {
   const loginElement = document.getElementById('login-element');
-  if (!loginElement) {
-    console.warn('Login element not found!');
+  const profileElement = document.getElementById('profile_link');
+  if (!loginElement || !profileElement) {
+    console.warn('Element Missing!');
     return;
   }
 
@@ -31,13 +32,11 @@ function addLoginOrLogoutLinkToNavigation() {
       })
       .then((loginStatus) => {
         if (loginStatus.isLoggedIn) {
-          loginElement.appendChild(createLink('/user-page.html?user=' + loginStatus.username, 'Profile'));
+          profileElement.href = '/user-page.html?user=' + loginStatus.username;
+          loginElement.appendChild(createListItem(createLink('/logout', 'Logout')));
 
-          /*
-          navigationElement.appendChild(
-              createListItem(createLink('/logout', 'Logout')));
-          */
         } else {
+          profileElement.onClick = "loginAlert()";
           loginElement.appendChild(createLink('/login', 'Login'));
         }
       });
@@ -65,4 +64,8 @@ function createLink(url, text) {
   linkElement.appendChild(document.createTextNode(text));
   linkElement.href = url;
   return linkElement;
+}
+
+function loginAlert(){
+  alert("Login to view this page");
 }
