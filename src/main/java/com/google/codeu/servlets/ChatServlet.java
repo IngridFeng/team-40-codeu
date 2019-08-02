@@ -67,6 +67,12 @@ public class ChatServlet extends HttpServlet {
       String userEmail = userService.getCurrentUser().getEmail();
       String selectedUserEmail = request.getParameter("selectedUser");
       
+      // if the user is not stored redirect to profile page
+      if (datastore.getUser(userEmail) == null) {
+      	response.sendRedirect("user-page.html?user=" + userEmail + "&alert=fill");
+      	return;
+      }
+      
       //get nick names
       String userNick = datastore.getUser(userEmail).getNickName();
       String selectedUserNick = datastore.getUser(selectedUserEmail).getNickName();
