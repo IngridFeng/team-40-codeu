@@ -42,7 +42,7 @@ limitations under the License.
       <div class="mc_sidebar">
         <!-- <h2 class="sidebar-title">Find Friends</h2> -->
         <a class="sidebar-link" href="/community.html">Find Friends</a>
-        <a class="sidebar-link" href="/my-community.html">Bounce Thoughts</a>
+        <a id = "mychats_link" class="sidebar-link" href="/my-community.html">Bounce Thoughts</a>
         <a id = "profile_link" class="sidebar-link" href="#">Reflect</a>
         <a class="sidebar-link" href="/feed.html">Explore</a>
       </div>
@@ -112,6 +112,7 @@ limitations under the License.
                 <input type="submit" value="Update" class="cta submit-btn info-submit">
               </form>
             </div>
+
             <!-- Topic Form -->
             <!-- post request is handled via JS to parse the inputs into lists -->
             <div id="topic-form" class = "input-part">
@@ -126,32 +127,77 @@ limitations under the License.
                 <div id="currentTopics-div">
                   <div class = "row">
                     <div class="column equal33"><input type="checkbox" name="OS">Operating System</input></div>
-                    <div class="column equal33"><input type="checkbox" name="Web Dev">Web Development</input></div>
-                    <div class="column equal33"><input type="checkbox" name="Ios Dev">iOS Development</input></div>
+                    <div class="column equal33"><input type="checkbox" name="Web_Dev">Web Development</input></div>
+                    <div class="column equal33"><input type="checkbox" name="Ios_Dev">iOS Development</input></div>
                   </div>
 
                   <div class = "row">
-                    <div class="column equal33"><input type="checkbox" name="And Dev">Android Development</input></div>
+                    <div class="column equal33"><input type="checkbox" name="And_Dev">Android Development</input></div>
                     <div class="column equal33"><input type="checkbox" name="ML">Machine Learning</input></div>
                     <div class="column equal33"><input type="checkbox" name="CV">Computer Vision</input></div>
                   </div>
 
                   <div class = "row">
                     <div class="column equal33"><input type="checkbox" name="NLP">NLP</input></div>
-                    <div class="column equal33"><input type="checkbox" name="Alg Des">Algorithm Design</input></div>
-                    <div class="column equal33"><input type="checkbox" name="Data Sci">Data Science</input></div>
+                    <div class="column equal33"><input type="checkbox" name="Alg_Des">Algorithm Design</input></div>
+                    <div class="column equal33"><input type="checkbox" name="Data_Sci">Data Science</input></div>
                   </div>
 
                   <div class = "row">
                     <div class="column equal33"><input type="checkbox" name="Database">Database</input></div>
-                    <div class="column equal33"><input type="checkbox" name="Com Net">Computer Networks</input></div>
-                    <div class="column equal33"><input type="checkbox" name="Dist SYs">Distributed System</input></div>
+                    <div class="column equal33"><input type="checkbox" name="Com_Net">Computer Networks</input></div>
+                    <div class="column equal33"><input type="checkbox" name="Dist_Sys">Distributed System</input></div>
                   </div>
 
                 </div>
                 <input type="submit" value="Update Fields of Interest" class="cta submit-btn" onclick="setCurrentTopics()">
               </form>
             </div>
+
+            <div id="timezone-form" class = "input-part">
+              <form action="/timezone" method="POST">
+                <!--<input class = "input-textbox info-input" placeholder = "Time Zone" type="textbox" name="timezone" id="timezone-input" required></input>-->
+                <select name="timezone" id="timezone-input" class = "input-textbox info-input" required>
+                  <option value="" selected="selected">Time Zone</option>
+                	<option value="-12">(GMT -12:00) Eniwetok, Kwajalein</option>
+                	<option value="-11">(GMT -11:00) Midway Island, Samoa</option>
+                	<option value="-10">(GMT -10:00) Hawaii</option>
+                	<option value="-9">(GMT -9:00) Alaska</option>
+                	<option value="-8">(GMT -8:00) Pacific Time (US &amp; Canada)</option>
+                	<option value="-7">(GMT -7:00) Mountain Time (US &amp; Canada)</option>
+                	<option value="-6">(GMT -6:00) Central Time (US &amp; Canada), Mexico City</option>
+                	<option value="-5">(GMT -5:00) Eastern Time (US &amp; Canada), Bogota, Lima</option>
+                	<option value="-4">(GMT -4:00) Atlantic Time (Canada), Caracas, La Paz</option>
+                	<option value="-3">(GMT -3:00) Brazil, Buenos Aires, Georgetown</option>
+                	<option value="-2">(GMT -2:00) Mid-Atlantic</option>
+                	<option value="-1">(GMT -1:00) Azores, Cape Verde Islands</option>
+                	<option value="0">(GMT) Western Europe Time, London, Lisbon, Casablanca</option>
+                	<option value="1">(GMT +1:00) Brussels, Copenhagen, Madrid, Paris</option>
+                	<option value="2">(GMT +2:00) Kaliningrad, South Africa</option>
+                	<option value="3">(GMT +3:00) Baghdad, Riyadh, Moscow, St. Petersburg</option>
+                	<option value="4">(GMT +4:00) Abu Dhabi, Muscat, Baku, Tbilisi</option>
+                	<option value="5">(GMT +5:00) Ekaterinburg, Islamabad, Karachi, Tashkent</option>
+                	<option value="6">(GMT +6:00) Almaty, Dhaka, Colombo</option>
+                	<option value="7">(GMT +7:00) Bangkok, Hanoi, Jakarta</option>
+                	<option value="8">(GMT +8:00) Beijing, Perth, Singapore, Hong Kong</option>
+                	<option value="9">(GMT +9:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</option>
+                	<option value="10">(GMT +10:00) Eastern Australia, Guam, Vladivostok</option>
+                	<option value="11">(GMT +11:00) Magadan, Solomon Islands, New Caledonia</option>
+                	<option value="12">(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</option>
+                	<option value="13">(GMT +13:00) Apia, Nukualofa</option>
+                	<option value="14">(GMT +14:00) Line Islands, Tokelau</option>
+                </select>
+                <input type="submit" value="Update" class="cta submit-btn info-submit">
+              </form>
+            </div>
+
+            <div id="studypace-form" class = "input-part">
+              <form action="/studypace" method="POST">
+                <input class = "input-textbox info-input" placeholder = "Weekly Study Hours" type="textbox" name="studypace" id="studypace-input" required></input>
+                <input type="submit" value="Update" class="cta submit-btn info-submit">
+              </form>
+            </div>
+
 
             <div id="about-me-form">
               <form action="/about" method="POST">

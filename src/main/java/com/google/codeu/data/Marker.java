@@ -5,7 +5,7 @@ public class Marker {
   private double lat;
   private double lng;
   private String content;
-  // private long timestamp;
+  // private Long timestamp;
   private String universityAddress;
 
   public Marker(double lat, double lng, String content, String universityAddress) {
@@ -28,7 +28,7 @@ public class Marker {
     return content;
   }
 
-  // public long getTimestamp() {
+  // public Long getTimestamp() {
   //   return timestamp;
   // }
 

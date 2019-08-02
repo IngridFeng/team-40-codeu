@@ -4,13 +4,14 @@
     <title>Community Page</title>
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/mission-control.css">
+    <link rel="stylesheet" href="/css/community.css">
     <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
     <script src="/js/community-page-loader.js"></script>
     <script src="/js/navigation-loader.js"></script>
   </head>
-  <body onload="buildUI(); addLoginOrLogoutLinkToNavigation();">
+  <body onload="buildInitialUI(); addLoginOrLogoutLinkToNavigation();">
     <div class="wrapper navbar">
       <article class="main">
         <p id="logo"><a href="/aboutus.html">MuMind</a></p>
@@ -22,12 +23,12 @@
       <div class="mc_sidebar">
         <!-- <h2 class="sidebar-title">Find Friends</h2> -->
         <a class="sidebar-link" href="/community.html">Find Friends</a>
-        <a class="sidebar-link" href="/my-community.html">Bounce Thoughts</a>
+        <a id = "mychats_link"class="sidebar-link" href="/my-community.html">Bounce Thoughts</a>
         <a id = "profile_link" class="sidebar-link" href="#">Reflect</a>
         <a class="sidebar-link" href="/feed.html">Explore</a>
       </div>
       <div class="mc_main">
-        <div class="content centered">
+        <div class="content-wide centered">
           <h1>Community Page</h1>
           <p>Here is a list of every user who has set a profile:</p>
           <hr/>
@@ -38,19 +39,37 @@
             </div>
           </div>
 
-          <div id="filter_bar" class="header_bar" onchange="buildUI()">
+          <div id="filter_bar" class="header_bar">
 
             <div class="selectBox">
               <div class="select-title" onclick="showCheckboxOptions(this)">
                 <p>Topic</p>
               </div>
               <div class="select-contents" id="topic" style="display: none;">
-                <label for="topic1">
-                  <input type="checkbox" value="topic1" checked/><p>Topic 1</p></label>
-                <label for="topic2">
-                  <input type="checkbox" value="topic2" checked/><p>Topic 2</p></label>
-                <label for="topic3">
-                  <input type="checkbox" value="topic3" checked/><p>Topic 3</p></label>
+                <label for="OS">
+                  <input type="checkbox" value="OS" checked/><p>Operating System</p></label>
+                <label for="Web_Dev">
+                  <input type="checkbox" value="Web_Dev" checked/><p>Web Development</p></label>
+                <label for="Ios_Dev">
+                  <input type="checkbox" value="Ios_Dev" checked/><p>iOS Development</p></label>
+                <label for="And_Dev">
+                  <input type="checkbox" value="And_Dev" checked/><p>Android Development</p></label>
+                <label for="ML">
+                  <input type="checkbox" value="ML" checked/><p>Machine Learning</p></label>
+                <label for="CV">
+                  <input type="checkbox" value="CV" checked/><p>Computer Vision</p></label>
+                <label for="NLP">
+                  <input type="checkbox" value="NLP" checked/><p>NLP</p></label>
+                <label for="Alg_Des">
+                  <input type="checkbox" value="Alg_Des" checked/><p>Algorithm Design</p></label>
+                <label for="Data_Sci">
+                  <input type="checkbox" value="Data_Sci" checked/><p>Data Science</p></label>
+                <label for="Database">
+                  <input type="checkbox" value="Database" checked/><p>Database</p></label>
+                <label for="Com_Net">
+                  <input type="checkbox" value="Com_Net" checked/><p>Computer Networks</p></label>
+                <label for="Dist_Sys">
+                  <input type="checkbox" value="Dist_Sys" checked/><p>Distributed System</p></label>
               </div>
             </div>
 
@@ -59,12 +78,101 @@
                 <p>Time Zone</p>
               </div>
               <div class="select-contents" id="timezone" style="display: none;">
-                <label for="topic1">
-                  <input type="checkbox" value="timezone1" checked/><p>Time 1</p></label>
-                <label for="topic2">
-                  <input type="checkbox" value="timezone2" checked/><p>Time 2</p></label>
-                <label for="topic3">
-                  <input type="checkbox" value="timezone3" checked/><p>Time 3</p></label>
+                <p>Between </p>
+                <input type="number" name="startTime" min="-12" max="+14" class="filter_input">
+                <p>GMT and </p>
+                <input type="number" name="endTime" min="-12" max="+14" class="filter_input">
+                <p>GMT</p>
+              <!--
+                <label for="east_ish">
+                  <input type="checkbox" value="east_ish" checked/><p>GMT -12:00 to GMT -4:00</p></label>
+                <label for="central_ish">
+                  <input type="checkbox" value="central_ish" checked/><p>GMT -04:00 to GMT +04:00</p></label>
+                <label for="west_ish">
+                  <input type="checkbox" value="west_ish" checked/><p>GMT +04:00 to GMT +14:00</p></label>
+                -->
+                <!--
+                <label for="-12:00">
+                  <input type="checkbox" value="-12:00" checked/><p>(GMT -12:00) Eniwetok, Kwajalein</p></label>
+                <label for="-11:00">
+                  <input type="checkbox" value="-11:00" checked/><p>(GMT -11:00) Midway Island, Samoa</p></label>
+                <label for="-10:00">
+                  <input type="checkbox" value="-10:00" checked/><p>(GMT -10:00) Hawaii</p></label>
+                <label for="-09:30">
+                  <input type="checkbox" value="-09:30" checked/><p>(GMT -09:30) Taiohae</p></label>
+                <label for="-09:00">
+                  <input type="checkbox" value="-09:00" checked/><p>(GMT -09:00) Alaska</p></label>
+                <label for="-08:00">
+                  <input type="checkbox" value="-08:00" checked/><p>(GMT -08:00) Pacific Time (US &amp; Canada)</p></label>
+                <label for="-07:00">
+                  <input type="checkbox" value="-07:00" checked/><p>(GMT -07:00) Mountain Time (US &amp; Canada)</p></label>
+                <label for="-06:00">
+                  <input type="checkbox" value="-06:00" checked/><p>(GMT -06:00) Central Time (US &amp; Canada), Mexico City</p></label>
+                <label for="-05:00">
+                  <input type="checkbox" value="-05:00" checked/><p>(GMT -05:00) Eastern Time (US &amp; Canada), Bogota, Lima</p></label>
+                <label for="-04:50">
+                  <input type="checkbox" value="-04:50" checked/><p>(GMT -04:50) Caracas</p></label>
+                <label for="-04:00">
+                  <input type="checkbox" value="-04:00" checked/><p>(GMT -04:00) Atlantic Time (Canada), Caracas, La Paz</p></label>
+                <label for="-03:30">
+                  <input type="checkbox" value="-03:30" checked/><p>(GMT -03:30) Newfoundland</p></label>
+                <label for="-03:00">
+                  <input type="checkbox" value="-03:00" checked/><p>(GMT -03:00) Brazil, Buenos Aires, Georgetown</p></label>
+                <label for="-02:00">
+                  <input type="checkbox" value="-02:00" checked/><p>(GMT -02:00) Mid-Atlantic</p></label>
+                <label for="-01:00">
+                  <input type="checkbox" value="-01:00" checked/><p>(GMT -01:00) Azores, Cape Verde Islands</p></label>
+                <label for="+00:00">
+                  <input type="checkbox" value="+00:00" checked/><p>(GMT +00:00) Western Europe Time, London, Lisbon, Casablanca</p></label>
+                <label for="+01:00">
+                  <input type="checkbox" value="+01:00" checked/><p>(GMT +01:00) Brussels, Copenhagen, Madrid, Paris</p></label>
+                <label for="+02:00">
+                  <input type="checkbox" value="+02:00" checked/><p>(GMT +02:00) Kaliningrad, South Africa</p></label>
+                <label for="+03:00">
+                  <input type="checkbox" value="+03:00" checked/><p>(GMT +03:00) Baghdad, Riyadh, Moscow, St. Petersburg</p></label>
+                <label for="+03:30">
+                  <input type="checkbox" value="+03:30" checked/><p>(GMT +03:30) Tehran</p></label>
+                <label for="+04:00">
+                  <input type="checkbox" value="+04:00" checked/><p>(GMT +04:00) Abu Dhabi, Muscat, Baku, Tbilisi</p></label>
+                <label for="+04:30">
+                  <input type="checkbox" value="+04:30" checked/><p>(GMT +04:30) Kabul</p></label>
+                <label for="+05:00">
+                  <input type="checkbox" value="+05:00" checked/><p>(GMT +05:00) Ekaterinburg, Islamabad, Karachi, Tashkent</p></label>
+                <label for="+05:30">
+                  <input type="checkbox" value="+05:30" checked/><p>(GMT +05:30) Bombay, Calcutta, Madras, New Delhi</p></label>
+                <label for="+05:45">
+                  <input type="checkbox" value="+05:45" checked/><p>(GMT +05:45) Kathmandu, Pokhara</p></label>
+                <label for="+06:00">
+                  <input type="checkbox" value="+06:00" checked/><p>(GMT +06:00) Almaty, Dhaka, Colombo</p></label>
+                <label for="+06:30">
+                  <input type="checkbox" value="+06:30" checked/><p>(GMT +06:30) Yangon, Mandalay</p></label>
+                <label for="+07:00">
+                  <input type="checkbox" value="+07:00" checked/><p>(GMT +07:00) Bangkok, Hanoi, Jakarta</p></label>
+                <label for="+08:00">
+                  <input type="checkbox" value="+08:00" checked/><p>(GMT +08:00) Beijing, Perth, Singapore, Hong Kong</p></label>
+                <label for="+08:45">
+                  <input type="checkbox" value="+08:45" checked/><p>(GMT +08:45) Eucla</p></label>
+                <label for="+09:00">
+                  <input type="checkbox" value="+09:00" checked/><p>(GMT +09:00) Tokyo, Seoul, Osaka, Sapporo, Yakutsk</p></label>
+                <label for="+09:30">
+                  <input type="checkbox" value="+09:30" checked/><p>(GMT +09:30) Adelaide, Darwin</p></label>
+                <label for="+10:00">
+                  <input type="checkbox" value="+10:00" checked/><p>(GMT +10:00) Eastern Australia, Guam, Vladivostok</p></label>
+                <label for="+10:30">
+                  <input type="checkbox" value="+10:30" checked/><p>(GMT +10:30) Lord Howe Island</p></label>
+                <label for="+11:00">
+                  <input type="checkbox" value="+11:00" checked/><p>(GMT +11:00) Magadan, Solomon Islands, New Caledonia</p></label>
+                <label for="+11:30">
+                  <input type="checkbox" value="+11:30" checked/><p>(GMT +11:30) Norfolk Island</p></label>
+                <label for="+12:00">
+                  <input type="checkbox" value="+12:00" checked/><p>(GMT +12:00) Auckland, Wellington, Fiji, Kamchatka</p></label>
+                <label for="+12:45">
+                  <input type="checkbox" value="+12:45" checked/><p>(GMT +12:45) Chatham Islands</p></label>
+                <label for="+13:00">
+                  <input type="checkbox" value="+13:00" checked/><p>(GMT +13:00) Apia, Nukualofa</p></label>
+                <label for="+14:00">
+                  <input type="checkbox" value="+14:00" checked/><p>(GMT +14:00) Line Islands, Tokelau</p></label>
+                -->
               </div>
             </div>
 
@@ -73,15 +181,15 @@
                 <p>Study Pace</p>
               </div>
               <div class="select-contents" id="studypace" style="display: none;">
-                <label for="topic1">
-                  <input type="checkbox" value="studypace1" checked/><p>Pace 1</p></label>
-                <label for="topic2">
-                  <input type="checkbox" value="studypace2" checked/><p>Pace 2</p></label>
-                <label for="topic3">
-                  <input type="checkbox" value="studypace3" checked/><p>Pace 3</p></label>
+                <p>Between </p>
+                <input type="number" name="minPace" min="0" max="168" class="filter_input">
+                <p>hrs/week and </p>
+                <input type="number" name="maxPace" min="0" max="168" class="filter_input">
+                <p>hrs/week</p>
               </div>
             </div>
 
+            <button type="button" onclick="buildUI()" class="user_card-chat_button">Filter</button>
             <!--
             <p>Topic</p>
 

@@ -13,12 +13,12 @@ public class User {
   private String imageUrl;
   private String universityName;
   private String major;
-  private String timezone;
-  private String studypace;
+  private Long timezone;
+  private Long studypace;
   private List<String> pastTopics;
   private List<String> currentTopics;
 
-  public User(String email, String aboutMe, String nickName, List<String> chats, String imageUrl, String universityName, String major, String timezone, String studypace, List<String> pastTopics, List<String> currentTopics) {
+  public User(String email, String aboutMe, String nickName, List<String> chats, String imageUrl, String universityName, String major, Long timezone, Long studypace, List<String> pastTopics, List<String> currentTopics) {
     this.email = email;
     this.aboutMe = aboutMe;
     this.nickName = nickName;
@@ -73,11 +73,11 @@ public class User {
     return major;
   }
 
-  public String getTimeZone() {
+  public Long getTimeZone() {
     return timezone;
   }
 
-  public String getStudyPace() {
+  public Long getStudyPace() {
     return studypace;
   }
 
@@ -113,11 +113,11 @@ public class User {
     this.major = major;
   }
 
-  public void setTimeZone(String timezone) {
+  public void setTimeZone(Long timezone) {
     this.timezone = timezone;
   }
 
-  public void setStudyPace(String studypace) {
+  public void setStudyPace(Long studypace) {
     this.studypace = studypace;
   }
 }

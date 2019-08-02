@@ -90,7 +90,7 @@ public class Datastore {
         UUID id = UUID.fromString(idString);
         String chat = (String) entity.getProperty("chat");
         String text = (String) entity.getProperty("text");
-        long timestamp = (long) entity.getProperty("timestamp");
+        Long timestamp = (Long) entity.getProperty("timestamp");
         /* double sentiment = (double) entity.getProperty("sentiment"); */
         String imageUrl = (String) entity.getProperty("imageUrl");
         String profilePic = (String) entity.getProperty("profilePic");
@@ -125,7 +125,7 @@ public class Datastore {
         String chat = (String) entity.getProperty("chat");
       	String user = (String) entity.getProperty("user");
         String text = (String) entity.getProperty("text");
-        long timestamp = (long) entity.getProperty("timestamp");
+        Long timestamp = (Long) entity.getProperty("timestamp");
         /* double sentiment = (double) entity.getProperty("sentiment"); */
         String imageUrl = (String) entity.getProperty("imageUrl");
         String profilePic = (String) entity.getProperty("profilePic");
@@ -167,7 +167,7 @@ public class Datastore {
           UUID id = UUID.fromString(idString);
           String user = (String) entity.getProperty("user");
           String text = (String) entity.getProperty("text");
-          long timestamp = (long) entity.getProperty("timestamp");
+          Long timestamp = (Long) entity.getProperty("timestamp");
           /* ouble sentiment = (double) entity.getProperty("sentiment"); */
           String imageUrl = (String) entity.getProperty("imageUrl");
           String profilePic = (String) entity.getProperty("profilePic");
@@ -190,83 +190,107 @@ public class Datastore {
    * Gets a set of all users.
    * return a set of strings representing the users.
    */
-  public List<User> getUsers(String topic, String timezone, String studypace){
-    System.out.println("REACHED DATASTORE");
-    System.out.println(topic);
-    System.out.println(timezone);
-    System.out.println(studypace);
+   public List<User> getUsers(){
+     List<User> users = new ArrayList<>();
+     Query query = new Query("User");
 
+     PreparedQuery results = datastore.prepare(query);
+
+
+     for (Entity entity : results.asIterable()) {
+       try {
+         String email = (String) entity.getProperty("email");
+         String aboutMe = (String) entity.getProperty("aboutMe");
+         String nickName = (String) entity.getProperty("nickName");
+         List<String> chats = (List<String>) entity.getProperty("chats");
+         String imageUrl = (String) entity.getProperty("imageUrl");
+         String universityName = (String) entity.getProperty("universityName");
+         String major = (String) entity.getProperty("major");
+         Long timezone = (Long) entity.getProperty("timezone");
+         Long studypace = (Long) entity.getProperty("studypace");
+         List<String> pastTopics = (List<String>) entity.getProperty("pastTopics");
+         List<String> currentTopics = (List<String>) entity.getProperty("currentTopics");
+
+         User user = new User(email, aboutMe, nickName, chats, imageUrl, universityName, major, timezone, studypace, pastTopics, currentTopics);
+         users.add(user);
+       } catch (Exception e) {
+         System.err.println("Error reading message.");
+         System.err.println(entity.toString());
+         e.printStackTrace();
+       }
+     }
+
+     return users;
+   }
+
+
+  public List<User> getUsersWithParams(String topicParam, String timezoneParam, String studypaceParam){
     List<User> users = new ArrayList<>();
 
-    /**
-    // Can't quite do this part until I know how we're storing user info.
+    // process params
+    List<String> topicList = new ArrayList<String>(Arrays.asList(topicParam.split(",")));
+    List<String> timezoneStrings = new ArrayList<String>(Arrays.asList(timezoneParam.split(",")));
+    List<Long> timezoneList = new ArrayList<>();
+    for (String strTimezone:timezoneStrings) {
+       timezoneList.add(Long.parseLong(strTimezone));
+    }
 
-    topic = topic.substring(1, topic.length()-1);
-    timezone = timezone.substring(1, timezone.length()-1);
-    studypace = studypace.substring(1, studypace.length()-1);
+    List<String> studypaceStrings = Arrays.asList(studypaceParam.split(","));
+    List<Long> studypaceList = new ArrayList<>();
+    for (String strStudypace:studypaceStrings) {
+       studypaceList.add(Long.parseLong(strStudypace));
+    }
 
-    List<String> topicList = Arrays.asList(topic.split(","));
-    List<String> timezoneList = Arrays.asList(timezone.split(","));
-    List<String> studypaceList = Arrays.asList(studypace.split(","));
-
-    // Build Filters
-    Filter topicFilter =
-    new FilterPredicate("topic", FilterOperator.IN, topicList);
-
-    Filter timezoneFilter =
-        new FilterPredicate("timezone", FilterOperator.IN, timezoneList);
-
-    Filter studypaceFilter =
-        new FilterPredicate("studypace", FilterOperator.IN, studypaceList);
-
-
-    // Use CompositeFilter to combine multiple filters
-    CompositeFilter userFilter =
-        CompositeFilterOperator.and(topicFilter, timezoneFilter, studypaceFilter);
-
-    Query query = new Query("User").setFilter(userFilter);
-    **/
+    /* DEBUGGING
+    System.out.println(topicList);
+    System.out.println(timezoneList);
+    System.out.println(studypaceList);
+    */
 
     Query query = new Query("User");
-
     PreparedQuery results = datastore.prepare(query);
 
-
+    // process results
     for (Entity entity : results.asIterable()) {
       try {
-        String email = (String) entity.getProperty("email");
-        String aboutMe = (String) entity.getProperty("aboutMe");
-        String nickName = (String) entity.getProperty("nickName");
-        List<String> chats = (List<String>) entity.getProperty("chats");
-        String imageUrl = (String) entity.getProperty("imageUrl");
-        String universityName = (String) entity.getProperty("universityName");
-        String major = (String) entity.getProperty("major");
-        String pace = (String) entity.getProperty("studypace");
-        List<String> pastTopics = (List<String>) entity.getProperty("pastTopics");
+        System.out.println("filter");
+        /* FILTER HERE */
         List<String> currentTopics = (List<String>) entity.getProperty("currentTopics");
+        Long timezone = (Long) entity.getProperty("timezone");
+        Long studypace = (Long) entity.getProperty("studypace");
 
-        User user = new User(email, aboutMe, nickName, chats, imageUrl, universityName, major, timezone, studypace, pastTopics, currentTopics);
-        users.add(user);
+        List<String> commonTopics = currentTopics;
+        currentTopics.retainAll(topicList);
+
+        Boolean hasTopic = (commonTopics.size()) > 0;
+        Boolean hasTimezone = timezone != null && (timezone >= timezoneList.get(0) && timezone <= timezoneList.get(timezoneList.size() - 1));
+        Boolean hasStudypace = studypace != null && (studypace >= studypaceList.get(0) && studypace <= studypaceList.get(studypaceList.size() - 1));
+        if (hasTopic && hasTimezone && hasStudypace){
+          String email = (String) entity.getProperty("email");
+          String aboutMe = (String) entity.getProperty("aboutMe");
+          String nickName = (String) entity.getProperty("nickName");
+          List<String> chats = (List<String>) entity.getProperty("chats");
+          String imageUrl = (String) entity.getProperty("imageUrl");
+          String universityName = (String) entity.getProperty("universityName");
+          String major = (String) entity.getProperty("major");
+          //Long timezone = (Long) entity.getProperty("timezone");
+          //Long studypace = (Long) entity.getProperty("studypace");
+          List<String> pastTopics = (List<String>) entity.getProperty("pastTopics");
+          //List<String> currentTopics = (List<String>) entity.getProperty("currentTopics");
+          User user = new User(email, aboutMe, nickName, chats, imageUrl, universityName, major, timezone, studypace, pastTopics, currentTopics);
+          users.add(user);
+        }
       } catch (Exception e) {
         System.err.println("Error reading message.");
         System.err.println(entity.toString());
         e.printStackTrace();
       }
     }
-
-    return users;
-
-
-
-    /*
-  	Set<String> users = new HashSet<>();
-  	Query query = new Query("Message");
-  	PreparedQuery results = datastore.prepare(query);
-  	for(Entity entity : results.asIterable()) {
-  		users.add((String) entity.getProperty("user"));
-  	}
-  	return users;
+    /* DEBUGGING
+    System.out.println("datastore returning");
+    System.out.println(users);
     */
+    return users;
   }
 
 
@@ -308,8 +332,8 @@ public class Datastore {
   String imageUrl = (String) userEntity.getProperty("imageUrl");
   String universityName = (String) userEntity.getProperty("universityName");
   String major = (String) userEntity.getProperty("major");
-  String timezone = (String) userEntity.getProperty("timezone");
-  String studypace = (String) userEntity.getProperty("studypace");
+  Long timezone = (Long) userEntity.getProperty("timezone");
+  Long studypace = (Long) userEntity.getProperty("studypace");
   List<String> pastTopics = (List<String>) userEntity.getProperty("pastTopics");
   List<String> currentTopics = (List<String>) userEntity.getProperty("currentTopics");
   User user = new User(email, aboutMe, nickName, chats, imageUrl, universityName, major, timezone, studypace, pastTopics, currentTopics);

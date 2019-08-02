@@ -68,11 +68,20 @@ h2 {
   border-right: 0px;
   border-left: 0px;
   border-bottom: thin solid #ddd;
+  color: #bdbdd3;
 }
 
 #nickname-form, #about-me-form{
   margin-bottom: 20px;
 }
+
+/* override default*/
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 /* Give each message a rounded border. */
 .message-div {
   border: thin solid black;
@@ -119,7 +128,7 @@ h2 {
   margin-right: auto;
   width: 150px;
   height: 150px;
-  border-radius: 75px;
+  border-radius: 20px;
 }
 
 #profilepic-message {

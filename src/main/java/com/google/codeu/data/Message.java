@@ -25,7 +25,7 @@ public class Message {
   private String chat;
   private String user;
   private String text;
-  private long timestamp;
+  private Long timestamp;
   /*private double sentiment; */
   private String imageUrl;
   private String profilePic;
@@ -38,7 +38,7 @@ public class Message {
     this(UUID.randomUUID(), chat, user, text, System.currentTimeMillis(), imageUrl, profilePic);
   }
 
-  public Message(UUID id, String chat, String user, String text, long timestamp, String imageUrl, String profilePic) {
+  public Message(UUID id, String chat, String user, String text, Long timestamp, String imageUrl, String profilePic) {
     this.id = id;
     this.chat = chat;
     this.user = user;
@@ -65,7 +65,7 @@ public class Message {
     return chat;
   }
 
-  public long getTimestamp() {
+  public Long getTimestamp() {
     return timestamp;
   }
 

@@ -343,7 +343,7 @@ input:-ms-input-placeholder { color: #bdbdd3;}
 .user_card-picture img {
   width: inherit;
   height: inherit;
-  border-radius: 5px;
+  border-radius: 20px;
 }
 
 .user_card-content {
