@@ -20,9 +20,9 @@ if (parameterKey) {
         messageContainer.innerHTML = '<p>There are no posts yet.</p>';
       }
       else{
-        messageContainer.innerHTML = '';  
+        messageContainer.innerHTML = '';
       }
-      messages.forEach((message) => {  
+      messages.forEach((message) => {
         if(!message.hasOwnProperty('chat')) {
           const messageDiv = buildMessageDiv(message);
           messageContainer.appendChild(messageDiv);
@@ -30,67 +30,41 @@ if (parameterKey) {
       });
     });
   }
-  
+
   /** creates a new message element from the message provided */
   function buildMessageDiv(message){
+    // build div
+    const messageDiv = document.createElement('div');
+    const pictureDiv = document.createElement('div');
+    const contentDiv = document.createElement('div');
+    pictureDiv.className = "user_card-picture";
+    contentDiv.className = "user_card-content";
+    messageDiv.className = "user_card";
+    messageDiv.appendChild(pictureDiv);
+    messageDiv.appendChild(contentDiv);
 
-    const usernameDiv = document.createElement('div');
-    usernameDiv.classList.add("left-align");
-    usernameDiv.style.textAlign = "left";
-    const userLink = document.createElement('a');
-    const url = '/nickName?user=' + message.user;
-    fetch(url).then((response) => {
-      return response.text();
-    }).then((nickName) => {
-      const userName = nickName || message.user;
-      const userLinkText = document.createTextNode(userName);
-      userLink.appendChild(userLinkText);
-    });
-    //const userLinkText = document.createTextNode(userName);
-    //userLink.appendChild(userLinkText);
-    userLink.href = "/user-page.html?user=" + message.user
-    usernameDiv.appendChild(userLink);
+    // build picture div
+    const profilePic = document.createElement('img');
 
-    const timeDiv = document.createElement('div');
-    timeDiv.classList.add('right-align');
-    timeDiv.appendChild(document.createTextNode(new Date(message.timestamp).toLocaleString()));
+    var profilePicUrl = "profilepic.png";
+    if(message.hasOwnProperty('profilePic')) {
+      profilePicUrl = message.profilePic;
+    }
 
-    const headerContentDiv = document.createElement('div');
-    headerContentDiv.setAttribute("id", "message-header-content")
-    headerContentDiv.appendChild(usernameDiv);
-    headerContentDiv.appendChild(timeDiv)
+    var picUrl = message.profilePic || "profilepic.png";
+    if(picUrl && picUrl.style) {
+     picUrl.style.height = '75px';
+     picUrl.style.width = '75px';
+     picUrl.style.borderRadius = '50%';
+    }
+    profilePic.setAttribute("id","profilepic");
+    profilePic.setAttribute("src", profilePicUrl)
+    profilePic.setAttribute("alt", "Profile picture")
+    profilePic.setAttribute("class", "profilepic")
 
-    const headerDiv = document.createElement('div');
-    headerDiv.classList.add('message-header');
+    pictureDiv.appendChild(profilePic);
 
-    //if(message.hasOwnProperty('profilePic')) {
-      //Adding profile picture
-      const profilePic = document.createElement('img');
-      var profilePicUrl = "profilepic.png";
-      if(message.hasOwnProperty('profilePic')) {
-        profilePicUrl = message.profilePic;
-      }
-
-      var picUrl = message.profilePic || "profilepic.png";
-      if(picUrl && picUrl.style) {
-       picUrl.style.height = '75px';
-       picUrl.style.width = '75px';
-       picUrl.style.borderRadius = '50%';
-      }
-      //profilePic.setAttribute("height", 70)
-      //profilePic.setAttribute("width", 70)
-      profilePic.setAttribute("id", "profilepic-message")
-      profilePic.setAttribute("src", profilePicUrl)
-      profilePic.setAttribute("alt", "Profile picture")
-      profilePic.setAttribute("class", "profilepic")
-
-      headerDiv.appendChild(profilePic);
-    //}
-
-    //headerDiv.appendChild(usernameDiv);
-    //headerDiv.appendChild(timeDiv);
-    headerDiv.appendChild(headerContentDiv);
-
+    // build content div
     const bodyDiv = document.createElement('div');
     bodyDiv.classList.add('message-body');
     const body = document.createElement('div');
@@ -109,11 +83,35 @@ if (parameterKey) {
       img.src = message.imageUrl;
       bodyDiv.appendChild(img);
     }
+    contentDiv.appendChild(bodyDiv);
 
-    const messageDiv = document.createElement('div');
-    messageDiv.classList.add("message-div");
-    messageDiv.appendChild(headerDiv);
-    messageDiv.appendChild(bodyDiv);
+    // build footer div
+    const footerDiv = document.createElement('div');
+    footerDiv.className = "user-card_footer-div";
+
+    const usernameDiv = document.createElement('div');
+    usernameDiv.classList.add("left-align");
+    usernameDiv.style.textAlign = "left";
+    const userLink = document.createElement('a');
+    const url = '/nickName?user=' + message.user;
+    fetch(url).then((response) => {
+      return response.text();
+    }).then((nickName) => {
+      const userName = nickName || message.user;
+      const userLinkText = document.createTextNode(userName);
+      userLink.appendChild(userLinkText);
+    });
+
+    userLink.href = "/user-page.html?user=" + message.user
+    usernameDiv.appendChild(userLink);
+    footerDiv.appendChild(usernameDiv);
+
+    // time div
+    const timeDiv = document.createElement('div');
+    timeDiv.classList.add('right-align');
+    timeDiv.appendChild(document.createTextNode(new Date(message.timestamp).toLocaleString()));
+    footerDiv.appendChild(timeDiv);
+    contentDiv.appendChild(footerDiv);
 
     return messageDiv;
   }
@@ -157,7 +155,7 @@ if (parameterKey) {
     });
 
   }
-  
+
   function searchRedirect() {
     var searchKey = document.getElementById('search-key').value;
     if (searchKey == "") {
@@ -166,7 +164,7 @@ if (parameterKey) {
       window.location.replace("/feed.html?search=" + searchKey);
     }
   }
-  
+
   // Fetch data and populate the UI of the page.
   function buildUI(){
    fetchMessages();

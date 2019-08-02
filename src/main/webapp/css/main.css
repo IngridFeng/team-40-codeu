@@ -316,6 +316,17 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   margin-right: auto;
 }
 
+.user-card_footer-div {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  color: #aaa;
+
+  a {
+    color: #aaa;
+  }
+}
+
 .send-button {
   background-color: var(--main-color);
   color: #fff;
@@ -353,6 +364,7 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   top: 0;
   width: calc(inherit - var(--card-height));
   height: 100%;
+  min-width: 300px;
 }
 
 .user_card-chat_button {
@@ -487,6 +499,29 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   margin-top: 20px;
 }
 
+.mg-20 {
+  margin: 20px;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.left-align {
+  display: inline-block;
+  float: left;
+  text-align: left;
+  margin: 10px;
+}
+
+.right-align {
+  display: inline-block;
+  float: right;
+  text-align: right;
+  margin: 10px;
+}
+
+/**/
 #search-container {
   box-sizing: border-box;
 }
@@ -550,4 +585,3 @@ input:-ms-input-placeholder { color: #bdbdd3;}
 #translate-button:hover {
   background: var(--main-color-highlight);
 }
-
