@@ -1,28 +1,7 @@
-/** Handles dropdown checkboxes **/
-function showCheckboxOptions(div) {
-  checkBoxContainer = div.parentNode.getElementsByClassName("select-contents")[0]
-  if (checkBoxContainer.style.display == "none") {
-    checkBoxContainer.style.display = "block";
-  } else {
-    checkBoxContainer.style.display = "none";
-  }
-}
-
 /** Fetches users and adds them to the page. */
 function loadUsers(){
-  // get params
-  const filterBar = document.getElementById("filter_bar");
-  var params = ``;
-
-  const paramDivs = Array.from(filterBar.getElementsByClassName('select-contents'));
-
-  paramDivs.forEach(function(paramDiv) {
-    const selectedOptions = checkboxesToList(paramDiv);
-    params += `${paramDiv.id}=${selectedOptions}&`;
-  });
-  params = params.substring(0, params.length-1);
-
-  // fetch user list based on params
+  
+  // fetch user
   const url = '/chats-list?';
   fetch(url).then((response) => {
     return response.json();
@@ -37,19 +16,6 @@ function loadUsers(){
    });
   });
 
-}
-
-/** Helper: returns list of checked checkbox items **/
-function checkboxesToList(paramDiv){
-  var selectedOptions = [];
-  const selectDivs = Array.from(paramDiv.getElementsByTagName("input"));
-
-  selectDivs.forEach(function(checkbox) {
-    if (checkbox.checked) {
-      selectedOptions.push(checkbox.value)
-    }
-  });
-  return(selectedOptions);
 }
 
 /**
