@@ -361,7 +361,7 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   color: white;
   font-size: 20px;
   font-weight: 500;
-  position: absolute;
+  /* position: absolute; */
   bottom: 10px;
 }
 
