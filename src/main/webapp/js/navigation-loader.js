@@ -33,7 +33,7 @@ function addLoginOrLogoutLinkToNavigation() {
       .then((loginStatus) => {
         if (loginStatus.isLoggedIn) {
           profileElement.href = '/user-page.html?user=' + loginStatus.username;
-          loginElement.appendChild(createListItem(createLink('/logout', 'Logout')));
+          loginElement.appendChild(createLink('/logout', 'Logout'));
 
         } else {
           profileElement.onClick = "loginAlert()";

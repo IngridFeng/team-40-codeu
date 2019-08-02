@@ -88,7 +88,6 @@ body {
 
 .sidebar-link:hover {
   background-color: var(--secondary-color);
-  color: #fff;
 }
 
 .sidebar-title {

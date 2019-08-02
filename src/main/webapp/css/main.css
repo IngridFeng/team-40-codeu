@@ -352,6 +352,7 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   position: absolute;
   top: 0;
   width: calc(inherit - var(--card-height));
+  height: 100%;
 }
 
 .user_card-chat_button {
