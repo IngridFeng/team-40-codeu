@@ -123,8 +123,10 @@ public class MessageServlet extends HttpServlet {
 
     // Get text
     String text = Jsoup.clean(request.getParameter("text"), Whitelist.simpleText());
-    TextProcessor processor = BBProcessorFactory.getInstance().create();
-    text = processor.process(text);
+    //System.out.println("before: " + text);
+    //TextProcessor processor = BBProcessorFactory.getInstance().create();
+    //text = processor.process(text);
+    //System.out.println("after: " + text);
 
     // Get image
     String imageUrl = getUploadedFileUrl(request, "image");
