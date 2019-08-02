@@ -132,3 +132,11 @@ h2 {
   position: relative;
   right: 150px;
 }
+
+#message-header-content {
+  display: inline-block;
+  position: relative;
+  right: 140px;
+  bottom: 30px;
+  font-size: 18px;
+}
