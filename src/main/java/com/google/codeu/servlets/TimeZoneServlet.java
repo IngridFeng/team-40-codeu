@@ -68,7 +68,7 @@ public class TimeZoneServlet extends HttpServlet {
     //get email of current user
     String userEmail = userService.getCurrentUser().getEmail();
     //get timezone that user put in
-    String timezone = request.getParameter("timezone");
+    Long timezone = Long.parseLong(request.getParameter("timezone"));
     //get current user by querying the email
     User user = datastore.getUser(userEmail);
     if (user == null) {

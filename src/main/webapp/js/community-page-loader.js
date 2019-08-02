@@ -8,6 +8,25 @@ function showCheckboxOptions(div) {
   }
 }
 
+/* TEMPORARY: prevent slow initial load*/
+function buildInitialUI(){
+  // fetch user list no params
+  const url = '/user-list';
+  fetch(url).then((response) => {
+    return response.json();
+  }).then((users) => {
+    const list = document.getElementById('list');
+    list.innerHTML = '';
+
+    // build UI
+    users.forEach((user) => {
+     const userListItem = buildUserListItem(user);
+     list.appendChild(userListItem);
+   });
+  });
+
+}
+
 /** Fetches users and adds them to the page. */
 function loadUsers(){
   // TEMPORARY: show succesful request
@@ -15,23 +34,31 @@ function loadUsers(){
   list.innerHTML = '<p>loading filtered users...</p>'+ list.innerHTML;
 
   // get params
-  const filterBar = document.getElementById("filter_bar");
-  var params = ``;
+  // set param defaults if no input
 
-  const paramDivs = Array.from(filterBar.getElementsByClassName('select-contents'));
+  var topicParams = checkboxesToList(document.getElementById("topic"));
 
-  paramDivs.forEach(function(paramDiv) {
-    const selectedOptions = checkboxesToList(paramDiv);
-    params += `${paramDiv.id}=${selectedOptions}&`;
-  });
-  params = params.substring(0, params.length-1);
+  const startTime = parseInt(document.getElementById("timezone").getElementsByTagName("input")[0].value || -12);
+  const endTime = parseInt(document.getElementById("timezone").getElementsByTagName("input")[1].value || 14);
+  var timezoneParams = [];
+  for (var i=startTime; i<=endTime; i++) {
+    timezoneParams.push(i);
+  }
+
+  const startPace = parseInt(document.getElementById("studypace").getElementsByTagName("input")[0].value || 0);
+  const endPace = parseInt(document.getElementById("studypace").getElementsByTagName("input")[1].value || 168);
+  var studypaceParams = [];
+  for (var i=startPace; i<=endPace; i++) {
+    studypaceParams.push(i);
+  }
+
+  var params = `topic=${topicParams}&timezone=${timezoneParams}&studypace=${studypaceParams}`;
 
   // fetch user list based on params
   const url = '/user-list?' + params;
   fetch(url).then((response) => {
     return response.json();
   }).then((users) => {
-    const list = document.getElementById('list');
     list.innerHTML = '';
 
     // build UI

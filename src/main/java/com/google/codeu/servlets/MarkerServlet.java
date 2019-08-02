@@ -45,7 +45,7 @@ public class MarkerServlet extends HttpServlet {
     double lng = Double.parseDouble(request.getParameter("lng"));
     String content = Jsoup.clean(request.getParameter("content"), Whitelist.none());
     String universityAddress = Jsoup.clean(request.getParameter("universityAddress"), Whitelist.none());
-    // long timestamp = Long.parseLong(request.getParameter("timestamp"));
+    // Long timestamp = Long.parseLong(request.getParameter("timestamp"));
 
     Marker marker = new Marker(lat, lng, content, universityAddress);
     storeMarker(marker);
