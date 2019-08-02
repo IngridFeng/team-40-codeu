@@ -144,7 +144,7 @@ function buildUserListItem(user){
   // build chat button
   const chatButton = document.createElement("input");
   chatButton.setAttribute('type',"submit");
-  chatButton.setAttribute('value',"Chat with Me!");
+  chatButton.setAttribute('value',"Go to Chat");
   //chatButton.classList.add("submit-button");
   //chatButton.classList.add("chat-with-me");
   chatButton.classList.add("user_card-chat_button");
