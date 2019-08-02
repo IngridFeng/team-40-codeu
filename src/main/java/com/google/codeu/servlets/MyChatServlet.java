@@ -24,8 +24,8 @@ import java.util.UUID;
 /**
  * Handles fetching and saving user data.
  */
-@WebServlet("/chat")
-public class ChatServlet extends HttpServlet {
+@WebServlet("/mychats")
+public class MyChatServlet extends HttpServlet {
 
   private Datastore datastore;
 
@@ -67,12 +67,6 @@ public class ChatServlet extends HttpServlet {
       String userEmail = userService.getCurrentUser().getEmail();
       String selectedUserEmail = request.getParameter("selectedUser");
       
-      // if the user is not stored redirect to profile page
-      if (datastore.getUser(userEmail) == null) {
-      	response.sendRedirect("user-page.html?user=" + userEmail + "&alert=fill");
-      	return;
-      }
-      
       //get nick names
       String userNick = datastore.getUser(userEmail).getNickName();
       String selectedUserNick = datastore.getUser(selectedUserEmail).getNickName();
@@ -94,7 +88,7 @@ public class ChatServlet extends HttpServlet {
       			// a chat already exists between the two users
       			String chatId = common.get(0);
       			// redirect to chat package
-      			response.sendRedirect("/chat.html?chat=" + chatId);
+      			response.sendRedirect("/mychats.html?chat=" + chatId);
       			return;
       		}
       	} else {
@@ -106,7 +100,7 @@ public class ChatServlet extends HttpServlet {
       				// a chat already exists
       				String chatId = userChats.get(i);
       				// redirect to chat package
-      				response.sendRedirect("/chat.html?chat=" + chatId);
+      				response.sendRedirect("/mychats.html?chat=" + chatId);
       				return;
       			} else {
       				unique.add(userChats.get(i));
@@ -159,7 +153,7 @@ public class ChatServlet extends HttpServlet {
       datastore.storeChat(chat);
 
       // redirect to chat package
-      response.sendRedirect("/chat.html?chat=" + chat.getId());
+      response.sendRedirect("/mychats.html?chat=" + chat.getId());
       return;
 
   }

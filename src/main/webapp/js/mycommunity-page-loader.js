@@ -10,10 +10,6 @@ function showCheckboxOptions(div) {
 
 /** Fetches users and adds them to the page. */
 function loadUsers(){
-  // TEMPORARY: show succesful request
-  const list = document.getElementById('list');
-  list.innerHTML = '<p>loading filtered users...</p>'+ list.innerHTML;
-
   // get params
   const filterBar = document.getElementById("filter_bar");
   var params = ``;
@@ -27,7 +23,7 @@ function loadUsers(){
   params = params.substring(0, params.length-1);
 
   // fetch user list based on params
-  const url = '/user-list?' + params;
+  const url = '/chats-list?';
   fetch(url).then((response) => {
     return response.json();
   }).then((users) => {
@@ -115,7 +111,7 @@ function buildUserListItem(user){
     }
     userInfoElem.appendChild(document.createTextNode('Major: ' + major));
   }
-  
+
   userInfoElem.appendChild(document.createElement('br'));
 
   // add topic
@@ -148,7 +144,7 @@ function buildUserListItem(user){
   // build chat button
   const chatButton = document.createElement("input");
   chatButton.setAttribute('type',"submit");
-  chatButton.setAttribute('value',"Let's Talk!");
+  chatButton.setAttribute('value',"Chat with Me!");
   //chatButton.classList.add("submit-button");
   //chatButton.classList.add("chat-with-me");
   chatButton.classList.add("user_card-chat_button");

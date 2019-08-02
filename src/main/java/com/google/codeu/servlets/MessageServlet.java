@@ -117,14 +117,16 @@ public class MessageServlet extends HttpServlet {
     	User newUser = new User(user, null, null, chats, null, null, null, null, null, null, null);
     	datastore.storeUser(newUser);
     }
-    
+
     // Get nickName
     String nickName = datastore.getUser(user).getNickName();
 
     // Get text
     String text = Jsoup.clean(request.getParameter("text"), Whitelist.simpleText());
-    TextProcessor processor = BBProcessorFactory.getInstance().create();
-    text = processor.process(text);
+    //System.out.println("before: " + text);
+    //TextProcessor processor = BBProcessorFactory.getInstance().create();
+    //text = processor.process(text);
+    //System.out.println("after: " + text);
 
     // Get image
     String imageUrl = getUploadedFileUrl(request, "image");
@@ -140,18 +142,20 @@ public class MessageServlet extends HttpServlet {
     String textWithVideosReplaced = textWithImagesReplaced.replaceAll(regexVid, repVid);
 
     // Get sentiment score
+    /*
     Document doc = Document.newBuilder().setContent(textWithVideosReplaced).setType(Document.Type.PLAIN_TEXT).build();
     LanguageServiceClient languageService = LanguageServiceClient.create();
     Sentiment sentiment = languageService.analyzeSentiment(doc).getDocumentSentiment();
     double score = sentiment.getScore();
     languageService.close();
+    */
 
     String chat = request.getParameter("chat");
-    
+
     // Profile picture of user
     String profilePic = datastore.getUser(user).getImageUrl();
 
-    Message message = new Message(chat , user, textWithVideosReplaced, score, imageUrl, profilePic);
+    Message message = new Message(chat , user, textWithVideosReplaced, imageUrl, profilePic);
     // Message message = new Message(chat , nickName, textWithVideosReplaced, score, imageUrl, profilePic);
     datastore.storeMessage(message);
     response.sendRedirect(request.getHeader("referer"));

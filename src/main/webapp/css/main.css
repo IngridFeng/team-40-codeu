@@ -19,7 +19,7 @@
     --secondary-color: #F0D9F7;
     --text-color:#4D4D4D;
     --main-color-highlight: #7907FF;
-    --card-size: 150px;
+    --card-height: 150px;
 }
 
 /* FONT */
@@ -38,7 +38,6 @@ body {
 
 .content {
   position: relative;
-  padding-top: 50px;
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
@@ -291,7 +290,7 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   position: relative;
   text-align: left;
   width: 100%;
-  height: var(--card-size);
+  height: var(--card-height);
   margin: 20px 0;
   padding: 10px;
   border: 1px solid lightgray;
@@ -310,8 +309,8 @@ input:-ms-input-placeholder { color: #bdbdd3;}
 
 .user_card-picture {
   display: inline-block;
-  width: var(--card-size);
-  height: var(--card-size);
+  width: var(--card-height);
+  height: var(--card-height);
   border-radius: 50%;
   margin-left: auto;
   margin-right: auto;
@@ -350,12 +349,20 @@ input:-ms-input-placeholder { color: #bdbdd3;}
 .user_card-content {
   display: inline-block;
   margin-left: 10px;
+  position: absolute;
+  top: 0;
+  width: calc(inherit - var(--card-height));
+  height: 100%;
 }
 
 .user_card-chat_button {
   border-radius: 10px;
   background-color: var(--main-color);
   color: white;
+  font-size: 20px;
+  font-weight: 500;
+  position: absolute;
+  bottom: 10px;
 }
 
 .user_card-chat_button:hover {
@@ -454,11 +461,11 @@ input:-ms-input-placeholder { color: #bdbdd3;}
 
 .main-content_footer {
   height: 30vh;
-  padding-top: 180px;/* TEmp*/
   padding-bottom: 60px;
 }
 
 /** TEMPORARY **/
+/** hopefully... **/
 
 .noTime_input {
   outline: var(--secondary-color);
@@ -472,6 +479,75 @@ input:-ms-input-placeholder { color: #bdbdd3;}
 
 .content-wide {
   position: relative;
-  padding-top: 50px;
   margin: 0 20px;
 }
+
+/** Lazyyy **/
+.mg_top-20 {
+  margin-top: 20px;
+}
+
+#search-container {
+  box-sizing: border-box;
+}
+
+#search-form {
+  margin: auto;
+  max-width: 500px;
+  margin-bottom: 20px;
+}
+
+#search-form input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+#search-form button {
+  float: left;
+  width: 15%;
+  padding: 10px;
+  background: var(--main-color);
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  border-radius: 0px 10px 10px 0px;
+  cursor: pointer;
+}
+
+#search-form button:hover {
+  background: var(--main-color-highlight);
+}
+
+#search-form::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+#translation {
+  font-size: 18px;
+}
+
+#language {
+  margin-left: 10px;
+  font-size: 15px;
+}
+
+#translate-button {
+  background: var(--main-color);
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+#translate-button:hover {
+  background: var(--main-color-highlight);
+}
+

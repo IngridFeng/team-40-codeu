@@ -121,3 +121,22 @@ h2 {
   height: 150px;
   border-radius: 75px;
 }
+
+#profilepic-message {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  position: relative;
+  right: 150px;
+}
+
+#message-header-content {
+  display: inline-block;
+  position: relative;
+  right: 140px;
+  bottom: 30px;
+  font-size: 18px;
+}
