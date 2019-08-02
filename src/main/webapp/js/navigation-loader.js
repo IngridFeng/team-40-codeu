@@ -21,6 +21,7 @@
 function addLoginOrLogoutLinkToNavigation() {
   const loginElement = document.getElementById('login-element');
   const profileElement = document.getElementById('profile_link');
+  const mychatsElement = document.getElementById('mychats_link');
   if (!loginElement || !profileElement) {
     console.warn('Element Missing!');
     return;
@@ -34,9 +35,10 @@ function addLoginOrLogoutLinkToNavigation() {
         if (loginStatus.isLoggedIn) {
           profileElement.href = '/user-page.html?user=' + loginStatus.username;
           loginElement.appendChild(createLink('/logout', 'Logout'));
-
         } else {
           profileElement.setAttribute("onClick","loginAlert()");
+          mychatsElement.setAttribute("onClick","loginAlert()");
+          mychatsElement.href = '#';
           loginElement.appendChild(createLink('/login', 'Login'));
         }
       });
