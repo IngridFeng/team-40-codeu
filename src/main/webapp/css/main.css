@@ -474,3 +474,87 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   padding-top: 50px;
   margin: 0 20px;
 }
+
+#profilepic-message {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+  height: 100px;
+  border-radius: 5px;
+  position: relative;
+  right: 150px;
+}
+
+#message-header-content {
+  display: inline-block;
+  position: relative;
+  right: 140px;
+  bottom: 30px;
+  font-size: 18px;
+}
+
+
+#search-container {
+  box-sizing: border-box;
+}
+
+#search-form {
+  margin: auto;
+  max-width: 500px;
+  margin-bottom: 20px;
+}
+
+#search-form input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+
+#search-form button {
+  float: left;
+  width: 15%;
+  padding: 10px;
+  background: var(--main-color);
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  border-radius: 0px 10px 10px 0px;
+  cursor: pointer;
+}
+
+#search-form button:hover {
+  background: var(--main-color-highlight);
+}
+
+#search-form::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+#translation {
+  font-size: 18px;
+}
+
+#language {
+  margin-left: 10px;
+  font-size: 15px;
+}
+
+#translate-button {
+  background: var(--main-color);
+  color: white;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+#translate-button:hover {
+  background: var(--main-color-highlight);
+}
