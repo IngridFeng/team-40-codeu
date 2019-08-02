@@ -2,7 +2,7 @@
 function loadUsers(){
   
   // fetch user
-  const url = '/chats-list?';
+  const url = '/chats-list';
   fetch(url).then((response) => {
     return response.json();
   }).then((users) => {
