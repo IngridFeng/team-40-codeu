@@ -39,7 +39,9 @@ h2 {
    isn't too close to the border. */
 .message-body {
   /* font: 12pt cursive; */
-  margin: 5px;
+  margin-top: 20px;
+  font-size: 20px;
+  color: #000;
 }
 
 .row {
