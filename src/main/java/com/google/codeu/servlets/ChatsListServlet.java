@@ -50,10 +50,7 @@ public class ChatsListServlet extends HttpServlet {
       //get current user by querying the email
       User user = datastore.getUser(userEmail);
 
-      String topic = request.getParameter("topic");
-      String timezone = request.getParameter("timezone");
-      String studypace = request.getParameter("studypace");
-      List<User> users = datastore.getUsersWithParams(topic, timezone, studypace);
+      List<User> users = datastore.getUsers();
       List<User> result = new ArrayList<>();
 
       for (User selectedUser : users) {
