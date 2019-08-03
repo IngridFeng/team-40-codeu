@@ -354,7 +354,7 @@ input:-ms-input-placeholder { color: #bdbdd3;}
 .user_card-picture img {
   width: inherit;
   height: inherit;
-  border-radius: 20px;
+  border-radius: 75px;
 }
 
 .user_card-content {
@@ -373,7 +373,7 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   color: white;
   font-size: 20px;
   font-weight: 500;
-  position: absolute;
+  /* position: absolute; */
   bottom: 10px;
 }
 
@@ -521,7 +521,6 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   margin: 10px;
 }
 
-/**/
 #search-container {
   box-sizing: border-box;
 }
@@ -532,13 +531,8 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   margin-bottom: 20px;
 }
 
-#search-form input[type=text] {
-  padding: 10px;
-  font-size: 17px;
-  border: 1px solid grey;
-  float: left;
-  width: 80%;
-  background: #f1f1f1;
+.search-input {
+  width: 100%;
 }
 
 #search-form button {
@@ -552,6 +546,7 @@ input:-ms-input-placeholder { color: #bdbdd3;}
   border-left: none;
   border-radius: 0px 10px 10px 0px;
   cursor: pointer;
+  display: none;
 }
 
 #search-form button:hover {

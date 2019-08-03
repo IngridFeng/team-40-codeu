@@ -13,6 +13,11 @@
 # limitations under the License.
 
 indexes:
+- kind: User
+  properties:
+  - name: chats
+  - name: nickName
+    direction: desc
 - kind: Message
   properties:
   - name: user
